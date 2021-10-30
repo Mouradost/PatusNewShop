@@ -45,8 +45,14 @@ git pull origin/master
   python PatusUi.py
   ```
 
-- Install the PatusMobileApp.apk on your phone
+- Install the [PatusMobileApp.apk](MobileAPP/PatusMobileApp.apk) on your phone
 - Run and login to the Mobile APP
+- Change and save your setting by following the pictures bellow
+- Congratulation ! You can use the app now
+
+![Access Setting](MobileAPP/setting_0.png)
+
+![Access Setting](MobileAPP/setting1.png)
 
 ## Issues
 
