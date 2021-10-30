@@ -131,34 +131,28 @@ def printTicket(worker_name: str, order_items: list, tax: float):
     try:
         total = 0
         file = open('Receipt.txt', 'wt')
-        file.writelines('-' * 42 + ' \n')
-        file.writelines('Worker Name:\t\t\t\t{} \n'.format(worker_name))
-        file.writelines("Date and time : ")
-        file.writelines(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-        file.writelines('\n')
-        file.writelines('-' * 42 + ' \n')
+        file.writelines('=' * 50 + ' \n')
+        file.writelines(f'Worker Name: {worker_name:^50}\n')
+        file.writelines(
+            f'Date and time : {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"):^50}\n')
+        file.writelines('-' * 50 + ' \n')
         if order_items[0].tableId is not None:
-            file.writelines('Table {} \n'.format(order_items[0].tableId))
+            file.writelines(f'Table {order_items[0].tableId:^50}\n')
         else:
             file.writelines('Take away \n')
-        file.writelines('-' * 42 + ' \n')
-        file.writelines('{0:20}{1:15}{2:15}\n'.format(
-            'ITEM', 'QUANTITY', 'PRICE'))
-        file.writelines('-' * 42 + ' \n')
+        file.writelines('-' * 50 + ' \n')
+        file.writelines(f"{'ITEM':^20}{'QUANTITY':^10}{'PRICE':^20}\n")
+        file.writelines('-' * 50 + ' \n')
         for order_item in order_items:
             total += order_item.orderItemTotal * order_item.orderItemQuantity
-            file.writelines('{0:{width}{base}}'.format(
-                order_item.productName, base='s', width=25))
-            file.writelines('{0:{width}{base}}'.format(
-                int(order_item.orderItemQuantity), base='d', width=4))
-            file.writelines('{0:{width}{base}}\n'.format(order_item.orderItemTotal * order_item.orderItemQuantity,
-                                                         base='.2f', width=12))
-        file.writelines('-' * 42 + ' \n')
-        file.writelines('{0:25}{1:15}\n'.format('TOTAL', total))
-        file.writelines('{0:25}{1:15}\n'.format('TOTAL TAX', total * tax))
-        file.writelines('{0:25}{1:15}\n'.format(
-            'TOTAL TO PAY', total + (total * tax)))
-        file.writelines('-' * 42 + ' \n')
+            file.writelines(
+                f"{order_item.productName:^20}{order_item.orderItemQuantity:^10}{round(order_item.orderItemTotal * order_item.orderItemQuantity, 2):^20}\n")
+        file.writelines('-' * 50 + ' \n')
+        file.writelines(f"{'TOTAL':^25}{round(total, 2):^25}\n")
+        file.writelines(f"{'TOTAL TAX':^25}{round(total * tax, 2):^25}\n")
+        file.writelines(
+            f"{'TOTAL TO PAY':^25}{round(total + (total * tax), 2):^25}\n")
+        file.writelines('=' * 50 + ' \n')
         file.close()
     except Exception as e:
         msg = QMessageBox()
@@ -177,47 +171,41 @@ def kitchenTicket(worker_name: str, order_items: list):
         file_ = open('pizzaYolo.txt', 'wt')
         now = datetime.datetime.now()
         # chef
-        file.writelines('-' * 42 + ' \n')
-        file.writelines('Worker Name:\t\t\t\t{} \n'.format(worker_name))
-        file.writelines("Date and time : ")
-        file.writelines(now.strftime("%Y-%m-%d %H:%M:%S"))
-        file.writelines('\n')
-        file.writelines('-' * 42 + ' \n')
+        file.writelines('=' * 50 + ' \n')
+        file.writelines(f'Worker Name: {worker_name:^50}\n')
+        file.writelines(
+            f'Date and time : {now.strftime("%Y-%m-%d %H:%M:%S"):^50}\n')
+        file.writelines('-' * 50 + ' \n')
         # pizza yolo
-        file_.writelines('-' * 42 + ' \n')
-        file_.writelines('Worker Name:\t\t\t\t{} \n'.format(worker_name))
-        file_.writelines("Date and time : ")
-        file_.writelines(now.strftime("%Y-%m-%d %H:%M:%S"))
-        file_.writelines('\n')
-        file_.writelines('-' * 42 + ' \n')
+        file_.writelines('=' * 50 + ' \n')
+        file_.writelines(f'Worker Name: {worker_name:^50}\n')
+        file_.writelines(
+            f'Date and time : {now.strftime("%Y-%m-%d %H:%M:%S"):^50}\n')
+        file_.writelines('-' * 50 + ' \n')
         if order_items[0].tableId is not None:
-            file.writelines('Table {} \n'.format(order_items[0].tableId))
-            file_.writelines('Table {} \n'.format(order_items[0].tableId))
+            file.writelines(f'Table {order_items[0].tableId:^50} \n')
+            file_.writelines(f'Table {order_items[0].tableId:^50} \n')
         else:
             file.writelines('Take away \n')
             file_.writelines('Take away \n')
         # chef
-        file.writelines('-' * 42 + ' \n')
-        file.writelines('{0:20}{1:15}\n'.format('ITEM', 'QUANTITY'))
-        file.writelines('-' * 42 + ' \n')
+        file.writelines('-' * 50 + ' \n')
+        file.writelines(f"{'ITEM':^25}{'QUANTITY':^25}\n")
+        file.writelines('-' * 50 + ' \n')
         # pizza yolo
-        file.writelines('-' * 42 + ' \n')
-        file.writelines('{0:20}{1:15}\n'.format('ITEM', 'QUANTITY'))
-        file.writelines('-' * 42 + ' \n')
+        file_.writelines('-' * 50 + ' \n')
+        file_.writelines(f"{'ITEM':^25}{'QUANTITY':^25}\n")
+        file_.writelines('-' * 50 + ' \n')
         for order_item in order_items:
-            file.writelines('{0:{width}{base}}'.format(
-                order_item.productName, base='s', width=25))
-            file.writelines('{0:{width}{base}}\n'.format(
-                int(order_item.orderItemQuantity), base='d', width=4))
+            file.writelines(
+                f"{order_item.productName:^25} {order_item.orderItemQuantity:^25}\n")
             if order_item.productCategory == "Pizza":
+                file_.writelines(
+                    f"{order_item.productName:^25} {order_item.orderItemQuantity:^25}\n")
                 pizza_count += 1
-                file_.writelines('{0:{width}{base}}'.format(
-                    order_item.productName, base='s', width=25))
-                file_.writelines('{0:{width}{base}}\n'.format(
-                    int(order_item.orderItemQuantity), base='d', width=4))
-        file.writelines('-' * 42 + ' \n')
+        file.writelines('=' * 50 + ' \n')
         file.close()
-        file_.writelines('-' * 42 + ' \n')
+        file_.writelines('=' * 50 + ' \n')
         file_.close()
         return pizza_count
     except Exception as e:
