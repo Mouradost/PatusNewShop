@@ -22,13 +22,15 @@ This is the application for the restaurant patus.
 
 ## How to download
 
-run the command bellow to clone the repository
+Make sure you have git installed, please refer to [how to install git](https://github.com/git-guides/install-git).
+
+than run the command bellow to clone the repository, refer to [how to use git clone](https://github.com/git-guides/git-clone) for more information.
 
 ```git
-git clone https//:github.com/mouradost/PatusNewShop.git
+git clone https://github.com/Mouradost/PatusNewShop.git
 ```
 
-run the command bellow to pull changes
+run the command bellow to update your application, check [git pull](https://github.com/git-guides/git-pull) for more information.
 
 ```git
 git pull origin/master
@@ -36,4 +38,4 @@ git pull origin/master
 
 ## Issues
 
-If you have any issue or request for a feature please click [here](https//:github.com/mouradost/PatusNewShop/issue/new) and choose the right template for your request, your request will be handled as soon as possible.
+If you have any issue or request for a feature please click [here](https://github.com/Mouradost/PatusNewShop/issues/new) and choose the right template for your request, your request will be handled as soon as possible.
