@@ -249,6 +249,7 @@ class PatusMainUI(QMainWindow):
 
         # Main Window
         self.btn_fullScreen.clicked.connect(self.fullScreen)
+        self.btn_setting.clicked.connect(self.changeSettings)
         self.show()
         self.homeScreen()
         self.infoThread.start()
@@ -1281,7 +1282,29 @@ class PatusMainUI(QMainWindow):
             self.currentPointer.date_end = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             self.DB.insertPointer(self.currentPointer)
 
+    def changeSettings(self):
+        try:
+            setting = SettingUI()
+            setting.show()
+            rsp = setting.exec_()
+            if rsp:
+                print(f"restart server with new settings...")
+                if self.serverThread is not None:
+                    self.serverThread.stop()
+                self.serverThread = ServerThread()
+                self.serverThread.start()
+        except Exception as e:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText('No settings !')
+            msg.setInformativeText(
+                "The setting file is missing")
+            msg.setDetailedText(str(e))
+            msg.setWindowTitle("Warning message")
+            msg.exec_()
+
     # On close work
+
     def closeEvent(self, event):
         self.sw_content.setCurrentIndex(1)
         if self.currentPointer is not None:

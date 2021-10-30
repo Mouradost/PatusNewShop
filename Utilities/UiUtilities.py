@@ -7,6 +7,8 @@ import os
 from DB.DBHandler import DBHelper
 from DB.DbTables import *
 from functools import partial
+import json
+from Setting.Setting import ServerSetting
 
 
 class Pay(QDialog):
@@ -32,7 +34,8 @@ class Pay(QDialog):
     def validate_print(self):
         try:
             file = open('Receipt.txt', 'a')
-            file.writelines('{0:25}{1:15}\n'.format('RECEIVED', float(self.le_givenAmount.text())))
+            file.writelines('{0:25}{1:15}\n'.format(
+                'RECEIVED', float(self.le_givenAmount.text())))
             file.writelines('{0:25}{1:15}\n'.format('RETURNED', float(self.le_givenAmount.text()) -
                                                     self.lcdN_total.value()))
             file.writelines('-' * 42 + ' \n')
@@ -64,6 +67,35 @@ class Holder(QDialog):
     def validate_click(self):
         if self.tw_orderHold.currentRow() > -1:
             self.done(self.holdingOrders[self.tw_orderHold.currentRow()].id)
+        else:
+            self.buttonBox.blockSignals(True)
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText('No order to resume')
+            msg.setInformativeText("Please select the order to resume")
+            msg.setWindowTitle("Warning message")
+            msg.exec_()
+
+
+class SettingUI(QDialog):
+    def __init__(self):
+        super(SettingUI, self).__init__()
+        uic.loadUi(os.path.join(os.getcwd(), 'uis', 'Setting.ui'), self)
+        self.buttonBox.accepted.connect(self.validate_click)
+        self.buttonBox.rejected.connect(self.reject)
+        self.serverSetting = ServerSetting()
+        self.serverSetting.load()
+        self.le_ip.setText(self.serverSetting.IP)
+        self.sb_port.setValue(self.serverSetting.PORT)
+        self.sb_maxClients.setValue(self.serverSetting.MAX_CLIENTS)
+
+    def validate_click(self):
+        if len(self.le_ip.text()) > 0:
+            self.serverSetting.IP = self.le_ip.text()
+            self.serverSetting.PORT = self.sb_port.value()
+            self.serverSetting.MAX_CLIENTS = self.sb_maxClients.value()
+            self.serverSetting.save()
+            self.done(1)
         else:
             self.buttonBox.blockSignals(True)
             msg = QMessageBox()
@@ -110,18 +142,22 @@ def printTicket(worker_name: str, order_items: list, tax: float):
         else:
             file.writelines('Take away \n')
         file.writelines('-' * 42 + ' \n')
-        file.writelines('{0:20}{1:15}{2:15}\n'.format('ITEM', 'QUANTITY', 'PRICE'))
+        file.writelines('{0:20}{1:15}{2:15}\n'.format(
+            'ITEM', 'QUANTITY', 'PRICE'))
         file.writelines('-' * 42 + ' \n')
         for order_item in order_items:
             total += order_item.orderItemTotal * order_item.orderItemQuantity
-            file.writelines('{0:{width}{base}}'.format(order_item.productName, base='s', width=25))
-            file.writelines('{0:{width}{base}}'.format(int(order_item.orderItemQuantity), base='d', width=4))
+            file.writelines('{0:{width}{base}}'.format(
+                order_item.productName, base='s', width=25))
+            file.writelines('{0:{width}{base}}'.format(
+                int(order_item.orderItemQuantity), base='d', width=4))
             file.writelines('{0:{width}{base}}\n'.format(order_item.orderItemTotal * order_item.orderItemQuantity,
                                                          base='.2f', width=12))
         file.writelines('-' * 42 + ' \n')
         file.writelines('{0:25}{1:15}\n'.format('TOTAL', total))
         file.writelines('{0:25}{1:15}\n'.format('TOTAL TAX', total * tax))
-        file.writelines('{0:25}{1:15}\n'.format('TOTAL TO PAY', total + (total * tax)))
+        file.writelines('{0:25}{1:15}\n'.format(
+            'TOTAL TO PAY', total + (total * tax)))
         file.writelines('-' * 42 + ' \n')
         file.close()
     except Exception as e:
@@ -169,12 +205,16 @@ def kitchenTicket(worker_name: str, order_items: list):
         file.writelines('{0:20}{1:15}\n'.format('ITEM', 'QUANTITY'))
         file.writelines('-' * 42 + ' \n')
         for order_item in order_items:
-            file.writelines('{0:{width}{base}}'.format(order_item.productName, base='s', width=25))
-            file.writelines('{0:{width}{base}}\n'.format(int(order_item.orderItemQuantity), base='d', width=4))
+            file.writelines('{0:{width}{base}}'.format(
+                order_item.productName, base='s', width=25))
+            file.writelines('{0:{width}{base}}\n'.format(
+                int(order_item.orderItemQuantity), base='d', width=4))
             if order_item.productCategory == "Pizza":
                 pizza_count += 1
-                file_.writelines('{0:{width}{base}}'.format(order_item.productName, base='s', width=25))
-                file_.writelines('{0:{width}{base}}\n'.format(int(order_item.orderItemQuantity), base='d', width=4))
+                file_.writelines('{0:{width}{base}}'.format(
+                    order_item.productName, base='s', width=25))
+                file_.writelines('{0:{width}{base}}\n'.format(
+                    int(order_item.orderItemQuantity), base='d', width=4))
         file.writelines('-' * 42 + ' \n')
         file.close()
         file_.writelines('-' * 42 + ' \n')
@@ -214,8 +254,10 @@ def createProductContainer(parent, product, table_id, fc):
     btn_layout.setMaximumSize(200, 200)
     add_button = QPushButton(parent=btn_layout, text="+")
     remove_button = QPushButton(parent=btn_layout, text="-")
-    order_item = OrderItem(table_id, product.id, product.name, product.category, 1, product.price)
-    order_item_ = OrderItem(table_id, product.id, product.name, product.category, -1, -product.price)
+    order_item = OrderItem(table_id, product.id, product.name,
+                           product.category, 1, product.price)
+    order_item_ = OrderItem(table_id, product.id,
+                            product.name, product.category, -1, -product.price)
     add_button.clicked.connect(partial(fc, order_item))
     remove_button.clicked.connect(partial(fc, order_item_))
     btn_layout.layout().addWidget(add_button)
@@ -223,4 +265,3 @@ def createProductContainer(parent, product, table_id, fc):
     # buttons
     frame.layout().addWidget(btn_layout)
     return frame
-
