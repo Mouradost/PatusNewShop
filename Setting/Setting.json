@@ -1,0 +1,6 @@
+{
+  "IP": "198.168.1.6",
+  "PORT": 7800,
+  "MAX_CLIENTS": 10,
+  "PATH": "d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json"
+}

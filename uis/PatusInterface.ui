@@ -492,13 +492,13 @@ QLabel
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>50</width>
+                 <width>100</width>
                  <height>50</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>50</width>
+                 <width>100</width>
                  <height>50</height>
                 </size>
                </property>
@@ -550,6 +550,23 @@ QPushButton:pressed
                 <property name="bottomMargin">
                  <number>0</number>
                 </property>
+                <item>
+                 <widget class="QPushButton" name="btn_setting">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../resource/resource.qrc">
+                    <normaloff>:/Simple icons/simple_icons/fi-rr-settings.svg</normaloff>:/Simple icons/simple_icons/fi-rr-settings.svg</iconset>
+                  </property>
+                 </widget>
+                </item>
                 <item>
                  <widget class="QPushButton" name="btn_fullScreen">
                   <property name="sizePolicy">
@@ -1013,8 +1030,8 @@ QPushButton:pressed
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>948</width>
-                      <height>577</height>
+                      <width>630</width>
+                      <height>218</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_10">
@@ -1195,8 +1212,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>446</width>
-                             <height>513</height>
+                             <width>178</width>
+                             <height>129</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_13">
@@ -1227,7 +1244,7 @@ QLabel
                                   <string/>
                                  </property>
                                  <property name="pixmap">
-                                  <pixmap resource="C:/Users/moura/Desktop/disktop stuff/to archive/Amel_new_api/img/login.qrc">:/Tab/menu.png</pixmap>
+                                  <pixmap>:/Tab/menu.png</pixmap>
                                  </property>
                                  <property name="scaledContents">
                                   <bool>true</bool>
@@ -1321,7 +1338,7 @@ QLabel
                                   <string/>
                                  </property>
                                  <property name="pixmap">
-                                  <pixmap resource="C:/Users/moura/Desktop/disktop stuff/to archive/Amel_new_api/img/login.qrc">:/Tab/menu.png</pixmap>
+                                  <pixmap>:/Tab/menu.png</pixmap>
                                  </property>
                                  <property name="scaledContents">
                                   <bool>true</bool>
@@ -1413,8 +1430,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>446</width>
-                             <height>513</height>
+                             <width>178</width>
+                             <height>129</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_6">
@@ -1445,7 +1462,7 @@ QLabel
                                   <string/>
                                  </property>
                                  <property name="pixmap">
-                                  <pixmap resource="C:/Users/moura/Desktop/disktop stuff/to archive/Amel_new_api/img/login.qrc">:/Tab/menu.png</pixmap>
+                                  <pixmap>:/Tab/menu.png</pixmap>
                                  </property>
                                  <property name="scaledContents">
                                   <bool>true</bool>
@@ -1539,7 +1556,7 @@ QLabel
                                   <string/>
                                  </property>
                                  <property name="pixmap">
-                                  <pixmap resource="C:/Users/moura/Desktop/disktop stuff/to archive/Amel_new_api/img/login.qrc">:/Tab/menu.png</pixmap>
+                                  <pixmap>:/Tab/menu.png</pixmap>
                                  </property>
                                  <property name="scaledContents">
                                   <bool>true</bool>
@@ -1631,8 +1648,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>446</width>
-                             <height>515</height>
+                             <width>178</width>
+                             <height>129</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_7">
@@ -1663,7 +1680,7 @@ QLabel
                                   <string/>
                                  </property>
                                  <property name="pixmap">
-                                  <pixmap resource="C:/Users/moura/Desktop/disktop stuff/to archive/Amel_new_api/img/login.qrc">:/Tab/menu.png</pixmap>
+                                  <pixmap>:/Tab/menu.png</pixmap>
                                  </property>
                                  <property name="scaledContents">
                                   <bool>true</bool>
@@ -1757,7 +1774,7 @@ QLabel
                                   <string/>
                                  </property>
                                  <property name="pixmap">
-                                  <pixmap resource="C:/Users/moura/Desktop/disktop stuff/to archive/Amel_new_api/img/login.qrc">:/Tab/menu.png</pixmap>
+                                  <pixmap>:/Tab/menu.png</pixmap>
                                  </property>
                                  <property name="scaledContents">
                                   <bool>true</bool>
@@ -1849,8 +1866,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>424</width>
-                             <height>218</height>
+                             <width>178</width>
+                             <height>129</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_11">
@@ -1881,7 +1898,7 @@ QLabel
                                   <string/>
                                  </property>
                                  <property name="pixmap">
-                                  <pixmap resource="C:/Users/moura/Desktop/disktop stuff/to archive/Amel_new_api/img/login.qrc">:/Tab/menu.png</pixmap>
+                                  <pixmap>:/Tab/menu.png</pixmap>
                                  </property>
                                  <property name="scaledContents">
                                   <bool>true</bool>
@@ -1975,7 +1992,7 @@ QLabel
                                   <string/>
                                  </property>
                                  <property name="pixmap">
-                                  <pixmap resource="C:/Users/moura/Desktop/disktop stuff/to archive/Amel_new_api/img/login.qrc">:/Tab/menu.png</pixmap>
+                                  <pixmap>:/Tab/menu.png</pixmap>
                                  </property>
                                  <property name="scaledContents">
                                   <bool>true</bool>
@@ -2067,8 +2084,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>424</width>
-                             <height>218</height>
+                             <width>178</width>
+                             <height>129</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_16">
@@ -2099,7 +2116,7 @@ QLabel
                                   <string/>
                                  </property>
                                  <property name="pixmap">
-                                  <pixmap resource="C:/Users/moura/Desktop/disktop stuff/to archive/Amel_new_api/img/login.qrc">:/Tab/menu.png</pixmap>
+                                  <pixmap>:/Tab/menu.png</pixmap>
                                  </property>
                                  <property name="scaledContents">
                                   <bool>true</bool>
@@ -2193,7 +2210,7 @@ QLabel
                                   <string/>
                                  </property>
                                  <property name="pixmap">
-                                  <pixmap resource="C:/Users/moura/Desktop/disktop stuff/to archive/Amel_new_api/img/login.qrc">:/Tab/menu.png</pixmap>
+                                  <pixmap>:/Tab/menu.png</pixmap>
                                  </property>
                                  <property name="scaledContents">
                                   <bool>true</bool>
@@ -2285,8 +2302,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>446</width>
-                             <height>513</height>
+                             <width>178</width>
+                             <height>129</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_17">
@@ -2317,7 +2334,7 @@ QLabel
                                   <string/>
                                  </property>
                                  <property name="pixmap">
-                                  <pixmap resource="C:/Users/moura/Desktop/disktop stuff/to archive/Amel_new_api/img/login.qrc">:/Tab/menu.png</pixmap>
+                                  <pixmap>:/Tab/menu.png</pixmap>
                                  </property>
                                  <property name="scaledContents">
                                   <bool>true</bool>
@@ -2411,7 +2428,7 @@ QLabel
                                   <string/>
                                  </property>
                                  <property name="pixmap">
-                                  <pixmap resource="C:/Users/moura/Desktop/disktop stuff/to archive/Amel_new_api/img/login.qrc">:/Tab/menu.png</pixmap>
+                                  <pixmap>:/Tab/menu.png</pixmap>
                                  </property>
                                  <property name="scaledContents">
                                   <bool>true</bool>
@@ -6392,6 +6409,7 @@ QComboBox
   </widget>
  </widget>
  <resources>
+  <include location="../resource/resource.qrc"/>
   <include location="../resource/resource.qrc"/>
   <include location="C:/Users/moura/Desktop/disktop stuff/to archive/Amel_new_api/img/login.qrc"/>
  </resources>

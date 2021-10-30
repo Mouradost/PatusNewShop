@@ -2,6 +2,7 @@ from PyQt5 import QtCore
 from PyQt5.QtWidgets import QMessageBox
 
 from DB.DBHandler import DBHelper
+from Setting.Setting import ServerSetting
 from DB.DbTables import *
 import threading
 import datetime
@@ -13,7 +14,16 @@ import json
 class ServerThread(QtCore.QThread):
     def __init__(self, parent=None):
         super(ServerThread, self).__init__(parent)
-        self.server = Server()
+        try:
+            settings = ServerSetting()
+            settings.load()
+            print(f"[SERVER] Using setting {settings}")
+            self.server = Server(settings=settings)
+        except Exception as e:
+            print(f"[SERVER] {e}")
+            settings = ServerSetting()
+            print(f"[SERVER] Using default setting {settings}")
+            self.server = Server(settings=settings)
 
     def run(self):
         self.server.start()
@@ -39,7 +49,8 @@ class InfoThread(QtCore.QThread):
                 print(f"[INFO THREAD] Updating")
                 nb_free_tables, nb_busy_tables, nb_month_sells, nb_day_sells = self.DB.getHomeScreenInfo(
                     datetime.datetime.now().strftime("%Y-%m"), datetime.datetime.now().strftime("%Y-%m-%d"))
-                self.UpdateInfo.emit(nb_free_tables[0], nb_busy_tables[0], nb_month_sells[0], nb_day_sells[0])
+                self.UpdateInfo.emit(
+                    nb_free_tables[0], nb_busy_tables[0], nb_month_sells[0], nb_day_sells[0])
                 # sleep for a minute
                 self.sleep(60)
         except Exception as e:
@@ -61,9 +72,6 @@ class InfoThread(QtCore.QThread):
 
 
 class Server:
-    IP = "192.168.1.5"
-    PORT = 7800
-    MAX_CLIENTS = 5
     SIZE = 1024
     FORMAT = 'utf-8'
     SEND_TABLES_MSG = "!TABLES"
@@ -77,10 +85,11 @@ class Server:
     SEND_DENY_MSG = "!DENY"
     STOP_MSG = "!DISCONNECT"
 
-    def __init__(self):
+    def __init__(self, settings):
         super(Server, self).__init__()
+        self.SETTINGS = settings
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.bind((self.IP, self.PORT))
+        self.socket.bind((self.SETTINGS.IP, self.SETTINGS.PORT))
         self.count = 0
         self.active = False
         self.workers = {}
@@ -89,11 +98,13 @@ class Server:
     def start(self):
         print(f"[STARTING] Server is started")
         self.active = True
-        self.socket.listen(self.MAX_CLIENTS)
-        print(f"[LISTENING] Server is listening on {self.IP}:{self.PORT}")
+        self.socket.listen(self.SETTINGS.MAX_CLIENTS)
+        print(
+            f"[LISTENING] Server is listening on {self.SETTINGS.IP}:{self.SETTINGS.PORT}")
         while self.active:
             client_socket, client_address = self.socket.accept()
-            thread = threading.Thread(target=self.handle_client, args=(client_socket, client_address))
+            thread = threading.Thread(
+                target=self.handle_client, args=(client_socket, client_address))
             thread.start()
             print(f"[ACTIVE CONNECTIONS] {threading.active_count() - 1}")
 
@@ -114,16 +125,19 @@ class Server:
                 print(f"[SEND TO {client_address}] {msg_send}")
             elif msg == self.SEND_PRODUCTS_MSG:
                 print(f"[{client_address}] {msg}")
-                msg_send = json.dumps([x.__dict__ for x in db.getAllFinishProducts()])
+                msg_send = json.dumps(
+                    [x.__dict__ for x in db.getAllFinishProducts()])
                 client_socket.send((msg_send + "\n").encode(self.FORMAT))
                 print(f"[SEND TO {client_address}] {msg_send}")
             elif msg == self.SEND_TABLE_MSG:
                 print(f"[{client_address}] {msg}")
-                client_socket.send((self.ASK_WHICH_MSG + "\n").encode(self.FORMAT))
+                client_socket.send(
+                    (self.ASK_WHICH_MSG + "\n").encode(self.FORMAT))
                 print(f"[SEND TO {client_address}] {self.ASK_WHICH_MSG}")
                 msg = client_socket.recv(self.SIZE).decode(self.FORMAT)
                 print(f"[RECEIVED FROM {client_address}] {msg}")
-                msg_send = json.dumps([x.__dict__ for x in db.getTableContent(int(msg))[0]])
+                msg_send = json.dumps(
+                    [x.__dict__ for x in db.getTableContent(int(msg))[0]])
                 client_socket.send((msg_send + "\n").encode(self.FORMAT))
                 print(f"[SEND TO {client_address}] {msg_send}")
             elif msg == self.RECEIVE_ORDER_MSG:
@@ -142,7 +156,8 @@ class Server:
                     current_order.append(OrderItem(**orderItem))
                     total += current_order[-1].orderItemTotal
                 if client_address[0] in self.workers.keys():
-                    db.insertOrder(current_order, total, self.workers[client_address[0]].id, 1)
+                    db.insertOrder(current_order, total,
+                                   self.workers[client_address[0]].id, 1)
                 else:
                     db.insertOrder(current_order, total, 1, 1)
             elif msg == self.LOGIN_MSG:
@@ -166,7 +181,8 @@ class Server:
                 print(f"[SEND TO {client_address}] {msg_send}")
 
         client_socket.close()
-        print(f"[DISCONNECTION] Server is not connected anymore to {client_address}")
+        print(
+            f"[DISCONNECTION] Server is not connected anymore to {client_address}")
         print(self.workers)
 
     def stop(self):
