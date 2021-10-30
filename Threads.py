@@ -14,7 +14,16 @@ import json
 class ServerThread(QtCore.QThread):
     def __init__(self, parent=None):
         super(ServerThread, self).__init__(parent)
-        self.server = Server()
+        try:
+            settings = ServerSetting()
+            settings.load()
+            print(f"[SERVER] Using setting {settings}")
+            self.server = Server(settings=settings)
+        except Exception as e:
+            print(f"[SERVER] {e}")
+            settings = ServerSetting()
+            print(f"[SERVER] Using default setting {settings}")
+            self.server = Server(settings=settings)
 
     def run(self):
         self.server.start()
@@ -63,11 +72,6 @@ class InfoThread(QtCore.QThread):
 
 
 class Server:
-    SETTINGS = ServerSetting()
-    SETTINGS.load()
-    IP = SETTINGS.IP
-    PORT = SETTINGS.PORT
-    MAX_CLIENTS = SETTINGS.MAX_CLIENTS
     SIZE = 1024
     FORMAT = 'utf-8'
     SEND_TABLES_MSG = "!TABLES"
@@ -81,10 +85,11 @@ class Server:
     SEND_DENY_MSG = "!DENY"
     STOP_MSG = "!DISCONNECT"
 
-    def __init__(self):
+    def __init__(self, settings):
         super(Server, self).__init__()
+        self.SETTINGS = settings
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.bind((self.IP, self.PORT))
+        self.socket.bind((self.SETTINGS.IP, self.SETTINGS.PORT))
         self.count = 0
         self.active = False
         self.workers = {}
@@ -93,8 +98,9 @@ class Server:
     def start(self):
         print(f"[STARTING] Server is started")
         self.active = True
-        self.socket.listen(self.MAX_CLIENTS)
-        print(f"[LISTENING] Server is listening on {self.IP}:{self.PORT}")
+        self.socket.listen(self.SETTINGS.MAX_CLIENTS)
+        print(
+            f"[LISTENING] Server is listening on {self.SETTINGS.IP}:{self.SETTINGS.PORT}")
         while self.active:
             client_socket, client_address = self.socket.accept()
             thread = threading.Thread(
