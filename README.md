@@ -36,6 +36,18 @@ run the command bellow to update your application, check [git pull](https://gith
 git pull origin/master
 ```
 
+## How to use
+
+- Clone the repository in your local machine
+- Run [PatusUi.py](PatusUi.py) by the command bellow
+
+  ```cmd
+  python PatusUi.py
+  ```
+
+- Install the PatusMobileApp.apk on your phone
+- Run and login to the Mobile APP
+
 ## Issues
 
 If you have any issue or request for a feature please click [here](https://github.com/Mouradost/PatusNewShop/issues/new) and choose the right template for your request, your request will be handled as soon as possible.
