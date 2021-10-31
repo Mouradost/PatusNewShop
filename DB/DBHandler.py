@@ -3,6 +3,7 @@ from DB.ShopDbInfo import *
 from dataclasses import astuple
 from DB.DbTables import *
 import datetime
+import os
 
 
 class DBHelper(object):
@@ -10,7 +11,8 @@ class DBHelper(object):
     DATABASE_VERSION = 1
 
     def __init__(self):
-        self.conn = sql.connect(DBHelper.DATABASE_NAME, check_same_thread=True)
+        self.conn = sql.connect(os.path.join(
+            os.getcwd(), "DB", DBHelper.DATABASE_NAME), check_same_thread=True)
         self.c = self.conn.cursor()
 
     def createTables(self):
@@ -187,35 +189,43 @@ class DBHelper(object):
 
     def deleteRawProduct(self, _id: int):
         with self.conn:
-            self.c.execute(f"DELETE FROM {RawProductTable.TABLE_NAME} WHERE {RawProductTable.COLUMN_ID}=?", (_id,))
+            self.c.execute(
+                f"DELETE FROM {RawProductTable.TABLE_NAME} WHERE {RawProductTable.COLUMN_ID}=?", (_id,))
 
     def deleteCustomer(self, _id: int):
         with self.conn:
-            self.c.execute(f"DELETE FROM {CustomerTable.TABLE_NAME} WHERE {CustomerTable.COLUMN_ID}=?", (_id,))
+            self.c.execute(
+                f"DELETE FROM {CustomerTable.TABLE_NAME} WHERE {CustomerTable.COLUMN_ID}=?", (_id,))
 
     def deleteWorker(self, _id: int):
         with self.conn:
-            self.c.execute(f"DELETE FROM {WorkerTable.TABLE_NAME} WHERE {WorkerTable.COLUMN_ID}=?", (_id,))
+            self.c.execute(
+                f"DELETE FROM {WorkerTable.TABLE_NAME} WHERE {WorkerTable.COLUMN_ID}=?", (_id,))
 
     def deleteSell(self, _id: int):
         with self.conn:
-            self.c.execute(f"DELETE FROM {SellTable.TABLE_NAME} WHERE {SellTable.COLUMN_ID}=?", (_id,))
+            self.c.execute(
+                f"DELETE FROM {SellTable.TABLE_NAME} WHERE {SellTable.COLUMN_ID}=?", (_id,))
 
     def deleteSellItem(self, _id: int):
         with self.conn:
-            self.c.execute(f"DELETE FROM {SellItemTable.TABLE_NAME} WHERE {SellItemTable.COLUMN_ID}=?", (_id,))
+            self.c.execute(
+                f"DELETE FROM {SellItemTable.TABLE_NAME} WHERE {SellItemTable.COLUMN_ID}=?", (_id,))
 
     def deleteTable(self, _id: int):
         with self.conn:
-            self.c.execute(f"DELETE FROM {TableTable.TABLE_NAME} WHERE {TableTable.COLUMN_ID}=?", (_id,))
+            self.c.execute(
+                f"DELETE FROM {TableTable.TABLE_NAME} WHERE {TableTable.COLUMN_ID}=?", (_id,))
 
     def deleteCategory(self, _id: int):
         with self.conn:
-            self.c.execute(f"DELETE FROM {CategoryTable.TABLE_NAME} WHERE {CategoryTable.COLUMN_ID}=?", (_id,))
+            self.c.execute(
+                f"DELETE FROM {CategoryTable.TABLE_NAME} WHERE {CategoryTable.COLUMN_ID}=?", (_id,))
 
     def deletePointer(self, _id: int):
         with self.conn:
-            self.c.execute(f"DELETE FROM {PointerTable.TABLE_NAME} WHERE {PointerTable.COLUMN_ID}=?", (_id,))
+            self.c.execute(
+                f"DELETE FROM {PointerTable.TABLE_NAME} WHERE {PointerTable.COLUMN_ID}=?", (_id,))
 
     # Delete all
     def deleteAllFinishProducts(self):
@@ -262,7 +272,8 @@ class DBHelper(object):
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(FinishProduct(x[1], x[2], x[3], x[4], x[5], x[0]))
+                    results.append(FinishProduct(
+                        x[1], x[2], x[3], x[4], x[5], x[0]))
             return results
 
     def getAllRawProducts(self):
@@ -282,7 +293,8 @@ class DBHelper(object):
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(Customer(x[1], x[2], x[3], x[4], x[5], x[6], x[0]))
+                    results.append(
+                        Customer(x[1], x[2], x[3], x[4], x[5], x[6], x[0]))
             return results
 
     def getAllWorkers(self):
@@ -292,7 +304,8 @@ class DBHelper(object):
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(Worker(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[0]))
+                    results.append(
+                        Worker(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[0]))
             return results
 
     def getAllSells(self):
@@ -528,7 +541,8 @@ class DBHelper(object):
             if all_x is not None:
                 for x in all_x:
                     total = x[6]
-                    results.append(OrderItem(x[0], x[1], x[2], x[3], x[4], x[5]))
+                    results.append(
+                        OrderItem(x[0], x[1], x[2], x[3], x[4], x[5]))
             return results, total
 
     def getWorkerByUsername(self, username):
@@ -543,7 +557,8 @@ class DBHelper(object):
 
     def deleteAllRelatedSellItems(self, _id: int):
         with self.conn:
-            self.c.execute(f"DELETE FROM {SellItemTable.TABLE_NAME} WHERE {SellItemTable.COLUMN_ID_SELL}=?", (_id,))
+            self.c.execute(
+                f"DELETE FROM {SellItemTable.TABLE_NAME} WHERE {SellItemTable.COLUMN_ID_SELL}=?", (_id,))
 
     def getAllUncompletedSells(self):
         with self.conn:
@@ -580,7 +595,8 @@ class DBHelper(object):
             table.id_sell = sell_id
             self.updateTable(table)
         for item in order_items:
-            self.insertSellItem(SellItem(item.productId, sell_id, item.orderItemQuantity, item.orderItemTotal))
+            self.insertSellItem(
+                SellItem(item.productId, sell_id, item.orderItemQuantity, item.orderItemTotal))
 
     def getUncompletedOrdersBySellId(self, _id):
         sql_command = f"""SELECT NULL, 
@@ -603,7 +619,8 @@ class DBHelper(object):
             total = 0
             if all_x is not None:
                 for x in all_x:
-                    results.append(OrderItem(x[0], x[1], x[2], x[3], x[4], x[5]))
+                    results.append(
+                        OrderItem(x[0], x[1], x[2], x[3], x[4], x[5]))
                     total = x[6]
             return results, total
 
@@ -626,7 +643,8 @@ class DBHelper(object):
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(OrderItem(x[0], x[1], x[2], x[3], x[4], x[5]))
+                    results.append(
+                        OrderItem(x[0], x[1], x[2], x[3], x[4], x[5]))
             return results
 
     def getHomeScreenInfo(self, month_date: str, day_date: str):

@@ -33,13 +33,14 @@ class Pay(QDialog):
 
     def validate_print(self):
         try:
-            file = open('Receipt.txt', 'a')
-            file.writelines('{0:25}{1:15}\n'.format(
-                'RECEIVED', float(self.le_givenAmount.text())))
-            file.writelines('{0:25}{1:15}\n'.format('RETURNED', float(self.le_givenAmount.text()) -
-                                                    self.lcdN_total.value()))
-            file.writelines('-' * 42 + ' \n')
-            file.writelines('PATUS vous remercie pour votre visite')
+            file = open(os.path.join(os.getcwd(), 'tmp', 'Receipt.txt'), 'a')
+            file.writelines(
+                f"{'RECEIVED':<30}{self.le_givenAmount.text():^20}\n")
+            file.writelines(
+                f"{'RETURNED':<30}{round(float(self.le_givenAmount.text()) - self.lcdN_total.value(), 2):^20}\n")
+            file.writelines('=' * 50 + ' \n')
+            file.writelines(f"{'PATUS vous remercie pour votre visite':^50}\n")
+            file.writelines('=' * 50 + ' \n')
             file.close()
             self.accept()
         except Exception as e:
@@ -130,28 +131,28 @@ def displayDbData(table_widget: QTableWidget, data):
 def printTicket(worker_name: str, order_items: list, tax: float):
     try:
         total = 0
-        file = open('Receipt.txt', 'wt')
+        file = open(os.path.join(os.getcwd(), 'tmp', 'Receipt.txt'), 'wt')
         file.writelines('=' * 50 + ' \n')
-        file.writelines(f'Worker Name: {worker_name:^50}\n')
+        file.writelines(f'Worker Name: {worker_name:>37}\n')
         file.writelines(
-            f'Date and time : {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"):^50}\n')
+            f'Date and time : {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"):>33}\n')
         file.writelines('-' * 50 + ' \n')
         if order_items[0].tableId is not None:
-            file.writelines(f'Table {order_items[0].tableId:^50}\n')
+            file.writelines(f'Table {order_items[0].tableId:>44}\n')
         else:
             file.writelines('Take away \n')
         file.writelines('-' * 50 + ' \n')
-        file.writelines(f"{'ITEM':^20}{'QUANTITY':^10}{'PRICE':^20}\n")
+        file.writelines(f"{'ITEM':<20}{'QUANTITY':^10}{'PRICE':^20}\n")
         file.writelines('-' * 50 + ' \n')
         for order_item in order_items:
             total += order_item.orderItemTotal * order_item.orderItemQuantity
             file.writelines(
-                f"{order_item.productName:^20}{order_item.orderItemQuantity:^10}{round(order_item.orderItemTotal * order_item.orderItemQuantity, 2):^20}\n")
+                f"{order_item.productName:<20}{order_item.orderItemQuantity:^10}{round(order_item.orderItemTotal * order_item.orderItemQuantity, 2):^20}\n")
         file.writelines('-' * 50 + ' \n')
-        file.writelines(f"{'TOTAL':^25}{round(total, 2):^25}\n")
-        file.writelines(f"{'TOTAL TAX':^25}{round(total * tax, 2):^25}\n")
+        file.writelines(f"{'TOTAL':<30}{round(total, 2):^20}\n")
+        file.writelines(f"{'TOTAL TAX':<30}{round(total * tax, 2):^20}\n")
         file.writelines(
-            f"{'TOTAL TO PAY':^25}{round(total + (total * tax), 2):^25}\n")
+            f"{'TOTAL TO PAY':<30}{round(total + (total * tax), 2):^20}\n")
         file.writelines('=' * 50 + ' \n')
         file.close()
     except Exception as e:
@@ -167,41 +168,43 @@ def printTicket(worker_name: str, order_items: list, tax: float):
 def kitchenTicket(worker_name: str, order_items: list):
     try:
         pizza_count = 0
-        file = open('chef.txt', 'wt')
-        file_ = open('pizzaYolo.txt', 'wt')
+        file = open(os.path.join(os.getcwd(), 'tmp', 'chef.txt'), 'wt')
+        file_ = open(os.path.join(os.getcwd(), 'tmp', 'pizzaYolo.txt'), 'wt')
         now = datetime.datetime.now()
         # chef
         file.writelines('=' * 50 + ' \n')
-        file.writelines(f'Worker Name: {worker_name:^50}\n')
+        file.writelines(f'Worker Name: {worker_name:>37}\n')
         file.writelines(
-            f'Date and time : {now.strftime("%Y-%m-%d %H:%M:%S"):^50}\n')
+            f'Date and time : {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"):>33}\n')
         file.writelines('-' * 50 + ' \n')
-        # pizza yolo
-        file_.writelines('=' * 50 + ' \n')
-        file_.writelines(f'Worker Name: {worker_name:^50}\n')
-        file_.writelines(
-            f'Date and time : {now.strftime("%Y-%m-%d %H:%M:%S"):^50}\n')
-        file_.writelines('-' * 50 + ' \n')
         if order_items[0].tableId is not None:
-            file.writelines(f'Table {order_items[0].tableId:^50} \n')
-            file_.writelines(f'Table {order_items[0].tableId:^50} \n')
+            file.writelines(f'Table {order_items[0].tableId:>44}\n')
         else:
             file.writelines('Take away \n')
+        # pizza yolo
+        file_.writelines('=' * 50 + ' \n')
+        file_.writelines(f'Worker Name: {worker_name:>37}\n')
+        file_.writelines(
+            f'Date and time : {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"):>33}\n')
+        file_.writelines('-' * 50 + ' \n')
+        if order_items[0].tableId is not None:
+            file_.writelines(f'Table {order_items[0].tableId:>44}\n')
+        else:
             file_.writelines('Take away \n')
         # chef
         file.writelines('-' * 50 + ' \n')
-        file.writelines(f"{'ITEM':^25}{'QUANTITY':^25}\n")
+        file.writelines(f"{'ITEM':<25}{'QUANTITY':^25}\n")
         file.writelines('-' * 50 + ' \n')
         # pizza yolo
         file_.writelines('-' * 50 + ' \n')
-        file_.writelines(f"{'ITEM':^25}{'QUANTITY':^25}\n")
+        file_.writelines(f"{'ITEM':<25}{'QUANTITY':^25}\n")
         file_.writelines('-' * 50 + ' \n')
         for order_item in order_items:
             file.writelines(
-                f"{order_item.productName:^25} {order_item.orderItemQuantity:^25}\n")
+                f"{order_item.productName:<25} {order_item.orderItemQuantity:^25}\n")
             if order_item.productCategory == "Pizza":
                 file_.writelines(
-                    f"{order_item.productName:^25} {order_item.orderItemQuantity:^25}\n")
+                    f"{order_item.productName:<25} {order_item.orderItemQuantity:^25}\n")
                 pizza_count += 1
         file.writelines('=' * 50 + ' \n')
         file.close()
@@ -227,7 +230,8 @@ def createProductContainer(parent, product, table_id, fc):
     frame.setMaximumSize(200, 300)
     # Picture or name
     label = QLabel()
-    label.setPixmap(QPixmap("patus_logo.jpg"))
+    label.setPixmap(QPixmap(os.path.join(
+        os.getcwd(), "resource", "patus_logo.jpg")))
     label.setScaledContents(True)
     label.setAlignment(Qt.AlignHCenter)
     label.setMaximumSize(200, 200)

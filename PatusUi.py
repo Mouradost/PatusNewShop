@@ -1,9 +1,10 @@
 from DB.DBHandler import DBHelper
 from DB.DbTables import *
-from Threads import *
+from Utilities.Threads import *
 
 from Utilities.UiUtilities import *
 from resource import resource_rc
+from Utilities import Threads
 
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
@@ -14,7 +15,6 @@ from PyQt5 import uic
 import threading
 import datetime
 import hashlib
-import Threads
 import time
 import copy
 import sys

@@ -1,9 +1,9 @@
 # Patus PC application
 
-![Patus](patus_logo.jpg)
+![Patus](resource/patus_logo.jpg)
 This is the application for the restaurant patus.
 
-![App](App.png)
+![App](Documentation/App.png)
 
 ## Progress
 
@@ -50,9 +50,13 @@ git pull origin/master
 - Change and save your setting by following the pictures bellow
 - Congratulation ! You can use the app now
 
-![Access Setting](MobileAPP/setting_0.png)
+![Access Setting](Documentation/setting_0.png)
 
-![Access Setting](MobileAPP/setting1.png)
+![Access Setting](Documentation/setting1.png)
+
+## Ticket printing
+
+![All tickets](Documentation/All_tickets.png)
 
 ## Issues
 
