@@ -2,6 +2,7 @@ from dataclasses import dataclass
 import socket
 import json
 import os
+import logging
 
 
 @dataclass
@@ -9,6 +10,10 @@ class ServerSetting:
     IP: str = socket.gethostbyname(socket.gethostname())
     PORT: int = 7800
     MAX_CLIENTS: int = 5
+    CASHIER_IP: str = "192.168.1.203"
+    KITCHEN_IP: str = "192.168.1.204"
+    PIZZA_IP: str = "192.168.1.204"
+    BAR_IP: str = "192.168.1.202"
     PATH: str = os.path.join(os.getcwd(), 'Setting', 'Setting.json')
 
     def save(self):
@@ -22,7 +27,11 @@ class ServerSetting:
             self.IP = settings['IP']
             self.PORT = settings['PORT']
             self.MAX_CLIENTS = settings['MAX_CLIENTS']
+            self.CASHIER_IP = settings['CASHIER_IP']
+            self.KITCHEN_IP = settings['KITCHEN_IP']
+            self.PIZZA_IP = settings['PIZZA_IP']
+            self.BAR_IP = settings['BAR_IP']
         except Exception as e:
-            print(f"No settings found --> {e}")
-            print("Saving default settings")
+            logging.error(f"No settings found --> {e}")
+            logging.debug("Saving default settings")
             self.save()

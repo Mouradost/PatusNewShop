@@ -1,7 +1,7 @@
 # Patus PC application
 
 ![Patus](resource/patus_logo.jpg)
-This is the application for the restaurant patus.
+This is the application for the restaurant Patus.
 
 ![App](Documentation/App.png)
 
@@ -24,7 +24,7 @@ This is the application for the restaurant patus.
 
 Make sure you have git installed, please refer to [how to install git](https://github.com/git-guides/install-git).
 
-than run the command bellow to clone the repository, refer to [how to use git clone](https://github.com/git-guides/git-clone) for more information.
+Then run the command below to clone the repository, refer to [how to use git clone](https://github.com/git-guides/git-clone) for more information.
 
 ```git
 git clone https://github.com/Mouradost/PatusNewShop.git
@@ -48,7 +48,7 @@ git pull origin/master
 - Install the [PatusMobileApp.apk](MobileAPP/PatusMobileApp.apk) on your phone
 - Run and login to the Mobile APP
 - Change and save your setting by following the pictures bellow
-- Congratulation ! You can use the app now
+- Congratulation! You can use the app now
 
 ![Access Setting](Documentation/setting_0.png)
 
@@ -60,4 +60,4 @@ git pull origin/master
 
 ## Issues
 
-If you have any issue or request for a feature please click [here](https://github.com/Mouradost/PatusNewShop/issues/new/choose) and choose the right template for your request, your request will be handled as soon as possible.
+If you have any issues or requests please click [here](https://github.com/Mouradost/PatusNewShop/issues/new/choose) and choose the right template for your request, your request will be handled as soon as possible.

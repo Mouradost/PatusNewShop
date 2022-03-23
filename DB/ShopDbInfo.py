@@ -2,24 +2,60 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
-class FinishProductTable:
-    TABLE_NAME: str = "FinishProducts"
+class ExpenseTable:
+    TABLE_NAME: str = "Expense"
     COLUMN_ID: str = "_id"
     COLUMN_NAME: str = "name"
     COLUMN_CATEGORY: str = "category"
+    COLUMN_UNIT: str = "unit"
     COLUMN_QUANTITY: str = "quantity"
     COLUMN_PRICE: str = "price"
+    COLUMN_SUPPLIER_ID: str = "supplier_id"
+    COLUMN_DATE: str = "date"
+
+
+@dataclass(frozen=True)
+class MenuTable:
+    TABLE_NAME: str = "Menu"
+    COLUMN_ID: str = "_id"
+    COLUMN_NAME: str = "name"
+    COLUMN_CATEGORY: str = "category"
+    COLUMN_CATEGORY_ID: str = "category_id"
+    COLUMN_UNIT: str = "unit"
+    COLUMN_QUANTITY: str = "quantity"
+    COLUMN_PRICE: str = "price"
+    COLUMN_AVAILABLE: str = "available"
     COLUMN_PICTURE: str = "picture"
 
 
 @dataclass(frozen=True)
-class RawProductTable:
-    TABLE_NAME: str = "RawProducts"
-    COLUMN_ID: str = "_id"
+class StockTable:
+    TABLE_NAME: str = "Stock"
     COLUMN_NAME: str = "name"
     COLUMN_CATEGORY: str = "category"
+    COLUMN_UNIT: str = "unit"
+    COLUMN_QUANTITY: str = "quantity"
+    COLUMN_ID: str = "_id"
+
+
+@dataclass(frozen=True)
+class SupplementTable:
+    TABLE_NAME: str = "Supplement"
+    COLUMN_ID: str = "_id"
+    COLUMN_NAME: str = "name"
+    COLUMN_RELATED_ITEM_ID: str = "related_item_id"
     COLUMN_QUANTITY: str = "quantity"
     COLUMN_PRICE: str = "price"
+
+
+@dataclass(frozen=True)
+class SupplierTable:
+    TABLE_NAME: str = "Supplier"
+    COLUMN_ID: str = "_id"
+    COLUMN_NAME: str = "name"
+    COLUMN_PHONE: str = "phone"
+    COLUMN_ADDRESS: str = "address"
+    COLUMN_MAIL: str = "mail"
 
 
 @dataclass(frozen=True)
@@ -35,6 +71,46 @@ class CustomerTable:
 
 
 @dataclass(frozen=True)
+class ExpenseCategoryTable:
+    TABLE_NAME: str = "ExpenseCategory"
+    COLUMN_ID: str = "_id"
+    COLUMN_NAME: str = "name"
+    COLUMN_STOCK: str = "stock"
+
+
+@dataclass(frozen=True)
+class ReservationTable:
+    TABLE_NAME: str = "Reservation"
+    COLUMN_ID: str = "_id"
+    COLUMN_NAME: str = "name"
+    COLUMN_PHONE: str = "phone"
+    COLUMN_CUSTOMER_ID: str = "customer_id"
+    COLUMN_NB_PERSON: str = "nb_person"
+    COLUMN_TABLE_ID: str = "table_id"
+    COLUMN_DATE: str = "date"
+
+
+@dataclass(frozen=True)
+class WasteTable:
+    TABLE_NAME: str = "Waste"
+    COLUMN_ID: str = "_id"
+    COLUMN_WORKER_ID: str = "worker_id"
+    COLUMN_NAME: str = "name"
+    COLUMN_CATEGORY: str = "category"
+    COLUMN_QUANTITY: str = "quantity"
+    COLUMN_PRICE: str = "price"
+    COLUMN_DATE: str = "date"
+
+
+@dataclass(frozen=True)
+class MenuCategoryTable:
+    TABLE_NAME: str = "MenuCategory"
+    COLUMN_ID: str = "_id"
+    COLUMN_NAME: str = "name"
+    COLUMN_PRINTING_PLACE: str = "printing_place"
+
+
+@dataclass(frozen=True)
 class WorkerTable:
     TABLE_NAME: str = "Workers"
     COLUMN_ID: str = "_id"
@@ -44,6 +120,7 @@ class WorkerTable:
     COLUMN_PHONE: str = "phone"
     COLUMN_ID_CATEGORY: str = "id_category"
     COLUMN_ADDRESS: str = "address"
+    COLUMN_SALARY: str = "salary"
     COLUMN_SCORE: str = "score"
     COLUMN_PICTURE: str = "picture"
     COLUMN_FACE: str = "face"
@@ -71,11 +148,21 @@ class SellItemTable:
 
 
 @dataclass(frozen=True)
+class SellItemSupplementTable:
+    TABLE_NAME: str = "SellItemSupplement"
+    COLUMN_ID: str = "_id"
+    COLUMN_ID_SUPPLEMENT: str = "id_supplement"
+    COLUMN_ID_SELL_ITEM: str = "id_sell_item"
+    COLUMN_PRICE: str = "price"
+
+
+@dataclass(frozen=True)
 class TableTable:
     TABLE_NAME: str = "Tables"
     COLUMN_ID: str = "_id"
     COLUMN_NAME: str = "name"
     COLUMN_SEATS: str = "seats"
+    COLUMN_COMMENT: str = "comment"
     COLUMN_ID_SELL: str = "id_sell"
 
 
