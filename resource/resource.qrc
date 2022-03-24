@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="Simple icons">
+    <file>patus_logo.svg</file>
     <file>simple_icons/fi-rr-add.svg</file>
     <file>simple_icons/fi-rr-address-book.svg</file>
     <file>simple_icons/fi-rr-alarm-clock.svg</file>

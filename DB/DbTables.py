@@ -213,6 +213,14 @@ class Pointer:
 
 
 @dataclass
+class MenuItemReceipt:
+    id: int
+    ingredient_name: str
+    ingredient_id: int
+    quantity: float
+
+
+@dataclass
 class OrderItem:
     tableId: int
     productId: int

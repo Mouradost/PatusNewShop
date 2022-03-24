@@ -21,7 +21,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../resource/resource.qrc">
-    <normaloff>:/Simple icons/simple_icons/fi-rr-incognito.svg</normaloff>:/Simple icons/simple_icons/fi-rr-incognito.svg</iconset>
+    <normaloff>:/Simple icons/patus_logo.svg</normaloff>:/Simple icons/patus_logo.svg</iconset>
   </property>
   <widget class="QWidget" name="w_background">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -837,7 +837,7 @@ QComboBox
                 <enum>QFrame::Box</enum>
                </property>
                <property name="currentIndex">
-                <number>3</number>
+                <number>7</number>
                </property>
                <widget class="QWidget" name="page_standBy">
                 <layout class="QGridLayout" name="gridLayout">
@@ -1250,8 +1250,8 @@ QPushButton:pressed
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>797</width>
-                      <height>694</height>
+                      <width>630</width>
+                      <height>218</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_10">
@@ -1432,8 +1432,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>374</width>
-                             <height>630</height>
+                             <width>178</width>
+                             <height>129</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_13">
@@ -1650,8 +1650,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>374</width>
-                             <height>630</height>
+                             <width>178</width>
+                             <height>129</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_6">
@@ -1868,8 +1868,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>374</width>
-                             <height>630</height>
+                             <width>178</width>
+                             <height>129</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_7">
@@ -2086,8 +2086,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>374</width>
-                             <height>630</height>
+                             <width>178</width>
+                             <height>129</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_11">
@@ -2304,8 +2304,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>374</width>
-                             <height>630</height>
+                             <width>178</width>
+                             <height>129</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_16">
@@ -4566,10 +4566,57 @@ QPushButton:pressed
                      </widget>
                     </item>
                     <item>
-                     <widget class="QComboBox" name="cb_productReceiptMenuItem"/>
+                     <widget class="QFrame" name="frame_14">
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Sunken</enum>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout_22">
+                       <item row="2" column="0">
+                        <widget class="QLabel" name="l_ingredient_2">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Times New Roman</family>
+                           <pointsize>14</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Menu Item</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                         <property name="margin">
+                          <number>5</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="1">
+                        <widget class="QComboBox" name="cb_productReceiptMenuItem">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
                     </item>
                     <item>
                      <widget class="QFrame" name="frame_8">
+                      <property name="inputMethodHints">
+                       <set>Qt::ImhDigitsOnly</set>
+                      </property>
                       <property name="frameShape">
                        <enum>QFrame::StyledPanel</enum>
                       </property>
@@ -4577,6 +4624,23 @@ QPushButton:pressed
                        <enum>QFrame::Sunken</enum>
                       </property>
                       <layout class="QGridLayout" name="gridLayout_15">
+                       <item row="1" column="3">
+                        <widget class="QPushButton" name="btn_productReceiptAdd">
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="../resource/resource.qrc">
+                           <normaloff>:/Simple icons/simple_icons/fi-rr-add.svg</normaloff>:/Simple icons/simple_icons/fi-rr-add.svg</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>32</width>
+                           <height>32</height>
+                          </size>
+                         </property>
+                        </widget>
+                       </item>
                        <item row="1" column="1">
                         <widget class="QComboBox" name="cb_productReceiptIngredientName">
                          <property name="sizePolicy">
@@ -4584,6 +4648,26 @@ QPushButton:pressed
                            <horstretch>0</horstretch>
                            <verstretch>0</verstretch>
                           </sizepolicy>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="1" column="5">
+                        <widget class="QPushButton" name="btn_productReceiptRemove">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="../resource/resource.qrc">
+                           <normaloff>:/Simple icons/simple_icons/fi-rr-cross-circle.svg</normaloff>:/Simple icons/simple_icons/fi-rr-cross-circle.svg</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>32</width>
+                           <height>32</height>
+                          </size>
                          </property>
                         </widget>
                        </item>
@@ -4595,6 +4679,9 @@ QPushButton:pressed
                            <verstretch>0</verstretch>
                           </sizepolicy>
                          </property>
+                         <property name="inputMethodHints">
+                          <set>Qt::ImhDigitsOnly|Qt::ImhFormattedNumbersOnly</set>
+                         </property>
                          <property name="placeholderText">
                           <string>Quantity</string>
                          </property>
@@ -4603,14 +4690,17 @@ QPushButton:pressed
                          </property>
                         </widget>
                        </item>
-                       <item row="1" column="3">
-                        <widget class="QPushButton" name="btn_productReceiptAdd">
+                       <item row="1" column="4">
+                        <widget class="QPushButton" name="btn_productReceiptEdit">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
                          <property name="text">
                           <string/>
                          </property>
                          <property name="icon">
                           <iconset resource="../resource/resource.qrc">
-                           <normaloff>:/Simple icons/simple_icons/fi-rr-add.svg</normaloff>:/Simple icons/simple_icons/fi-rr-add.svg</iconset>
+                           <normaloff>:/Simple icons/simple_icons/fi-rr-edit.svg</normaloff>:/Simple icons/simple_icons/fi-rr-edit.svg</iconset>
                          </property>
                          <property name="iconSize">
                           <size>
@@ -4645,6 +4735,26 @@ QPushButton:pressed
                          </property>
                         </widget>
                        </item>
+                       <item row="1" column="6">
+                        <widget class="QPushButton" name="btn_productReceiptClear">
+                         <property name="enabled">
+                          <bool>true</bool>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="../resource/resource.qrc">
+                           <normaloff>:/Simple icons/simple_icons/fi-rr-broom.svg</normaloff>:/Simple icons/simple_icons/fi-rr-broom.svg</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>32</width>
+                           <height>32</height>
+                          </size>
+                         </property>
+                        </widget>
+                       </item>
                       </layout>
                      </widget>
                     </item>
@@ -4659,6 +4769,174 @@ QPushButton:pressed
                       <property name="selectionBehavior">
                        <enum>QAbstractItemView::SelectRows</enum>
                       </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QFrame" name="frame_31">
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Sunken</enum>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout_23">
+                       <item row="2" column="2">
+                        <widget class="QLabel" name="l_ingredient_7">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Times New Roman</family>
+                           <pointsize>14</pointsize>
+                           <weight>75</weight>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Sell price</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                         <property name="margin">
+                          <number>5</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="0">
+                        <widget class="QLabel" name="l_ingredient_5">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Times New Roman</family>
+                           <pointsize>14</pointsize>
+                           <weight>75</weight>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Estimated production price</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                         <property name="margin">
+                          <number>5</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="2" column="3">
+                        <widget class="QLabel" name="l_ingredient_8">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Times New Roman</family>
+                           <pointsize>14</pointsize>
+                           <weight>75</weight>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Estimated quantity</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                         <property name="margin">
+                          <number>5</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="3">
+                        <widget class="QLabel" name="l_productReceiptQuantity">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Times New Roman</family>
+                           <pointsize>14</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>0</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                         <property name="margin">
+                          <number>5</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="2">
+                        <widget class="QLabel" name="l_productReceiptPrice">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Times New Roman</family>
+                           <pointsize>14</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>0</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                         <property name="margin">
+                          <number>5</number>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="3" column="0">
+                        <widget class="QLabel" name="l_productReceiptEstimatedProductionPrice">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <family>Times New Roman</family>
+                           <pointsize>14</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>0</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                         <property name="margin">
+                          <number>5</number>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
                      </widget>
                     </item>
                    </layout>
@@ -4691,7 +4969,7 @@ QPushButton:pressed
                     </font>
                    </property>
                    <property name="currentIndex">
-                    <number>0</number>
+                    <number>4</number>
                    </property>
                    <property name="iconSize">
                     <size>
@@ -9033,7 +9311,6 @@ QComboBox
  </widget>
  <resources>
   <include location="../resource/resource.qrc"/>
-  <include location="../resource/resource.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -9049,6 +9326,22 @@ QComboBox
     <hint type="destinationlabel">
      <x>717</x>
      <y>163</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_productReceiptClear</sender>
+   <signal>clicked()</signal>
+   <receiver>le_productReceiptIngredientQuantity</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>874</x>
+     <y>202</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>640</x>
+     <y>197</y>
     </hint>
    </hints>
   </connection>

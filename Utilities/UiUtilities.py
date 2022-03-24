@@ -8,7 +8,7 @@ from DB.DBHandler import DBHelper
 from DB.DbTables import *
 from functools import partial
 from Setting.Setting import ServerSetting
-from escpos.printer import Network
+from Utilities import LicenseChecker
 import logging
 
 
@@ -97,6 +97,26 @@ class Pay(QDialog):
             msg.setWindowTitle("Warning message")
             msg.exec_()
             # self.buttonBox.blockSignals(True)
+
+
+class CheckerL(QDialog):
+    def __init__(self):
+        super(CheckerL, self).__init__()
+        uic.loadUi(os.path.join(os.getcwd(), 'uis', 'LicenseProblem.ui'), self)
+        self.l_adressMac.setText(LicenseChecker.get_mac())
+        self.tb_copyMac.clicked.connect(self.copyMac)
+
+    def accept(self):
+        if LicenseChecker.check_license(self.le_licenseCode.text()):
+            LicenseChecker.save_current_license(self.le_licenseCode.text())
+            super().accept()
+        else:
+            self.le_licenseCode.clear()
+
+    def copyMac(self):
+        cb = QApplication.clipboard()
+        cb.clear(mode=cb.Clipboard)
+        cb.setText(self.l_adressMac.text())
 
 
 class Reducer(QDialog):

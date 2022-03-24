@@ -215,6 +215,17 @@ class DBHelper(object):
                                                 {CategoryTable.COLUMN_LEVEL} INTEGER NOT NULL )"""
             self.c.execute(sql_command)
 
+            sql_command = f"""CREATE TABLE IF NOT EXISTS {MenuItemReceiptTable.TABLE_NAME} 
+                                                 ( {MenuItemReceiptTable.COLUMN_ID} INTEGER NOT NULL, 
+                                                {MenuItemReceiptTable.COLUMN_INGREDIENT_NAME} TEXT NOT NULL, 
+                                                {MenuItemReceiptTable.COLUMN_INGREDIENT_ID} INTEGER NOT NULL,  
+                                                {MenuItemReceiptTable.COLUMN_QUANTITY} REAL NOT NULL, 
+                                                        FOREIGN KEY ( {MenuItemReceiptTable.COLUMN_INGREDIENT_ID} ) REFERENCES 
+                                                        {StockTable.TABLE_NAME} ({StockTable.COLUMN_ID}), 
+                                                        FOREIGN KEY ( {MenuItemReceiptTable.COLUMN_ID} ) REFERENCES 
+                                                        {MenuTable.TABLE_NAME} ({MenuTable.COLUMN_ID}) )"""
+            self.c.execute(sql_command)
+
             sql_command = f"""CREATE TABLE IF NOT EXISTS {PointerTable.TABLE_NAME} 
                                                         ( {PointerTable.COLUMN_ID} INTEGER PRIMARY KEY AUTOINCREMENT, 
                                                         {PointerTable.COLUMN_DATE_START} TEXT NOT NULL,   
@@ -232,6 +243,13 @@ class DBHelper(object):
                             {MenuTable.COLUMN_PRICE}, {MenuTable.COLUMN_AVAILABLE}, {MenuTable.COLUMN_PICTURE}) 
                             VALUES (?, ?, ?, ?, ?, ?, ?, ?)"""
             self.c.execute(sql_command, astuple(x)[:-1])
+
+    def insertMenuItemReceipt(self, x: MenuItemReceipt):
+        with self.conn:
+            sql_command = f"""INSERT INTO {MenuItemReceiptTable.TABLE_NAME} ({MenuItemReceiptTable.COLUMN_ID}, 
+                            {MenuItemReceiptTable.COLUMN_INGREDIENT_NAME}, {MenuItemReceiptTable.COLUMN_INGREDIENT_ID}, {MenuItemReceiptTable.COLUMN_QUANTITY}) 
+                            VALUES (?, ?, ?, ?)"""
+            self.c.execute(sql_command, astuple(x))
 
     def insertExpense(self, x: Expense):
         with self.conn:
@@ -363,6 +381,11 @@ class DBHelper(object):
         with self.conn:
             self.c.execute(
                 f"DELETE FROM {MenuTable.TABLE_NAME} WHERE {MenuTable.COLUMN_ID}=?", (_id,))
+
+    def deleteMenuItemReceipt(self, _id: int, ingredient_id: int):
+        with self.conn:
+            self.c.execute(
+                f"DELETE FROM {MenuItemReceiptTable.TABLE_NAME} WHERE {MenuItemReceiptTable.COLUMN_ID}=? AND {MenuItemReceiptTable.COLUMN_INGREDIENT_ID}=?", (_id, ingredient_id))
 
     def deleteCustomer(self, _id: int):
         with self.conn:
@@ -543,7 +566,19 @@ class DBHelper(object):
             if all_x is not None:
                 for x in all_x:
                     results.append(MenuItemPhone(
-                        x[1], x[2], x[3], x[4], x[5], x[6], x[7], "x[8]", self.getSupplementByMenuId(x[0]), x[0]))
+                        x[1], x[2], x[3], x[4], x[5], x[6], x[7], f"{x[8]}", self.getSupplementByMenuId(x[0]), x[0]))
+            return results
+
+    def getAllMenuItemReceiptById(self, _id: int):
+        with self.conn:
+            self.c.execute(
+                f"SELECT * FROM {MenuItemReceiptTable.TABLE_NAME} WHERE {MenuItemReceiptTable.COLUMN_ID}=?", (_id,))
+            all_x = self.c.fetchall()
+            results = []
+            if all_x is not None:
+                for x in all_x:
+                    results.append(MenuItemReceipt(
+                        x[0], x[1], x[2], x[3]))
             return results
 
     def getAllCustomers(self):
@@ -729,6 +764,16 @@ class DBHelper(object):
             else:
                 return x
 
+    def getMenuItemReceiptById(self, _id: int, ingredient_id: int):
+        with self.conn:
+            self.c.execute(
+                f"SELECT * FROM {MenuItemReceiptTable.TABLE_NAME} WHERE {MenuItemReceiptTable.COLUMN_ID}=? AND {MenuItemReceiptTable.COLUMN_INGREDIENT_ID}=?", (_id, ingredient_id))
+            x = self.c.fetchone()
+            if x is not None:
+                return MenuItemReceipt(x[0], x[1], x[2], x[3])
+            else:
+                return x
+
     def getCustomerById(self, _id: int):
         with self.conn:
             self.c.execute(f"SELECT * FROM {CustomerTable.TABLE_NAME} WHERE {CustomerTable.COLUMN_ID}=?",
@@ -896,6 +941,14 @@ class DBHelper(object):
                         {MenuTable.COLUMN_PRICE}=?, {MenuTable.COLUMN_AVAILABLE}=?, {MenuTable.COLUMN_PICTURE}=? 
                         WHERE {MenuTable.COLUMN_ID}=? """
             self.c.execute(sql_command, astuple(x))
+
+    def updateMenuItemReceipt(self, x: MenuItemReceipt):
+        with self.conn:
+            sql_command = f"""UPDATE {MenuItemReceiptTable.TABLE_NAME} SET {MenuItemReceiptTable.COLUMN_ID}=?, 
+                        {MenuItemReceiptTable.COLUMN_INGREDIENT_NAME}=?, {MenuItemReceiptTable.COLUMN_INGREDIENT_ID}=?, {MenuItemReceiptTable.COLUMN_QUANTITY}=? 
+                        WHERE {MenuItemReceiptTable.COLUMN_ID}=? AND 
+                        {MenuItemReceiptTable.COLUMN_INGREDIENT_ID}=?"""
+            self.c.execute(sql_command, astuple(x) + (x.id, x.ingredient_id))
 
     def updateCustomer(self, x: Customer):
         with self.conn:
@@ -1283,6 +1336,18 @@ class DBHelper(object):
                 return Expense(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[0])
             else:
                 return x
+
+    def getExpenseByName(self, name: str):
+        with self.conn:
+            self.c.execute(
+                f"SELECT * FROM {ExpenseTable.TABLE_NAME} WHERE {ExpenseTable.COLUMN_NAME}=?", (name,))
+            all_x = self.c.fetchall()
+            results = []
+            if all_x is not None:
+                for x in all_x:
+                    results.append(
+                        Expense(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[0]))
+            return results
 
     # Search
     def customSearchSingle(self, table_name, table_field, value):

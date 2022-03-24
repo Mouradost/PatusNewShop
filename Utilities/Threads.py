@@ -186,6 +186,7 @@ class ClientHandler(QThread):
                     if msg[-1] == "&":
                         receiving = False
                         msg = msg[:-1]
+                # self.logUpdater.emit(f"[{self.client.address}] {msg}", False)
                 if msg == "":
                     self.logUpdater.emit(
                         f"[{self.client.address}] {msg}", False)

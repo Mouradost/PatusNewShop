@@ -799,3 +799,849 @@
 2022-03-22 23:52:50,987 INFO: [SERVER] Server is stopped
 2022-03-22 23:52:51,063 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
 2022-03-22 23:52:51,064 INFO: [SERVER] Server is stopped
+2022-03-23 11:09:55,981 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-23 11:09:55,982 INFO: [SERVER] Server is configured
+2022-03-23 11:09:55,982 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-23 11:09:57,241 INFO: [SERVER] New connection: Connected to 192.168.0.100
+2022-03-23 11:09:57,243 INFO: [SERVER] Active connection: 1
+2022-03-23 11:10:04,417 INFO: [SERVER] New connection: Connected to 192.168.0.101
+2022-03-23 11:10:04,418 INFO: [SERVER] Active connection: 2
+2022-03-23 11:10:19,003 INFO: [192.168.0.101] !MENUCATEGORY
+2022-03-23 11:10:19,013 INFO: [192.168.0.101] !TABLES
+2022-03-23 11:11:04,483 INFO: [192.168.0.100] !MENUCATEGORY
+2022-03-23 11:11:04,487 INFO: [192.168.0.100] !TABLES
+2022-03-23 11:12:31,869 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:12:31,874 INFO: [SERVER] Active connection: 3
+2022-03-23 11:12:41,876 INFO: [192.168.0.102] !MENUCATEGORY
+2022-03-23 11:12:41,888 INFO: [192.168.0.102] !TABLES
+2022-03-23 11:12:50,599 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 11:12:50,762 INFO: [SERVER] Client list size: 2
+2022-03-23 11:12:50,762 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:12:54,760 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:12:54,766 INFO: [SERVER] Active connection: 3
+2022-03-23 11:13:11,778 INFO: [192.168.0.102] !MENUCATEGORY
+2022-03-23 11:13:11,800 INFO: [192.168.0.102] !TABLES
+2022-03-23 11:13:25,636 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 11:13:25,787 INFO: [SERVER] Client list size: 2
+2022-03-23 11:13:25,787 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:13:27,477 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:13:27,484 INFO: [SERVER] Active connection: 3
+2022-03-23 11:14:20,305 ERROR: [192.168.0.102] string index out of range
+2022-03-23 11:14:20,305 INFO: [SERVER] Client list size: 2
+2022-03-23 11:14:20,305 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:14:22,754 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:14:22,755 INFO: [SERVER] Active connection: 3
+2022-03-23 11:14:36,549 INFO: [192.168.0.102] !MENUCATEGORY
+2022-03-23 11:14:36,767 INFO: [192.168.0.102] !TABLES
+2022-03-23 11:14:55,839 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 11:14:56,228 INFO: [SERVER] Client list size: 2
+2022-03-23 11:14:56,229 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:14:59,953 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:14:59,959 INFO: [SERVER] Active connection: 3
+2022-03-23 11:16:56,668 ERROR: [192.168.0.102] string index out of range
+2022-03-23 11:16:56,668 INFO: [SERVER] Client list size: 2
+2022-03-23 11:16:56,669 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:17:02,103 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:17:02,104 INFO: [SERVER] Active connection: 3
+2022-03-23 11:17:42,081 ERROR: [192.168.0.102] string index out of range
+2022-03-23 11:17:42,081 INFO: [SERVER] Client list size: 2
+2022-03-23 11:17:42,081 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:17:45,579 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:17:45,580 INFO: [SERVER] Active connection: 3
+2022-03-23 11:17:48,256 ERROR: [192.168.0.102] string index out of range
+2022-03-23 11:17:48,257 INFO: [SERVER] Client list size: 2
+2022-03-23 11:17:48,257 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:17:51,661 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:17:51,662 INFO: [SERVER] Active connection: 3
+2022-03-23 11:18:25,009 INFO: [192.168.0.102] !MENUCATEGORY
+2022-03-23 11:18:25,013 INFO: [192.168.0.102] !TABLES
+2022-03-23 11:18:56,551 INFO: [192.168.0.102] Message send
+2022-03-23 11:19:13,368 INFO: [192.168.0.102] Message send
+2022-03-23 11:19:31,038 INFO: [192.168.0.100] Message send
+2022-03-23 11:19:36,529 INFO: [192.168.0.101] Message send
+2022-03-23 11:19:58,087 ERROR: [192.168.0.101] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 11:19:58,229 INFO: [SERVER] Client list size: 2
+2022-03-23 11:19:58,230 INFO: [SERVER] Server is not connected anymore to 192.168.0.101
+2022-03-23 11:23:58,526 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 11:23:58,914 INFO: [SERVER] Client list size: 1
+2022-03-23 11:23:58,914 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:24:18,403 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:24:18,409 INFO: [SERVER] Active connection: 2
+2022-03-23 11:25:15,343 INFO: [SERVER] New connection: Connected to 192.168.0.101
+2022-03-23 11:25:15,345 INFO: [SERVER] Active connection: 3
+2022-03-23 11:27:44,487 ERROR: [192.168.0.100] timed out
+2022-03-23 11:27:44,865 INFO: [SERVER] Client list size: 2
+2022-03-23 11:27:44,865 INFO: [SERVER] Server is not connected anymore to 192.168.0.100
+2022-03-23 11:27:45,123 INFO: [SERVER] New connection: Connected to 192.168.0.100
+2022-03-23 11:27:45,128 INFO: [SERVER] Active connection: 3
+2022-03-23 11:29:47,558 ERROR: [192.168.0.102] string index out of range
+2022-03-23 11:29:47,559 INFO: [SERVER] Client list size: 2
+2022-03-23 11:29:47,559 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:29:50,008 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:29:50,009 INFO: [SERVER] Active connection: 3
+2022-03-23 11:29:59,524 ERROR: [192.168.0.102] string index out of range
+2022-03-23 11:29:59,525 INFO: [SERVER] Client list size: 2
+2022-03-23 11:29:59,525 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:30:01,988 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:30:01,989 INFO: [SERVER] Active connection: 3
+2022-03-23 11:30:25,823 INFO: [192.168.0.102] !MENUCATEGORY
+2022-03-23 11:30:25,827 INFO: [192.168.0.102] !TABLES
+2022-03-23 11:32:02,613 INFO: [192.168.0.102] 3!TABLECONTENT
+2022-03-23 11:32:02,653 INFO: [192.168.0.102] !MENUITEM
+2022-03-23 11:33:05,196 INFO: [192.168.0.102] Message send
+2022-03-23 11:34:41,198 INFO: [192.168.0.100] !MENUCATEGORY
+2022-03-23 11:34:41,202 INFO: [192.168.0.100] !TABLES
+2022-03-23 11:35:05,540 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 11:35:05,921 INFO: [SERVER] Client list size: 2
+2022-03-23 11:35:05,922 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:35:14,877 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:35:14,882 INFO: [SERVER] Active connection: 3
+2022-03-23 11:39:26,117 INFO: [SERVER] Client list size: 2
+2022-03-23 11:39:26,117 INFO: [SERVER] Server is not connected anymore to 192.168.0.101
+2022-03-23 11:39:26,118 INFO: [SERVER] Client list size: 1
+2022-03-23 11:39:26,118 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:39:26,118 INFO: [SERVER] Server is stopped
+2022-03-23 11:39:26,142 ERROR: [192.168.0.101] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-23 11:39:26,143 INFO: [SERVER] Client list size: 1
+2022-03-23 11:39:26,144 INFO: [SERVER] Server is not connected anymore to 192.168.0.101
+2022-03-23 11:39:26,144 ERROR: [192.168.0.102] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-23 11:39:26,144 INFO: [SERVER] Client list size: 1
+2022-03-23 11:39:26,144 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:39:26,145 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-23 11:41:40,412 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-23 11:41:40,413 INFO: [SERVER] Server is configured
+2022-03-23 11:41:40,413 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-23 11:41:41,884 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:41:41,886 INFO: [SERVER] Active connection: 1
+2022-03-23 11:41:57,142 ERROR: [192.168.0.102] ServerThread.logUpdater[str, bool] signal has 2 argument(s) but 1 provided
+2022-03-23 11:41:57,142 INFO: [SERVER] Client list size: 0
+2022-03-23 11:41:57,143 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:41:57,190 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:41:57,191 INFO: [SERVER] Active connection: 1
+2022-03-23 11:42:00,308 ERROR: [192.168.0.102] ServerThread.logUpdater[str, bool] signal has 2 argument(s) but 1 provided
+2022-03-23 11:42:00,308 INFO: [SERVER] Client list size: 0
+2022-03-23 11:42:00,309 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:42:00,333 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:42:00,334 INFO: [SERVER] Active connection: 1
+2022-03-23 11:42:20,297 ERROR: [192.168.0.102] ServerThread.logUpdater[str, bool] signal has 2 argument(s) but 1 provided
+2022-03-23 11:42:20,297 INFO: [SERVER] Client list size: 0
+2022-03-23 11:42:20,297 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:42:20,328 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:42:20,329 INFO: [SERVER] Active connection: 1
+2022-03-23 11:42:45,571 INFO: [SERVER] New connection: Connected to 192.168.0.100
+2022-03-23 11:42:45,572 INFO: [SERVER] Active connection: 2
+2022-03-23 11:42:58,297 INFO: [SERVER] Client list size: 1
+2022-03-23 11:42:58,298 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:42:58,298 INFO: [SERVER] Server is stopped
+2022-03-23 11:42:58,312 ERROR: [192.168.0.102] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-23 11:42:58,313 INFO: [SERVER] Client list size: 1
+2022-03-23 11:42:58,313 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:42:58,313 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-23 11:42:58,314 INFO: [SERVER] Client list size: 0
+2022-03-23 11:42:58,315 ERROR: [192.168.0.100] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-23 11:42:58,316 INFO: [SERVER] Client list size: 0
+2022-03-23 11:42:58,317 INFO: [SERVER] Server is not connected anymore to 192.168.0.100
+2022-03-23 11:42:58,317 INFO: [SERVER] Server is not connected anymore to 192.168.0.100
+2022-03-23 11:42:58,317 INFO: [SERVER] Server is stopped
+2022-03-23 11:43:01,624 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-23 11:43:01,625 INFO: [SERVER] Server is configured
+2022-03-23 11:43:01,625 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-23 11:43:03,419 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:43:03,420 INFO: [SERVER] Active connection: 1
+2022-03-23 11:43:10,749 INFO: mourad;mourad!AUTH
+2022-03-23 11:43:10,757 INFO: !MENUCATEGORY
+2022-03-23 11:43:10,757 INFO: [192.168.0.102] !MENUCATEGORY
+2022-03-23 11:43:10,761 INFO: !TABLES
+2022-03-23 11:43:10,762 INFO: [192.168.0.102] !TABLES
+2022-03-23 11:44:10,308 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 11:44:10,694 INFO: [SERVER] Client list size: 0
+2022-03-23 11:44:10,695 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:45:28,429 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:45:28,431 INFO: [SERVER] Active connection: 1
+2022-03-23 11:45:36,655 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 11:45:36,655 INFO: [SERVER] Client list size: 0
+2022-03-23 11:45:36,655 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:47:01,419 INFO: [SERVER] New connection: Connected to 192.168.0.100
+2022-03-23 11:47:01,420 INFO: [SERVER] Active connection: 1
+2022-03-23 11:47:17,497 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:47:17,498 INFO: [SERVER] Active connection: 2
+2022-03-23 11:48:07,899 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 11:48:07,900 INFO: [SERVER] Client list size: 1
+2022-03-23 11:48:07,900 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:58:00,012 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:58:00,013 INFO: [SERVER] Active connection: 2
+2022-03-23 11:58:00,013 INFO: mourad;mourad!AUTH
+2022-03-23 11:58:00,016 INFO: !MENUCATEGORY
+2022-03-23 11:58:00,016 INFO: [192.168.0.102] !MENUCATEGORY
+2022-03-23 11:58:00,017 INFO: !TABLES
+2022-03-23 11:58:00,017 INFO: [192.168.0.102] !TABLES
+2022-03-23 11:58:00,017 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 11:58:00,017 INFO: [SERVER] Client list size: 1
+2022-03-23 11:58:00,017 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:58:08,406 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:58:08,408 INFO: [SERVER] Active connection: 2
+2022-03-23 11:58:20,767 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 11:58:20,768 INFO: [SERVER] Client list size: 1
+2022-03-23 11:58:20,768 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:58:33,289 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:58:33,290 INFO: [SERVER] Active connection: 2
+2022-03-23 11:59:00,722 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 11:59:00,722 INFO: [SERVER] Client list size: 1
+2022-03-23 11:59:00,722 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:59:12,526 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:59:12,528 INFO: [SERVER] Active connection: 2
+2022-03-23 11:59:19,953 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 11:59:19,953 INFO: [SERVER] Client list size: 1
+2022-03-23 11:59:19,953 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 11:59:51,031 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 11:59:51,032 INFO: [SERVER] Active connection: 2
+2022-03-23 12:00:16,388 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 12:00:16,388 INFO: [SERVER] Client list size: 1
+2022-03-23 12:00:16,388 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:03:41,425 ERROR: [192.168.0.100] timed out
+2022-03-23 12:03:41,425 INFO: [SERVER] Client list size: 0
+2022-03-23 12:03:41,426 INFO: [SERVER] Server is not connected anymore to 192.168.0.100
+2022-03-23 12:03:41,824 INFO: [SERVER] New connection: Connected to 192.168.0.100
+2022-03-23 12:03:41,825 INFO: [SERVER] Active connection: 1
+2022-03-23 12:05:40,970 INFO: [SERVER] New connection: Connected to 192.168.0.101
+2022-03-23 12:05:40,971 INFO: [SERVER] Active connection: 2
+2022-03-23 12:06:04,030 INFO: amel;amel!AUTH
+2022-03-23 12:06:04,041 INFO: !MENUCATEGORY
+2022-03-23 12:06:04,041 INFO: [192.168.0.101] !MENUCATEGORY
+2022-03-23 12:06:04,051 INFO: !TABLES
+2022-03-23 12:06:04,051 INFO: [192.168.0.101] !TABLES
+2022-03-23 12:14:04,950 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:14:04,951 INFO: [SERVER] Active connection: 3
+2022-03-23 12:14:13,422 ERROR: [192.168.0.102] string index out of range
+2022-03-23 12:14:13,423 INFO: [SERVER] Client list size: 2
+2022-03-23 12:14:13,423 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:14:14,776 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:14:14,778 INFO: [SERVER] Active connection: 3
+2022-03-23 12:14:28,334 INFO: mourad;mourad!AUTH
+2022-03-23 12:14:28,340 INFO: !MENUCATEGORY
+2022-03-23 12:14:28,340 INFO: [192.168.0.102] !MENUCATEGORY
+2022-03-23 12:14:28,380 INFO: !TABLES
+2022-03-23 12:14:28,380 INFO: [192.168.0.102] !TABLES
+2022-03-23 12:14:43,052 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 12:14:43,436 INFO: [SERVER] Client list size: 2
+2022-03-23 12:14:43,436 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:14:50,611 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:14:50,613 INFO: [SERVER] Active connection: 3
+2022-03-23 12:16:17,812 ERROR: [192.168.0.102] string index out of range
+2022-03-23 12:16:17,812 INFO: [SERVER] Client list size: 2
+2022-03-23 12:16:17,813 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:16:19,315 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:16:19,316 INFO: [SERVER] Active connection: 3
+2022-03-23 12:16:21,524 ERROR: [192.168.0.102] string index out of range
+2022-03-23 12:16:21,524 INFO: [SERVER] Client list size: 2
+2022-03-23 12:16:21,524 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:16:25,158 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:16:25,159 INFO: [SERVER] Active connection: 3
+2022-03-23 12:16:35,958 INFO: mourad;mourad!AUTH
+2022-03-23 12:16:35,967 INFO: !MENUCATEGORY
+2022-03-23 12:16:35,967 INFO: [192.168.0.102] !MENUCATEGORY
+2022-03-23 12:16:35,970 INFO: !TABLES
+2022-03-23 12:16:35,971 INFO: [192.168.0.102] !TABLES
+2022-03-23 12:16:49,963 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 12:16:50,137 INFO: [SERVER] Client list size: 2
+2022-03-23 12:16:50,137 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:16:58,283 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:16:58,284 INFO: [SERVER] Active connection: 3
+2022-03-23 12:20:21,841 ERROR: [192.168.0.100] timed out
+2022-03-23 12:20:21,841 INFO: [SERVER] Client list size: 2
+2022-03-23 12:20:21,842 INFO: [SERVER] Server is not connected anymore to 192.168.0.100
+2022-03-23 12:20:22,258 INFO: [SERVER] New connection: Connected to 192.168.0.100
+2022-03-23 12:20:22,260 INFO: [SERVER] Active connection: 3
+2022-03-23 12:20:44,093 ERROR: [192.168.0.102] string index out of range
+2022-03-23 12:20:44,093 INFO: [SERVER] Client list size: 2
+2022-03-23 12:20:44,093 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:20:48,231 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:20:48,233 INFO: [SERVER] Active connection: 3
+2022-03-23 12:21:03,456 INFO: mourad;mourad!AUTH
+2022-03-23 12:21:03,468 INFO: !MENUCATEGORY
+2022-03-23 12:21:03,468 INFO: [192.168.0.102] !MENUCATEGORY
+2022-03-23 12:21:03,472 INFO: !TABLES
+2022-03-23 12:21:03,472 INFO: [192.168.0.102] !TABLES
+2022-03-23 12:21:21,071 ERROR: [192.168.0.102] string index out of range
+2022-03-23 12:21:21,180 INFO: [SERVER] Client list size: 2
+2022-03-23 12:21:21,180 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:21:26,314 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:21:26,316 INFO: [SERVER] Active connection: 3
+2022-03-23 12:21:37,082 INFO: mourad;mourad!AUTH
+2022-03-23 12:21:37,108 INFO: !MENUCATEGORY
+2022-03-23 12:21:37,108 INFO: [192.168.0.102] !MENUCATEGORY
+2022-03-23 12:21:37,114 INFO: !TABLES
+2022-03-23 12:21:37,114 INFO: [192.168.0.102] !TABLES
+2022-03-23 12:22:06,460 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 12:22:06,847 INFO: [SERVER] Client list size: 2
+2022-03-23 12:22:06,847 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:22:12,193 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:22:12,195 INFO: [SERVER] Active connection: 3
+2022-03-23 12:22:44,056 ERROR: [192.168.0.101] timed out
+2022-03-23 12:22:44,430 INFO: [SERVER] Client list size: 2
+2022-03-23 12:22:44,430 INFO: [SERVER] Server is not connected anymore to 192.168.0.101
+2022-03-23 12:37:02,266 ERROR: [192.168.0.100] timed out
+2022-03-23 12:37:02,266 INFO: [SERVER] Client list size: 1
+2022-03-23 12:37:02,266 INFO: [SERVER] Server is not connected anymore to 192.168.0.100
+2022-03-23 12:37:02,874 INFO: [SERVER] New connection: Connected to 192.168.0.100
+2022-03-23 12:37:02,876 INFO: [SERVER] Active connection: 2
+2022-03-23 12:37:51,973 ERROR: [192.168.0.102] string index out of range
+2022-03-23 12:37:51,974 INFO: [SERVER] Client list size: 1
+2022-03-23 12:37:51,974 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:37:55,123 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:37:55,125 INFO: [SERVER] Active connection: 2
+2022-03-23 12:38:00,918 ERROR: [192.168.0.102] string index out of range
+2022-03-23 12:38:00,919 INFO: [SERVER] Client list size: 1
+2022-03-23 12:38:00,919 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:40:14,144 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:40:14,146 INFO: [SERVER] Active connection: 2
+2022-03-23 12:40:32,028 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:40:32,029 INFO: [SERVER] Active connection: 3
+2022-03-23 12:40:37,829 ERROR: [192.168.0.102] string index out of range
+2022-03-23 12:40:37,829 INFO: [SERVER] Client list size: 2
+2022-03-23 12:40:37,829 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:40:37,830 ERROR: [192.168.0.102] string index out of range
+2022-03-23 12:40:37,830 INFO: [SERVER] Client list size: 1
+2022-03-23 12:40:37,830 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:40:42,277 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:40:42,279 INFO: [SERVER] Active connection: 2
+2022-03-23 12:45:15,997 ERROR: [192.168.0.102] string index out of range
+2022-03-23 12:45:15,997 INFO: [SERVER] Client list size: 1
+2022-03-23 12:45:15,998 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:45:18,017 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:45:18,018 INFO: [SERVER] Active connection: 2
+2022-03-23 12:45:54,686 INFO: mourad;mourad!AUTH
+2022-03-23 12:46:03,324 INFO: mourad;mourad!AUTH
+2022-03-23 12:47:01,720 INFO: mourad;mourad!AUTH
+2022-03-23 12:48:09,568 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 12:48:09,670 INFO: [SERVER] Client list size: 1
+2022-03-23 12:48:09,670 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:48:11,236 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:48:11,237 INFO: [SERVER] Active connection: 2
+2022-03-23 12:52:27,120 ERROR: [192.168.0.102] string index out of range
+2022-03-23 12:52:27,121 INFO: [SERVER] Client list size: 1
+2022-03-23 12:52:27,121 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:52:28,992 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:52:28,993 INFO: [SERVER] Active connection: 2
+2022-03-23 12:53:15,926 ERROR: [192.168.0.102] string index out of range
+2022-03-23 12:53:15,927 INFO: [SERVER] Client list size: 1
+2022-03-23 12:53:15,927 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:53:16,821 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:53:16,823 INFO: [SERVER] Active connection: 2
+2022-03-23 12:53:42,880 ERROR: [192.168.0.100] timed out
+2022-03-23 12:53:42,880 INFO: [SERVER] Client list size: 1
+2022-03-23 12:53:42,881 INFO: [SERVER] Server is not connected anymore to 192.168.0.100
+2022-03-23 12:53:45,243 INFO: [SERVER] New connection: Connected to 192.168.0.100
+2022-03-23 12:53:45,244 INFO: [SERVER] Active connection: 2
+2022-03-23 12:53:52,418 ERROR: [192.168.0.102] string index out of range
+2022-03-23 12:53:52,419 INFO: [SERVER] Client list size: 1
+2022-03-23 12:53:52,419 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:53:54,245 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:53:54,246 INFO: [SERVER] Active connection: 2
+2022-03-23 12:54:45,585 ERROR: [192.168.0.102] string index out of range
+2022-03-23 12:54:45,585 INFO: [SERVER] Client list size: 1
+2022-03-23 12:54:45,585 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 12:54:47,379 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 12:54:47,380 INFO: [SERVER] Active connection: 2
+2022-03-23 13:00:03,884 ERROR: [192.168.0.102] string index out of range
+2022-03-23 13:00:03,884 INFO: [SERVER] Client list size: 1
+2022-03-23 13:00:03,886 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 13:00:05,191 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 13:00:05,193 INFO: [SERVER] Active connection: 2
+2022-03-23 13:00:27,476 ERROR: [192.168.0.102] string index out of range
+2022-03-23 13:00:27,476 INFO: [SERVER] Client list size: 1
+2022-03-23 13:00:27,476 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 13:01:31,107 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 13:01:31,109 INFO: [SERVER] Active connection: 2
+2022-03-23 13:01:38,934 ERROR: [192.168.0.102] string index out of range
+2022-03-23 13:01:38,934 INFO: [SERVER] Client list size: 1
+2022-03-23 13:01:38,934 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 13:01:44,639 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 13:01:44,640 INFO: [SERVER] Active connection: 2
+2022-03-23 13:02:42,913 ERROR: [192.168.0.102] string index out of range
+2022-03-23 13:02:42,913 INFO: [SERVER] Client list size: 1
+2022-03-23 13:02:42,914 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 13:02:44,884 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 13:02:44,885 INFO: [SERVER] Active connection: 2
+2022-03-23 13:06:25,692 ERROR: [192.168.0.102] string index out of range
+2022-03-23 13:06:25,692 INFO: [SERVER] Client list size: 1
+2022-03-23 13:06:25,693 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 13:06:30,620 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 13:06:30,621 INFO: [SERVER] Active connection: 2
+2022-03-23 13:06:44,027 INFO: mourad;mourad!AUTH
+2022-03-23 13:06:44,042 INFO: !MENUCATEGORY
+2022-03-23 13:06:44,043 INFO: [192.168.0.102] !MENUCATEGORY
+2022-03-23 13:06:44,055 INFO: !TABLES
+2022-03-23 13:06:44,056 INFO: [192.168.0.102] !TABLES
+2022-03-23 13:06:53,867 ERROR: [192.168.0.102] string index out of range
+2022-03-23 13:06:54,009 INFO: [SERVER] Client list size: 1
+2022-03-23 13:06:54,010 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 13:07:09,546 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 13:07:09,548 INFO: [SERVER] Active connection: 2
+2022-03-23 13:07:20,663 INFO: mourad;mourad!AUTH
+2022-03-23 13:07:20,762 INFO: !MENUCATEGORY
+2022-03-23 13:07:20,762 INFO: [192.168.0.102] !MENUCATEGORY
+2022-03-23 13:07:20,766 INFO: !TABLES
+2022-03-23 13:07:20,766 INFO: [192.168.0.102] !TABLES
+2022-03-23 13:07:29,408 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 13:07:29,551 INFO: [SERVER] Client list size: 1
+2022-03-23 13:07:29,552 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 13:07:37,643 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 13:07:37,644 INFO: [SERVER] Active connection: 2
+2022-03-23 13:07:53,162 INFO: mourad;mourad!AUTH
+2022-03-23 13:07:53,180 INFO: !MENUCATEGORY
+2022-03-23 13:07:53,180 INFO: [192.168.0.102] !MENUCATEGORY
+2022-03-23 13:07:53,187 INFO: !TABLES
+2022-03-23 13:07:53,187 INFO: [192.168.0.102] !TABLES
+2022-03-23 13:10:25,255 ERROR: [192.168.0.100] timed out
+2022-03-23 13:10:25,255 INFO: [SERVER] Client list size: 1
+2022-03-23 13:10:25,255 INFO: [SERVER] Server is not connected anymore to 192.168.0.100
+2022-03-23 13:10:25,798 INFO: [SERVER] New connection: Connected to 192.168.0.100
+2022-03-23 13:10:25,799 INFO: [SERVER] Active connection: 2
+2022-03-23 13:15:19,151 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 13:15:19,152 INFO: [SERVER] Active connection: 3
+2022-03-23 13:15:37,614 INFO: mourad;mourad!AUTH
+2022-03-23 13:15:37,627 INFO: !MENUCATEGORY
+2022-03-23 13:15:37,627 INFO: [192.168.0.102] !MENUCATEGORY
+2022-03-23 13:15:37,907 INFO: !TABLES
+2022-03-23 13:15:37,907 INFO: [192.168.0.102] !TABLES
+2022-03-23 13:16:43,723 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
+2022-03-23 13:16:44,129 INFO: [SERVER] Client list size: 2
+2022-03-23 13:16:44,130 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 13:16:56,468 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 13:16:56,469 INFO: [SERVER] Active connection: 3
+2022-03-23 13:17:17,771 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-23 13:17:17,775 INFO: [SERVER] Active connection: 4
+2022-03-23 13:17:20,635 ERROR: [192.168.0.102] string index out of range
+2022-03-23 13:17:20,635 INFO: [SERVER] Client list size: 3
+2022-03-23 13:17:20,636 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 13:21:20,313 INFO: [SERVER] Client list size: 2
+2022-03-23 13:21:20,314 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 13:21:20,314 INFO: [SERVER] Client list size: 1
+2022-03-23 13:21:20,314 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 13:21:20,315 INFO: [SERVER] Server is stopped
+2022-03-23 13:21:20,352 ERROR: [192.168.0.102] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-23 13:21:20,353 ERROR: [192.168.0.102] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-23 13:21:20,354 INFO: [SERVER] Client list size: 1
+2022-03-23 13:21:20,354 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
+2022-03-23 13:21:20,354 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-23 13:21:20,354 INFO: [SERVER] Client list size: 0
+2022-03-23 13:21:20,355 ERROR: [192.168.0.100] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-23 13:21:20,355 INFO: [SERVER] Client list size: 0
+2022-03-23 13:21:20,355 INFO: [SERVER] Server is not connected anymore to 192.168.0.100
+2022-03-23 13:21:20,357 INFO: [SERVER] Server is not connected anymore to 192.168.0.100
+2022-03-23 13:21:20,358 INFO: [SERVER] Server is stopped
+2022-03-24 01:37:40,006 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 01:37:40,008 INFO: [SERVER] Server is configured
+2022-03-24 01:37:40,008 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 01:37:42,460 INFO: [SERVER] Server is stopped
+2022-03-24 01:37:42,472 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 01:37:42,474 INFO: [SERVER] Server is stopped
+2022-03-24 01:38:32,686 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 01:38:32,687 INFO: [SERVER] Server is configured
+2022-03-24 01:38:32,687 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 01:38:33,923 INFO: [SERVER] Server is stopped
+2022-03-24 01:38:33,937 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 01:38:33,938 INFO: [SERVER] Server is stopped
+2022-03-24 01:39:34,656 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 01:39:34,658 INFO: [SERVER] Server is configured
+2022-03-24 01:39:34,658 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 01:39:35,953 INFO: [SERVER] Server is stopped
+2022-03-24 01:39:35,957 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 01:39:35,957 INFO: [SERVER] Server is stopped
+2022-03-24 01:40:08,731 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 01:40:08,731 INFO: [SERVER] Server is configured
+2022-03-24 01:40:08,731 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 01:40:09,571 INFO: [SERVER] Server is stopped
+2022-03-24 01:40:20,642 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 01:40:20,644 INFO: [SERVER] Server is configured
+2022-03-24 01:40:20,645 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 01:40:22,688 INFO: [SERVER] Server is stopped
+2022-03-24 01:40:58,643 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 01:40:58,644 INFO: [SERVER] Server is configured
+2022-03-24 01:40:58,644 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 01:40:59,879 INFO: [SERVER] Server is stopped
+2022-03-24 01:41:27,385 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 01:41:27,387 INFO: [SERVER] Server is configured
+2022-03-24 01:41:27,387 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 01:41:31,196 INFO: [SERVER] Server is stopped
+2022-03-24 01:41:31,215 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 01:41:31,216 INFO: [SERVER] Server is stopped
+2022-03-24 01:43:16,364 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 01:43:16,365 INFO: [SERVER] Server is configured
+2022-03-24 01:43:16,365 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 01:43:19,670 INFO: [SERVER] Server is stopped
+2022-03-24 01:43:19,690 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 01:43:19,690 INFO: [SERVER] Server is stopped
+2022-03-24 01:43:39,999 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 01:43:40,000 INFO: [SERVER] Server is configured
+2022-03-24 01:43:40,000 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 01:43:42,026 INFO: [SERVER] Server is stopped
+2022-03-24 01:43:42,047 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 01:43:42,049 INFO: [SERVER] Server is stopped
+2022-03-24 01:44:51,904 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 01:44:51,904 INFO: [SERVER] Server is configured
+2022-03-24 01:44:51,904 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 01:44:53,727 INFO: [SERVER] Server is stopped
+2022-03-24 01:44:53,750 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 01:44:53,751 INFO: [SERVER] Server is stopped
+2022-03-24 01:46:37,723 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 01:46:37,723 INFO: [SERVER] Server is configured
+2022-03-24 01:46:37,723 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 01:46:39,936 INFO: [SERVER] Server is stopped
+2022-03-24 01:46:39,975 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 01:46:39,975 INFO: [SERVER] Server is stopped
+2022-03-24 02:16:43,435 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 02:16:43,436 INFO: [SERVER] Server is configured
+2022-03-24 02:16:43,436 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 02:16:46,025 INFO: [SERVER] Server is stopped
+2022-03-24 02:16:46,044 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 02:16:46,045 INFO: [SERVER] Server is stopped
+2022-03-24 02:23:27,367 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 02:23:27,368 INFO: [SERVER] Server is configured
+2022-03-24 02:23:27,368 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 02:23:33,422 INFO: [SERVER] Server is stopped
+2022-03-24 02:23:33,439 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 02:23:33,440 INFO: [SERVER] Server is stopped
+2022-03-24 02:25:50,166 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 02:25:50,166 INFO: [SERVER] Server is configured
+2022-03-24 02:25:50,167 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 02:26:31,992 INFO: [SERVER] Server is stopped
+2022-03-24 02:26:32,041 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 02:26:32,041 INFO: [SERVER] Server is stopped
+2022-03-24 02:34:08,993 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 02:34:08,994 INFO: [SERVER] Server is configured
+2022-03-24 02:34:08,994 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 02:34:52,626 INFO: [SERVER] New connection: Connected to 192.168.0.102
+2022-03-24 02:34:52,627 INFO: [SERVER] Active connection: 1
+2022-03-24 02:35:02,783 INFO: [192.168.0.102] !TABLES
+2022-03-24 02:35:02,787 INFO: [192.168.0.102] !MENUCATEGORY
+2022-03-24 02:35:04,118 INFO: [192.168.0.102] 1!TABLECONTENT
+2022-03-24 02:35:04,122 INFO: [192.168.0.102] !MENUITEM
+2022-03-24 02:35:08,472 INFO: [192.168.0.102] [{"orderItemQuantity":1.0,"orderItemSupplements":[],"orderItemTotal":300.0,"productCategory":3,"productId":1,"productName":"Salade cesar","tableId":1}];;300.0;!ORDER
+2022-03-24 02:35:08,795 INFO: [PRINTER THREAD] Start printing
+2022-03-24 02:35:08,875 INFO: [192.168.0.102] !TABLES
+2022-03-24 02:35:29,854 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-03-24 02:35:29,856 INFO: [192.168.0.102] Message send
+2022-03-24 02:35:29,896 INFO: [PRINTER THREAD] Finished printing
+2022-03-24 13:52:17,264 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 13:52:17,278 INFO: [SERVER] Server is configured
+2022-03-24 13:52:17,279 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 14:00:41,141 INFO: [SERVER] Server is stopped
+2022-03-24 14:00:41,159 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 14:00:41,160 INFO: [SERVER] Server is stopped
+2022-03-24 14:44:20,652 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 14:44:20,653 INFO: [SERVER] Server is configured
+2022-03-24 14:44:20,653 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 16:08:24,948 INFO: [SERVER] Server is stopped
+2022-03-24 16:08:24,971 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 16:08:24,972 INFO: [SERVER] Server is stopped
+2022-03-24 17:06:00,167 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:06:00,167 INFO: [SERVER] Server is configured
+2022-03-24 17:06:00,168 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:06:24,020 INFO: [SERVER] Server is stopped
+2022-03-24 17:06:24,045 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 17:06:24,047 INFO: [SERVER] Server is stopped
+2022-03-24 17:19:07,332 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:19:07,332 INFO: [SERVER] Server is configured
+2022-03-24 17:19:07,332 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:20:25,865 INFO: [SERVER] Server is stopped
+2022-03-24 17:20:25,890 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 17:20:25,890 INFO: [SERVER] Server is stopped
+2022-03-24 17:21:31,007 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:21:31,028 INFO: [SERVER] Server is configured
+2022-03-24 17:21:31,029 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:23:30,580 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:23:30,581 INFO: [SERVER] Server is configured
+2022-03-24 17:23:30,581 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:24:53,134 INFO: [SERVER] Server is stopped
+2022-03-24 17:24:53,170 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 17:24:53,171 INFO: [SERVER] Server is stopped
+2022-03-24 17:32:42,019 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:32:42,020 INFO: [SERVER] Server is configured
+2022-03-24 17:32:42,020 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:33:06,154 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:33:06,155 INFO: [SERVER] Server is configured
+2022-03-24 17:33:06,155 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:34:21,055 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:34:21,055 INFO: [SERVER] Server is configured
+2022-03-24 17:34:21,055 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:36:36,878 INFO: [SERVER] Server is stopped
+2022-03-24 17:36:36,904 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 17:36:36,904 INFO: [SERVER] Server is stopped
+2022-03-24 17:36:42,104 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:36:42,105 INFO: [SERVER] Server is configured
+2022-03-24 17:36:42,105 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:37:05,298 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:37:05,300 INFO: [SERVER] Server is configured
+2022-03-24 17:37:05,301 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:37:40,486 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:37:40,487 INFO: [SERVER] Server is configured
+2022-03-24 17:37:40,487 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:38:27,738 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:38:27,738 INFO: [SERVER] Server is configured
+2022-03-24 17:38:27,738 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:38:53,428 INFO: [SERVER] Server is stopped
+2022-03-24 17:38:53,460 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 17:38:53,460 INFO: [SERVER] Server is stopped
+2022-03-24 17:39:38,800 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:39:38,800 INFO: [SERVER] Server is configured
+2022-03-24 17:39:38,801 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:41:07,646 INFO: [SERVER] Server is stopped
+2022-03-24 17:41:07,673 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 17:41:07,673 INFO: [SERVER] Server is stopped
+2022-03-24 17:41:19,800 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:41:19,800 INFO: [SERVER] Server is configured
+2022-03-24 17:41:19,800 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:41:40,312 INFO: [SERVER] Server is stopped
+2022-03-24 17:41:40,341 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 17:41:40,341 INFO: [SERVER] Server is stopped
+2022-03-24 17:42:13,467 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:42:13,467 INFO: [SERVER] Server is configured
+2022-03-24 17:42:13,467 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:43:16,588 INFO: [SERVER] Server is stopped
+2022-03-24 17:43:16,605 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 17:43:16,606 INFO: [SERVER] Server is stopped
+2022-03-24 17:44:01,367 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:44:01,368 INFO: [SERVER] Server is configured
+2022-03-24 17:44:01,368 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:45:28,822 INFO: [SERVER] Server is stopped
+2022-03-24 17:45:28,843 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 17:45:28,843 INFO: [SERVER] Server is stopped
+2022-03-24 17:45:33,377 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:45:33,377 INFO: [SERVER] Server is configured
+2022-03-24 17:45:33,379 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:46:20,955 INFO: [SERVER] Server is stopped
+2022-03-24 17:46:20,972 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 17:46:20,972 INFO: [SERVER] Server is stopped
+2022-03-24 17:46:26,112 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:46:26,113 INFO: [SERVER] Server is configured
+2022-03-24 17:46:26,113 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:46:50,280 INFO: [SERVER] Server is stopped
+2022-03-24 17:46:50,310 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 17:46:50,310 INFO: [SERVER] Server is stopped
+2022-03-24 17:47:15,100 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:47:15,102 INFO: [SERVER] Server is configured
+2022-03-24 17:47:15,102 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:47:47,664 INFO: [SERVER] Server is stopped
+2022-03-24 17:47:47,689 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 17:47:47,689 INFO: [SERVER] Server is stopped
+2022-03-24 17:47:53,369 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:47:53,372 INFO: [SERVER] Server is configured
+2022-03-24 17:47:53,372 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:55:27,036 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:55:27,037 INFO: [SERVER] Server is configured
+2022-03-24 17:55:27,037 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 17:56:23,908 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 17:56:23,908 INFO: [SERVER] Server is configured
+2022-03-24 17:56:23,908 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 18:00:05,442 INFO: [SERVER] Server is stopped
+2022-03-24 18:00:05,461 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 18:00:05,462 INFO: [SERVER] Server is stopped
+2022-03-24 18:00:10,696 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 18:00:10,697 INFO: [SERVER] Server is configured
+2022-03-24 18:00:10,697 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 18:02:13,606 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 18:02:13,610 INFO: [SERVER] Server is configured
+2022-03-24 18:02:13,611 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 18:05:11,775 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 18:05:11,777 INFO: [SERVER] Server is configured
+2022-03-24 18:05:11,778 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 18:08:20,037 INFO: [SERVER] Server is stopped
+2022-03-24 18:08:20,055 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 18:08:20,055 INFO: [SERVER] Server is stopped
+2022-03-24 18:08:24,752 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 18:08:24,752 INFO: [SERVER] Server is configured
+2022-03-24 18:08:24,752 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 18:10:25,212 INFO: [SERVER] Server is stopped
+2022-03-24 18:10:25,229 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 18:10:25,230 INFO: [SERVER] Server is stopped
+2022-03-24 18:10:29,959 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 18:10:29,959 INFO: [SERVER] Server is configured
+2022-03-24 18:10:29,959 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 18:11:04,546 INFO: [SERVER] Server is stopped
+2022-03-24 18:11:04,572 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 18:11:04,572 INFO: [SERVER] Server is stopped
+2022-03-24 18:11:31,494 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 18:11:31,494 INFO: [SERVER] Server is configured
+2022-03-24 18:11:31,494 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 18:11:54,087 INFO: [SERVER] Server is stopped
+2022-03-24 18:11:54,112 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 18:11:54,113 INFO: [SERVER] Server is stopped
+2022-03-24 18:12:11,275 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 18:12:11,276 INFO: [SERVER] Server is configured
+2022-03-24 18:12:11,276 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 18:12:56,329 INFO: [SERVER] Server is stopped
+2022-03-24 18:12:56,347 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 18:12:56,347 INFO: [SERVER] Server is stopped
+2022-03-24 18:13:06,735 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 18:13:06,736 INFO: [SERVER] Server is configured
+2022-03-24 18:13:06,736 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 18:13:22,487 INFO: [SERVER] Server is stopped
+2022-03-24 18:13:22,512 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 18:13:22,512 INFO: [SERVER] Server is stopped
+2022-03-24 18:13:51,093 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 18:13:51,094 INFO: [SERVER] Server is configured
+2022-03-24 18:13:51,094 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 18:14:09,363 INFO: [SERVER] Server is stopped
+2022-03-24 18:14:09,387 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 18:14:09,388 INFO: [SERVER] Server is stopped
+2022-03-24 18:14:28,112 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 18:14:28,115 INFO: [SERVER] Server is configured
+2022-03-24 18:14:28,116 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 18:23:03,948 INFO: [SERVER] Server is stopped
+2022-03-24 18:23:03,956 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 18:23:03,956 INFO: [SERVER] Server is stopped
+2022-03-24 18:23:07,135 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 18:23:07,135 INFO: [SERVER] Server is configured
+2022-03-24 18:23:07,135 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 18:26:33,674 INFO: [SERVER] Server is stopped
+2022-03-24 18:26:33,698 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 18:26:33,698 INFO: [SERVER] Server is stopped
+2022-03-24 18:26:38,464 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 18:26:38,467 INFO: [SERVER] Server is configured
+2022-03-24 18:26:38,467 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 19:04:24,459 INFO: [SERVER] Server is stopped
+2022-03-24 19:04:24,486 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 19:04:24,487 INFO: [SERVER] Server is stopped
+2022-03-24 19:04:30,595 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 19:04:30,597 INFO: [SERVER] Server is configured
+2022-03-24 19:04:30,598 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 19:05:07,732 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 19:05:07,735 INFO: [SERVER] Server is configured
+2022-03-24 19:05:07,736 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 19:06:16,872 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 19:06:16,872 INFO: [SERVER] Server is configured
+2022-03-24 19:06:16,872 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 19:07:06,592 INFO: [SERVER] Server is stopped
+2022-03-24 19:07:06,606 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 19:07:06,607 INFO: [SERVER] Server is stopped
+2022-03-24 19:14:31,271 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 19:14:31,271 INFO: [SERVER] Server is configured
+2022-03-24 19:14:31,271 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 19:14:51,503 INFO: [SERVER] Server is stopped
+2022-03-24 19:14:51,529 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 19:14:51,530 INFO: [SERVER] Server is stopped
+2022-03-24 19:15:46,460 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 19:15:46,461 INFO: [SERVER] Server is configured
+2022-03-24 19:15:46,461 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 19:21:42,438 INFO: [SERVER] Server is stopped
+2022-03-24 19:21:42,456 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 19:21:42,456 INFO: [SERVER] Server is stopped
+2022-03-24 19:21:55,359 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 19:21:55,360 INFO: [SERVER] Server is configured
+2022-03-24 19:21:55,361 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 19:42:41,735 INFO: [SERVER] Server is stopped
+2022-03-24 19:42:41,753 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 19:42:41,754 INFO: [SERVER] Server is stopped
+2022-03-24 19:49:03,817 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 19:49:03,817 INFO: [SERVER] Server is configured
+2022-03-24 19:49:03,817 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 19:49:19,744 INFO: [SERVER] Server is stopped
+2022-03-24 19:49:19,769 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 19:49:19,770 INFO: [SERVER] Server is stopped
+2022-03-24 19:49:52,527 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 19:49:52,527 INFO: [SERVER] Server is configured
+2022-03-24 19:49:52,527 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 19:51:06,020 INFO: [SERVER] Server is stopped
+2022-03-24 19:51:06,042 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 19:51:06,042 INFO: [SERVER] Server is stopped
+2022-03-24 19:51:16,675 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 19:51:16,676 INFO: [SERVER] Server is configured
+2022-03-24 19:51:16,676 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 19:51:50,595 INFO: [SERVER] Server is stopped
+2022-03-24 19:51:50,624 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 19:51:50,625 INFO: [SERVER] Server is stopped
+2022-03-24 19:53:44,234 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 19:53:44,235 INFO: [SERVER] Server is configured
+2022-03-24 19:53:44,235 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 19:54:02,808 ERROR: could not convert string to float: ''
+2022-03-24 19:54:32,712 INFO: [SERVER] Server is stopped
+2022-03-24 19:54:32,740 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 19:54:32,740 INFO: [SERVER] Server is stopped
+2022-03-24 20:45:11,689 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 20:45:11,690 INFO: [SERVER] Server is configured
+2022-03-24 20:45:11,690 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 20:45:14,750 INFO: [SERVER] Server is stopped
+2022-03-24 20:45:14,772 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 20:45:14,772 INFO: [SERVER] Server is stopped
+2022-03-24 20:45:40,173 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 20:45:40,174 INFO: [SERVER] Server is configured
+2022-03-24 20:45:40,174 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 20:45:42,478 INFO: [SERVER] Server is stopped
+2022-03-24 20:45:42,503 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 20:45:42,504 INFO: [SERVER] Server is stopped
+2022-03-24 21:02:10,861 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 21:02:10,861 INFO: [SERVER] Server is configured
+2022-03-24 21:02:10,861 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 21:03:58,547 INFO: [SERVER] Server is stopped
+2022-03-24 21:03:58,558 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 21:03:58,558 INFO: [SERVER] Server is stopped
+2022-03-24 21:04:48,115 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 21:04:48,116 INFO: [SERVER] Server is configured
+2022-03-24 21:04:48,116 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 21:05:55,063 INFO: restart server with new settings...
+2022-03-24 21:05:55,064 INFO: [SERVER] Server is stopped
+2022-03-24 21:05:55,067 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 21:05:55,067 INFO: [SERVER] Server is stopped
+2022-03-24 21:05:55,088 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 21:05:55,088 INFO: [SERVER] Server is configured
+2022-03-24 21:05:55,088 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 21:06:49,447 INFO: [SERVER] Server is stopped
+2022-03-24 21:06:49,461 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 21:06:49,461 INFO: [SERVER] Server is stopped
+2022-03-24 21:07:18,543 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 21:07:18,543 INFO: [SERVER] Server is configured
+2022-03-24 21:07:18,543 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 21:07:30,688 INFO: [SERVER] Server is stopped
+2022-03-24 21:07:30,710 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 21:07:30,710 INFO: [SERVER] Server is stopped
+2022-03-24 21:07:59,983 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 21:07:59,984 INFO: [SERVER] Server is configured
+2022-03-24 21:07:59,984 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 21:08:03,755 INFO: [SERVER] Server is stopped
+2022-03-24 21:08:03,772 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 21:08:03,772 INFO: [SERVER] Server is stopped
+2022-03-24 21:08:14,623 ERROR: [Loading License] [Errno 2] No such file or directory: 'd:\\Code\\Python_projects\\PatusNewShop\\Setting\\license.json'
+2022-03-24 21:08:18,915 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 21:08:18,915 INFO: [SERVER] Server is configured
+2022-03-24 21:08:18,915 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 21:08:22,047 INFO: [SERVER] Server is stopped
+2022-03-24 21:08:22,079 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 21:08:22,079 INFO: [SERVER] Server is stopped
+2022-03-24 21:09:12,728 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 21:09:12,728 INFO: [SERVER] Server is configured
+2022-03-24 21:09:12,729 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 21:09:15,185 INFO: [SERVER] Server is stopped
+2022-03-24 21:09:15,207 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 21:09:15,208 INFO: [SERVER] Server is stopped
+2022-03-24 21:09:51,652 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 21:09:51,653 INFO: [SERVER] Server is configured
+2022-03-24 21:09:51,653 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 21:09:54,014 INFO: [SERVER] Server is stopped
+2022-03-24 21:09:54,031 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 21:09:54,032 INFO: [SERVER] Server is stopped
+2022-03-24 21:10:20,577 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 21:10:20,578 INFO: [SERVER] Server is configured
+2022-03-24 21:10:20,578 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 21:10:37,923 INFO: [SERVER] Server is stopped
+2022-03-24 21:10:37,948 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 21:10:37,948 INFO: [SERVER] Server is stopped
+2022-03-24 21:45:59,763 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 21:45:59,764 INFO: [SERVER] Server is configured
+2022-03-24 21:45:59,764 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 21:46:01,944 INFO: [SERVER] Server is stopped
+2022-03-24 21:46:01,965 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 21:46:01,966 INFO: [SERVER] Server is stopped
+2022-03-24 21:46:05,165 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 21:46:05,165 INFO: [SERVER] Server is configured
+2022-03-24 21:46:05,166 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 21:46:07,922 INFO: [SERVER] Server is stopped
+2022-03-24 21:46:07,958 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 21:46:07,958 INFO: [SERVER] Server is stopped
+2022-03-24 21:46:26,031 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.104', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-03-24 21:46:26,032 INFO: [SERVER] Server is configured
+2022-03-24 21:46:26,032 INFO: [SERVER] Server is listening on 192.168.0.104:7800
+2022-03-24 21:46:28,111 INFO: [SERVER] Server is stopped
+2022-03-24 21:46:28,135 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-03-24 21:46:28,135 INFO: [SERVER] Server is stopped

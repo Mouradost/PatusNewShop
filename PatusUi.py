@@ -1,6 +1,7 @@
 from DB.DBHandler import DBHelper
 from DB.DbTables import *
 from Utilities.Threads import *
+from Utilities.LicenseChecker import *
 
 from Utilities.UiUtilities import *
 from resource import resource_rc
@@ -26,23 +27,10 @@ class PatusMainUI(QMainWindow):
     def __init__(self, **kwargs):
         super(PatusMainUI, self).__init__(**kwargs)
         uic.loadUi(os.path.join(os.getcwd(), 'uis', 'PatusInterface.ui'), self)
-        self.prepareLogFile()
         self.DB = DBHelper()
         self.sw_content.setCurrentIndex(0)
-        try:
-            self.serverThread = ServerThread()
-            self.serverThread.addClient.connect(self.addClientDashboard)
-            self.serverThread.removeClient.connect(self.removeClientDashboard)
-            self.serverThread.logUpdater.connect(self.callLog)
-            self.serverThread.tablesUpdated.connect(self.populateTables)
-            self.serverThread.updateServerStatus.connect(
-                self.updateServerStatus)
-            self.serverThread.printerCall.connect(self.printerCall)
-            # self.serverThread.logUpdater.connect(print)
-        except Exception as e:
-            logging.error(f"Server not running --> {e}")
-            self.serverThread = None
-        self.infoThread = InfoThread()
+        self.infoThread = None
+        self.serverThread = None
         self.printerThread = None
         # db current item selected
         self.currentPointer = None
@@ -52,8 +40,25 @@ class PatusMainUI(QMainWindow):
         self.current_table = None
         self.currentOrder = []
         self.tax = 0.0
-        self.categoryDict, self.workerDict, self.customerDict, self.menuItemNameDict, self.expenseCategoryNameDict, self.supplierNameDict, self.menuCustomCategoryNameDict = {}, {}, {}, {}, {}, {}, {}
-        self.categoryDictId, self.workerDictId, self.customerDictId, self.menuItemNameDictId, self.expenseCategoryNameDictId, self.supplierNameDictId, self.menuCustomCategoryNameDictId = {}, {}, {}, {}, {}, {}, {}
+        self.categoryDict, self.workerDict, self.customerDict, self.menuItemNameDict, self.expenseCategoryNameDict, self.supplierNameDict, self.menuCustomCategoryNameDict, self.ingredientItemNameDict = {}, {}, {}, {}, {}, {}, {}, {}
+        self.categoryDictId, self.workerDictId, self.customerDictId, self.menuItemNameDictId, self.expenseCategoryNameDictId, self.supplierNameDictId, self.menuCustomCategoryNameDictId, self.ingredientItemDictId = {}, {}, {}, {}, {}, {}, {}, {}
+        self.prepareLogFile()
+        self.check_me(load_current_license())
+
+        self.infoThread = InfoThread()
+        try:
+            self.serverThread = ServerThread()
+            self.serverThread.addClient.connect(self.addClientDashboard)
+            self.serverThread.removeClient.connect(self.removeClientDashboard)
+            self.serverThread.logUpdater.connect(self.callLog)
+            # self.serverThread.logUpdater.connect(print)
+            self.serverThread.tablesUpdated.connect(self.populateTables)
+            self.serverThread.updateServerStatus.connect(
+                self.updateServerStatus)
+            self.serverThread.printerCall.connect(self.printerCall)
+        except Exception as e:
+            logging.error(f"Server not running --> {e}")
+            self.serverThread = None
 
         # Side panel menu
         self.btn_sideBar.clicked.connect(self.showHideSideBar)
@@ -87,6 +92,8 @@ class PatusMainUI(QMainWindow):
         self.btn_waste.clicked.connect(self.showWasteHistory)
         self.btn_reservation.clicked.connect(self.showTablesReservation)
         self.btn_reservation.clicked.connect(self.showReservation)
+        self.btn_productReceipt.clicked.connect(
+            self.loadMenuItemReceiptIngredients)
 
         # Login
         self.btn_loginConfirm.clicked.connect(self.login)
@@ -399,6 +406,27 @@ class PatusMainUI(QMainWindow):
         self.le_reservationPhone.setValidator(QRegExpValidator(
             QRegExp("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$")))
 
+        # Menu item receipt Window
+        # Menu item Receipts
+        self.btn_productReceiptAdd.clicked.connect(
+            self.addMenuItemReceiptIngredient)
+        self.btn_productReceiptEdit.clicked.connect(
+            self.editMenuItemReceiptIngredient)
+        self.btn_productReceiptRemove.clicked.connect(
+            self.deleteMenuItemReceiptIngredient)
+        self.btn_productReceiptClear.clicked.connect(
+            lambda: self.btn_productReceiptAdd.setEnabled(True))
+        self.btn_productReceiptClear.clicked.connect(
+            lambda: self.btn_productReceiptEdit.setEnabled(False))
+        self.btn_productReceiptClear.clicked.connect(
+            lambda: self.btn_productReceiptRemove.setEnabled(False))
+        self.btn_productReceiptClear.clicked.connect(
+            lambda: self.le_productReceiptIngredientQuantity.clear())
+        self.tw_productReceiptIngredientList.doubleClicked.connect(
+            self.loadMenuItemReceiptIngredient)
+        self.cb_productReceiptMenuItem.currentIndexChanged.connect(
+            self.loadMenuItemReceiptIngredients)
+
         # Validators
         self.le_customerPhone.setValidator(QRegExpValidator(
             QRegExp("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$")))
@@ -416,15 +444,27 @@ class PatusMainUI(QMainWindow):
         # Main Window
         self.btn_fullScreen.clicked.connect(self.fullScreen)
         self.btn_setting.clicked.connect(self.changeSettings)
-        self.show()
         self.homeScreen()
         self.infoThread.start()
         self.infoThread.UpdateInfo.connect(self.updateInfo)
         if self.serverThread is not None:
             self.serverThread.start()
+        self.show()
 
         # Reduction
         self.btn_cashRegisterReduce.clicked.connect(self.reductionSetup)
+
+    """License verification"""
+
+    def check_me(self, license=""):
+        if not check_license(license):
+            check_dialog = CheckerL()
+            check_dialog.show()
+            rsp = check_dialog.exec_()
+            print(rsp)
+            if rsp != 1:
+                self.close()
+                sys.exit()
 
     """Logger file"""
 
@@ -445,11 +485,11 @@ class PatusMainUI(QMainWindow):
                 self.serverThread.removeClient.connect(
                     self.removeClientDashboard)
                 self.serverThread.logUpdater.connect(self.callLog)
+                # self.serverThread.logUpdater.connect(print)
                 self.serverThread.tablesUpdated.connect(self.populateTables)
                 self.serverThread.updateServerStatus.connect(
                     self.updateServerStatus)
                 self.serverThread.printerCall.connect(self.printerCall)
-                # self.serverThread.logUpdater.connect(print)
                 self.serverThread.STOPPED.connect(self.stoppedServerThread)
                 self.serverThread.start()
             else:
@@ -567,6 +607,7 @@ class PatusMainUI(QMainWindow):
         self.cb_supplementProduct.clear()
         self.cb_productReceiptMenuItem.clear()
         self.cb_expenseSupplier.clear()
+        self.cb_productReceiptIngredientName.clear()
 
         for i, category in enumerate(self.DB.getAllCategories()):
             self.categoryDict[i] = category.id
@@ -588,6 +629,11 @@ class PatusMainUI(QMainWindow):
             self.menuItemNameDictId[menuItem.id] = i
             self.cb_supplementProduct.insertItem(i, menuItem.name)
             self.cb_productReceiptMenuItem.insertItem(i, menuItem.name)
+        for i, ingredientItem in enumerate(self.DB.getAllStocks()):
+            self.ingredientItemNameDict[i] = ingredientItem.id
+            self.ingredientItemDictId[ingredientItem.id] = i
+            self.cb_productReceiptIngredientName.insertItem(
+                i, ingredientItem.name)
         for i, expenseCategory in enumerate(self.DB.getAllExpenseCategories()):
             self.expenseCategoryNameDict[i] = expenseCategory.id
             self.expenseCategoryNameDictId[expenseCategory.id] = i
@@ -983,11 +1029,11 @@ class PatusMainUI(QMainWindow):
             assert isinstance(self.current, Expense)
             self.current.name = self.le_expenseName.text()
             self.current.quantity = float(self.le_expenseQuantity.text())
-            self.current.category = self.expenseCategoryNameDict[self.cb_expenseCategory.currentText(
+            self.current.category = self.expenseCategoryNameDict[self.cb_expenseCategory.currentIndex(
             )]
             self.current.unit = self.le_expenseUnit.text()
             self.current.price = float(self.le_expensePrice.text())
-            self.current.supplier_id = self.supplierNameDict[self.cb_expenseSupplier.currentText(
+            self.current.supplier_id = self.supplierNameDict[self.cb_expenseSupplier.currentIndex(
             )]
             self.DB.updateExpense(self.current)
             # clear all
@@ -1666,8 +1712,7 @@ class PatusMainUI(QMainWindow):
             assert isinstance(self.current, Category)
             self.current.name = self.le_categoryName.text()
             self.current.level = self.cb_categoryLevel.currentIndex()
-            self.current.id_worker = self.workerDict[self.cb_categoryLevel.currentIndex(
-            )]
+
             # clear all
             self.le_categoryName.clear()
             self.cb_categoryLevel.setCurrentIndex(0)
@@ -1914,9 +1959,11 @@ class PatusMainUI(QMainWindow):
                     )]
 
                     self.DB.updateSell(self.currentSell)
+                    customer = self.DB.getCustomerById(
+                        self.currentSell.id_customer)
+                    worker = self.DB.getWorkerById(self.currentSell.id_worker)
 
                 else:
-
                     self.DB.insertOrder(
                         order_items=self.currentOrder,
                         total=total,
@@ -1924,7 +1971,11 @@ class PatusMainUI(QMainWindow):
                         id_customer=self.customerDict[self.cb_orderCustomer.currentIndex(
                         )],
                         completed=1)
-
+                    customer = self.DB.getCustomerById(self.customerDict[self.cb_orderCustomer.currentIndex(
+                    )])
+                    worker = self.currentWorker
+                self.updateScore(total=total, worker=worker, customer=customer)
+                self.reduceFromStock(self.currentOrder)
                 self.clearCashRegister()
                 self.notifyClients("TABLES")
         except Exception as e:
@@ -1936,6 +1987,12 @@ class PatusMainUI(QMainWindow):
             msg.setDetailedText(str(e))
             msg.setWindowTitle("Warning message")
             msg.exec_()
+
+    def updateScore(self, total: float, worker: Worker, customer: Customer):
+        worker.score += total
+        customer.score += total
+        self.DB.updateCustomer(customer)
+        self.DB.updateWorker(worker)
 
     def holdOrder(self):
 
@@ -2200,6 +2257,155 @@ class PatusMainUI(QMainWindow):
                     self.le_reservationSearch.text())
                 displayDbData(self.tw_reservation, all_data)
 
+    """MenuItemReceipt"""
+    # Worker
+
+    def loadMenuItemReceiptIngredient(self):
+
+        self.current = self.DB.getMenuItemReceiptById(
+            int(self.tw_productReceiptIngredientList.item(
+                self.tw_productReceiptIngredientList.currentRow(),
+                0).text()), int(self.tw_productReceiptIngredientList.item(
+                    self.tw_productReceiptIngredientList.currentRow(),
+                    2).text()))
+
+        self.le_productReceiptIngredientQuantity.setText(
+            str(self.current.quantity))
+        self.btn_productReceiptAdd.setEnabled(False)
+        self.btn_productReceiptRemove.setEnabled(True)
+        self.btn_productReceiptEdit.setEnabled(True)
+        if self.current.ingredient_id is not None and isinstance(self.current.ingredient_id, int):
+            self.cb_productReceiptIngredientName.setCurrentIndex(
+                self.ingredientItemDictId[self.current.ingredient_id])
+
+    def addMenuItemReceiptIngredient(self):
+
+        try:
+            menuItemReceipt = MenuItemReceipt(
+                id=self.menuItemNameDict[self.cb_productReceiptMenuItem.currentIndex(
+                )],
+                ingredient_name=self.cb_productReceiptIngredientName.currentText(
+                ),
+                ingredient_id=self.ingredientItemNameDict[self.cb_productReceiptIngredientName.currentIndex(
+                )],
+                quantity=float(
+                    self.le_productReceiptIngredientQuantity.text())
+            )
+            self.DB.insertMenuItemReceipt(menuItemReceipt)
+            # clear all
+            self.btn_productReceiptClear.click()
+            self.loadMenuItemReceiptIngredients()
+        except Exception as e:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText('Check your fields')
+            msg.setInformativeText("Ingredient not added")
+            msg.setDetailedText(str(e))
+            msg.setWindowTitle("Warning message")
+            msg.exec_()
+
+    def editMenuItemReceiptIngredient(self):
+
+        try:
+            assert isinstance(self.current, MenuItemReceipt)
+            self.current.id = self.menuItemNameDict[self.cb_productReceiptMenuItem.currentIndex(
+            )]
+            self.current.ingredient_name = self.cb_productReceiptIngredientName.currentText(
+            )
+            self.current.ingredient_id = self.ingredientItemNameDict[self.cb_productReceiptIngredientName.currentIndex(
+            )]
+            self.current.quantity = float(
+                self.le_productReceiptIngredientQuantity.text())
+            self.DB.updateMenuItemReceipt(self.current)
+            # clear all
+            self.btn_productReceiptClear.click()
+            self.loadMenuItemReceiptIngredients()
+        except Exception as e:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText('Check your fields')
+            msg.setInformativeText("Ingredient not updated")
+            msg.setDetailedText(str(e))
+            msg.setWindowTitle("Warning message")
+            msg.exec_()
+
+    def deleteMenuItemReceiptIngredient(self):
+        try:
+            assert isinstance(self.current, MenuItemReceipt)
+            self.DB.deleteMenuItemReceipt(
+                self.current.id, self.current.ingredient_id)
+            # clear all
+            self.btn_productReceiptClear.click()
+            self.loadMenuItemReceiptIngredients()
+        except Exception as e:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText('Check your fields')
+            msg.setInformativeText("Ingredient not deleted")
+            msg.setDetailedText(str(e))
+            msg.setWindowTitle("Warning message")
+            msg.exec_()
+
+    def loadMenuItemReceiptIngredients(self):
+
+        if self.cb_productReceiptMenuItem.currentIndex(
+        ) != -1:
+            all_data = self.DB.getAllMenuItemReceiptById(
+                self.menuItemNameDict[self.cb_productReceiptMenuItem.currentIndex(
+                )])
+            displayDbData(self.tw_productReceiptIngredientList, all_data)
+            self.l_productReceiptEstimatedProductionPrice.setText(
+                str(self.calculateEstimatedPrice(all_data)))
+            self.l_productReceiptPrice.setText(str(self.DB.getMenuItemById(self.menuItemNameDict[self.cb_productReceiptMenuItem.currentIndex(
+            )]).price))
+            self.l_productReceiptQuantity.setText(
+                str(self.calculateEstimatedQuantity(all_data)))
+
+    def calculateEstimatedQuantity(self, items: list):
+        possible_quantity = []
+        if len(items) > 0:
+            for item in items:
+                stock_quantity = self.DB.getStockById(
+                    item.ingredient_id).quantity
+                if stock_quantity > 0:
+                    possible_quantity.append(stock_quantity / item.quantity)
+                else:
+                    return 0
+            possible_quantity.sort()
+            return possible_quantity[0]
+
+    def calculateEstimatedPrice(self, items: list):
+        total_price = 0
+        if len(items) > 0:
+            for item in items:
+                all_prices = [x.price for x in self.DB.getExpenseByName(
+                    item.ingredient_name)]
+                all_quantities = [x.quantity for x in self.DB.getExpenseByName(
+                    item.ingredient_name)]
+                if len(all_prices) > 0:
+                    total_price += (sum(all_prices) /
+                                    sum(all_quantities))*item.quantity
+            return total_price
+
+    def reduceFromStock(self, orders: list):
+        try:
+            for order in orders:
+                receipts = self.DB.getAllMenuItemReceiptById(order.productId)
+                for receipt in receipts:
+                    stock_item = self.DB.getStockById(receipt.ingredient_id)
+                    if stock_item is not None:
+                        stock_item.quantity -= receipt.quantity * order.orderItemQuantity
+                        self.DB.updateStock(stock_item)
+        except Exception as e:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.setText('Not reduce from stock!')
+            msg.setInformativeText(
+                "Please check stock items and menu item receipts")
+            msg.setDetailedText(str(e))
+            msg.setWindowTitle("Information message")
+            msg.exec_()
+
     """Reduction functions"""
 
     def reductionSetup(self):
@@ -2438,6 +2644,7 @@ class PatusMainUI(QMainWindow):
                 self.serverThread.removeClient.connect(
                     self.removeClientDashboard)
                 self.serverThread.logUpdater.connect(self.callLog)
+                # self.serverThread.logUpdater.connect(print)
                 self.serverThread.tablesUpdated.connect(self.populateTables)
                 self.serverThread.printerCall.connect(self.printerCall)
                 self.serverThread.updateServerStatus.connect(

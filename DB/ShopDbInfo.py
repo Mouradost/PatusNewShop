@@ -29,6 +29,15 @@ class MenuTable:
 
 
 @dataclass(frozen=True)
+class MenuItemReceiptTable:
+    TABLE_NAME: str = "MenuItemReceipt"
+    COLUMN_ID: str = "_id"
+    COLUMN_INGREDIENT_NAME: str = "ingredient_name"
+    COLUMN_INGREDIENT_ID: str = "ingredient_id"
+    COLUMN_QUANTITY: str = "quantity"
+
+
+@dataclass(frozen=True)
 class StockTable:
     TABLE_NAME: str = "Stock"
     COLUMN_NAME: str = "name"
