@@ -837,7 +837,7 @@ QComboBox
                 <enum>QFrame::Box</enum>
                </property>
                <property name="currentIndex">
-                <number>7</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="page_standBy">
                 <layout class="QGridLayout" name="gridLayout">
@@ -1250,8 +1250,8 @@ QPushButton:pressed
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>630</width>
-                      <height>218</height>
+                      <width>797</width>
+                      <height>694</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_10">
@@ -1432,8 +1432,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>178</width>
-                             <height>129</height>
+                             <width>374</width>
+                             <height>630</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_13">
@@ -1650,8 +1650,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>178</width>
-                             <height>129</height>
+                             <width>374</width>
+                             <height>630</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_6">
@@ -1868,8 +1868,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>178</width>
-                             <height>129</height>
+                             <width>374</width>
+                             <height>630</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_7">
@@ -2086,8 +2086,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>178</width>
-                             <height>129</height>
+                             <width>374</width>
+                             <height>630</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_11">
@@ -2304,8 +2304,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>178</width>
-                             <height>129</height>
+                             <width>374</width>
+                             <height>630</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_16">
@@ -2569,6 +2569,30 @@ QLabel
                                  <property name="alignment">
                                   <set>Qt::AlignCenter</set>
                                  </property>
+                                </widget>
+                               </item>
+                               <item>
+                                <widget class="QComboBox" name="comboBox">
+                                 <item>
+                                  <property name="text">
+                                   <string>1</string>
+                                  </property>
+                                 </item>
+                                 <item>
+                                  <property name="text">
+                                   <string>2</string>
+                                  </property>
+                                 </item>
+                                 <item>
+                                  <property name="text">
+                                   <string>3</string>
+                                  </property>
+                                 </item>
+                                 <item>
+                                  <property name="text">
+                                   <string>4</string>
+                                  </property>
+                                 </item>
                                 </widget>
                                </item>
                                <item>
@@ -2859,6 +2883,35 @@ QComboBox
                          </property>
                          <property name="alignment">
                           <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="btn_cashRegisterChangeTable">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>50</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="../resource/resource.qrc">
+                           <normaloff>:/Simple icons/simple_icons/fi-rr-apps-sort.svg</normaloff>:/Simple icons/simple_icons/fi-rr-apps-sort.svg</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>32</width>
+                           <height>32</height>
+                          </size>
                          </property>
                         </widget>
                        </item>
@@ -4969,7 +5022,7 @@ QPushButton:pressed
                     </font>
                    </property>
                    <property name="currentIndex">
-                    <number>4</number>
+                    <number>0</number>
                    </property>
                    <property name="iconSize">
                     <size>
@@ -8147,42 +8200,168 @@ QComboBox
                             </widget>
                            </item>
                            <item>
-                            <widget class="QComboBox" name="cb_categoryLevel">
-                             <item>
-                              <property name="text">
-                               <string>Boss</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Manager</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Casher</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Chef</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Cooker</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Waiter</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Cleaner</string>
-                              </property>
-                             </item>
+                            <widget class="QFrame" name="frame_32">
+                             <property name="frameShape">
+                              <enum>QFrame::StyledPanel</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Raised</enum>
+                             </property>
+                             <layout class="QGridLayout" name="gridLayout_24">
+                              <item row="0" column="1">
+                               <widget class="QCheckBox" name="cb_categoryLevelCashier">
+                                <property name="text">
+                                 <string>Cashier</string>
+                                </property>
+                                <property name="icon">
+                                 <iconset resource="../resource/resource.qrc">
+                                  <normaloff>:/Simple icons/simple_icons/fi-rr-shop.svg</normaloff>:/Simple icons/simple_icons/fi-rr-shop.svg</iconset>
+                                </property>
+                                <property name="iconSize">
+                                 <size>
+                                  <width>32</width>
+                                  <height>32</height>
+                                 </size>
+                                </property>
+                               </widget>
+                              </item>
+                              <item row="1" column="1">
+                               <widget class="QCheckBox" name="cb_categoryLevelWaste">
+                                <property name="text">
+                                 <string>Waste</string>
+                                </property>
+                                <property name="icon">
+                                 <iconset resource="../resource/resource.qrc">
+                                  <normaloff>:/Simple icons/simple_icons/fi-rr-sad.svg</normaloff>:/Simple icons/simple_icons/fi-rr-sad.svg</iconset>
+                                </property>
+                                <property name="iconSize">
+                                 <size>
+                                  <width>32</width>
+                                  <height>32</height>
+                                 </size>
+                                </property>
+                               </widget>
+                              </item>
+                              <item row="0" column="0">
+                               <widget class="QCheckBox" name="cb_categoryLevelTables">
+                                <property name="text">
+                                 <string>Tables</string>
+                                </property>
+                                <property name="icon">
+                                 <iconset resource="../resource/resource.qrc">
+                                  <normaloff>:/Simple icons/simple_icons/fi-rr-terrace.svg</normaloff>:/Simple icons/simple_icons/fi-rr-terrace.svg</iconset>
+                                </property>
+                                <property name="iconSize">
+                                 <size>
+                                  <width>32</width>
+                                  <height>32</height>
+                                 </size>
+                                </property>
+                               </widget>
+                              </item>
+                              <item row="2" column="0">
+                               <widget class="QCheckBox" name="cb_categoryLevelStock">
+                                <property name="text">
+                                 <string>Stock</string>
+                                </property>
+                                <property name="icon">
+                                 <iconset resource="../resource/resource.qrc">
+                                  <normaloff>:/Simple icons/simple_icons/fi-rr-search-alt.svg</normaloff>:/Simple icons/simple_icons/fi-rr-search-alt.svg</iconset>
+                                </property>
+                                <property name="iconSize">
+                                 <size>
+                                  <width>32</width>
+                                  <height>32</height>
+                                 </size>
+                                </property>
+                               </widget>
+                              </item>
+                              <item row="1" column="0">
+                               <widget class="QCheckBox" name="cb_categoryLevelReservation">
+                                <property name="text">
+                                 <string>Reservation</string>
+                                </property>
+                                <property name="icon">
+                                 <iconset resource="../resource/resource.qrc">
+                                  <normaloff>:/Simple icons/simple_icons/fi-rr-phone-call.svg</normaloff>:/Simple icons/simple_icons/fi-rr-phone-call.svg</iconset>
+                                </property>
+                                <property name="iconSize">
+                                 <size>
+                                  <width>32</width>
+                                  <height>32</height>
+                                 </size>
+                                </property>
+                               </widget>
+                              </item>
+                              <item row="2" column="1">
+                               <widget class="QCheckBox" name="cb_categoryLevelReceipt">
+                                <property name="text">
+                                 <string>Receipt</string>
+                                </property>
+                                <property name="icon">
+                                 <iconset resource="../resource/resource.qrc">
+                                  <normaloff>:/Simple icons/simple_icons/fi-rr-list.svg</normaloff>:/Simple icons/simple_icons/fi-rr-list.svg</iconset>
+                                </property>
+                                <property name="iconSize">
+                                 <size>
+                                  <width>32</width>
+                                  <height>32</height>
+                                 </size>
+                                </property>
+                               </widget>
+                              </item>
+                              <item row="3" column="0">
+                               <widget class="QCheckBox" name="cb_categoryLevelDb">
+                                <property name="text">
+                                 <string>DataBase</string>
+                                </property>
+                                <property name="icon">
+                                 <iconset resource="../resource/resource.qrc">
+                                  <normaloff>:/Simple icons/simple_icons/fi-rr-database.svg</normaloff>:/Simple icons/simple_icons/fi-rr-database.svg</iconset>
+                                </property>
+                                <property name="iconSize">
+                                 <size>
+                                  <width>32</width>
+                                  <height>32</height>
+                                 </size>
+                                </property>
+                               </widget>
+                              </item>
+                              <item row="3" column="1">
+                               <widget class="QCheckBox" name="cb_categoryLevelPhone">
+                                <property name="text">
+                                 <string>Phones</string>
+                                </property>
+                                <property name="icon">
+                                 <iconset resource="../resource/resource.qrc">
+                                  <normaloff>:/Simple icons/simple_icons/fi-rr-data-transfer.svg</normaloff>:/Simple icons/simple_icons/fi-rr-data-transfer.svg</iconset>
+                                </property>
+                                <property name="iconSize">
+                                 <size>
+                                  <width>32</width>
+                                  <height>32</height>
+                                 </size>
+                                </property>
+                               </widget>
+                              </item>
+                              <item row="4" column="0" colspan="2">
+                               <widget class="QCheckBox" name="cb_categoryLevelStat">
+                                <property name="text">
+                                 <string>DashBoard</string>
+                                </property>
+                                <property name="icon">
+                                 <iconset resource="../resource/resource.qrc">
+                                  <normaloff>:/Simple icons/simple_icons/fi-rr-stats.svg</normaloff>:/Simple icons/simple_icons/fi-rr-stats.svg</iconset>
+                                </property>
+                                <property name="iconSize">
+                                 <size>
+                                  <width>32</width>
+                                  <height>32</height>
+                                 </size>
+                                </property>
+                               </widget>
+                              </item>
+                             </layout>
                             </widget>
                            </item>
                           </layout>
@@ -9100,8 +9279,8 @@ QComboBox
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>142</width>
-                      <height>177</height>
+                      <width>801</width>
+                      <height>698</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_21">

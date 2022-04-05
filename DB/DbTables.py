@@ -1,8 +1,5 @@
 from dataclasses import dataclass
 import datetime
-import json
-
-from attr import asdict
 
 
 @dataclass
@@ -177,6 +174,7 @@ class SellItem:
     id_sell: int
     quantity: float = 0
     total: float = 0
+    group: int = 0
     id: int = None
 
 
@@ -194,13 +192,22 @@ class Table:
     name: str
     seats: int
     comment: str = None
+    reserved: int = 0
     id_sell: int = None
 
 
 @dataclass
 class Category:
     name: str
-    level: int
+    tables: int = 1
+    cashier: int = 1
+    reservation: int = 1
+    waste: int = 1
+    stock: int = 1
+    receipt: int = 1
+    database: int = 1
+    phone: int = 1
+    dashboard: int = 1
     id: int = None
 
 
@@ -229,6 +236,7 @@ class OrderItem:
     orderItemQuantity: float
     orderItemTotal: float
     orderItemSupplements: list
+    group_id: int
 
     def toJson(self):
         return {
@@ -238,7 +246,8 @@ class OrderItem:
             "productCategory": self.productCategory,
             "orderItemQuantity": self.orderItemQuantity,
             "orderItemTotal": self.orderItemTotal,
-            "orderItemSupplements": [x.toJson() for x in self.orderItemSupplements]
+            "orderItemSupplements": [x.toJson() for x in self.orderItemSupplements],
+            "group_id": self.group_id
         }
 
 
@@ -249,6 +258,7 @@ class OrderItemShow:
     Quantity: float
     Total: float
     Supplements: list
+    Group: int
 
 
 @dataclass

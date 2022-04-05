@@ -15,8 +15,9 @@ import os
 
 
 class InfoThread(QtCore.QThread):
-    UpdateInfo = QtCore.pyqtSignal(int, int, int, int)
+    UpdateInfo = pyqtSignal(int, int, int, int)
     logUpdater = pyqtSignal(str, bool)
+    UpdateTables = pyqtSignal()
 
     def __init__(self, parent=None):
         super(InfoThread, self).__init__(parent)
@@ -32,12 +33,39 @@ class InfoThread(QtCore.QThread):
                     datetime.datetime.now().strftime("%Y-%m"), datetime.datetime.now().strftime("%Y-%m-%d"))
                 self.UpdateInfo.emit(
                     nb_free_tables[0], nb_busy_tables[0], nb_month_sells[0], nb_day_sells[0])
+                # Check for any reservation in 1h range
+                self.check_tables()
                 # sleep for a minute
                 self.sleep(60)
         except Exception as e:
             self.logUpdater.emit(f"[INFO THREAD ERROR] {e}", True)
             self.active = False
             self.terminate()
+
+    def check_tables(self):
+        # Active reservation
+        reservations = self.DB.getReservationByDateRange(
+            start_date=(datetime.datetime.now(
+            ) - datetime.timedelta(minutes=30)).strftime("%Y-%m-%d %H:%M"),
+            end_date=(datetime.datetime.now() + datetime.timedelta(minutes=30)).strftime("%Y-%m-%d %H:%M"))
+        count = 0
+        active_reserved_tables = []
+        for reservation in reservations:
+            table = self.DB.getTableById(reservation.table_id)
+            active_reserved_tables.append(table.id)
+            if table.reserved == 0:
+                table.reserved = 1
+                count += 1
+                self.DB.updateTable(table)
+        # Outdated reservation
+        tables = self.DB.getReservedTables()
+        for table in tables:
+            if table.id not in active_reserved_tables and table.reserved == 1:
+                count += 1
+                table.reserved = 0
+                self.DB.updateTable(table)
+        if count > 0:
+            self.UpdateTables.emit()
 
     def stop(self):
         self.logUpdater.emit(f"[INFO THREAD] Stopped", False)
@@ -402,7 +430,6 @@ class PrinterThread(QThread):
                 f"[PRINTER THREAD] Start printing", False)
 
             if self.which_printer == "Kitchen":
-
                 self.ticket_kitchen, self.ticket_pizza, self.ticket_bar, self.kitchen_count, self.pizza_count, self.drink_count = prepareTicketForOrder(
                     worker_name=self.worker_name,
                     order_items=self.order_items,

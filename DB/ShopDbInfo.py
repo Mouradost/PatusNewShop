@@ -154,6 +154,7 @@ class SellItemTable:
     COLUMN_ID_SELL: str = "id_sell"
     COLUMN_QUANTITY: str = "quantity"
     COLUMN_TOTAL: str = "total"
+    COLUMN_GROUP: str = "group_id"
 
 
 @dataclass(frozen=True)
@@ -172,6 +173,7 @@ class TableTable:
     COLUMN_NAME: str = "name"
     COLUMN_SEATS: str = "seats"
     COLUMN_COMMENT: str = "comment"
+    COLUMN_RESERVED: str = "reserved"
     COLUMN_ID_SELL: str = "id_sell"
 
 
@@ -180,7 +182,15 @@ class CategoryTable:
     TABLE_NAME: str = "Category"
     COLUMN_ID: str = "_id"
     COLUMN_NAME: str = "name"
-    COLUMN_LEVEL: str = "level"
+    COLUMN_TABLES: str = "tables"
+    COLUMN_CASHIER: str = "cashier"
+    COLUMN_RESERVATION: str = "reservation"
+    COLUMN_WASTE: str = "waste"
+    COLUMN_STOCK: str = "stock"
+    COLUMN_RECEIPT: str = "receipt"
+    COLUMN_DATABASE: str = "database"
+    COLUMN_PHONE: str = "phone"
+    COLUMN_DASHBOARD: str = "dashboard"
 
 
 @dataclass(frozen=True)

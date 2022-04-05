@@ -161,6 +161,29 @@ class Holder(QDialog):
             msg.exec_()
 
 
+class TableChanger(QDialog):
+    def __init__(self, free_tables):
+        super(TableChanger, self).__init__()
+        uic.loadUi(os.path.join(os.getcwd(), 'uis', 'TableChanger.ui'), self)
+        self.buttonBox.accepted.connect(self.validate_click)
+        self.buttonBox.rejected.connect(self.reject)
+        self.tw_freeTables.clear()
+        self.free_tables = free_tables
+        displayDbData(self.tw_freeTables, self.free_tables)
+
+    def validate_click(self):
+        if self.tw_freeTables.currentRow() != -1:
+            self.done(self.free_tables[self.tw_freeTables.currentRow()].id)
+        else:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText('No table selected')
+            msg.setInformativeText("Please select the new table")
+            msg.setWindowTitle("Warning message")
+            msg.exec_()
+            self.done(-1)
+
+
 class SettingUI(QDialog):
     def __init__(self):
         super(SettingUI, self).__init__()
@@ -240,6 +263,7 @@ def createTicketContainer(parent, ticket, place):
 
     # Ticket
     text_edit = QPlainTextEdit()
+    text_edit.setFont(QFont("Cascadia Code", 10))
     text_edit.insertPlainText(ticket)
     text_edit.setReadOnly(True)
     frame.layout().addWidget(text_edit)
@@ -286,6 +310,12 @@ def createProductContainer(parent, db, product, table_id, fc):
     label.setText(product.name)
     label.setAlignment(Qt.AlignHCenter)
     frame.layout().addWidget(label)
+    # Ranking system
+    comboBox = QComboBox()
+    for i in range(5):
+        comboBox.insertItem(i, f"Group {i+1}")
+    frame.layout().addWidget(comboBox)
+    # Supp
     supp_list = []
     for sup in db.getSupplementByMenuId(product.id):
         check_box = QCheckBox(parent=frame, text=f"{sup.name}")
@@ -298,12 +328,28 @@ def createProductContainer(parent, db, product, table_id, fc):
     btn_layout.setMaximumSize(200, 200)
     add_button = QPushButton(parent=btn_layout, text="+")
     remove_button = QPushButton(parent=btn_layout, text="-")
-    order_item = OrderItem(table_id, product.id, product.name,
-                           product.category_id, 1, product.price, [])
-    order_item_ = OrderItem(table_id, product.id,
-                            product.name, product.category_id, -1, -product.price, [])
-    add_button.clicked.connect(partial(fc, order_item, supp_list))
-    remove_button.clicked.connect(partial(fc, order_item_, supp_list))
+    order_item = OrderItem(
+        tableId=table_id,
+        productId=product.id,
+        productName=product.name,
+        productCategory=product.category_id,
+        orderItemQuantity=product.quantity,
+        orderItemTotal=product.price,
+        orderItemSupplements=[],
+        group_id=0)
+    order_item_ = OrderItem(
+        tableId=table_id,
+        productId=product.id,
+        productName=product.name,
+        productCategory=product.category_id,
+        orderItemQuantity=-product.quantity,
+        orderItemTotal=product.price,
+        orderItemSupplements=[],
+        group_id=0)
+    add_button.clicked.connect(
+        partial(fc, order_item, supp_list, comboBox))
+    remove_button.clicked.connect(
+        partial(fc, order_item_, supp_list, comboBox))
     btn_layout.layout().addWidget(add_button)
     btn_layout.layout().addWidget(remove_button)
     # buttons
@@ -425,6 +471,7 @@ def prepareTicketForCashier(worker_name: str, order_items: list, tax: float, com
 def prepareTicketForOrder(worker_name: str, order_items: list, comment: str, ticket_number: int, old: bool):
     db = DBHelper()
     kitchen_count, pizza_count, drink_count = 0, 0, 0
+    kitchen_group, pizza_group, drink_group = 0, 0, 0
 
     ticket_kitchen_txt = ""
     ticket_pizza_txt = ""
@@ -488,23 +535,34 @@ def prepareTicketForOrder(worker_name: str, order_items: list, comment: str, tic
     ticket_bar_txt += '-' * 46 + ' \n'
     ticket_bar_txt += f"{'ITEM':<23}{'QUANTITY':^23}\n"
     ticket_bar_txt += '-' * 46 + ' \n'
+    order_items.sort(key=lambda x: x.group_id)
 
     for order_item in order_items:
         if db.getMenuCategoryById(order_item.productCategory).printing_place == 2:
+            if drink_group != order_item.group_id:
+                ticket_bar_txt += f"{'*' * 15}{f'Group {order_item.group_id}':^16}{'*' * 15}\n"
+                drink_group = order_item.group_id
             ticket_bar_txt += f"{order_item.productName:<23} {order_item.orderItemQuantity:^23}\n"
             for supp in order_item.orderItemSupplements:
                 ticket_bar_txt += f"+ {supp.name:<23}\n"
             drink_count += 1
         else:
+            if kitchen_group != order_item.group_id:
+                ticket_kitchen_txt += f"{'*' * 15}{f'Group {order_item.group_id}':^16}{'*' * 15}\n"
+                kitchen_group = order_item.group_id
             ticket_kitchen_txt += f"{order_item.productName:<23} {order_item.orderItemQuantity:^23}\n"
             kitchen_count += 1
             for supp in order_item.orderItemSupplements:
                 ticket_kitchen_txt += f"+ {supp.name:<23}\n"
             if db.getMenuCategoryById(order_item.productCategory).printing_place == 1:
+                if pizza_group != order_item.group_id:
+                    ticket_pizza_txt += f"{'*' * 15}{f'Group {order_item.group_id}':^16}{'*' * 15}\n"
+                    pizza_group = order_item.group_id
                 ticket_pizza_txt += f"{order_item.productName:<23} {order_item.orderItemQuantity:^23}\n"
                 for supp in order_item.orderItemSupplements:
                     ticket_pizza_txt += f"+ {supp.name:<23}\n"
                 pizza_count += 1
+
     if len(comment) > 0:
         ticket_kitchen_txt += '-' * 46 + ' \n'
         ticket_pizza_txt += '-' * 46 + ' \n'

@@ -36,3 +36,6 @@ def save_current_license(license: str) -> None:
 def license_generator(license: str) -> str:
     license = f"lbk:{license}:ml"
     return hashlib.sha3_512(license.encode()).hexdigest()
+
+
+# print(license_generator("19:66:99:67:9d:74"))
