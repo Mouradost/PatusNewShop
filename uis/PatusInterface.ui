@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>932</width>
-    <height>800</height>
+    <width>1104</width>
+    <height>816</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>900</width>
+    <width>1100</width>
     <height>800</height>
    </size>
   </property>
@@ -22,6 +22,86 @@
   <property name="windowIcon">
    <iconset resource="../resource/resource.qrc">
     <normaloff>:/Simple icons/patus_logo.svg</normaloff>:/Simple icons/patus_logo.svg</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#page_tables{
+	border-image: url(resource/Restaurant_plan/plan.png) 0 0 0 0 stretch stretch;
+}
+
+QPushButton
+{ 
+	alternate-background-color: rgb(255, 255, 255);
+	background: rgba(225, 225, 225, 100);
+	border-width: 2px;
+    border-radius: 10px;
+	qproperty-iconSize: 32px 32px;
+	border-style: dashed;
+ }
+
+QPushButton:hover
+{
+	background: rgba(225, 225, 225, 180);
+	border-style: dashed;
+}
+
+QPushButton:pressed
+{
+	background: rgba(75, 75, 75, 180);
+	border-style: inset;
+}
+
+QLineEdit
+{
+	background: transparent;
+	color: rgb(88, 88, 88);
+	border: none;
+	border-bottom: 1px solid #717072;
+	font: 14pt &quot;MS Shell Dlg 2&quot;;
+}
+QComboBox
+{
+	background: transparent;
+	color: rgb(88, 88, 88);
+	border: none;
+	border-bottom: 1px solid #717072;
+	font: 14pt &quot;MS Shell Dlg 2&quot;;
+}
+
+
+
+QComboBox
+{
+	background: transparent;
+	color: rgb(88, 88, 88);
+	border: none;
+	border-bottom: 1px solid #717072;
+	font: 14pt &quot;MS Shell Dlg 2&quot;;
+}
+
+QLineEdit:hover{
+	alternate-background-color: rgb(255, 255, 255);
+	background: rgba(225, 225, 225, 100);
+	border-width: 2px;
+    border-radius: 10px;
+	qproperty-iconSize: 32px 32px;
+	border-style: dashed;
+    font-size: 24px;
+}
+QLineEdit:pressed{
+	background: rgba(225, 225, 225, 100);
+	border-width: 3px;
+    border-radius: 20px;
+	border-style: line;
+    font-size: 24px;
+}
+QFrame
+{
+	background-color: rgb(192, 192, 192)
+}
+QWidget
+{
+	background-color: rgb(192, 192, 192)
+}</string>
   </property>
   <widget class="QWidget" name="w_background">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -39,10 +119,11 @@
     </property>
     <item>
      <widget class="QFrame" name="f_main">
+      <property name="tabletTracking">
+       <bool>false</bool>
+      </property>
       <property name="styleSheet">
-       <string notr="true">QFrame{
-background-color: rgb(81, 81, 81);
-}</string>
+       <string notr="true"/>
       </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -80,10 +161,13 @@ background-color: rgb(81, 81, 81);
            <height>16777215</height>
           </size>
          </property>
+         <property name="tabletTracking">
+          <bool>false</bool>
+         </property>
          <property name="styleSheet">
           <string notr="true">QFrame
 {
-	background-color:  rgba(223, 223, 223, 200);
+	background-color: rgb(190, 190, 190)
 }
 
 QPushButton
@@ -139,6 +223,9 @@ QPushButton:pressed
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="tabletTracking">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -164,6 +251,9 @@ QPushButton:pressed
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="tabletTracking">
+             <bool>false</bool>
             </property>
             <property name="text">
              <string/>
@@ -191,6 +281,9 @@ QPushButton:pressed
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="tabletTracking">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -216,6 +309,9 @@ QPushButton:pressed
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="tabletTracking">
+             <bool>false</bool>
             </property>
             <property name="text">
              <string/>
@@ -243,6 +339,9 @@ QPushButton:pressed
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="tabletTracking">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -269,12 +368,15 @@ QPushButton:pressed
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="tabletTracking">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string/>
             </property>
             <property name="icon">
              <iconset resource="../resource/resource.qrc">
-              <normaloff>:/Simple icons/simple_icons/fi-rr-search-alt.svg</normaloff>:/Simple icons/simple_icons/fi-rr-search-alt.svg</iconset>
+              <normaloff>:/Simple icons/simple_icons/fi-rr-home.svg</normaloff>:/Simple icons/simple_icons/fi-rr-home.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -294,6 +396,9 @@ QPushButton:pressed
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="tabletTracking">
+             <bool>false</bool>
             </property>
             <property name="text">
              <string/>
@@ -321,6 +426,9 @@ QPushButton:pressed
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="tabletTracking">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -346,6 +454,9 @@ QPushButton:pressed
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="tabletTracking">
+             <bool>false</bool>
             </property>
             <property name="text">
              <string/>
@@ -373,6 +484,9 @@ QPushButton:pressed
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="tabletTracking">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -399,6 +513,9 @@ QPushButton:pressed
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="tabletTracking">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -419,8 +536,13 @@ QPushButton:pressed
        </item>
        <item>
         <widget class="QFrame" name="f_body">
+         <property name="tabletTracking">
+          <bool>false</bool>
+         </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgba(208, 208, 208, 150);</string>
+          <string notr="true">#f_body{
+background-color: rgba(208, 208, 208, 150);
+}</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -457,6 +579,14 @@ QPushButton:pressed
               <width>0</width>
               <height>50</height>
              </size>
+            </property>
+            <property name="tabletTracking">
+             <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">#f_header{
+	background-color: qlineargradient(spread:reflect, x1:0.460227, y1:1, x2:1, y2:1, stop:0 rgba(218, 218, 218, 255), stop:0.625 rgba(135, 135, 135, 255));
+}</string>
             </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
@@ -499,6 +629,9 @@ QPushButton:pressed
                  <width>50</width>
                  <height>50</height>
                 </size>
+               </property>
+               <property name="tabletTracking">
+                <bool>false</bool>
                </property>
                <property name="styleSheet">
                 <string notr="true">QFrame
@@ -556,6 +689,9 @@ QPushButton:pressed
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="tabletTracking">
+                   <bool>false</bool>
+                  </property>
                   <property name="text">
                    <string/>
                   </property>
@@ -575,6 +711,9 @@ QPushButton:pressed
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="tabletTracking">
+                <bool>false</bool>
                </property>
                <property name="styleSheet">
                 <string notr="true">*
@@ -611,32 +750,19 @@ QLabel
                 <property name="spacing">
                  <number>0</number>
                 </property>
-                <item row="1" column="1">
-                 <widget class="QLabel" name="l_monthSells">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="l_freeTables">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
-                  <property name="text">
-                   <string>Total day sells: 0</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QLabel" name="l_busyTables">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
+                  <property name="tabletTracking">
+                   <bool>false</bool>
                   </property>
                   <property name="text">
-                   <string>Busy tables: 8</string>
+                   <string>Free tables: 12</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -651,6 +777,9 @@ QLabel
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="tabletTracking">
+                   <bool>false</bool>
+                  </property>
                   <property name="text">
                    <string>Total month sells: 0</string>
                   </property>
@@ -659,16 +788,38 @@ QLabel
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="l_freeTables">
+                <item row="2" column="1">
+                 <widget class="QLabel" name="l_monthSells">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="tabletTracking">
+                   <bool>false</bool>
+                  </property>
                   <property name="text">
-                   <string>Free tables: 12</string>
+                   <string>Total day sells: 0</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="l_busyTables">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="tabletTracking">
+                   <bool>false</bool>
+                  </property>
+                  <property name="text">
+                   <string>Busy tables: 8</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -688,15 +839,18 @@ QLabel
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>100</width>
+                 <width>150</width>
                  <height>50</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>100</width>
+                 <width>150</width>
                  <height>50</height>
                 </size>
+               </property>
+               <property name="tabletTracking">
+                <bool>false</bool>
                </property>
                <property name="styleSheet">
                 <string notr="true">QFrame
@@ -747,12 +901,35 @@ QPushButton:pressed
                  <number>0</number>
                 </property>
                 <item>
+                 <widget class="QPushButton" name="btn_notification">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="tabletTracking">
+                   <bool>false</bool>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../resource/resource.qrc">
+                    <normaloff>:/Simple icons/simple_icons/fi-rr-envelope-marker.svg</normaloff>:/Simple icons/simple_icons/fi-rr-envelope-marker.svg</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
                  <widget class="QPushButton" name="btn_setting">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="tabletTracking">
+                   <bool>false</bool>
                   </property>
                   <property name="text">
                    <string/>
@@ -771,6 +948,9 @@ QPushButton:pressed
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="tabletTracking">
+                   <bool>false</bool>
+                  </property>
                   <property name="text">
                    <string/>
                   </property>
@@ -788,6 +968,9 @@ QPushButton:pressed
           </item>
           <item>
            <widget class="QFrame" name="f_content">
+            <property name="tabletTracking">
+             <bool>false</bool>
+            </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
@@ -812,26 +995,11 @@ QPushButton:pressed
              </property>
              <item>
               <widget class="QStackedWidget" name="sw_content">
+               <property name="tabletTracking">
+                <bool>false</bool>
+               </property>
                <property name="styleSheet">
-                <string notr="true">QLineEdit
-{
-	background: transparent;
-	color: rgb(88, 88, 88);
-	border: none;
-	border-bottom: 1px solid #717072;
-	font: 14pt &quot;MS Shell Dlg 2&quot;;
-}
-
-
-QComboBox
-{
-	background: transparent;
-	color: rgb(88, 88, 88);
-	border: none;
-	border-bottom: 1px solid #717072;
-	font: 14pt &quot;MS Shell Dlg 2&quot;;
-}
-</string>
+                <string notr="true"/>
                </property>
                <property name="frameShape">
                 <enum>QFrame::Box</enum>
@@ -1218,117 +1386,27 @@ QLineEdit
 }
 QPushButton
 { 
-	
 	alternate-background-color: rgb(255, 255, 255);
-	background: rgba(225, 225, 225, 100);
+	background: rgba(225, 225, 225, 255);
 	border-width: 2px;
     border-radius: 10px;
-	qproperty-iconSize: 50px 50px;
+	qproperty-iconSize: 32px 32px;
 	border-style: dashed;
  }
 
 QPushButton:hover
 {
-	background: rgba(225, 225, 225, 180);
+	background: rgba(225, 225, 225, 100);
 	border-style: dashed;
 }
 
 QPushButton:pressed
 {
-	background: rgba(225, 225, 225, 255);
+	background: rgba(75, 75, 75, 180);
 	border-style: inset;
 }</string>
                 </property>
-                <layout class="QGridLayout" name="gridLayout_4">
-                 <item row="0" column="0">
-                  <widget class="QScrollArea" name="sa_tables">
-                   <property name="widgetResizable">
-                    <bool>true</bool>
-                   </property>
-                   <widget class="QWidget" name="w_tables">
-                    <property name="geometry">
-                     <rect>
-                      <x>0</x>
-                      <y>0</y>
-                      <width>797</width>
-                      <height>694</height>
-                     </rect>
-                    </property>
-                    <layout class="QGridLayout" name="gridLayout_10">
-                     <item row="0" column="0">
-                      <widget class="QPushButton" name="pushButton_5">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>200</width>
-                         <height>200</height>
-                        </size>
-                       </property>
-                       <property name="text">
-                        <string>Table</string>
-                       </property>
-                       <property name="icon">
-                        <iconset resource="../resource/resource.qrc">
-                         <normaloff>:/Simple icons/simple_icons/fi-rr-terrace.svg</normaloff>:/Simple icons/simple_icons/fi-rr-terrace.svg</iconset>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="0" column="2">
-                      <widget class="QPushButton" name="pushButton_7">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>200</width>
-                         <height>200</height>
-                        </size>
-                       </property>
-                       <property name="text">
-                        <string>Table</string>
-                       </property>
-                       <property name="icon">
-                        <iconset resource="../resource/resource.qrc">
-                         <normaloff>:/Simple icons/simple_icons/fi-rr-terrace.svg</normaloff>:/Simple icons/simple_icons/fi-rr-terrace.svg</iconset>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="0" column="1">
-                      <widget class="QPushButton" name="pushButton_6">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>200</width>
-                         <height>200</height>
-                        </size>
-                       </property>
-                       <property name="text">
-                        <string>Table</string>
-                       </property>
-                       <property name="icon">
-                        <iconset resource="../resource/resource.qrc">
-                         <normaloff>:/Simple icons/simple_icons/fi-rr-terrace.svg</normaloff>:/Simple icons/simple_icons/fi-rr-terrace.svg</iconset>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </widget>
-                  </widget>
-                 </item>
-                </layout>
+                <layout class="QGridLayout" name="gridLayout_4"/>
                </widget>
                <widget class="QWidget" name="page_cashRegister">
                 <property name="styleSheet">
@@ -1365,6 +1443,9 @@ QLabel
                 <layout class="QGridLayout" name="gridLayout_5">
                  <item row="0" column="0">
                   <widget class="QFrame" name="f_foodMenu">
+                   <property name="tabletTracking">
+                    <bool>false</bool>
+                   </property>
                    <property name="frameShape">
                     <enum>QFrame::StyledPanel</enum>
                    </property>
@@ -1401,11 +1482,14 @@ QLabel
                         <height>0</height>
                        </size>
                       </property>
+                      <property name="tabletTracking">
+                       <bool>false</bool>
+                      </property>
                       <property name="styleSheet">
                        <string notr="true"/>
                       </property>
                       <property name="currentIndex">
-                       <number>5</number>
+                       <number>0</number>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -1424,6 +1508,9 @@ QLabel
                        <layout class="QGridLayout" name="gridLayout_12">
                         <item row="0" column="0">
                          <widget class="QScrollArea" name="sa_salade">
+                          <property name="tabletTracking">
+                           <bool>false</bool>
+                          </property>
                           <property name="widgetResizable">
                            <bool>true</bool>
                           </property>
@@ -1433,104 +1520,10 @@ QLabel
                              <x>0</x>
                              <y>0</y>
                              <width>374</width>
-                             <height>630</height>
+                             <height>644</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_13">
-                            <item row="0" column="1">
-                             <widget class="QFrame" name="frame_16">
-                              <property name="maximumSize">
-                               <size>
-                                <width>200</width>
-                                <height>200</height>
-                               </size>
-                              </property>
-                              <property name="frameShape">
-                               <enum>QFrame::Box</enum>
-                              </property>
-                              <property name="frameShadow">
-                               <enum>QFrame::Plain</enum>
-                              </property>
-                              <layout class="QVBoxLayout" name="verticalLayout_58">
-                               <item>
-                                <widget class="QLabel" name="label_17">
-                                 <property name="maximumSize">
-                                  <size>
-                                   <width>200</width>
-                                   <height>200</height>
-                                  </size>
-                                 </property>
-                                 <property name="text">
-                                  <string/>
-                                 </property>
-                                 <property name="pixmap">
-                                  <pixmap>:/Tab/menu.png</pixmap>
-                                 </property>
-                                 <property name="scaledContents">
-                                  <bool>true</bool>
-                                 </property>
-                                </widget>
-                               </item>
-                               <item>
-                                <widget class="QLabel" name="label_18">
-                                 <property name="text">
-                                  <string>Burger</string>
-                                 </property>
-                                 <property name="alignment">
-                                  <set>Qt::AlignCenter</set>
-                                 </property>
-                                </widget>
-                               </item>
-                               <item>
-                                <widget class="QFrame" name="frame_17">
-                                 <property name="maximumSize">
-                                  <size>
-                                   <width>200</width>
-                                   <height>100</height>
-                                  </size>
-                                 </property>
-                                 <property name="frameShape">
-                                  <enum>QFrame::StyledPanel</enum>
-                                 </property>
-                                 <property name="frameShadow">
-                                  <enum>QFrame::Raised</enum>
-                                 </property>
-                                 <layout class="QHBoxLayout" name="horizontalLayout_35">
-                                  <property name="spacing">
-                                   <number>5</number>
-                                  </property>
-                                  <property name="leftMargin">
-                                   <number>0</number>
-                                  </property>
-                                  <property name="topMargin">
-                                   <number>0</number>
-                                  </property>
-                                  <property name="rightMargin">
-                                   <number>0</number>
-                                  </property>
-                                  <property name="bottomMargin">
-                                   <number>0</number>
-                                  </property>
-                                  <item>
-                                   <widget class="QPushButton" name="pushButton_40">
-                                    <property name="text">
-                                     <string>+</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                  <item>
-                                   <widget class="QPushButton" name="pushButton_41">
-                                    <property name="text">
-                                     <string>-</string>
-                                    </property>
-                                   </widget>
-                                  </item>
-                                 </layout>
-                                </widget>
-                               </item>
-                              </layout>
-                             </widget>
-                            </item>
                             <item row="0" column="0">
                              <widget class="QFrame" name="frame_7">
                               <property name="maximumSize">
@@ -1538,6 +1531,9 @@ QLabel
                                 <width>200</width>
                                 <height>200</height>
                                </size>
+                              </property>
+                              <property name="tabletTracking">
+                               <bool>false</bool>
                               </property>
                               <property name="frameShape">
                                <enum>QFrame::Box</enum>
@@ -1554,6 +1550,9 @@ QLabel
                                    <height>200</height>
                                   </size>
                                  </property>
+                                 <property name="tabletTracking">
+                                  <bool>false</bool>
+                                 </property>
                                  <property name="text">
                                   <string/>
                                  </property>
@@ -1567,6 +1566,9 @@ QLabel
                                </item>
                                <item>
                                 <widget class="QLabel" name="label_16">
+                                 <property name="tabletTracking">
+                                  <bool>false</bool>
+                                 </property>
                                  <property name="text">
                                   <string>Burger</string>
                                  </property>
@@ -1582,6 +1584,9 @@ QLabel
                                    <width>200</width>
                                    <height>100</height>
                                   </size>
+                                 </property>
+                                 <property name="tabletTracking">
+                                  <bool>false</bool>
                                  </property>
                                  <property name="frameShape">
                                   <enum>QFrame::StyledPanel</enum>
@@ -1607,6 +1612,9 @@ QLabel
                                   </property>
                                   <item>
                                    <widget class="QPushButton" name="pushButton_38">
+                                    <property name="tabletTracking">
+                                     <bool>false</bool>
+                                    </property>
                                     <property name="text">
                                      <string>+</string>
                                     </property>
@@ -1614,6 +1622,121 @@ QLabel
                                   </item>
                                   <item>
                                    <widget class="QPushButton" name="pushButton_39">
+                                    <property name="tabletTracking">
+                                     <bool>false</bool>
+                                    </property>
+                                    <property name="text">
+                                     <string>-</string>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                 </layout>
+                                </widget>
+                               </item>
+                              </layout>
+                             </widget>
+                            </item>
+                            <item row="0" column="1">
+                             <widget class="QFrame" name="frame_16">
+                              <property name="maximumSize">
+                               <size>
+                                <width>200</width>
+                                <height>200</height>
+                               </size>
+                              </property>
+                              <property name="tabletTracking">
+                               <bool>false</bool>
+                              </property>
+                              <property name="frameShape">
+                               <enum>QFrame::Box</enum>
+                              </property>
+                              <property name="frameShadow">
+                               <enum>QFrame::Plain</enum>
+                              </property>
+                              <layout class="QVBoxLayout" name="verticalLayout_58">
+                               <item>
+                                <widget class="QLabel" name="label_17">
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>200</width>
+                                   <height>200</height>
+                                  </size>
+                                 </property>
+                                 <property name="tabletTracking">
+                                  <bool>false</bool>
+                                 </property>
+                                 <property name="text">
+                                  <string/>
+                                 </property>
+                                 <property name="pixmap">
+                                  <pixmap>:/Tab/menu.png</pixmap>
+                                 </property>
+                                 <property name="scaledContents">
+                                  <bool>true</bool>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item>
+                                <widget class="QLabel" name="label_18">
+                                 <property name="tabletTracking">
+                                  <bool>false</bool>
+                                 </property>
+                                 <property name="text">
+                                  <string>Burger</string>
+                                 </property>
+                                 <property name="alignment">
+                                  <set>Qt::AlignCenter</set>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item>
+                                <widget class="QFrame" name="frame_17">
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>200</width>
+                                   <height>100</height>
+                                  </size>
+                                 </property>
+                                 <property name="tabletTracking">
+                                  <bool>false</bool>
+                                 </property>
+                                 <property name="frameShape">
+                                  <enum>QFrame::StyledPanel</enum>
+                                 </property>
+                                 <property name="frameShadow">
+                                  <enum>QFrame::Raised</enum>
+                                 </property>
+                                 <layout class="QHBoxLayout" name="horizontalLayout_35">
+                                  <property name="spacing">
+                                   <number>5</number>
+                                  </property>
+                                  <property name="leftMargin">
+                                   <number>0</number>
+                                  </property>
+                                  <property name="topMargin">
+                                   <number>0</number>
+                                  </property>
+                                  <property name="rightMargin">
+                                   <number>0</number>
+                                  </property>
+                                  <property name="bottomMargin">
+                                   <number>0</number>
+                                  </property>
+                                  <item>
+                                   <widget class="QPushButton" name="pushButton_40">
+                                    <property name="tabletTracking">
+                                     <bool>false</bool>
+                                    </property>
+                                    <property name="text">
+                                     <string>+</string>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                  <item>
+                                   <widget class="QPushButton" name="pushButton_41">
+                                    <property name="tabletTracking">
+                                     <bool>false</bool>
+                                    </property>
                                     <property name="text">
                                      <string>-</string>
                                     </property>
@@ -1650,8 +1773,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>374</width>
-                             <height>630</height>
+                             <width>178</width>
+                             <height>129</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_6">
@@ -1868,8 +1991,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>374</width>
-                             <height>630</height>
+                             <width>178</width>
+                             <height>129</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_7">
@@ -2086,8 +2209,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>374</width>
-                             <height>630</height>
+                             <width>178</width>
+                             <height>129</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_11">
@@ -2304,8 +2427,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>374</width>
-                             <height>630</height>
+                             <width>178</width>
+                             <height>129</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_16">
@@ -2522,8 +2645,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>374</width>
-                             <height>630</height>
+                             <width>178</width>
+                             <height>161</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_17">
@@ -2770,14 +2893,13 @@ QLabel
                      <height>16777215</height>
                     </size>
                    </property>
+                   <property name="tabletTracking">
+                    <bool>false</bool>
+                   </property>
                    <property name="styleSheet">
-                    <string notr="true">QFrame
-{
-	background-color: rgb(192, 192, 192)
-}
+                    <string notr="true">
 QPushButton
 { 
-	
 	alternate-background-color: rgb(255, 255, 255);
 	background: rgba(225, 225, 225, 100);
 	border-width: 2px;
@@ -2833,6 +2955,9 @@ QComboBox
                     </property>
                     <item>
                      <widget class="QFrame" name="frame_5">
+                      <property name="tabletTracking">
+                       <bool>false</bool>
+                      </property>
                       <property name="frameShape">
                        <enum>QFrame::StyledPanel</enum>
                       </property>
@@ -2842,6 +2967,9 @@ QComboBox
                       <layout class="QHBoxLayout" name="horizontalLayout_31">
                        <item>
                         <widget class="QLabel" name="l_cashRegisterTicketNumberTitle">
+                         <property name="tabletTracking">
+                          <bool>false</bool>
+                         </property>
                          <property name="text">
                           <string>Ticket Number</string>
                          </property>
@@ -2849,6 +2977,9 @@ QComboBox
                        </item>
                        <item>
                         <widget class="QLabel" name="l_cashRegisterTicketNumber">
+                         <property name="tabletTracking">
+                          <bool>false</bool>
+                         </property>
                          <property name="text">
                           <string>-</string>
                          </property>
@@ -2862,6 +2993,9 @@ QComboBox
                     </item>
                     <item>
                      <widget class="QFrame" name="frame_9">
+                      <property name="tabletTracking">
+                       <bool>false</bool>
+                      </property>
                       <property name="frameShape">
                        <enum>QFrame::StyledPanel</enum>
                       </property>
@@ -2871,6 +3005,9 @@ QComboBox
                       <layout class="QHBoxLayout" name="horizontalLayout_32">
                        <item>
                         <widget class="QLabel" name="l_cashRegisterTableNumberTitle">
+                         <property name="tabletTracking">
+                          <bool>false</bool>
+                         </property>
                          <property name="text">
                           <string>Table Number</string>
                          </property>
@@ -2878,6 +3015,9 @@ QComboBox
                        </item>
                        <item>
                         <widget class="QLabel" name="l_cashRegisterTableNumber">
+                         <property name="tabletTracking">
+                          <bool>false</bool>
+                         </property>
                          <property name="text">
                           <string>-</string>
                          </property>
@@ -2900,6 +3040,9 @@ QComboBox
                            <height>16777215</height>
                           </size>
                          </property>
+                         <property name="tabletTracking">
+                          <bool>false</bool>
+                         </property>
                          <property name="text">
                           <string/>
                          </property>
@@ -2919,7 +3062,150 @@ QComboBox
                      </widget>
                     </item>
                     <item>
+                     <widget class="QFrame" name="f_orderPlace">
+                      <property name="enabled">
+                       <bool>false</bool>
+                      </property>
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>2000</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="tabletTracking">
+                       <bool>false</bool>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QRadioButton::indicator::checked
+{
+	border:1px solid black;
+	border-radius: 8px;
+	background-color: gray;
+}
+
+QRadioButton::indicator::unChecked
+{
+	border:1px solid black;
+	border-radius: 8px;
+	background-color: white;
+}</string>
+                      </property>
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QHBoxLayout" name="horizontalLayout_56">
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QRadioButton" name="rb_takeAway">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <weight>75</weight>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="mouseTracking">
+                          <bool>true</bool>
+                         </property>
+                         <property name="tabletTracking">
+                          <bool>false</bool>
+                         </property>
+                         <property name="text">
+                          <string>Take away</string>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="../resource/resource.qrc">
+                           <normaloff>:/Simple icons/simple_icons/fi-rr-truck-side.svg</normaloff>:/Simple icons/simple_icons/fi-rr-truck-side.svg</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>24</width>
+                           <height>24</height>
+                          </size>
+                         </property>
+                         <property name="checkable">
+                          <bool>true</bool>
+                         </property>
+                         <property name="checked">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QRadioButton" name="rb_onTable">
+                         <property name="enabled">
+                          <bool>false</bool>
+                         </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="mouseTracking">
+                          <bool>true</bool>
+                         </property>
+                         <property name="tabletTracking">
+                          <bool>false</bool>
+                         </property>
+                         <property name="text">
+                          <string>On table</string>
+                         </property>
+                         <property name="icon">
+                          <iconset resource="../resource/resource.qrc">
+                           <normaloff>:/Simple icons/simple_icons/fi-rr-terrace.svg</normaloff>:/Simple icons/simple_icons/fi-rr-terrace.svg</iconset>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>24</width>
+                           <height>24</height>
+                          </size>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
                      <widget class="QFrame" name="f_cashCommand">
+                      <property name="tabletTracking">
+                       <bool>false</bool>
+                      </property>
                       <property name="frameShape">
                        <enum>QFrame::StyledPanel</enum>
                       </property>
@@ -2944,6 +3230,9 @@ QComboBox
                        </property>
                        <item>
                         <widget class="QFrame" name="f_orderNav">
+                         <property name="tabletTracking">
+                          <bool>false</bool>
+                         </property>
                          <property name="frameShape">
                           <enum>QFrame::StyledPanel</enum>
                          </property>
@@ -2968,6 +3257,9 @@ QComboBox
                           </property>
                           <item>
                            <widget class="QFrame" name="f_totalInfo">
+                            <property name="tabletTracking">
+                             <bool>false</bool>
+                            </property>
                             <property name="styleSheet">
                              <string notr="true">QLCDNumber
 {
@@ -2987,11 +3279,20 @@ QComboBox
                             <layout class="QGridLayout" name="gridLayout_8">
                              <item row="2" column="1">
                               <widget class="QLCDNumber" name="lcdN_totalTtc">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
                                <property name="font">
                                 <font>
                                  <weight>50</weight>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="tabletTracking">
+                                <bool>false</bool>
                                </property>
                                <property name="frameShape">
                                 <enum>QFrame::StyledPanel</enum>
@@ -3005,6 +3306,9 @@ QComboBox
                                <property name="smallDecimalPoint">
                                 <bool>true</bool>
                                </property>
+                               <property name="digitCount">
+                                <number>7</number>
+                               </property>
                                <property name="value" stdset="0">
                                 <double>0.000000000000000</double>
                                </property>
@@ -3012,6 +3316,12 @@ QComboBox
                              </item>
                              <item row="1" column="0">
                               <widget class="QLabel" name="l_tax">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
                                <property name="font">
                                 <font>
                                  <family>MS Shell Dlg 2</family>
@@ -3020,6 +3330,9 @@ QComboBox
                                  <italic>false</italic>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="tabletTracking">
+                                <bool>false</bool>
                                </property>
                                <property name="text">
                                 <string>Reduction</string>
@@ -3031,11 +3344,20 @@ QComboBox
                              </item>
                              <item row="1" column="1">
                               <widget class="QLCDNumber" name="lcdN_tax">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
                                <property name="font">
                                 <font>
                                  <weight>50</weight>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="tabletTracking">
+                                <bool>false</bool>
                                </property>
                                <property name="frameShape">
                                 <enum>QFrame::StyledPanel</enum>
@@ -3049,6 +3371,9 @@ QComboBox
                                <property name="smallDecimalPoint">
                                 <bool>true</bool>
                                </property>
+                               <property name="digitCount">
+                                <number>7</number>
+                               </property>
                                <property name="value" stdset="0">
                                 <double>0.000000000000000</double>
                                </property>
@@ -3057,14 +3382,14 @@ QComboBox
                              <item row="1" column="2">
                               <widget class="QLabel" name="l_taxDa">
                                <property name="sizePolicy">
-                                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                                  <horstretch>0</horstretch>
                                  <verstretch>0</verstretch>
                                 </sizepolicy>
                                </property>
                                <property name="maximumSize">
                                 <size>
-                                 <width>20</width>
+                                 <width>40</width>
                                  <height>16777215</height>
                                 </size>
                                </property>
@@ -3076,6 +3401,9 @@ QComboBox
                                  <italic>false</italic>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="tabletTracking">
+                                <bool>false</bool>
                                </property>
                                <property name="frameShadow">
                                 <enum>QFrame::Plain</enum>
@@ -3091,14 +3419,14 @@ QComboBox
                              <item row="0" column="2">
                               <widget class="QLabel" name="l_da">
                                <property name="sizePolicy">
-                                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                                  <horstretch>0</horstretch>
                                  <verstretch>0</verstretch>
                                 </sizepolicy>
                                </property>
                                <property name="maximumSize">
                                 <size>
-                                 <width>20</width>
+                                 <width>40</width>
                                  <height>16777215</height>
                                 </size>
                                </property>
@@ -3110,6 +3438,9 @@ QComboBox
                                  <italic>false</italic>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="tabletTracking">
+                                <bool>false</bool>
                                </property>
                                <property name="frameShadow">
                                 <enum>QFrame::Plain</enum>
@@ -3124,6 +3455,12 @@ QComboBox
                              </item>
                              <item row="0" column="0">
                               <widget class="QLabel" name="l_totalHtt">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
                                <property name="font">
                                 <font>
                                  <family>MS Shell Dlg 2</family>
@@ -3132,6 +3469,9 @@ QComboBox
                                  <italic>false</italic>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="tabletTracking">
+                                <bool>false</bool>
                                </property>
                                <property name="text">
                                 <string>Total</string>
@@ -3143,6 +3483,12 @@ QComboBox
                              </item>
                              <item row="2" column="0">
                               <widget class="QLabel" name="l_totalTtc">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
                                <property name="font">
                                 <font>
                                  <family>MS Shell Dlg 2</family>
@@ -3151,6 +3497,9 @@ QComboBox
                                  <italic>false</italic>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="tabletTracking">
+                                <bool>false</bool>
                                </property>
                                <property name="text">
                                 <string>Final Total</string>
@@ -3162,11 +3511,20 @@ QComboBox
                              </item>
                              <item row="0" column="1">
                               <widget class="QLCDNumber" name="lcdN_totalHtt">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
                                <property name="font">
                                 <font>
                                  <weight>50</weight>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="tabletTracking">
+                                <bool>false</bool>
                                </property>
                                <property name="frameShape">
                                 <enum>QFrame::StyledPanel</enum>
@@ -3180,6 +3538,9 @@ QComboBox
                                <property name="smallDecimalPoint">
                                 <bool>true</bool>
                                </property>
+                               <property name="digitCount">
+                                <number>7</number>
+                               </property>
                                <property name="value" stdset="0">
                                 <double>0.000000000000000</double>
                                </property>
@@ -3188,14 +3549,14 @@ QComboBox
                              <item row="2" column="2">
                               <widget class="QLabel" name="l_TtcDa">
                                <property name="sizePolicy">
-                                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                                  <horstretch>0</horstretch>
                                  <verstretch>0</verstretch>
                                 </sizepolicy>
                                </property>
                                <property name="maximumSize">
                                 <size>
-                                 <width>20</width>
+                                 <width>40</width>
                                  <height>16777215</height>
                                 </size>
                                </property>
@@ -3208,6 +3569,9 @@ QComboBox
                                  <bold>false</bold>
                                 </font>
                                </property>
+                               <property name="tabletTracking">
+                                <bool>false</bool>
+                               </property>
                                <property name="frameShadow">
                                 <enum>QFrame::Plain</enum>
                                </property>
@@ -3216,89 +3580,6 @@ QComboBox
                                </property>
                                <property name="alignment">
                                 <set>Qt::AlignCenter</set>
-                               </property>
-                              </widget>
-                             </item>
-                            </layout>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QFrame" name="f_orderPlace">
-                            <property name="enabled">
-                             <bool>false</bool>
-                            </property>
-                            <property name="maximumSize">
-                             <size>
-                              <width>50</width>
-                              <height>16777215</height>
-                             </size>
-                            </property>
-                            <property name="frameShape">
-                             <enum>QFrame::StyledPanel</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
-                            </property>
-                            <layout class="QVBoxLayout" name="verticalLayout_42">
-                             <property name="leftMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="topMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="rightMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="bottomMargin">
-                              <number>0</number>
-                             </property>
-                             <item>
-                              <widget class="QRadioButton" name="rb_onTable">
-                               <property name="font">
-                                <font>
-                                 <weight>75</weight>
-                                 <italic>false</italic>
-                                 <bold>true</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string/>
-                               </property>
-                               <property name="icon">
-                                <iconset resource="../resource/resource.qrc">
-                                 <normaloff>:/Simple icons/simple_icons/fi-rr-terrace.svg</normaloff>:/Simple icons/simple_icons/fi-rr-terrace.svg</iconset>
-                               </property>
-                               <property name="iconSize">
-                                <size>
-                                 <width>24</width>
-                                 <height>24</height>
-                                </size>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QRadioButton" name="rb_takeAway">
-                               <property name="font">
-                                <font>
-                                 <weight>75</weight>
-                                 <bold>true</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string/>
-                               </property>
-                               <property name="icon">
-                                <iconset resource="../resource/resource.qrc">
-                                 <normaloff>:/Simple icons/simple_icons/fi-rr-truck-side.svg</normaloff>:/Simple icons/simple_icons/fi-rr-truck-side.svg</iconset>
-                               </property>
-                               <property name="iconSize">
-                                <size>
-                                 <width>24</width>
-                                 <height>24</height>
-                                </size>
-                               </property>
-                               <property name="checked">
-                                <bool>true</bool>
                                </property>
                               </widget>
                              </item>
@@ -3318,6 +3599,9 @@ QComboBox
                               <width>40</width>
                               <height>16777215</height>
                              </size>
+                            </property>
+                            <property name="tabletTracking">
+                             <bool>false</bool>
                             </property>
                             <property name="frameShape">
                              <enum>QFrame::StyledPanel</enum>
@@ -3358,6 +3642,9 @@ QComboBox
                                  <bold>false</bold>
                                 </font>
                                </property>
+                               <property name="tabletTracking">
+                                <bool>false</bool>
+                               </property>
                                <property name="text">
                                 <string/>
                                </property>
@@ -3389,6 +3676,9 @@ QComboBox
                                  <italic>false</italic>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="tabletTracking">
+                                <bool>false</bool>
                                </property>
                                <property name="text">
                                 <string/>
@@ -3422,6 +3712,9 @@ QComboBox
                                  <bold>false</bold>
                                 </font>
                                </property>
+                               <property name="tabletTracking">
+                                <bool>false</bool>
+                               </property>
                                <property name="text">
                                 <string/>
                                </property>
@@ -3447,6 +3740,9 @@ QComboBox
                               <width>50</width>
                               <height>16777215</height>
                              </size>
+                            </property>
+                            <property name="tabletTracking">
+                             <bool>false</bool>
                             </property>
                             <property name="frameShape">
                              <enum>QFrame::StyledPanel</enum>
@@ -3481,6 +3777,9 @@ QComboBox
                                  <height>16777215</height>
                                 </size>
                                </property>
+                               <property name="tabletTracking">
+                                <bool>false</bool>
+                               </property>
                                <property name="text">
                                 <string/>
                                </property>
@@ -3509,6 +3808,9 @@ QComboBox
                                  <width>50</width>
                                  <height>16777215</height>
                                 </size>
+                               </property>
+                               <property name="tabletTracking">
+                                <bool>false</bool>
                                </property>
                                <property name="text">
                                 <string/>
@@ -3539,6 +3841,9 @@ QComboBox
                                  <height>16777215</height>
                                 </size>
                                </property>
+                               <property name="tabletTracking">
+                                <bool>false</bool>
+                               </property>
                                <property name="text">
                                 <string/>
                                </property>
@@ -3568,6 +3873,9 @@ QComboBox
                                  <height>16777215</height>
                                 </size>
                                </property>
+                               <property name="tabletTracking">
+                                <bool>false</bool>
+                               </property>
                                <property name="text">
                                 <string/>
                                </property>
@@ -3594,6 +3902,9 @@ QComboBox
                     </item>
                     <item>
                      <widget class="QFrame" name="f_orderCustomer">
+                      <property name="tabletTracking">
+                       <bool>false</bool>
+                      </property>
                       <property name="frameShape">
                        <enum>QFrame::StyledPanel</enum>
                       </property>
@@ -3633,13 +3944,20 @@ QComboBox
                            <bold>false</bold>
                           </font>
                          </property>
+                         <property name="tabletTracking">
+                          <bool>false</bool>
+                         </property>
                          <property name="text">
                           <string>Customer name</string>
                          </property>
                         </widget>
                        </item>
                        <item>
-                        <widget class="QComboBox" name="cb_orderCustomer"/>
+                        <widget class="QComboBox" name="cb_orderCustomer">
+                         <property name="tabletTracking">
+                          <bool>false</bool>
+                         </property>
+                        </widget>
                        </item>
                       </layout>
                      </widget>
@@ -3651,6 +3969,9 @@ QComboBox
                         <width>0</width>
                         <height>0</height>
                        </size>
+                      </property>
+                      <property name="tabletTracking">
+                       <bool>false</bool>
                       </property>
                       <property name="layoutDirection">
                        <enum>Qt::LeftToRight</enum>
@@ -3689,10 +4010,19 @@ QComboBox
                         <verstretch>0</verstretch>
                        </sizepolicy>
                       </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>0</height>
+                       </size>
+                      </property>
                       <property name="font">
                        <font>
                         <pointsize>14</pointsize>
                        </font>
+                      </property>
+                      <property name="tabletTracking">
+                       <bool>false</bool>
                       </property>
                       <property name="title">
                        <string>Comment</string>
@@ -3706,10 +4036,19 @@ QComboBox
                            <verstretch>0</verstretch>
                           </sizepolicy>
                          </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>100</height>
+                          </size>
+                         </property>
                          <property name="font">
                           <font>
                            <pointsize>12</pointsize>
                           </font>
+                         </property>
+                         <property name="tabletTracking">
+                          <bool>false</bool>
                          </property>
                         </widget>
                        </item>
@@ -3778,25 +4117,7 @@ QPushButton:pressed
                        </font>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QLineEdit
-{
-	background: transparent;
-	color: rgb(88, 88, 88);
-	border: none;
-	border-bottom: 1px solid #717072;
-	font: 14pt &quot;MS Shell Dlg 2&quot;;
-}
-
-
-QComboBox
-{
-	background: transparent;
-	color: rgb(88, 88, 88);
-	border: none;
-	border-bottom: 1px solid #717072;
-	font: 14pt &quot;MS Shell Dlg 2&quot;;
-}
-</string>
+                       <string notr="true"/>
                       </property>
                       <property name="title">
                        <string>Reservation</string>
@@ -3862,6 +4183,9 @@ QComboBox
                          </property>
                          <property name="displayFormat">
                           <string>yyyy-MM-dd HH:mm</string>
+                         </property>
+                         <property name="calendarPopup">
+                          <bool>true</bool>
                          </property>
                         </widget>
                        </item>
@@ -4015,37 +4339,16 @@ QComboBox
                  <item>
                   <widget class="QFrame" name="f_reservationDb">
                    <property name="styleSheet">
-                    <string notr="true">QFrame
-{
-	background-color: rgb(192, 192, 192)
-}
+                    <string notr="true">
 
-QGroupBox
-{
-	background-color: rgb(192, 192, 192)
-}
 
-QPushButton
-{ 
-	
-	alternate-background-color: rgb(255, 255, 255);
-	background: rgba(225, 225, 225, 100);
-	border-width: 2px;
-    border-radius: 10px;
-	qproperty-iconSize: 32px 32px;
-	border-style: dashed;
- }
-
-QPushButton:hover
+QComboBox
 {
-	background: rgba(225, 225, 225, 180);
-	border-style: dashed;
-}
-
-QPushButton:pressed
-{
-	background: rgba(75, 75, 75, 180);
-	border-style: inset;
+	background: transparent;
+	color: rgb(88, 88, 88);
+	border: none;
+	border-bottom: 1px solid #717072;
+	font: 14pt &quot;MS Shell Dlg 2&quot;;
 }</string>
                    </property>
                    <property name="frameShape">
@@ -4154,11 +4457,17 @@ QPushButton:pressed
                          <property name="alignment">
                           <set>Qt::AlignCenter</set>
                          </property>
+                         <property name="showGroupSeparator" stdset="0">
+                          <bool>false</bool>
+                         </property>
                          <property name="currentSection">
                           <enum>QDateTimeEdit::YearSection</enum>
                          </property>
                          <property name="displayFormat">
                           <string>yyyy-MM-dd</string>
+                         </property>
+                         <property name="calendarPopup">
+                          <bool>true</bool>
                          </property>
                         </widget>
                        </item>
@@ -4237,6 +4546,18 @@ QPushButton:pressed
 {
 	background: rgba(75, 75, 75, 180);
 	border-style: inset;
+}
+
+
+
+
+QComboBox
+{
+	background: transparent;
+	color: rgb(88, 88, 88);
+	border: none;
+	border-bottom: 1px solid #717072;
+	font: 14pt &quot;MS Shell Dlg 2&quot;;
 }</string>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_29">
@@ -4541,6 +4862,45 @@ QPushButton:pressed
                      </widget>
                     </item>
                     <item>
+                     <widget class="QFrame" name="frame_38">
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Plain</enum>
+                      </property>
+                      <layout class="QHBoxLayout" name="horizontalLayout_57">
+                       <item>
+                        <widget class="QRadioButton" name="rb_stockIngredients">
+                         <property name="font">
+                          <font>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Ingredients</string>
+                         </property>
+                         <property name="checked">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QRadioButton" name="rb_stockOthers">
+                         <property name="font">
+                          <font>
+                           <pointsize>12</pointsize>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Others</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
                      <widget class="QTableWidget" name="tw_stock">
                       <property name="font">
                        <font>
@@ -4594,6 +4954,18 @@ QPushButton:pressed
 {
 	background: rgba(75, 75, 75, 180);
 	border-style: inset;
+}
+
+
+
+
+QComboBox
+{
+	background: transparent;
+	color: rgb(88, 88, 88);
+	border: none;
+	border-bottom: 1px solid #717072;
+	font: 14pt &quot;MS Shell Dlg 2&quot;;
 }</string>
                    </property>
                    <property name="frameShape">
@@ -5316,7 +5688,7 @@ QComboBox
                               <string/>
                              </property>
                              <property name="maxLength">
-                              <number>20</number>
+                              <number>40</number>
                              </property>
                              <property name="placeholderText">
                               <string>Name</string>
@@ -5655,6 +6027,17 @@ QPushButton:pressed
 {
 	background: rgba(75, 75, 75, 180);
 	border-style: inset;
+}
+
+
+
+QComboBox
+{
+	background: transparent;
+	color: rgb(88, 88, 88);
+	border: none;
+	border-bottom: 1px solid #717072;
+	font: 14pt &quot;MS Shell Dlg 2&quot;;
 }</string>
                        </property>
                        <property name="frameShape">
@@ -5672,33 +6055,7 @@ QPushButton:pressed
                            </font>
                           </property>
                           <property name="styleSheet">
-                           <string notr="true">QLineEdit
-{
-	background: transparent;
-	color: rgb(88, 88, 88);
-	border: none;
-	border-bottom: 1px solid #717072;
-	font: 14pt &quot;MS Shell Dlg 2&quot;;
-}
-
-
-QComboBox
-{
-	background: transparent;
-	color: rgb(88, 88, 88);
-	border: none;
-	border-bottom: 1px solid #717072;
-	font: 14pt &quot;MS Shell Dlg 2&quot;;
-}
-
-QCheckBox
-{
-	background: transparent;
-	color: rgb(88, 88, 88);
-	border: none;
-	font: 14pt &quot;MS Shell Dlg 2&quot;;
-}
-</string>
+                           <string notr="true"/>
                           </property>
                           <property name="title">
                            <string>Menu Category</string>
@@ -5713,7 +6070,7 @@ QCheckBox
                               <string/>
                              </property>
                              <property name="maxLength">
-                              <number>20</number>
+                              <number>40</number>
                              </property>
                              <property name="placeholderText">
                               <string>Name</string>
@@ -5954,7 +6311,7 @@ QComboBox
                               <string/>
                              </property>
                              <property name="maxLength">
-                              <number>20</number>
+                              <number>40</number>
                              </property>
                              <property name="placeholderText">
                               <string>Name</string>
@@ -6247,7 +6604,7 @@ QComboBox
                               <string/>
                              </property>
                              <property name="maxLength">
-                              <number>20</number>
+                              <number>40</number>
                              </property>
                              <property name="placeholderText">
                               <string>Name</string>
@@ -6312,6 +6669,38 @@ QComboBox
                                <string>None</string>
                               </property>
                              </item>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QCheckBox" name="cb_expensePayed">
+                             <property name="font">
+                              <font>
+                               <family>MS Shell Dlg 2</family>
+                               <pointsize>14</pointsize>
+                               <weight>50</weight>
+                               <italic>false</italic>
+                               <bold>false</bold>
+                              </font>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="text">
+                              <string>Is payed ?</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../resource/resource.qrc">
+                               <normaloff>:/Simple icons/simple_icons/fi-rr-dollar.svg</normaloff>:/Simple icons/simple_icons/fi-rr-dollar.svg</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>32</width>
+                               <height>32</height>
+                              </size>
+                             </property>
+                             <property name="checked">
+                              <bool>true</bool>
+                             </property>
                             </widget>
                            </item>
                           </layout>
@@ -6573,7 +6962,7 @@ QCheckBox
                               <string/>
                              </property>
                              <property name="maxLength">
-                              <number>20</number>
+                              <number>40</number>
                              </property>
                              <property name="placeholderText">
                               <string>Name</string>
@@ -6598,7 +6987,39 @@ QCheckBox
                               <enum>Qt::LeftToRight</enum>
                              </property>
                              <property name="text">
-                              <string>Save in stock</string>
+                              <string>Save to stock ?</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../resource/resource.qrc">
+                               <normaloff>:/Simple icons/simple_icons/fi-rr-cursor-plus.svg</normaloff>:/Simple icons/simple_icons/fi-rr-cursor-plus.svg</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>32</width>
+                               <height>32</height>
+                              </size>
+                             </property>
+                             <property name="checked">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QCheckBox" name="cb_expenseCategoryIsIngredient">
+                             <property name="font">
+                              <font>
+                               <family>MS Shell Dlg 2</family>
+                               <pointsize>14</pointsize>
+                               <weight>50</weight>
+                               <italic>false</italic>
+                               <bold>false</bold>
+                              </font>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="text">
+                              <string>Is ingredient ?</string>
                              </property>
                              <property name="icon">
                               <iconset resource="../resource/resource.qrc">
@@ -6867,7 +7288,7 @@ QComboBox
                               <string/>
                              </property>
                              <property name="maxLength">
-                              <number>20</number>
+                              <number>40</number>
                              </property>
                              <property name="placeholderText">
                               <string>Name</string>
@@ -6899,7 +7320,7 @@ QComboBox
                               <string/>
                              </property>
                              <property name="maxLength">
-                              <number>20</number>
+                              <number>250</number>
                              </property>
                              <property name="placeholderText">
                               <string>Address</string>
@@ -7339,7 +7760,7 @@ QPushButton:pressed
                               <string/>
                              </property>
                              <property name="maxLength">
-                              <number>20</number>
+                              <number>40</number>
                              </property>
                              <property name="placeholderText">
                               <string>First and Last Name</string>
@@ -7374,7 +7795,7 @@ QPushButton:pressed
                               <string/>
                              </property>
                              <property name="maxLength">
-                              <number>20</number>
+                              <number>250</number>
                              </property>
                              <property name="placeholderText">
                               <string>Address</string>
@@ -7633,25 +8054,7 @@ QComboBox
                            </font>
                           </property>
                           <property name="styleSheet">
-                           <string notr="true">QLineEdit
-{
-	background: transparent;
-	color: rgb(88, 88, 88);
-	border: none;
-	border-bottom: 1px solid #717072;
-	font: 14pt &quot;MS Shell Dlg 2&quot;;
-}
-
-
-
-QComboBox
-{
-	background: transparent;
-	color: rgb(88, 88, 88);
-	border: none;
-	border-bottom: 1px solid #717072;
-	font: 14pt &quot;MS Shell Dlg 2&quot;;
-}</string>
+                           <string notr="true"/>
                           </property>
                           <property name="title">
                            <string>Worker</string>
@@ -7835,7 +8238,7 @@ QComboBox
                               <string/>
                              </property>
                              <property name="maxLength">
-                              <number>20</number>
+                              <number>40</number>
                              </property>
                              <property name="placeholderText">
                               <string>First and Last Name</string>
@@ -7908,7 +8311,7 @@ QComboBox
                               <string/>
                              </property>
                              <property name="maxLength">
-                              <number>20</number>
+                              <number>250</number>
                              </property>
                              <property name="placeholderText">
                               <string>Address</string>
@@ -7939,6 +8342,89 @@ QComboBox
                              <property name="clearButtonEnabled">
                               <bool>true</bool>
                              </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QFrame" name="frame_33">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="frameShape">
+                              <enum>QFrame::StyledPanel</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Raised</enum>
+                             </property>
+                             <layout class="QHBoxLayout" name="horizontalLayout_58">
+                              <item>
+                               <widget class="QLineEdit" name="le_workerCv">
+                                <property name="enabled">
+                                 <bool>false</bool>
+                                </property>
+                                <property name="text">
+                                 <string/>
+                                </property>
+                                <property name="maxLength">
+                                 <number>20</number>
+                                </property>
+                                <property name="placeholderText">
+                                 <string>CV</string>
+                                </property>
+                                <property name="clearButtonEnabled">
+                                 <bool>true</bool>
+                                </property>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QPushButton" name="btn_workerAddCv">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="text">
+                                 <string/>
+                                </property>
+                                <property name="icon">
+                                 <iconset resource="../resource/resource.qrc">
+                                  <normaloff>:/Simple icons/simple_icons/fi-rr-file-add.svg</normaloff>:/Simple icons/simple_icons/fi-rr-file-add.svg</iconset>
+                                </property>
+                                <property name="iconSize">
+                                 <size>
+                                  <width>32</width>
+                                  <height>32</height>
+                                 </size>
+                                </property>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QPushButton" name="btn_workerOpenCv">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="text">
+                                 <string/>
+                                </property>
+                                <property name="icon">
+                                 <iconset resource="../resource/resource.qrc">
+                                  <normaloff>:/Simple icons/simple_icons/fi-rr-search-alt.svg</normaloff>:/Simple icons/simple_icons/fi-rr-search-alt.svg</iconset>
+                                </property>
+                                <property name="iconSize">
+                                 <size>
+                                  <width>32</width>
+                                  <height>32</height>
+                                 </size>
+                                </property>
+                               </widget>
+                              </item>
+                             </layout>
                             </widget>
                            </item>
                           </layout>
@@ -8622,6 +9108,9 @@ QComboBox
                              <property name="displayFormat">
                               <string>yyyy-MM-dd HH:mm:ss</string>
                              </property>
+                             <property name="calendarPopup">
+                              <bool>true</bool>
+                             </property>
                             </widget>
                            </item>
                            <item>
@@ -8634,6 +9123,22 @@ QComboBox
                              </property>
                              <property name="placeholderText">
                               <string>Total</string>
+                             </property>
+                             <property name="clearButtonEnabled">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QLineEdit" name="le_sellNbCovers">
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="maxLength">
+                              <number>20</number>
+                             </property>
+                             <property name="placeholderText">
+                              <string>Number of covers</string>
                              </property>
                              <property name="clearButtonEnabled">
                               <bool>true</bool>
@@ -9204,6 +9709,699 @@ QComboBox
                      </item>
                     </layout>
                    </widget>
+                   <widget class="QWidget" name="tab_stock">
+                    <attribute name="icon">
+                     <iconset resource="../resource/resource.qrc">
+                      <normaloff>:/Simple icons/simple_icons/fi-rr-home.svg</normaloff>:/Simple icons/simple_icons/fi-rr-home.svg</iconset>
+                    </attribute>
+                    <attribute name="title">
+                     <string/>
+                    </attribute>
+                    <layout class="QHBoxLayout" name="horizontalLayout_60">
+                     <item>
+                      <widget class="QFrame" name="f_tableInput_2">
+                       <property name="styleSheet">
+                        <string notr="true">QFrame
+{
+	background-color: rgb(192, 192, 192)
+}
+
+QGroupBox
+{
+	background-color: rgb(192, 192, 192)
+}
+
+QPushButton
+{ 
+	
+	alternate-background-color: rgb(255, 255, 255);
+	background: rgba(225, 225, 225, 100);
+	border-width: 2px;
+    border-radius: 10px;
+	qproperty-iconSize: 32px 32px;
+	border-style: dashed;
+ }
+
+QPushButton:hover
+{
+	background: rgba(225, 225, 225, 180);
+	border-style: dashed;
+}
+
+QPushButton:pressed
+{
+	background: rgba(75, 75, 75, 180);
+	border-style: inset;
+}
+
+
+QComboBox
+{
+	background: transparent;
+	color: rgb(88, 88, 88);
+	border: none;
+	border-bottom: 1px solid #717072;
+	font: 14pt &quot;MS Shell Dlg 2&quot;;
+}</string>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_42">
+                        <item>
+                         <widget class="QGroupBox" name="gb_stock">
+                          <property name="font">
+                           <font>
+                            <pointsize>14</pointsize>
+                           </font>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">QLineEdit
+{
+	background: transparent;
+	color: rgb(88, 88, 88);
+	border: none;
+	border-bottom: 1px solid #717072;
+	font: 14pt &quot;MS Shell Dlg 2&quot;;
+}
+
+</string>
+                          </property>
+                          <property name="title">
+                           <string>Stock</string>
+                          </property>
+                          <layout class="QVBoxLayout" name="verticalLayout_79">
+                           <item>
+                            <widget class="QLineEdit" name="le_stockProductName">
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="maxLength">
+                              <number>20</number>
+                             </property>
+                             <property name="placeholderText">
+                              <string>Name</string>
+                             </property>
+                             <property name="clearButtonEnabled">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QComboBox" name="cb_stockCategory"/>
+                           </item>
+                           <item>
+                            <widget class="QLineEdit" name="le_stockUnit">
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="maxLength">
+                              <number>20</number>
+                             </property>
+                             <property name="placeholderText">
+                              <string>Stock unit</string>
+                             </property>
+                             <property name="clearButtonEnabled">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QLineEdit" name="le_stockQuantity">
+                             <property name="maxLength">
+                              <number>30</number>
+                             </property>
+                             <property name="placeholderText">
+                              <string>Stock quantity</string>
+                             </property>
+                             <property name="clearButtonEnabled">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QCheckBox" name="cb_stockIsIngredient">
+                             <property name="font">
+                              <font>
+                               <family>MS Shell Dlg 2</family>
+                               <pointsize>14</pointsize>
+                               <weight>50</weight>
+                               <italic>false</italic>
+                               <bold>false</bold>
+                              </font>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="text">
+                              <string>Is ingredient ?</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../resource/resource.qrc">
+                               <normaloff>:/Simple icons/simple_icons/fi-rr-cursor-plus.svg</normaloff>:/Simple icons/simple_icons/fi-rr-cursor-plus.svg</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>32</width>
+                               <height>32</height>
+                              </size>
+                             </property>
+                             <property name="checked">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QFrame" name="f_tableDbBtn_2">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="frameShape">
+                           <enum>QFrame::StyledPanel</enum>
+                          </property>
+                          <property name="frameShadow">
+                           <enum>QFrame::Raised</enum>
+                          </property>
+                          <layout class="QHBoxLayout" name="horizontalLayout_59">
+                           <property name="spacing">
+                            <number>5</number>
+                           </property>
+                           <property name="leftMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="topMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="rightMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="bottomMargin">
+                            <number>0</number>
+                           </property>
+                           <item>
+                            <widget class="QPushButton" name="btn_stockAdd">
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../resource/resource.qrc">
+                               <normaloff>:/Simple icons/simple_icons/fi-rr-add.svg</normaloff>:/Simple icons/simple_icons/fi-rr-add.svg</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>32</width>
+                               <height>32</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="btn_stockEdit">
+                             <property name="enabled">
+                              <bool>false</bool>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../resource/resource.qrc">
+                               <normaloff>:/Simple icons/simple_icons/fi-rr-edit.svg</normaloff>:/Simple icons/simple_icons/fi-rr-edit.svg</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>32</width>
+                               <height>32</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="btn_stockDelete">
+                             <property name="enabled">
+                              <bool>false</bool>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../resource/resource.qrc">
+                               <normaloff>:/Simple icons/simple_icons/fi-rr-delete.svg</normaloff>:/Simple icons/simple_icons/fi-rr-delete.svg</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>32</width>
+                               <height>32</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="btn_stockClear">
+                             <property name="enabled">
+                              <bool>true</bool>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../resource/resource.qrc">
+                               <normaloff>:/Simple icons/simple_icons/fi-rr-broom.svg</normaloff>:/Simple icons/simple_icons/fi-rr-broom.svg</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>32</width>
+                               <height>32</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="f_stockDb">
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_80">
+                        <item>
+                         <widget class="QTableWidget" name="tw_stockDb">
+                          <property name="font">
+                           <font>
+                            <family>Times New Roman</family>
+                            <pointsize>18</pointsize>
+                           </font>
+                          </property>
+                          <property name="editTriggers">
+                           <set>QAbstractItemView::NoEditTriggers</set>
+                          </property>
+                          <property name="selectionMode">
+                           <enum>QAbstractItemView::SingleSelection</enum>
+                          </property>
+                          <property name="selectionBehavior">
+                           <enum>QAbstractItemView::SelectRows</enum>
+                          </property>
+                          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+                           <bool>true</bool>
+                          </attribute>
+                          <attribute name="verticalHeaderCascadingSectionResizes">
+                           <bool>true</bool>
+                          </attribute>
+                          <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+                           <bool>false</bool>
+                          </attribute>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                   <widget class="QWidget" name="tab_uploader">
+                    <attribute name="icon">
+                     <iconset resource="../resource/resource.qrc">
+                      <normaloff>:/Simple icons/simple_icons/fi-rr-upload.svg</normaloff>:/Simple icons/simple_icons/fi-rr-upload.svg</iconset>
+                    </attribute>
+                    <attribute name="title">
+                     <string/>
+                    </attribute>
+                    <layout class="QHBoxLayout" name="horizontalLayout_62">
+                     <item>
+                      <widget class="QFrame" name="f_tableInput_3">
+                       <property name="styleSheet">
+                        <string notr="true">QFrame
+{
+	background-color: rgb(192, 192, 192)
+}
+
+QGroupBox
+{
+	background-color: rgb(192, 192, 192)
+}
+
+QPushButton
+{ 
+	
+	alternate-background-color: rgb(255, 255, 255);
+	background: rgba(225, 225, 225, 100);
+	border-width: 2px;
+    border-radius: 10px;
+	qproperty-iconSize: 32px 32px;
+	border-style: dashed;
+ }
+
+QPushButton:hover
+{
+	background: rgba(225, 225, 225, 180);
+	border-style: dashed;
+}
+
+QPushButton:pressed
+{
+	background: rgba(75, 75, 75, 180);
+	border-style: inset;
+}</string>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_82">
+                        <item>
+                         <widget class="QGroupBox" name="gb_doccuments">
+                          <property name="font">
+                           <font>
+                            <pointsize>14</pointsize>
+                           </font>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">QLineEdit
+{
+	background: transparent;
+	color: rgb(88, 88, 88);
+	border: none;
+	border-bottom: 1px solid #717072;
+	font: 14pt &quot;MS Shell Dlg 2&quot;;
+}
+
+</string>
+                          </property>
+                          <property name="title">
+                           <string>Doccuments</string>
+                          </property>
+                          <layout class="QVBoxLayout" name="verticalLayout_83">
+                           <item>
+                            <widget class="QLineEdit" name="le_docName">
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="maxLength">
+                              <number>80</number>
+                             </property>
+                             <property name="placeholderText">
+                              <string>Name</string>
+                             </property>
+                             <property name="clearButtonEnabled">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QDateEdit" name="de_docDate">
+                             <property name="font">
+                              <font>
+                               <pointsize>14</pointsize>
+                              </font>
+                             </property>
+                             <property name="displayFormat">
+                              <string>yyyy-MM-dd</string>
+                             </property>
+                             <property name="calendarPopup">
+                              <bool>true</bool>
+                             </property>
+                             <property name="date">
+                              <date>
+                               <year>2022</year>
+                               <month>1</month>
+                               <day>2</day>
+                              </date>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QLineEdit" name="le_docComment">
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="maxLength">
+                              <number>250</number>
+                             </property>
+                             <property name="placeholderText">
+                              <string>Comment</string>
+                             </property>
+                             <property name="clearButtonEnabled">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QFrame" name="frame_40">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="frameShape">
+                              <enum>QFrame::StyledPanel</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Raised</enum>
+                             </property>
+                             <layout class="QHBoxLayout" name="horizontalLayout_64">
+                              <item>
+                               <widget class="QLineEdit" name="le_docPath">
+                                <property name="enabled">
+                                 <bool>false</bool>
+                                </property>
+                                <property name="text">
+                                 <string/>
+                                </property>
+                                <property name="maxLength">
+                                 <number>20</number>
+                                </property>
+                                <property name="placeholderText">
+                                 <string>Path</string>
+                                </property>
+                                <property name="clearButtonEnabled">
+                                 <bool>true</bool>
+                                </property>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QPushButton" name="btn_docAddFile">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="text">
+                                 <string/>
+                                </property>
+                                <property name="icon">
+                                 <iconset resource="../resource/resource.qrc">
+                                  <normaloff>:/Simple icons/simple_icons/fi-rr-file-add.svg</normaloff>:/Simple icons/simple_icons/fi-rr-file-add.svg</iconset>
+                                </property>
+                                <property name="iconSize">
+                                 <size>
+                                  <width>32</width>
+                                  <height>32</height>
+                                 </size>
+                                </property>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QPushButton" name="btn_docOpenFile">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="text">
+                                 <string/>
+                                </property>
+                                <property name="icon">
+                                 <iconset resource="../resource/resource.qrc">
+                                  <normaloff>:/Simple icons/simple_icons/fi-rr-search-alt.svg</normaloff>:/Simple icons/simple_icons/fi-rr-search-alt.svg</iconset>
+                                </property>
+                                <property name="iconSize">
+                                 <size>
+                                  <width>32</width>
+                                  <height>32</height>
+                                 </size>
+                                </property>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QFrame" name="f_tableDbBtn_3">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="frameShape">
+                           <enum>QFrame::StyledPanel</enum>
+                          </property>
+                          <property name="frameShadow">
+                           <enum>QFrame::Raised</enum>
+                          </property>
+                          <layout class="QHBoxLayout" name="horizontalLayout_61">
+                           <property name="spacing">
+                            <number>5</number>
+                           </property>
+                           <property name="leftMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="topMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="rightMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="bottomMargin">
+                            <number>0</number>
+                           </property>
+                           <item>
+                            <widget class="QPushButton" name="btn_docAdd">
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../resource/resource.qrc">
+                               <normaloff>:/Simple icons/simple_icons/fi-rr-add.svg</normaloff>:/Simple icons/simple_icons/fi-rr-add.svg</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>32</width>
+                               <height>32</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="btn_docEdit">
+                             <property name="enabled">
+                              <bool>false</bool>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../resource/resource.qrc">
+                               <normaloff>:/Simple icons/simple_icons/fi-rr-edit.svg</normaloff>:/Simple icons/simple_icons/fi-rr-edit.svg</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>32</width>
+                               <height>32</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="btn_docDelete">
+                             <property name="enabled">
+                              <bool>false</bool>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../resource/resource.qrc">
+                               <normaloff>:/Simple icons/simple_icons/fi-rr-delete.svg</normaloff>:/Simple icons/simple_icons/fi-rr-delete.svg</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>32</width>
+                               <height>32</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="btn_docClear">
+                             <property name="enabled">
+                              <bool>true</bool>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../resource/resource.qrc">
+                               <normaloff>:/Simple icons/simple_icons/fi-rr-broom.svg</normaloff>:/Simple icons/simple_icons/fi-rr-broom.svg</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>32</width>
+                               <height>32</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="f_stockDb_2">
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_81">
+                        <item>
+                         <widget class="QTableWidget" name="tw_documentDb">
+                          <property name="font">
+                           <font>
+                            <family>Times New Roman</family>
+                            <pointsize>18</pointsize>
+                           </font>
+                          </property>
+                          <property name="editTriggers">
+                           <set>QAbstractItemView::NoEditTriggers</set>
+                          </property>
+                          <property name="selectionMode">
+                           <enum>QAbstractItemView::SingleSelection</enum>
+                          </property>
+                          <property name="selectionBehavior">
+                           <enum>QAbstractItemView::SelectRows</enum>
+                          </property>
+                          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+                           <bool>true</bool>
+                          </attribute>
+                          <attribute name="verticalHeaderCascadingSectionResizes">
+                           <bool>true</bool>
+                          </attribute>
+                          <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+                           <bool>false</bool>
+                          </attribute>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
                   </widget>
                  </item>
                 </layout>
@@ -9279,8 +10477,8 @@ QComboBox
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>801</width>
-                      <height>698</height>
+                      <width>473</width>
+                      <height>712</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_21">
@@ -9369,23 +10567,10 @@ QComboBox
                 </layout>
                </widget>
                <widget class="QWidget" name="page_stats">
-                <layout class="QGridLayout" name="gridLayout_18">
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label_3">
-                   <property name="font">
-                    <font>
-                     <pointsize>22</pointsize>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Dashboard is not ready yet...</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_18"/>
                </widget>
               </widget>
              </item>
@@ -9405,6 +10590,14 @@ QComboBox
               <width>16777215</width>
               <height>40</height>
              </size>
+            </property>
+            <property name="tabletTracking">
+             <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">#f_footer{
+	background-color: qlineargradient(spread:reflect, x1:0.512, y1:1, x2:1, y2:0.994, stop:0 rgba(190, 190, 190, 200), stop:1 rgba(131, 131, 131, 20));
+}</string>
             </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
@@ -9436,6 +10629,9 @@ QComboBox
                  <bold>true</bold>
                 </font>
                </property>
+               <property name="tabletTracking">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string>Patus 1.0.1</string>
                </property>
@@ -9451,6 +10647,9 @@ QComboBox
                  <weight>75</weight>
                  <bold>true</bold>
                 </font>
+               </property>
+               <property name="tabletTracking">
+                <bool>false</bool>
                </property>
                <property name="text">
                 <string>Server Starting</string>
@@ -9468,6 +10667,9 @@ QComboBox
                  <bold>true</bold>
                 </font>
                </property>
+               <property name="tabletTracking">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string>Made by Lablack Mourad</string>
                </property>
@@ -9477,6 +10679,85 @@ QComboBox
               </widget>
              </item>
             </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="f_notification">
+         <property name="minimumSize">
+          <size>
+           <width>500</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>500</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_84">
+          <item>
+           <widget class="QScrollArea" name="scrollArea">
+            <property name="frameShape">
+             <enum>QFrame::WinPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Plain</enum>
+            </property>
+            <property name="widgetResizable">
+             <bool>true</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <widget class="QWidget" name="scrollAreaWidgetContents">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>476</width>
+               <height>748</height>
+              </rect>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_85">
+              <item>
+               <widget class="QWidget" name="w_notification" native="true">
+                <property name="styleSheet">
+                 <string notr="true">*
+{
+	font: 14pt &quot;Times New Roman&quot;;
+}</string>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_86"/>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_notification_clear">
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Clear all notifications</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../resource/resource.qrc">
+              <normaloff>:/Simple icons/simple_icons/fi-rr-broom.svg</normaloff>:/Simple icons/simple_icons/fi-rr-broom.svg</iconset>
+            </property>
            </widget>
           </item>
          </layout>
@@ -9499,12 +10780,12 @@ QComboBox
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>576</x>
-     <y>162</y>
+     <x>177</x>
+     <y>86</y>
     </hint>
     <hint type="destinationlabel">
-     <x>717</x>
-     <y>163</y>
+     <x>181</x>
+     <y>86</y>
     </hint>
    </hints>
   </connection>
@@ -9515,12 +10796,12 @@ QComboBox
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>874</x>
-     <y>202</y>
+     <x>175</x>
+     <y>81</y>
     </hint>
     <hint type="destinationlabel">
-     <x>640</x>
-     <y>197</y>
+     <x>148</x>
+     <y>81</y>
     </hint>
    </hints>
   </connection>

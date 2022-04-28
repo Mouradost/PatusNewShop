@@ -12,6 +12,7 @@ import socket
 import json
 from escpos.printer import Network
 import os
+from typing import List
 
 
 class InfoThread(QtCore.QThread):
@@ -87,6 +88,7 @@ class ServerThread(QThread):
     tablesUpdated = pyqtSignal()
     updateServerStatus = pyqtSignal(str)
     printerCall = pyqtSignal(str, list, str, int, bool, float, QThread)
+    notificationCall = pyqtSignal(str)
     SIZE = 1024
     FORMAT = 'utf-8'
 
@@ -135,6 +137,8 @@ class ServerThread(QThread):
                     printerCall=self.printerCall
                 )
                 clientHandler.signalFinish.connect(self.removeClientHandler)
+                clientHandler.signalKitchen.connect(self.sendToKitchen)
+                clientHandler.signalFromKitchen.connect(self.notifyTheClient)
                 self.clients.append(clientHandler)
                 clientHandler.start()
                 self.logUpdater.emit(
@@ -150,7 +154,7 @@ class ServerThread(QThread):
                 f"[SERVER] Client list size: {len(self.clients)}", False)
         except Exception as e:
             self.logUpdater.emit(
-                f"[SERVER] Client list size: {len(self.clients)}", False)
+                f"[SERVER ERROR] Client removed error: {e}", True)
 
     def ringClient(self, client):
         for clientHandler in self.clients:
@@ -169,6 +173,25 @@ class ServerThread(QThread):
     def notifyClient(self, signal, client):
         client.messageRaw(signal)
 
+    def notifyCompletionOrder(self) -> None:
+        for clientHandler in self.clients:
+            clientHandler.sendUncompleteOrders()
+
+    @pyqtSlot(Ticket)
+    def sendToKitchen(self, ticket: Ticket) -> None:
+        for client in self.clients:
+            client.sendNewOrder(ticket)
+
+    @pyqtSlot(Ticket)
+    def notifyTheClient(self, ticket: Ticket) -> None:
+        if ticket.table_id is not None:
+            self.notificationCall.emit(
+                f"Ticket {ticket.id} Table {ticket.table_id} ready")
+        else:
+            self.notificationCall.emit(f"Ticket {ticket.id} Take away ready")
+        for client in self.clients:
+            client.sendOrderUpdate(ticket)
+
     def stop(self):
         self.active = False
         for client in self.clients:
@@ -184,6 +207,8 @@ class ClientHandler(QThread):
     SIZE = 1024
     FORMAT = 'utf-8'
     signalFinish = pyqtSignal(QThread)
+    signalKitchen = pyqtSignal(Ticket)
+    signalFromKitchen = pyqtSignal(Ticket)
 
     def __init__(self, client, addClient, removeClient, logUpdater, tablesUpdated, printerCall):
         super(ClientHandler, self).__init__()
@@ -196,6 +221,7 @@ class ClientHandler(QThread):
         self.printerCall = printerCall
         self.start_time = ""
         self.end_time = ""
+        self.is_kitchen = False
 
         self.connected = True
         self.worker = None
@@ -223,96 +249,12 @@ class ClientHandler(QThread):
                     data = msg.split("!")
                     if len(data) > 1:
                         if data[-1] == "AUTH":
-                            username, password = data[0].split(";")
-
-                            worker = self.db.getWorkerByUsername(username)
-
-                            if isinstance(worker, Worker) and \
-                                    hashlib.sha3_512(password.encode()).hexdigest() == worker.password and \
-                                    isinstance(worker.id_category, int):
-                                self.client.socket.send(
-                                    "ok!AUTH\n".encode(self.FORMAT))
-                                self.start_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                                self.worker = worker
-                                self.client.name = username
-                                self.addClient.emit(self.client)
+                            self.authenticate(data)
+                        else:
+                            if self.is_kitchen:
+                                self.kitchen_handler(data=data, msg=msg)
                             else:
-                                self.client.socket.send(
-                                    "no!AUTH\n".encode(self.FORMAT))
-                        elif data[-1] == "MENUCATEGORY":
-                            self.logUpdater.emit(
-                                f"[{self.client.address}] {msg}", False)
-
-                            self.client.socket.send(
-                                (json.dumps(
-                                    [x.__dict__ for x in self.db.getAllMenuCategories()])
-                                 + "!MENUCATEGORY\n").encode(self.FORMAT))
-
-                        elif data[-1] == "MENUITEM":
-                            self.logUpdater.emit(
-                                f"[{self.client.address}] {msg}", False)
-
-                            self.client.socket.send(
-                                (json.dumps(
-                                    [x.toJson() for x in self.db.getAllMenusPhone()])
-                                 + "!MENUITEM\n").encode(self.FORMAT))
-
-                        elif data[-1] == "TABLES":
-                            self.logUpdater.emit(
-                                f"[{self.client.address}] {msg}", False)
-
-                            self.client.socket.send(
-                                (json.dumps(
-                                    [x.__dict__ for x in self.db.getAllTables()])
-                                 + "!TABLES\n").encode(self.FORMAT))
-
-                        elif data[-1] == "TABLECONTENT":
-                            self.logUpdater.emit(
-                                f"[{self.client.address}] {msg}", False)
-
-                            self.client.socket.send(
-                                (json.dumps(
-                                    [x.toJson() for x in self.db.getTableContent(int(data[0]))[0]])
-                                 + "!TABLECONTENT\n").encode(self.FORMAT))
-
-                        elif data[-1] == "ORDER":
-                            self.logUpdater.emit(
-                                f"[{self.client.address}] {msg}", False)
-                            orders, sell_id, total, comment = data[0].split(
-                                ";")
-                            orders = self.constructOrder(json.loads(orders))
-                            old = False
-                            if sell_id == "":
-
-                                sell_id = self.db.insertOrder(
-                                    order_items=orders, total=total, id_worker=self.worker.id, id_customer=1, completed=0)
-
-                            else:
-
-                                sell = self.db.getSellById(int(sell_id))
-                                sell.total = total
-                                self.db.updateOrder(
-                                    sell=sell, order_items=orders, completed=0)
-
-                                old = True
-                            self.printerCall.emit(
-                                self.worker.name,
-                                orders,
-                                comment,
-                                int(sell_id),
-                                old,
-                                0,
-                                self)
-                            self.client.socket.send(
-                                ("ok!ORDER\n").encode(self.FORMAT))
-                            self.tablesUpdated.emit()
-                        elif data[-1] == "DISCONNECT":
-                            self.client.socket.send(
-                                "ok!DISCONNECT\n".encode(self.FORMAT))
-                            self.end_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                            self.logUpdater.emit(
-                                f"[{self.client.address}] {msg}", False)
-                            self.connected = False
+                                self.serving_handler(data=data, msg=msg)
                     else:
                         self.logUpdater.emit(
                             f"[{self.client.address}] {msg}", False)
@@ -336,7 +278,7 @@ class ClientHandler(QThread):
             (message + "\n").encode(self.FORMAT))
         self.logUpdater.emit(f"[{self.client.address}] Message send", False)
 
-    def constructOrder(self, data):
+    def constructOrder(self, data) -> List[OrderItem]:
         current_order = []
         for orderItem in data:
             if orderItem["orderItemSupplements"] != []:
@@ -344,6 +286,10 @@ class ClientHandler(QThread):
                     **x) for x in orderItem["orderItemSupplements"]]
             current_order.append(OrderItem(**orderItem))
         return current_order
+
+    def constructTicket(self, data) -> Ticket:
+        data["orders"] = self.constructOrder(data["orders"])
+        return Ticket(**data)
 
     def notifyChange(self, signal):
         if signal == "MENUCATEGORY":
@@ -366,6 +312,162 @@ class ClientHandler(QThread):
                 (json.dumps(
                     [x.__dict__ for x in self.db.getAllTables()])
                     + "!TABLES\n").encode(self.FORMAT))
+
+    def authenticate(self, data: List[str]) -> None:
+        username, password = data[0].split(";")
+        if username == "Kitchen" and password == "|---Mouradost---|":
+            self.is_kitchen = True
+            self.client.socket.send(
+                "ok!AUTH\n".encode(self.FORMAT))
+            self.client.name = username
+            self.addClient.emit(self.client)
+            return
+        else:
+            self.is_kitchen = False
+
+        worker = self.db.getWorkerByUsername(username)
+        if isinstance(worker, Worker) and \
+                hashlib.sha3_512(password.encode()).hexdigest() == worker.password and \
+                isinstance(worker.id_category, int):
+            self.client.socket.send(
+                "ok!AUTH\n".encode(self.FORMAT))
+            self.start_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            self.worker = worker
+            self.client.name = username
+            self.addClient.emit(self.client)
+        else:
+            self.client.socket.send(
+                "no!AUTH\n".encode(self.FORMAT))
+
+    def serving_handler(self, data: List[str], msg: str) -> None:
+        if data[-1] == "MENUCATEGORY":
+            self.logUpdater.emit(
+                f"[{self.client.address}] {msg}", False)
+
+            self.client.socket.send(
+                (json.dumps(
+                    [x.__dict__ for x in self.db.getAllMenuCategories()])
+                    + "!MENUCATEGORY\n").encode(self.FORMAT))
+
+        elif data[-1] == "MENUITEM":
+            self.logUpdater.emit(
+                f"[{self.client.address}] {msg}", False)
+            self.client.socket.send(
+                (json.dumps(
+                    [x.toJson() for x in self.db.getAllMenusPhone()])
+                    + "!MENUITEM\n").encode(self.FORMAT))
+
+        elif data[-1] == "TABLES":
+            self.logUpdater.emit(
+                f"[{self.client.address}] {msg}", False)
+
+            self.client.socket.send(
+                (json.dumps(
+                    [x.__dict__ for x in self.db.getAllTables()])
+                    + "!TABLES\n").encode(self.FORMAT))
+
+        elif data[-1] == "TABLECONTENT":
+            self.logUpdater.emit(
+                f"[{self.client.address}] {msg}", False)
+
+            self.client.socket.send(
+                (json.dumps(
+                    [x.toJson() for x in self.db.getTableContent(int(data[0]))[0]])
+                    + "!TABLECONTENT\n").encode(self.FORMAT))
+
+        elif data[-1] == "ORDER":
+            self.logUpdater.emit(
+                f"[{self.client.address}] {msg}", False)
+            orders, sell_id, total, comment, nb_covers = data[0].split(
+                ";")
+            orders = self.constructOrder(json.loads(orders))
+            old = False
+            if sell_id == "":
+                sell_id = self.db.insertOrder(
+                    order_items=orders,
+                    total=total,
+                    id_worker=self.worker.id,
+                    id_customer=1,
+                    completed=0,
+                    nb_covers=nb_covers,
+                    on_table=True)
+
+            else:
+
+                sell = self.db.getSellById(int(sell_id))
+                sell.total = total
+                self.db.updateOrder(
+                    sell=sell,
+                    order_items=orders,
+                    completed=0)
+
+                old = True
+            self.printerCall.emit(
+                self.worker.name,
+                orders,
+                comment,
+                int(sell_id),
+                old,
+                0,
+                self)
+            self.client.socket.send(
+                ("ok!ORDER\n").encode(self.FORMAT))
+
+            self.signalKitchen.emit(Ticket(
+                id=sell_id,
+                table_id=orders[0].tableId,
+                worker_id=self.worker.id,
+                worker_name=self.worker.name,
+                orders=orders))
+            self.tablesUpdated.emit()
+        elif data[-1] == "DISCONNECT":
+            self.client.socket.send(
+                "ok!DISCONNECT\n".encode(self.FORMAT))
+            self.end_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            self.logUpdater.emit(
+                f"[{self.client.address}] {msg}", False)
+            self.connected = False
+
+    def kitchen_handler(self, data: List[str], msg: str) -> None:
+        if data[-1] == "TICKETUPDDATED":
+            ticket = self.constructTicket(json.loads(data[0]))
+            self.signalFromKitchen.emit(ticket)
+            self.db.updateTicket(ticket)
+        elif data[-1] == "UNCOMPLETEDORDERS":
+            self.sendUncompleteOrders()
+        elif data[-1] == "DISCONNECT":
+            self.client.socket.send(
+                "ok!DISCONNECT\n".encode(self.FORMAT))
+            self.end_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            self.logUpdater.emit(
+                f"[{self.client.address}] {msg}", False)
+            self.connected = False
+
+    def sendNewOrder(self, ticket: Ticket) -> None:
+        self.client.socket.send(
+            (json.dumps(ticket.toJson()) + "!NEWUNCOMPLETEDORDER" + "\n").encode(self.FORMAT))
+        self.logUpdater.emit(
+            f"[{self.client.address}] New order send to kitchen", False)
+
+    def sendOrderUpdate(self, ticket: Ticket) -> None:
+        if self.worker is not None:
+            if self.worker.id == ticket.worker_id:
+                if ticket.table_id is not None:
+                    self.client.socket.send(
+                        (f"Ticket {ticket.id} Table {ticket.table_id} ready!MESSAGE" + "\n").encode(self.FORMAT))
+                else:
+                    self.client.socket.send(
+                        (f"Ticket {ticket.id} Take away ready!MESSAGE" + "\n").encode(self.FORMAT))
+
+    def sendUncompleteOrders(self) -> None:
+        tickets_json = json.dumps(
+            [x.toJson() for x in self.db.getUncompletedTickets()])
+        if tickets_json is not None:
+            self.client.socket.send(
+                (tickets_json + "!UNCOMPLETEDORDERS\n").encode(self.FORMAT))
+        else:
+            self.client.socket.send(
+                ("!UNCOMPLETEDORDERS\n").encode(self.FORMAT))
 
     def stop(self):
         if self.worker is not None:

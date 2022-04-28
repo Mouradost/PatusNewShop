@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 import datetime
+from typing import List
 
 
 @dataclass
-class Expense(object):
+class Expense:
     name: str
     category: int
     unit: str = ""
@@ -11,11 +12,12 @@ class Expense(object):
     price: float = 0
     supplier_id: int = None
     date: str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    payed: bool = True
     id: int = None
 
 
 @dataclass
-class MenuItem(object):
+class MenuItem:
     name: str
     category: str
     category_id: int = None
@@ -28,7 +30,7 @@ class MenuItem(object):
 
 
 @dataclass
-class MenuItemPhone(object):
+class MenuItemPhone:
     name: str
     category: str
     category_id: int = None
@@ -49,6 +51,7 @@ class MenuItemPhone(object):
             'category': self.category,
             'category_id': self.category_id,
             'unit': self.unit,
+            'quantity': self.quantity,
             'price': self.price,
             "available": self.available,
             "picture": self.picture,
@@ -58,7 +61,7 @@ class MenuItemPhone(object):
 
 
 @dataclass
-class Supplement(object):
+class Supplement:
     name: str
     related_item_id: int = None
     quantity: float = 0
@@ -79,11 +82,12 @@ class Supplement(object):
 
 
 @dataclass
-class Stock(object):
+class Stock:
     name: str
     category: int
     unit: str
     quantity: float = 0
+    is_ingredient: bool = False
     id: int = None
 
 
@@ -99,7 +103,7 @@ class Customer:
 
 
 @dataclass
-class Supplier(object):
+class Supplier:
     name: str
     phone: str = None
     address: str = None
@@ -108,14 +112,15 @@ class Supplier(object):
 
 
 @dataclass
-class ExpenseCategory(object):
+class ExpenseCategory:
     name: str
     stock: bool = True
+    is_ingredient: bool = False
     id: int = None
 
 
 @dataclass
-class Reservation(object):
+class Reservation:
     name: str
     phone: str = None
     customer_id: int = None
@@ -126,7 +131,7 @@ class Reservation(object):
 
 
 @dataclass
-class Waste(object):
+class Waste:
     worker_id: int = None
     name: str = None
     category: str = None
@@ -137,7 +142,7 @@ class Waste(object):
 
 
 @dataclass
-class MenuCategory(object):
+class MenuCategory:
     name: str
     printing_place: int = None
     id: int = None
@@ -155,6 +160,7 @@ class Worker:
     score: float = 0
     picture: object = None
     face: object = None
+    cv: object = None
     id: int = None
 
 
@@ -165,6 +171,8 @@ class Sell:
     date: str = ""
     total: float = 0
     completed: int = 0
+    nb_covers: int = 0
+    on_table: bool = True
     id: int = None
 
 
@@ -175,6 +183,8 @@ class SellItem:
     quantity: float = 0
     total: float = 0
     group: int = 0
+    ready: int = 0
+    served: int = 0
     id: int = None
 
 
@@ -233,10 +243,15 @@ class OrderItem:
     productId: int
     productName: str
     productCategory: int
+    productUnit: str
     orderItemQuantity: float
     orderItemTotal: float
     orderItemSupplements: list
     group_id: int
+    nb_covers: int
+    ready: bool
+    served: bool
+    id: int = None
 
     def toJson(self):
         return {
@@ -244,15 +259,39 @@ class OrderItem:
             "productId": self.productId,
             "productName": self.productName,
             "productCategory": self.productCategory,
+            "productUnit": self.productUnit,
             "orderItemQuantity": self.orderItemQuantity,
             "orderItemTotal": self.orderItemTotal,
             "orderItemSupplements": [x.toJson() for x in self.orderItemSupplements],
-            "group_id": self.group_id
+            "group_id": self.group_id,
+            "nb_covers": self.nb_covers,
+            "ready": self.ready,
+            "served": self.served,
+            "id": self.id
+        }
+
+
+@dataclass
+class Ticket:
+    id: int
+    table_id: int
+    worker_id: int
+    worker_name: str
+    orders: List[OrderItem]
+
+    def toJson(self):
+        return {
+            "id": self.id,
+            "table_id": self.table_id,
+            "worker_id": self.worker_id,
+            "worker_name": self.worker_name,
+            "orders": [x.toJson() for x in self.orders]
         }
 
 
 @dataclass
 class OrderItemShow:
+    Ready: bool
     Name: str
     Category: str
     Quantity: float

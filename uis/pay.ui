@@ -138,6 +138,9 @@ QLineEdit
      <property name="smallDecimalPoint">
       <bool>true</bool>
      </property>
+     <property name="digitCount">
+      <number>7</number>
+     </property>
      <property name="value" stdset="0">
       <double>0.000000000000000</double>
      </property>
@@ -181,6 +184,9 @@ QLineEdit
      </property>
      <property name="smallDecimalPoint">
       <bool>true</bool>
+     </property>
+     <property name="digitCount">
+      <number>7</number>
      </property>
     </widget>
    </item>

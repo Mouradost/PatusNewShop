@@ -500,4 +500,7 @@
     <file>simple_icons/fi-rr-zoom-in.svg</file>
     <file>simple_icons/fi-rr-zoom-out.svg</file>
   </qresource>
+  <qresource prefix="Restaurant_plan">
+    <file>Restaurant_plan/plan.png</file>
+  </qresource>
 </RCC>

@@ -3,6 +3,7 @@ import json
 import os
 import logging
 import hashlib
+import sys
 
 
 def check_license(license: str) -> None:
@@ -15,6 +16,20 @@ def get_mac() -> str:
     pc_mac_address = ':'.join(['{:02x}'.format(
         (uuid.getnode() >> elements) & 0xff) for elements in range(0, 2*6, 2)][::-1])
     return pc_mac_address
+
+
+def get_serial_number() -> str:
+    os_type = sys.platform.lower()
+    if "win" in os_type:
+        command = "wmic bios get serialnumber"
+    elif "linux" in os_type:
+        command = "hal-get-property --udi /org/freedesktop/Hal/devices/computer --key system.hardware.uuid"
+    elif "darwin" in os_type:
+        command = "ioreg -l | grep IOPlatformSerialNumber"
+    else:
+        raise Exception("Unsupported OS")
+    result = os.popen(command).read()
+    return result.replace("\n", "").replace("	", "").replace(" ", "")
 
 
 def load_current_license() -> str:
@@ -38,4 +53,6 @@ def license_generator(license: str) -> str:
     return hashlib.sha3_512(license.encode()).hexdigest()
 
 
-# print(license_generator("19:66:99:67:9d:74"))
+# print(license_generator(get_mac()))
+
+# print(license_generator(get_serial_number()))

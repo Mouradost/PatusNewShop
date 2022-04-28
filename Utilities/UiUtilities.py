@@ -1,3 +1,4 @@
+from typing import List, Union
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -127,6 +128,16 @@ class Reducer(QDialog):
         self.buttonBox.rejected.connect(self.reject)
         self.le_reduction.clear()
         self.le_reduction.setValidator(QDoubleValidator())
+
+
+class NbCoversChooser(QDialog):
+    def __init__(self):
+        super(NbCoversChooser, self).__init__()
+        uic.loadUi(os.path.join(os.getcwd(), 'uis', 'NbCovers.ui'), self)
+        self.buttonBox.accepted.connect(self.accept)
+        self.buttonBox.rejected.connect(self.reject)
+        self.le_nb_covers.clear()
+        self.le_nb_covers.setValidator(QIntValidator())
 
 
 class Holder(QDialog):
@@ -297,7 +308,7 @@ def createProductContainer(parent, db, product, table_id, fc):
     frame.setFrameShape(QFrame.StyledPanel)
     frame.setLineWidth(1)
     frame.setLayout(QVBoxLayout())
-    frame.setMaximumSize(200, 300)
+    frame.setMaximumSize(200, 400)
     # Picture or name
     label = QLabel()
     label.setPixmap(QPixmap(os.path.join(
@@ -333,28 +344,80 @@ def createProductContainer(parent, db, product, table_id, fc):
         productId=product.id,
         productName=product.name,
         productCategory=product.category_id,
+        productUnit=product.unit,
         orderItemQuantity=product.quantity,
         orderItemTotal=product.price,
         orderItemSupplements=[],
-        group_id=0)
+        group_id=0,
+        nb_covers=1,
+        ready=0,
+        served=0)
     order_item_ = OrderItem(
         tableId=table_id,
         productId=product.id,
         productName=product.name,
+        productUnit=product.unit,
         productCategory=product.category_id,
         orderItemQuantity=-product.quantity,
-        orderItemTotal=product.price,
+        orderItemTotal=-product.price,
         orderItemSupplements=[],
-        group_id=0)
+        group_id=0,
+        nb_covers=1,
+        ready=0,
+        served=0)
     add_button.clicked.connect(
         partial(fc, order_item, supp_list, comboBox))
     remove_button.clicked.connect(
         partial(fc, order_item_, supp_list, comboBox))
+    # Buttons add specific number
+    add_button_s = QPushButton(parent=btn_layout, text="++")
+    remove_button_s = QPushButton(parent=btn_layout, text="--")
+    order_item_s = OrderItem(
+        tableId=table_id,
+        productId=product.id,
+        productName=product.name,
+        productCategory=product.category_id,
+        productUnit=product.unit,
+        orderItemQuantity=product.quantity,
+        orderItemTotal=product.price,
+        orderItemSupplements=[],
+        group_id=0,
+        nb_covers=1,
+        ready=0,
+        served=0)
+    order_item__s = OrderItem(
+        tableId=table_id,
+        productId=product.id,
+        productName=product.name,
+        productCategory=product.category_id,
+        productUnit=product.unit,
+        orderItemQuantity=-product.quantity,
+        orderItemTotal=-product.price,
+        orderItemSupplements=[],
+        group_id=0,
+        nb_covers=1,
+        ready=0,
+        served=0)
+
+    add_button_s.clicked.connect(
+        partial(custom_quantity, fc, order_item_s, supp_list, comboBox))
+    remove_button_s.clicked.connect(
+        partial(custom_quantity, fc, order_item__s, supp_list, comboBox))
+
+    btn_layout.layout().addWidget(add_button_s)
     btn_layout.layout().addWidget(add_button)
     btn_layout.layout().addWidget(remove_button)
-    # buttons
+    btn_layout.layout().addWidget(remove_button_s)
+
     frame.layout().addWidget(btn_layout)
+
     return frame
+
+
+def custom_quantity(fc, order_item, supp_list, comboBox):
+    custom_quantity = CustomQuantity(fc, order_item, supp_list, comboBox)
+    custom_quantity.show()
+    custom_quantity.exec_()
 
 
 def createClientDashBoardContainer(parent, client, fc_ring, fc_message):
@@ -400,6 +463,7 @@ def createClientDashBoardContainer(parent, client, fc_ring, fc_message):
 
 def prepareTicketForReceipt(worker_name: str, order_items: list, tax: float, comment: str, ticket_number: int):
     total = 0
+    group = 0
     ticket_txt = ""
     ticket_txt += '=' * 46 + ' \n'
     ticket_txt += f'Ticket Number : {ticket_number:>30}\n'
@@ -414,24 +478,36 @@ def prepareTicketForReceipt(worker_name: str, order_items: list, tax: float, com
     ticket_txt += f"{'ITEM':<20}{'QUANTITY':^13}{'PRICE':^13}\n"
     ticket_txt += '-' * 46 + ' \n'
     for order_item in order_items:
+        if group != order_item.group_id:
+            ticket_txt += f"{'*' * 46}\n"
+            group = order_item.group_id
         total += order_item.orderItemTotal
-        ticket_txt += f"{order_item.productName:<20}{order_item.orderItemQuantity:^13}{round(order_item.orderItemTotal, 2):^13}\n"
+        if order_item.productUnit.strip().lower() == "g" or order_item.productUnit.strip().lower() == "kg":
+            ticket_txt += f"{order_item.productName:<20}{f'{order_item.orderItemQuantity} {order_item.productUnit.strip().lower()}':^13}{to_money(order_item.orderItemTotal):^13}\n"
+        else:
+            ticket_txt += f"{order_item.productName:<20}{order_item.orderItemQuantity:^13}{to_money(order_item.orderItemTotal):^13}\n"
         for supp in order_item.orderItemSupplements:
-            ticket_txt += f"+ {supp.name:<31}{round(order_item.orderItemQuantity * supp.price, 2):^13}\n"
-            total += order_item.orderItemQuantity * supp.price
+            if order_item.productUnit.strip().lower() == "g" or order_item.productUnit.strip().lower() == "kg":
+                ticket_txt += f"+ {supp.name:<31}{to_money(supp.price):^13}\n"
+                total += supp.price
+            else:
+                ticket_txt += f"+ {supp.name:<31}{to_money(order_item.orderItemQuantity * supp.price):^13}\n"
+                total += order_item.orderItemQuantity * supp.price
+
     if len(comment) > 0:
         ticket_txt += '-' * 46 + ' \n'
         ticket_txt += comment + ' \n'
     ticket_txt += '-' * 46 + ' \n'
-    ticket_txt += f"{'TOTAL':<33}{round(total, 2):^13}\n"
-    ticket_txt += f"{'REDUCTION':<33}{round(tax, 2):^13}\n"
-    ticket_txt += f"{'TOTAL TO PAY':<33}{round(total - tax, 2):^13}\n"
+    ticket_txt += f"{'TOTAL':<33}{to_money(total):^13}\n"
+    ticket_txt += f"{'REDUCTION':<33}{to_money(tax):^13}\n"
+    ticket_txt += f"{'TOTAL TO PAY':<33}{to_money(total - tax):^13}\n"
     ticket_txt += '=' * 46 + ' \n'
     return ticket_txt
 
 
 def prepareTicketForCashier(worker_name: str, order_items: list, tax: float, comment: str, ticket_number: int, given: float):
     total = 0
+    group = 0
     ticket_txt = ""
     ticket_txt += '=' * 46 + ' \n'
     ticket_txt += f'Ticket Number : {ticket_number:>30}\n'
@@ -446,21 +522,32 @@ def prepareTicketForCashier(worker_name: str, order_items: list, tax: float, com
     ticket_txt += f"{'ITEM':<20}{'QUANTITY':^13}{'PRICE':^13}\n"
     ticket_txt += '-' * 46 + ' \n'
     for order_item in order_items:
+        if group != order_item.group_id:
+            ticket_txt += f"{'*' * 46}\n"
+            group = order_item.group_id
         total += order_item.orderItemTotal
-        ticket_txt += f"{order_item.productName:<20}{order_item.orderItemQuantity:^13}{round(order_item.orderItemTotal, 2):^13}\n"
+
+        if order_item.productUnit.strip().lower() == "g" or order_item.productUnit.strip().lower() == "kg":
+            ticket_txt += f"{order_item.productName:<20}{f'{order_item.orderItemQuantity} {order_item.productUnit.strip().lower()}':^13}{to_money(order_item.orderItemTotal):^13}\n"
+        else:
+            ticket_txt += f"{order_item.productName:<20}{order_item.orderItemQuantity:^13}{to_money(order_item.orderItemTotal):^13}\n"
         for supp in order_item.orderItemSupplements:
-            ticket_txt += f"+ {supp.name:<31}{round(order_item.orderItemQuantity * supp.price, 2):^13}\n"
-            total += order_item.orderItemQuantity * supp.price
+            if order_item.productUnit.strip().lower() == "g" or order_item.productUnit.strip().lower() == "kg":
+                ticket_txt += f"+ {supp.name:<31}{to_money(supp.price):^13}\n"
+                total += supp.price
+            else:
+                ticket_txt += f"+ {supp.name:<31}{to_money(order_item.orderItemQuantity * supp.price):^13}\n"
+                total += order_item.orderItemQuantity * supp.price
     if len(comment) > 0:
         ticket_txt += '-' * 46 + ' \n'
         ticket_txt += comment + ' \n'
     ticket_txt += '-' * 46 + ' \n'
-    ticket_txt += f"{'TOTAL':<33}{round(total, 2):^13}\n"
-    ticket_txt += f"{'REDUCTION':<33}{round(tax, 2):^13}\n"
-    ticket_txt += f"{'TOTAL TO PAY':<33}{round(total - tax, 2):^13}\n"
+    ticket_txt += f"{'TOTAL':<33}{to_money(total):^13}\n"
+    ticket_txt += f"{'REDUCTION':<33}{to_money(tax):^13}\n"
+    ticket_txt += f"{'TOTAL TO PAY':<33}{to_money(total - tax):^13}\n"
     ticket_txt += '=' * 46 + ' \n'
-    ticket_txt += f"{'RECEIVED':<33}{given:^13}\n"
-    ticket_txt += f"{'RETURNED':<33}{round(given - total, 2):^13}\n"
+    ticket_txt += f"{'RECEIVED':<33}{to_money(given):^13}\n"
+    ticket_txt += f"{'RETURNED':<33}{to_money(given - total):^13}\n"
     ticket_txt += '=' * 46 + ' \n'
     ticket_txt += f"{'PATUS vous remercie pour votre visite':^46}\n"
     ticket_txt += '=' * 46 + ' \n'
@@ -468,7 +555,12 @@ def prepareTicketForCashier(worker_name: str, order_items: list, tax: float, com
     return ticket_txt
 
 
-def prepareTicketForOrder(worker_name: str, order_items: list, comment: str, ticket_number: int, old: bool):
+def prepareTicketForOrder(
+        worker_name: str,
+        order_items: List[OrderItem],
+        comment: str,
+        ticket_number: int,
+        old: bool) -> Union[str, str, str, int, int, int]:
     db = DBHelper()
     kitchen_count, pizza_count, drink_count = 0, 0, 0
     kitchen_group, pizza_group, drink_group = 0, 0, 0
@@ -538,30 +630,34 @@ def prepareTicketForOrder(worker_name: str, order_items: list, comment: str, tic
     order_items.sort(key=lambda x: x.group_id)
 
     for order_item in order_items:
-        if db.getMenuCategoryById(order_item.productCategory).printing_place == 2:
-            if drink_group != order_item.group_id:
-                ticket_bar_txt += f"{'*' * 15}{f'Group {order_item.group_id}':^16}{'*' * 15}\n"
-                drink_group = order_item.group_id
-            ticket_bar_txt += f"{order_item.productName:<23} {order_item.orderItemQuantity:^23}\n"
-            for supp in order_item.orderItemSupplements:
-                ticket_bar_txt += f"+ {supp.name:<23}\n"
-            drink_count += 1
-        else:
-            if kitchen_group != order_item.group_id:
-                ticket_kitchen_txt += f"{'*' * 15}{f'Group {order_item.group_id}':^16}{'*' * 15}\n"
-                kitchen_group = order_item.group_id
-            ticket_kitchen_txt += f"{order_item.productName:<23} {order_item.orderItemQuantity:^23}\n"
-            kitchen_count += 1
-            for supp in order_item.orderItemSupplements:
-                ticket_kitchen_txt += f"+ {supp.name:<23}\n"
-            if db.getMenuCategoryById(order_item.productCategory).printing_place == 1:
-                if pizza_group != order_item.group_id:
-                    ticket_pizza_txt += f"{'*' * 15}{f'Group {order_item.group_id}':^16}{'*' * 15}\n"
-                    pizza_group = order_item.group_id
-                ticket_pizza_txt += f"{order_item.productName:<23} {order_item.orderItemQuantity:^23}\n"
+        if not bool(order_item.ready):
+            if db.getMenuCategoryById(order_item.productCategory).printing_place == 2:
+                if drink_group != order_item.group_id:
+                    ticket_bar_txt += f"{'*' * 15}{f'Group {order_item.group_id}':^16}{'*' * 15}\n"
+                    drink_group = order_item.group_id
+                ticket_bar_txt += f"{order_item.productName:<23} {order_item.orderItemQuantity:^23}\n"
                 for supp in order_item.orderItemSupplements:
-                    ticket_pizza_txt += f"+ {supp.name:<23}\n"
-                pizza_count += 1
+                    ticket_bar_txt += f"+ {supp.name:<23}\n"
+                drink_count += 1
+            else:
+                if kitchen_group != order_item.group_id:
+                    ticket_kitchen_txt += f"{'*' * 15}{f'Group {order_item.group_id}':^16}{'*' * 15}\n"
+                    kitchen_group = order_item.group_id
+                if order_item.productUnit.strip().lower() == "g" or order_item.productUnit.strip().lower() == "kg":
+                    ticket_kitchen_txt += f"{order_item.productName:<23} {f'{order_item.orderItemQuantity} {order_item.productUnit.strip().lower()}':^23}\n"
+                else:
+                    ticket_kitchen_txt += f"{order_item.productName:<23} {order_item.orderItemQuantity:^23}\n"
+                kitchen_count += 1
+                for supp in order_item.orderItemSupplements:
+                    ticket_kitchen_txt += f"+ {supp.name:<23}\n"
+                if db.getMenuCategoryById(order_item.productCategory).printing_place == 1:
+                    if pizza_group != order_item.group_id:
+                        ticket_pizza_txt += f"{'*' * 15}{f'Group {order_item.group_id}':^16}{'*' * 15}\n"
+                        pizza_group = order_item.group_id
+                    ticket_pizza_txt += f"{order_item.productName:<23} {order_item.orderItemQuantity:^23}\n"
+                    for supp in order_item.orderItemSupplements:
+                        ticket_pizza_txt += f"+ {supp.name:<23}\n"
+                    pizza_count += 1
 
     if len(comment) > 0:
         ticket_kitchen_txt += '-' * 46 + ' \n'
@@ -577,3 +673,114 @@ def prepareTicketForOrder(worker_name: str, order_items: list, comment: str, tic
     ticket_bar_txt += '=' * 46 + ' \n'
 
     return ticket_kitchen_txt, ticket_pizza_txt, ticket_bar_txt, kitchen_count, pizza_count, drink_count
+
+
+class MovableButton(QPushButton):
+    drag_initiated = pyqtSignal(QPushButton)
+
+    def __init__(self, **args):
+        super(MovableButton, self).__init__(**args)
+
+    def mouseMoveEvent(self, event):
+        if event.buttons() == Qt.RightButton:
+            mimeData = QMimeData()
+            drag = QDrag(self)
+            drag.setMimeData(mimeData)
+            self.drag_initiated.emit(self)
+            drag.exec_(Qt.MoveAction)
+
+
+class CustomTablesWidget(QWidget):
+    def __init__(self, **args):
+        super(CustomTablesWidget, self).__init__(objectName="w_tables", **args)
+        self.setAcceptDrops(True)
+        self.moving_btn = None
+        self.settings = QSettings("Patus", "Tables")
+
+    @pyqtSlot(QPushButton)
+    def btn_moving(self, btn):
+        self.moving_btn = btn
+
+    def dragEnterEvent(self, event):
+        event.accept()
+
+    def dropEvent(self, event):
+        position = event.pos()
+        if self.moving_btn:
+            position.setX(position.x()-80)
+            position.setY(position.y()-50)
+            self.moving_btn.move(position)
+            self.settings.setValue(
+                f"table_{self.moving_btn.objectName()}", position)
+        event.accept()
+
+
+class CustomQuantity(QDialog):
+    def __init__(self, fc, order_item: OrderItem, supp_list: list, comboBox: QComboBox):
+        super(CustomQuantity, self).__init__()
+        uic.loadUi(os.path.join(os.getcwd(), 'uis', 'customQuantity.ui'), self)
+        self.le_quantity.setPlaceholderText(
+            f"Quantity ({order_item.productUnit})")
+        self.le_quantity.setValidator(QDoubleValidator())
+        self.buttonBox.accepted.connect(self.validate_print)
+        self.buttonBox.rejected.connect(self.reject)
+        self.fc = fc
+        self.order_item = order_item
+        self.supp_list = supp_list
+        self.comboBox = comboBox
+
+    def validate_print(self):
+        try:
+            quantity = float(self.le_quantity.text())
+            try:
+
+                if self.order_item.orderItemQuantity < 0:
+                    self.order_item.orderItemTotal = -self.order_item.orderItemTotal * \
+                        (quantity / self.order_item.orderItemQuantity)
+                    self.order_item.orderItemQuantity = -quantity
+                else:
+                    self.order_item.orderItemTotal = self.order_item.orderItemTotal * \
+                        (quantity / self.order_item.orderItemQuantity)
+                    self.order_item.orderItemQuantity = quantity
+                self.fc(self.order_item, self.supp_list, self.comboBox)
+                self.accept()
+            except Exception as e:
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Critical)
+                msg.setText('Printer problem')
+                msg.setInformativeText(
+                    "Check if the cashier printer is connected")
+                msg.setDetailedText(str(e))
+                msg.setWindowTitle("Warning message")
+                msg.exec_()
+        except Exception as e:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText('Quantity error')
+            msg.setInformativeText("Quantity should not be empty")
+            msg.setDetailedText(str(e))
+            msg.setWindowTitle("Warning message")
+            msg.exec_()
+
+
+def to_money(total: float, currency: str = "DA") -> str:
+    return f"{total:,.2f} {currency}"
+
+
+def addNewNotification(parent: QWidget, message: str) -> None:
+    frame = QFrame(parent=parent)
+    frame.setFrameShape(QFrame.StyledPanel)
+    frame.setLineWidth(1)
+    frame.setLayout(QHBoxLayout())
+
+    label = QLabel()
+    label.setText(datetime.datetime.now().strftime("%H:%M:%S"))
+    label.setAlignment(Qt.AlignHCenter)
+    frame.layout().addWidget(label)
+
+    label = QLabel()
+    label.setText(message)
+    label.setAlignment(Qt.AlignHCenter)
+    frame.layout().addWidget(label)
+
+    parent.layout().addWidget(frame)

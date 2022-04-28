@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>988</width>
+    <height>771</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">*
+{
+	font: 14pt &quot;MS Shell Dlg 2&quot;;
+	padding: 2px;
+}
+#page_tables{
+	border-image: url(resource/Restaurant_plan/plan.png) 0 0 0 0 stretch stretch;
+}
+#w_test_tables{
+	border-image: url(:/Restaurant_plan/Restaurant_plan/plan.png) 0 0 0 0 stretch stretch;
+}
+
+QPushButton
+{ 
+	alternate-background-color: rgb(255, 255, 255);
+	background: rgba(225, 225, 225, 220);
+	border-width: 2px;
+    border-radius: 10px;
+	qproperty-iconSize: 50px 50px;
+	border-style: dashed;
+ }
+
+QPushButton:hover
+{
+	background: rgba(225, 225, 225, 200);
+	border-style: dashed;
+}
+
+QPushButton:pressed
+{
+	background: rgba(225, 225, 225, 255);
+	border-style: inset;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="btn_page_1">
+        <property name="text">
+         <string>Page 1</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_page_2">
+        <property name="text">
+         <string>Page 2</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QStackedWidget" name="sw_content">
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="page_1">
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QWidget" name="w_test_tables" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page_tables">
+       <layout class="QVBoxLayout" name="verticalLayout_2"/>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../resource/resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

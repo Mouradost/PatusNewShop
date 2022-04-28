@@ -12,6 +12,7 @@ class ExpenseTable:
     COLUMN_PRICE: str = "price"
     COLUMN_SUPPLIER_ID: str = "supplier_id"
     COLUMN_DATE: str = "date"
+    COLUMN_PAYED: str = "payed"
 
 
 @dataclass(frozen=True)
@@ -44,6 +45,7 @@ class StockTable:
     COLUMN_CATEGORY: str = "category"
     COLUMN_UNIT: str = "unit"
     COLUMN_QUANTITY: str = "quantity"
+    COLUMN_IS_INGREDIENT: str = "is_ingredient"
     COLUMN_ID: str = "_id"
 
 
@@ -85,6 +87,7 @@ class ExpenseCategoryTable:
     COLUMN_ID: str = "_id"
     COLUMN_NAME: str = "name"
     COLUMN_STOCK: str = "stock"
+    COLUMN_IS_INGREDIENT: str = "is_ingredient"
 
 
 @dataclass(frozen=True)
@@ -133,6 +136,7 @@ class WorkerTable:
     COLUMN_SCORE: str = "score"
     COLUMN_PICTURE: str = "picture"
     COLUMN_FACE: str = "face"
+    COLUMN_CV: str = "cv"
 
 
 @dataclass(frozen=True)
@@ -144,6 +148,8 @@ class SellTable:
     COLUMN_DATE: str = "date"
     COLUMN_TOTAL: str = "total"
     COLUMN_COMPLETED: str = "completed"
+    COLUMN_NB_COVERS: str = "nb_covers"
+    COLUMN_ON_TABLE: str = "on_table"
 
 
 @dataclass(frozen=True)
@@ -155,6 +161,8 @@ class SellItemTable:
     COLUMN_QUANTITY: str = "quantity"
     COLUMN_TOTAL: str = "total"
     COLUMN_GROUP: str = "group_id"
+    COLUMN_READY: str = "ready"
+    COLUMN_SERVED: str = "served"
 
 
 @dataclass(frozen=True)

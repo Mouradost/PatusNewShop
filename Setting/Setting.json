@@ -1,1 +1,1 @@
-{"IP": "192.168.0.104", "PORT": 7800, "MAX_CLIENTS": 10, "CASHIER_IP": "192.168.1.203", "KITCHEN_IP": "192.168.1.204", "PIZZA_IP": "192.168.1.204", "BAR_IP": "192.168.1.202", "PATH": "d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json"}
+{"IP": "192.168.0.105", "PORT": 7800, "MAX_CLIENTS": 10, "CASHIER_IP": "192.168.1.203", "KITCHEN_IP": "192.168.1.204", "PIZZA_IP": "192.168.1.204", "BAR_IP": "192.168.1.202", "PATH": "D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json"}

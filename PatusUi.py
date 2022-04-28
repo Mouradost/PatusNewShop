@@ -2,6 +2,7 @@ from DB.DBHandler import DBHelper
 from DB.DbTables import *
 from Utilities.Threads import *
 from Utilities.LicenseChecker import *
+from DashBoardShow import DashBoard
 
 from Utilities.UiUtilities import *
 from resource import resource_rc
@@ -27,6 +28,9 @@ class PatusMainUI(QMainWindow):
     def __init__(self, **kwargs):
         super(PatusMainUI, self).__init__(**kwargs)
         uic.loadUi(os.path.join(os.getcwd(), 'uis', 'PatusInterface.ui'), self)
+        self.tables_settings = QSettings("Patus", "Tables")
+
+        # self.local_ = locale.setlocale(locale.LC_ALL, 'fr_DZ')
         self.DB = DBHelper()
         self.sw_content.setCurrentIndex(0)
         self.infoThread = None
@@ -38,6 +42,7 @@ class PatusMainUI(QMainWindow):
         self.currentWorker = None
         self.current = None
         self.current_table = None
+        self.currentNbCovers = 1
         self.currentOrder = []
         self.tax = 0.0
         self.categoryDict, self.workerDict, self.customerDict, self.menuItemNameDict, self.expenseCategoryNameDict, self.supplierNameDict, self.menuCustomCategoryNameDict, self.ingredientItemNameDict = {}, {}, {}, {}, {}, {}, {}, {}
@@ -56,9 +61,15 @@ class PatusMainUI(QMainWindow):
             self.serverThread.updateServerStatus.connect(
                 self.updateServerStatus)
             self.serverThread.printerCall.connect(self.printerCall)
+            self.serverThread.notificationCall.connect(self.notifySelf)
         except Exception as e:
             logging.error(f"Server not running --> {e}")
             self.serverThread = None
+
+        # Notifications
+        self.btn_notification_clear.clicked.connect(self.clearAllNotifications)
+        self.btn_notification.clicked.connect(self.showHideNotification)
+        self.f_notification.setVisible(False)
 
         # Side panel menu
         self.btn_sideBar.clicked.connect(self.showHideSideBar)
@@ -95,10 +106,18 @@ class PatusMainUI(QMainWindow):
         self.btn_productReceipt.clicked.connect(
             self.loadMenuItemReceiptIngredients)
 
-        # Login
+        # Login Window
         self.btn_loginConfirm.clicked.connect(self.login)
 
-        # Cash Register
+        # Tables window
+        self.w_tables = CustomTablesWidget()
+        self.page_tables.layout().addWidget(self.w_tables)
+
+        # DashBoard window
+        self.DashBoard = DashBoard()
+        self.page_stats.layout().addWidget(self.DashBoard)
+
+        # Cash Register Window
         self.populateMenu()
         self.btn_cashRegisterPay.clicked.connect(self.pay)
         self.btn_cashRegisterClear.clicked.connect(self.clearCashRegister)
@@ -110,7 +129,7 @@ class PatusMainUI(QMainWindow):
         self.btn_cashRegisterTicketKitchen.clicked.connect(
             lambda: self.cashRegisterPrintFunction("Kitchen", True))
 
-        # Database
+        # Database Window
         self.tw_database.currentChanged.connect(self.twDbHandler)
         self.populateCb()
         # Menu Item
@@ -196,6 +215,8 @@ class PatusMainUI(QMainWindow):
         self.btn_expenseClear.clicked.connect(
             lambda: self.btn_expenseDelete.setEnabled(False))
         self.btn_expenseClear.clicked.connect(
+            lambda: self.cb_expensePayed.setChecked(True))
+        self.btn_expenseClear.clicked.connect(
             lambda: self.le_expenseName.clear())
         self.btn_expenseClear.clicked.connect(
             lambda: self.le_expenseQuantity.clear())
@@ -221,6 +242,8 @@ class PatusMainUI(QMainWindow):
             lambda: self.le_expenseCategoryName.clear())
         self.btn_expenseCategoryClear.clicked.connect(
             lambda: self.cb_expenseCategorySaveToStock.setChecked(True))
+        self.btn_expenseCategoryClear.clicked.connect(
+            lambda: self.cb_expenseCategoryIsIngredient.setChecked(True))
         self.tw_expenseCategory.doubleClicked.connect(self.loadExpenseCategory)
         # Supplier
         self.btn_supplierAdd.clicked.connect(self.addSupplier)
@@ -315,11 +338,14 @@ class PatusMainUI(QMainWindow):
             lambda: self.btn_sellDelete.setEnabled(False))
         self.btn_sellClear.clicked.connect(lambda: self.le_sellTotal.clear())
         self.btn_sellClear.clicked.connect(
+            lambda: self.le_sellNbCovers.clear())
+        self.btn_sellClear.clicked.connect(
             lambda: self.cb_sellIdWorker.setCurrentIndex(0))
         self.btn_sellClear.clicked.connect(
             lambda: self.cb_sellIdCustomer.setCurrentIndex(0))
         self.tw_sell.doubleClicked.connect(self.loadSell)
         self.le_sellTotal.setValidator(QDoubleValidator())
+        self.le_sellNbCovers.setValidator(QIntValidator())
         # Table
         self.btn_tableAdd.clicked.connect(self.addTable)
         self.btn_tableEdit.clicked.connect(self.editTable)
@@ -351,6 +377,12 @@ class PatusMainUI(QMainWindow):
         self.btn_categoryClear.clicked.connect(
             self.clearCategory)
         self.tw_category.doubleClicked.connect(self.loadCategory)
+        # Stock
+        self.btn_stockAdd.clicked.connect(self.addStockDB)
+        self.btn_stockEdit.clicked.connect(self.editStockDB)
+        self.btn_stockDelete.clicked.connect(self.deleteStockDB)
+        self.btn_stockClear.clicked.connect(self.clearStockDB)
+        self.tw_stockDb.doubleClicked.connect(self.loadStockDB)
 
         # Waste Window
         # Waste Stock
@@ -428,6 +460,10 @@ class PatusMainUI(QMainWindow):
         self.cb_productReceiptMenuItem.currentIndexChanged.connect(
             self.loadMenuItemReceiptIngredients)
 
+        # Stock window
+        self.rb_stockIngredients.clicked.connect(self.loadStock)
+        self.rb_stockOthers.clicked.connect(self.loadStock)
+
         # Validators
         self.le_customerPhone.setValidator(QRegExpValidator(
             QRegExp("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$")))
@@ -491,6 +527,7 @@ class PatusMainUI(QMainWindow):
                 self.serverThread.updateServerStatus.connect(
                     self.updateServerStatus)
                 self.serverThread.printerCall.connect(self.printerCall)
+                self.serverThread.notificationCall.connect(self.notifySelf)
                 self.serverThread.STOPPED.connect(self.stoppedServerThread)
                 self.serverThread.start()
             else:
@@ -508,6 +545,22 @@ class PatusMainUI(QMainWindow):
             self.f_sideBar.setVisible(False)
         else:
             self.f_sideBar.setVisible(True)
+
+    """Notification"""
+
+    def showHideNotification(self):
+        if self.f_notification.isVisible():
+            self.f_notification.setVisible(False)
+        else:
+            self.f_notification.setVisible(True)
+
+    def clearAllNotifications(self):
+        for child in self.w_notification.findChildren(QFrame):
+            child.deleteLater()
+
+    @pyqtSlot(str)
+    def notifySelf(self, msg: str):
+        addNewNotification(parent=self.w_notification, message=msg)
 
     """Home screen"""
 
@@ -533,11 +586,14 @@ class PatusMainUI(QMainWindow):
     """Stock Window"""
 
     def loadStock(self):
-
         all_data = self.DB.getAllStocks()
-
-        displayDbData(self.tw_stock, all_data)
         displayDbData(self.tw_wasteStock, all_data)
+        displayDbData(self.tw_stockDb, all_data)
+
+        if self.rb_stockIngredients.isChecked():
+            displayDbData(self.tw_stock, self.DB.getAllStockIngredients())
+        else:
+            displayDbData(self.tw_stock, self.DB.getAllStockOthers())
 
     """Database"""
 
@@ -589,9 +645,16 @@ class PatusMainUI(QMainWindow):
             elif self.tw_database.currentIndex() == 10:
                 all_data = self.DB.getAllTables()
                 displayDbData(self.tw_table, all_data)
-            else:
+            elif self.tw_database.currentIndex() == 11:
                 all_data = self.DB.getAllPointers()
                 displayDbData(self.tw_pointer, all_data)
+            elif self.tw_database.currentIndex() == 12:
+                all_data = self.DB.getAllStocks()
+                displayDbData(self.tw_stockDb, all_data)
+            else:
+                # all_data = self.DB.getAllDocuments()
+                # displayDbData(self.tw_documentDb, all_data)
+                pass
         except Exception as e:
             logging.error(f"twDbHandler: {e}")
         #
@@ -630,7 +693,7 @@ class PatusMainUI(QMainWindow):
             self.menuItemNameDictId[menuItem.id] = i
             self.cb_supplementProduct.insertItem(i, menuItem.name)
             self.cb_productReceiptMenuItem.insertItem(i, menuItem.name)
-        for i, ingredientItem in enumerate(self.DB.getAllStocks()):
+        for i, ingredientItem in enumerate(self.DB.getAllStockIngredients()):
             self.ingredientItemNameDict[i] = ingredientItem.id
             self.ingredientItemDictId[ingredientItem.id] = i
             self.cb_productReceiptIngredientName.insertItem(
@@ -640,6 +703,7 @@ class PatusMainUI(QMainWindow):
             self.expenseCategoryNameDictId[expenseCategory.id] = i
             self.cb_expenseCategory.insertItem(i, expenseCategory.name)
             self.cb_wasteCustomCategory.insertItem(i, expenseCategory.name)
+            self.cb_stockCategory.insertItem(i, expenseCategory.name)
         for i, supplier in enumerate(self.DB.getAllSuppliers()):
             self.supplierNameDict[i] = supplier.id
             self.supplierNameDictId[supplier.id] = i
@@ -968,6 +1032,7 @@ class PatusMainUI(QMainWindow):
         self.le_expenseQuantity.setText(str(self.current.quantity))
         self.le_expenseUnit.setText(str(self.current.unit))
         self.le_expensePrice.setText(str(self.current.price))
+        self.cb_expensePayed.setChecked(self.current.payed)
         self.btn_expenseAdd.setEnabled(False)
         self.btn_expenseEdit.setEnabled(True)
         self.btn_expenseDelete.setEnabled(True)
@@ -988,8 +1053,12 @@ class PatusMainUI(QMainWindow):
                 unit=self.le_expenseUnit.text(),
                 quantity=float(self.le_expenseQuantity.text()),
                 price=float(self.le_expensePrice.text()),
-                supplier_id=self.supplierNameDict[self.cb_expenseSupplier.currentIndex()])
-            if self.DB.getExpenseCategoryById(expense.category).stock:
+                supplier_id=self.supplierNameDict[self.cb_expenseSupplier.currentIndex(
+                )],
+                payed=self.cb_expensePayed.isChecked())
+            current_expense_category = self.DB.getExpenseCategoryById(
+                expense.category)
+            if current_expense_category.stock:
                 stock_item = self.DB.getStockByNameCat(
                     name=expense.name.lower(),
                     category=expense.category)
@@ -1005,7 +1074,8 @@ class PatusMainUI(QMainWindow):
                             name=expense.name.lower(),
                             category=expense.category,
                             unit=expense.unit,
-                            quantity=expense.quantity
+                            quantity=expense.quantity,
+                            is_ingredient=current_expense_category.is_ingredient
                         )
                     )
             self.DB.insertExpense(expense)
@@ -1016,6 +1086,7 @@ class PatusMainUI(QMainWindow):
             self.le_expensePrice.clear()
             self.cb_expenseCategory.setCurrentIndex(0)
             self.cb_expenseSupplier.setCurrentIndex(0)
+            self.cb_expensePayed.setChecked(True)
             self.twDbHandler()
             self.populateCb()
         except Exception as e:
@@ -1039,6 +1110,7 @@ class PatusMainUI(QMainWindow):
             self.current.price = float(self.le_expensePrice.text())
             self.current.supplier_id = self.supplierNameDict[self.cb_expenseSupplier.currentIndex(
             )]
+            self.current.payed = self.cb_expensePayed.isChecked()
             self.DB.updateExpense(self.current)
             # clear all
             self.le_expenseName.clear()
@@ -1047,6 +1119,7 @@ class PatusMainUI(QMainWindow):
             self.le_expensePrice.clear()
             self.cb_expenseCategory.setCurrentIndex(0)
             self.cb_expenseSupplier.setCurrentIndex(0)
+            self.cb_expensePayed.setChecked(True)
             self.btn_expenseAdd.setEnabled(True)
             self.btn_expenseEdit.setEnabled(False)
             self.btn_expenseDelete.setEnabled(False)
@@ -1073,6 +1146,7 @@ class PatusMainUI(QMainWindow):
             self.le_expensePrice.clear()
             self.cb_expenseCategory.setCurrentIndex(0)
             self.cb_expenseSupplier.setCurrentIndex(0)
+            self.cb_expensePayed.setChecked(True)
             self.btn_expenseAdd.setEnabled(True)
             self.btn_expenseEdit.setEnabled(False)
             self.btn_expenseDelete.setEnabled(False)
@@ -1098,6 +1172,8 @@ class PatusMainUI(QMainWindow):
 
         self.le_expenseCategoryName.setText(self.current.name)
         self.cb_expenseCategorySaveToStock.setChecked(self.current.stock)
+        self.cb_expenseCategoryIsIngredient.setChecked(
+            self.current.is_ingredient)
         self.btn_expenseCategoryAdd.setEnabled(False)
         self.btn_expenseCategoryEdit.setEnabled(True)
         self.btn_expenseCategoryDelete.setEnabled(True)
@@ -1107,11 +1183,13 @@ class PatusMainUI(QMainWindow):
         try:
             expense_category = ExpenseCategory(
                 name=self.le_expenseCategoryName.text(),
-                stock=self.cb_expenseCategorySaveToStock.isChecked())
+                stock=self.cb_expenseCategorySaveToStock.isChecked(),
+                is_ingredient=self.cb_expenseCategoryIsIngredient.isChecked())
             self.DB.insertExpenseCategory(expense_category)
             # clear all
             self.le_expenseCategoryName.clear()
             self.cb_expenseCategorySaveToStock.setChecked(True)
+            self.cb_expenseCategoryIsIngredient.setChecked(True)
             self.twDbHandler()
             self.populateCb()
         except Exception as e:
@@ -1129,10 +1207,12 @@ class PatusMainUI(QMainWindow):
             assert isinstance(self.current, ExpenseCategory)
             self.current.name = self.le_expenseCategoryName.text()
             self.current.stock = self.cb_expenseCategorySaveToStock.isChecked()
+            self.current.is_ingredient = self.cb_expenseCategoryIsIngredient.isChecked()
             self.DB.updateExpenseCategory(self.current)
             # clear all
             self.le_expenseCategoryName.clear()
             self.cb_expenseCategorySaveToStock.setChecked(True)
+            self.cb_expenseCategoryIsIngredient.setChecked(True)
             self.btn_expenseCategoryAdd.setEnabled(True)
             self.btn_expenseCategoryEdit.setEnabled(False)
             self.btn_expenseCategoryDelete.setEnabled(False)
@@ -1155,6 +1235,7 @@ class PatusMainUI(QMainWindow):
             # clear all
             self.le_expenseCategoryName.clear()
             self.cb_expenseCategorySaveToStock.setChecked(True)
+            self.cb_expenseCategoryIsIngredient.setChecked(True)
             self.btn_expenseCategoryAdd.setEnabled(True)
             self.btn_expenseCategoryEdit.setEnabled(False)
             self.btn_expenseCategoryDelete.setEnabled(False)
@@ -1495,14 +1576,21 @@ class PatusMainUI(QMainWindow):
 
     def loadSell(self):
 
-        self.current = self.DB.getSellById(int(self.tw_sell.item(self.tw_sell.currentRow(), self.tw_sell.columnCount()
-                                                                 - 1).text()))
+        self.current = self.DB.getSellById(
+            int(
+                self.tw_sell.item(
+                    self.tw_sell.currentRow(),
+                    self.tw_sell.columnCount() - 1).text()
+            ))
 
         self.dte_sellDate.setDateTime(QDateTime.fromString(
             self.current.date, "yyyy-MM-dd HH:mm:ss"))
         self.le_sellTotal.setText(str(self.current.total))
-        self.cb_sellIdWorker.setCurrentIndex(self.current.id_worker)
-        self.cb_sellIdCustomer.setCurrentIndex(self.current.id_customer)
+        self.le_sellNbCovers.setText(str(self.current.nb_covers))
+        self.cb_sellIdWorker.setCurrentIndex(
+            self.workerDictId[self.current.id_worker])
+        self.cb_sellIdCustomer.setCurrentIndex(
+            self.customerDictId[self.current.id_customer])
         self.btn_sellAdd.setEnabled(False)
         self.btn_sellEdit.setEnabled(True)
         self.btn_sellDelete.setEnabled(True)
@@ -1511,14 +1599,17 @@ class PatusMainUI(QMainWindow):
 
         try:
             sell = Sell(
-                id_worker=self.cb_sellIdWorker.currentIndex(),
-                id_customer=self.cb_sellIdCustomer.currentIndex(),
+                id_worker=self.workerDict[self.cb_sellIdWorker.currentIndex()],
+                id_customer=self.customerDict[self.cb_sellIdCustomer.currentIndex(
+                )],
                 date=self.dte_sellDate.dateTime().toString("yyyy-MM-dd HH:mm:ss"),
-                total=float(self.le_sellTotal.text())
+                total=float(self.le_sellTotal.text()),
+                nb_covers=int(self.le_sellNbCovers.text())
             )
             self.DB.insertSell(sell)
             # clear all
             self.le_sellTotal.clear()
+            self.le_sellNbCovers.clear()
             self.cb_sellIdWorker.setCurrentIndex(0)
             self.cb_sellIdCustomer.setCurrentIndex(0)
             self.twDbHandler()
@@ -1535,13 +1626,17 @@ class PatusMainUI(QMainWindow):
 
         try:
             assert isinstance(self.current, Sell)
-            self.current.id_worker = self.cb_sellIdWorker.currentIndex()
-            self.current.id_customer = self.cb_sellIdCustomer.currentIndex()
+            self.current.id_worker = self.workerDict[self.cb_sellIdWorker.currentIndex(
+            )]
+            self.current.id_customer = self.customerDict[self.cb_sellIdCustomer.currentIndex(
+            )]
             self.current.date = self.dte_sellDate.dateTime().toString("yyyy-MM-dd HH:mm:ss")
             self.current.total = float(self.le_sellTotal.text())
+            self.current.nb_covers = int(self.le_sellNbCovers.text())
             self.DB.updateSell(self.current)
             # clear all
             self.le_sellTotal.clear()
+            self.le_sellNbCovers.clear()
             self.cb_sellIdWorker.setCurrentIndex(0)
             self.cb_sellIdCustomer.setCurrentIndex(0)
             self.btn_sellAdd.setEnabled(True)
@@ -1562,9 +1657,9 @@ class PatusMainUI(QMainWindow):
         try:
             assert isinstance(self.current, Sell)
             self.DB.deleteSell(self.current.id)
-            self.DB.deleteAllRelatedSellItems(self.current.id)
             # clear all
             self.le_sellTotal.clear()
+            self.le_sellNbCovers.clear()
             self.cb_sellIdWorker.setCurrentIndex(0)
             self.cb_sellIdCustomer.setCurrentIndex(0)
             self.btn_sellAdd.setEnabled(True)
@@ -1790,6 +1885,100 @@ class PatusMainUI(QMainWindow):
             msg.setWindowTitle("Warning message")
             msg.exec_()
 
+    # Category
+    def clearStockDB(self):
+        self.le_stockProductName.clear()
+        self.cb_stockCategory.setCurrentIndex(0)
+        self.le_stockUnit.clear()
+        self.le_stockQuantity.clear()
+        self.cb_stockIsIngredient.setChecked(False)
+        self.btn_stockAdd.setEnabled(True)
+        self.btn_stockEdit.setEnabled(False)
+        self.btn_stockDelete.setEnabled(False)
+
+    def loadStockDB(self):
+
+        self.current = self.DB.getStockById(
+            int(self.tw_stockDb.item(
+                self.tw_stockDb.currentRow(),
+                self.tw_stockDb.columnCount() - 1).text()))
+
+        self.le_stockProductName.setText(self.current.name)
+        self.cb_stockCategory.setCurrentIndex(
+            self.expenseCategoryNameDictId[self.current.category])
+        self.le_stockUnit.setText(self.current.unit)
+        self.le_stockQuantity.setText(str(self.current.quantity))
+        self.cb_stockIsIngredient.setChecked(self.current.is_ingredient)
+        self.btn_categoryAdd.setEnabled(False)
+        self.btn_categoryEdit.setEnabled(True)
+        self.btn_categoryDelete.setEnabled(True)
+
+    def addStockDB(self):
+
+        try:
+            stock = Stock(
+                name=self.le_stockProductName.text(),
+                category=self.expenseCategoryNameDict[
+                    self.cb_stockCategory.currentIndex()],
+                unit=self.le_stockUnit.text(),
+                quantity=float(self.le_stockQuantity.text()),
+                is_ingredient=self.cb_stockIsIngredient.isChecked()
+            )
+            self.DB.insertStock(stock)
+            # clear all
+            self.clearStockDB()
+            self.loadStock()
+        except Exception as e:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText('Check your fields')
+            msg.setInformativeText("Worker category not added")
+            msg.setDetailedText(str(e))
+            msg.setWindowTitle("Warning message")
+            msg.exec_()
+
+    def editStockDB(self):
+
+        try:
+            assert isinstance(self.current, Stock)
+
+            self.current.name = self.le_stockProductName.text()
+            self.current.category = self.expenseCategoryNameDict[
+                self.cb_stockCategory.currentIndex()]
+            self.current.unit = self.le_stockUnit.text()
+            self.current.quantity = float(self.le_stockQuantity.text())
+            self.current.is_ingredient = self.cb_stockIsIngredient.isChecked()
+
+            # clear all
+            self.DB.updateCategory(self.current)
+            self.clearStockDB()
+            self.loadStock()
+        except Exception as e:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText('Check your fields')
+            msg.setInformativeText("Worker category not updated")
+            msg.setDetailedText(str(e))
+            msg.setWindowTitle("Warning message")
+            msg.exec_()
+
+    def deleteStockDB(self):
+
+        try:
+            assert isinstance(self.current, Category)
+            self.DB.deleteStock(self.current.id)
+            # clear all
+            self.clearStockDB()
+            self.loadStock()
+        except Exception as e:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText('Check your fields')
+            msg.setInformativeText("Worker category not deleted")
+            msg.setDetailedText(str(e))
+            msg.setWindowTitle("Warning message")
+            msg.exec_()
+
     """Tables"""
 
     def clearAllTables(self):
@@ -1798,14 +1987,14 @@ class PatusMainUI(QMainWindow):
 
     def populateTables(self):
         self.clearAllTables()
-
         all_tables = self.DB.getAllTables()
-
         for table in all_tables:
-            text = f"{table.name}\nSeats: {table.seats}\nComments: {table.comment}"
-            table_button = QPushButton(parent=self.w_tables, text=text)
+            text = f"{table.name}\nSeats: {table.seats}"
+            table_button = MovableButton(parent=self.w_tables, text=text)
             table_button.setObjectName(f"{table.id}")
-            table_button.setMinimumSize(200, 200)
+            table_button.move(self.tables_settings.value(
+                f"table_{table_button.objectName()}", QPoint(10, 10)))
+            table_button.setMinimumSize(160, 100)
             table_button.setSizePolicy(
                 QSizePolicy.Preferred, QSizePolicy.Preferred)
             if table.id_sell is not None:
@@ -1815,9 +2004,10 @@ class PatusMainUI(QMainWindow):
                     table_button.setStyleSheet('color: rgb(190, 142, 30);')
                 else:
                     table_button.setStyleSheet('color: rgb(20, 150, 0);')
-            self.w_tables.layout().addWidget(table_button)
             table_button.clicked.connect(
                 partial(self.loadTableContent, table_button.objectName()))
+            table_button.drag_initiated.connect(self.w_tables.btn_moving)
+            table_button.setVisible(True)
 
     def loadTableContent(self, table_id):
         self.clearCashRegister()
@@ -1831,6 +2021,8 @@ class PatusMainUI(QMainWindow):
             if self.currentSell is not None:
                 self.l_cashRegisterTicketNumber.setText(
                     f"{self.currentSell.id}")
+            else:
+                self.setNbCoversSetup()
             currentOrderShow = []
             for co in self.currentOrder:
                 currentSuppShow = []
@@ -1838,6 +2030,7 @@ class PatusMainUI(QMainWindow):
                     currentSuppShow.append({cs.name: cs.price})
                 currentOrderShow.append(
                     OrderItemShow(
+                        Ready=bool(co.ready),
                         Name=co.productName,
                         Category=self.DB.getMenuCategoryById(
                             co.productCategory).name,
@@ -1931,7 +2124,10 @@ class PatusMainUI(QMainWindow):
         for order in self.currentOrder:
             total += order.orderItemTotal
             for supp in order.orderItemSupplements:
-                total += order.orderItemQuantity * supp.price
+                if order.productUnit.strip().lower() == "g" or order.productUnit.strip().lower() == "kg":
+                    total += supp.price
+                else:
+                    total += order.orderItemQuantity * supp.price
         self.lcdN_totalHtt.setProperty("value", total)
         self.lcdN_tax.setProperty("value", self.tax)
         self.lcdN_totalTtc.setProperty("value", total - self.tax)
@@ -1961,7 +2157,7 @@ class PatusMainUI(QMainWindow):
                     order.orderItemQuantity += order_item.orderItemQuantity
                     order.orderItemTotal += order_item.orderItemTotal
                     # total += order.orderItemTotal
-                    if order.orderItemQuantity == 0:
+                    if order.orderItemQuantity <= 0:
                         self.currentOrder.remove(order)
 
             if tag and order_item.orderItemQuantity > 0:
@@ -1974,6 +2170,7 @@ class PatusMainUI(QMainWindow):
                     currentSuppShow.append({cs.name: cs.price})
                 currentOrderShow.append(
                     OrderItemShow(
+                        Ready=bool(co.ready),
                         Name=co.productName,
                         Category=self.DB.getMenuCategoryById(
                             co.productCategory).name,
@@ -2006,6 +2203,7 @@ class PatusMainUI(QMainWindow):
         self.currentOrder = []
         self.current_table = None
         self.currentSell = None
+        self.currentNbCovers = 1
         self.lcdN_totalHtt.setProperty("value", 0)
         self.lcdN_tax.setProperty("value", 0)
         self.lcdN_totalTtc.setProperty("value", 0)
@@ -2052,13 +2250,16 @@ class PatusMainUI(QMainWindow):
                         id_worker=self.currentWorker.id,
                         id_customer=self.customerDict[self.cb_orderCustomer.currentIndex(
                         )],
-                        completed=1)
+                        completed=1,
+                        nb_covers=self.currentNbCovers,
+                        on_table=self.current_table is not None)
                     customer = self.DB.getCustomerById(self.customerDict[self.cb_orderCustomer.currentIndex(
                     )])
                     worker = self.currentWorker
                 self.updateScore(total=total, worker=worker, customer=customer)
                 self.reduceFromStock(self.currentOrder)
                 self.clearCashRegister()
+
                 self.notifyClients("TABLES")
         except Exception as e:
             #
@@ -2086,7 +2287,11 @@ class PatusMainUI(QMainWindow):
                     order_items=self.currentOrder,
                     total=total,
                     id_worker=self.currentWorker.id,
-                    id_customer=self.customerDict[self.cb_orderCustomer.currentIndex()])
+                    id_customer=self.customerDict[self.cb_orderCustomer.currentIndex(
+                    )],
+                    completed=0,
+                    nb_covers=self.currentNbCovers,
+                    on_table=self.current_table is not None)
             else:
                 self.DB.updateOrder(
                     sell=self.currentSell,
@@ -2124,6 +2329,7 @@ class PatusMainUI(QMainWindow):
                         currentSuppShow.append({cs.name: cs.price})
                     currentOrderShow.append(
                         OrderItemShow(
+                            Ready=bool(co.ready),
                             Name=co.productName,
                             Category=self.DB.getMenuCategoryById(
                                 co.productCategory).name,
@@ -2221,11 +2427,17 @@ class PatusMainUI(QMainWindow):
 
     def showTablesReservation(self):
         requested_time_str = self.dte_reservation.dateTime().toString("yyyy-MM-dd HH:mm")
+
         requested_time = datetime.datetime.strptime(
             requested_time_str, "%Y-%m-%d %H:%M")
+
+        # requested_time = (datetime.datetime.now() +
+        #                   datetime.timedelta(hours=24))
+
         all_data = self.DB.getFreeTablesByDateRange(
             start_date=(requested_time - datetime.timedelta(minutes=60)
                         ).strftime("%Y-%m-%d %H:%M"),
+
             end_date=(requested_time + datetime.timedelta(minutes=60)).strftime("%Y-%m-%d %H:%M"))
 
         displayDbData(self.tw_reservationTable, all_data)
@@ -2518,6 +2730,15 @@ class PatusMainUI(QMainWindow):
             self.lcdN_tax.setProperty("value", self.tax)
             self.calculateTotal()
 
+    """Nb Covers functions"""
+
+    def setNbCoversSetup(self):
+        reduction_dialog = NbCoversChooser()
+        reduction_dialog.show()
+        rsp = reduction_dialog.exec_()
+        if rsp:
+            self.currentNbCovers = int(reduction_dialog.le_nb_covers.text())
+
     """Print functions"""
 
     def cashRegisterPrintFunction(self, place: str, use_printer: bool):
@@ -2530,7 +2751,11 @@ class PatusMainUI(QMainWindow):
                     order_items=self.currentOrder,
                     total=total,
                     id_worker=self.currentWorker.id,
-                    id_customer=self.customerDict[self.cb_orderCustomer.currentIndex()])
+                    id_customer=self.customerDict[self.cb_orderCustomer.currentIndex(
+                    )],
+                    completed=0,
+                    nb_covers=self.currentNbCovers,
+                    on_table=self.current_table is not None)
                 self.currentSell = self.DB.getSellById(sell_id)
 
                 old = False
@@ -2545,6 +2770,18 @@ class PatusMainUI(QMainWindow):
 
             self.l_cashRegisterTicketNumber.setText(f"{self.currentSell.id}")
             self.notifyClients("TABLES")
+
+            if place == "Kitchen":
+                self.serverThread.sendToKitchen(
+                    Ticket(
+                        id=self.currentSell.id,
+                        table_id=self.current_table,
+                        worker_id=self.currentSell.id_worker,
+                        worker_name=self.DB.getWorkerById(
+                            self.currentSell.id_worker).name,
+                        orders=self.currentOrder
+                    ))
+
         except Exception as e:
             #
             msg = QMessageBox()
@@ -2615,6 +2852,7 @@ class PatusMainUI(QMainWindow):
     def notifyClients(self, signal):
         if self.serverThread is not None:
             self.serverThread.notifyClients(signal)
+            self.serverThread.notifyCompletionOrder()
 
     def notifyClient(self, signal, thread):
         try:
@@ -2752,6 +2990,7 @@ class PatusMainUI(QMainWindow):
                 self.serverThread.printerCall.connect(self.printerCall)
                 self.serverThread.updateServerStatus.connect(
                     self.updateServerStatus)
+                self.serverThread.notificationCall.connect(self.notifySelf)
                 self.serverThread.start()
         except Exception as e:
             msg = QMessageBox()
