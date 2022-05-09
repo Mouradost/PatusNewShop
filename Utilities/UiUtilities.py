@@ -130,6 +130,15 @@ class Reducer(QDialog):
         self.le_reduction.setValidator(QDoubleValidator())
 
 
+class ConfirmDeletingOrder(QDialog):
+    def __init__(self):
+        super(ConfirmDeletingOrder, self).__init__()
+        uic.loadUi(os.path.join(os.getcwd(), 'uis',
+                   'ConfirmDeleteOrder.ui'), self)
+        self.buttonBox.accepted.connect(self.accept)
+        self.buttonBox.rejected.connect(self.reject)
+
+
 class NbCoversChooser(QDialog):
     def __init__(self):
         super(NbCoversChooser, self).__init__()
@@ -138,6 +147,17 @@ class NbCoversChooser(QDialog):
         self.buttonBox.rejected.connect(self.reject)
         self.le_nb_covers.clear()
         self.le_nb_covers.setValidator(QIntValidator())
+
+
+class EditOrderOnFly(QDialog):
+    def __init__(self, quantity):
+        super(EditOrderOnFly, self).__init__()
+        uic.loadUi(os.path.join(os.getcwd(), 'uis', 'EditOrderOnFly.ui'), self)
+        self.buttonBox.accepted.connect(self.accept)
+        self.buttonBox.rejected.connect(self.reject)
+        self.le_orderItemOnFly_quantity.clear()
+        self.le_orderItemOnFly_quantity.setText(str(quantity))
+        self.le_orderItemOnFly_quantity.setValidator(QDoubleValidator())
 
 
 class Holder(QDialog):
@@ -315,10 +335,10 @@ def createProductContainer(parent, db, product, table_id, fc):
         os.getcwd(), "resource", "patus_logo.jpg")))
     label.setScaledContents(True)
     label.setAlignment(Qt.AlignHCenter)
-    label.setMaximumSize(200, 200)
+    label.setMaximumSize(200, 150)
     frame.layout().addWidget(label)
     label = QLabel()
-    label.setText(product.name)
+    label.setText(pretty_string(product.name, 20, "returnLine"))
     label.setAlignment(Qt.AlignHCenter)
     frame.layout().addWidget(label)
     # Ranking system
@@ -461,6 +481,17 @@ def createClientDashBoardContainer(parent, client, fc_ring, fc_message):
     return frame
 
 
+def pretty_string(text: str, size: int = 20, mode: str = "strip") -> str:
+    if mode == "strip":
+        return text[:size]
+    else:
+        old_text = text
+        new_test = ""
+        for i in range(0, len(text), size):
+            new_test += old_text[i:i+size] + "\n"
+        return fr"{new_test}"
+
+
 def prepareTicketForReceipt(worker_name: str, order_items: list, tax: float, comment: str, ticket_number: int):
     total = 0
     group = 0
@@ -478,20 +509,20 @@ def prepareTicketForReceipt(worker_name: str, order_items: list, tax: float, com
     ticket_txt += f"{'ITEM':<20}{'QUANTITY':^13}{'PRICE':^13}\n"
     ticket_txt += '-' * 46 + ' \n'
     for order_item in order_items:
-        if group != order_item.group_id:
-            ticket_txt += f"{'*' * 46}\n"
-            group = order_item.group_id
+        # if group != order_item.group_id:
+        #     ticket_txt += f"{'*' * 46}\n"
+        #     group = order_item.group_id
         total += order_item.orderItemTotal
         if order_item.productUnit.strip().lower() == "g" or order_item.productUnit.strip().lower() == "kg":
-            ticket_txt += f"{order_item.productName:<20}{f'{order_item.orderItemQuantity} {order_item.productUnit.strip().lower()}':^13}{to_money(order_item.orderItemTotal):^13}\n"
+            ticket_txt += f"{pretty_string(order_item.productName):<20}{f'{order_item.orderItemQuantity} {order_item.productUnit.strip().lower()}':^13}{to_money(order_item.orderItemTotal):^13}\n"
         else:
-            ticket_txt += f"{order_item.productName:<20}{order_item.orderItemQuantity:^13}{to_money(order_item.orderItemTotal):^13}\n"
+            ticket_txt += f"{pretty_string(order_item.productName):<20}{order_item.orderItemQuantity:^13}{to_money(order_item.orderItemTotal):^13}\n"
         for supp in order_item.orderItemSupplements:
             if order_item.productUnit.strip().lower() == "g" or order_item.productUnit.strip().lower() == "kg":
-                ticket_txt += f"+ {supp.name:<31}{to_money(supp.price):^13}\n"
+                ticket_txt += f"+ {pretty_string(supp.name, 31):<31}{to_money(supp.price):^13}\n"
                 total += supp.price
             else:
-                ticket_txt += f"+ {supp.name:<31}{to_money(order_item.orderItemQuantity * supp.price):^13}\n"
+                ticket_txt += f"+ {pretty_string(supp.name, 31):<31}{to_money(order_item.orderItemQuantity * supp.price):^13}\n"
                 total += order_item.orderItemQuantity * supp.price
 
     if len(comment) > 0:
@@ -505,14 +536,17 @@ def prepareTicketForReceipt(worker_name: str, order_items: list, tax: float, com
     return ticket_txt
 
 
-def prepareTicketForCashier(worker_name: str, order_items: list, tax: float, comment: str, ticket_number: int, given: float):
+def prepareTicketForCashier(worker_name: str, order_items: list, tax: float, comment: str, ticket_number: int, given: float, time_date: datetime.datetime = None):
     total = 0
     group = 0
     ticket_txt = ""
     ticket_txt += '=' * 46 + ' \n'
     ticket_txt += f'Ticket Number : {ticket_number:>30}\n'
     ticket_txt += f'Worker Name : {worker_name:>32}\n'
-    ticket_txt += f'Date and time : {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"):>30}\n'
+    if time_date is None:
+        ticket_txt += f'Date and time : {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"):>30}\n'
+    else:
+        ticket_txt += f'Date and time : {time_date:>30}\n'
     ticket_txt += '-' * 46 + ' \n'
     if order_items[0].tableId is not None:
         ticket_txt += f'Table {order_items[0].tableId:>30}\n'
@@ -522,21 +556,21 @@ def prepareTicketForCashier(worker_name: str, order_items: list, tax: float, com
     ticket_txt += f"{'ITEM':<20}{'QUANTITY':^13}{'PRICE':^13}\n"
     ticket_txt += '-' * 46 + ' \n'
     for order_item in order_items:
-        if group != order_item.group_id:
-            ticket_txt += f"{'*' * 46}\n"
-            group = order_item.group_id
+        # if group != order_item.group_id:
+        #     ticket_txt += f"{'*' * 46}\n"
+        #     group = order_item.group_id
         total += order_item.orderItemTotal
 
         if order_item.productUnit.strip().lower() == "g" or order_item.productUnit.strip().lower() == "kg":
-            ticket_txt += f"{order_item.productName:<20}{f'{order_item.orderItemQuantity} {order_item.productUnit.strip().lower()}':^13}{to_money(order_item.orderItemTotal):^13}\n"
+            ticket_txt += f"{pretty_string(order_item.productName):<20}{f'{order_item.orderItemQuantity} {order_item.productUnit.strip().lower()}':^13}{to_money(order_item.orderItemTotal):^13}\n"
         else:
-            ticket_txt += f"{order_item.productName:<20}{order_item.orderItemQuantity:^13}{to_money(order_item.orderItemTotal):^13}\n"
+            ticket_txt += f"{pretty_string(order_item.productName):<20}{order_item.orderItemQuantity:^13}{to_money(order_item.orderItemTotal):^13}\n"
         for supp in order_item.orderItemSupplements:
             if order_item.productUnit.strip().lower() == "g" or order_item.productUnit.strip().lower() == "kg":
-                ticket_txt += f"+ {supp.name:<31}{to_money(supp.price):^13}\n"
+                ticket_txt += f"+ {pretty_string(supp.name, 31):<31}{to_money(supp.price):^13}\n"
                 total += supp.price
             else:
-                ticket_txt += f"+ {supp.name:<31}{to_money(order_item.orderItemQuantity * supp.price):^13}\n"
+                ticket_txt += f"+ {pretty_string(supp.name, 31):<31}{to_money(order_item.orderItemQuantity * supp.price):^13}\n"
                 total += order_item.orderItemQuantity * supp.price
     if len(comment) > 0:
         ticket_txt += '-' * 46 + ' \n'
@@ -635,28 +669,28 @@ def prepareTicketForOrder(
                 if drink_group != order_item.group_id:
                     ticket_bar_txt += f"{'*' * 15}{f'Group {order_item.group_id}':^16}{'*' * 15}\n"
                     drink_group = order_item.group_id
-                ticket_bar_txt += f"{order_item.productName:<23} {order_item.orderItemQuantity:^23}\n"
+                ticket_bar_txt += f"{pretty_string(order_item.productName, 23):<23} {order_item.orderItemQuantity:^23}\n"
                 for supp in order_item.orderItemSupplements:
-                    ticket_bar_txt += f"+ {supp.name:<23}\n"
+                    ticket_bar_txt += f"+ {pretty_string(supp.name, 23):<23}\n"
                 drink_count += 1
             else:
                 if kitchen_group != order_item.group_id:
                     ticket_kitchen_txt += f"{'*' * 15}{f'Group {order_item.group_id}':^16}{'*' * 15}\n"
                     kitchen_group = order_item.group_id
                 if order_item.productUnit.strip().lower() == "g" or order_item.productUnit.strip().lower() == "kg":
-                    ticket_kitchen_txt += f"{order_item.productName:<23} {f'{order_item.orderItemQuantity} {order_item.productUnit.strip().lower()}':^23}\n"
+                    ticket_kitchen_txt += f"{pretty_string(order_item.productName, 23):<23} {f'{order_item.orderItemQuantity} {order_item.productUnit.strip().lower()}':^23}\n"
                 else:
-                    ticket_kitchen_txt += f"{order_item.productName:<23} {order_item.orderItemQuantity:^23}\n"
+                    ticket_kitchen_txt += f"{pretty_string(order_item.productName, 23):<23} {order_item.orderItemQuantity:^23}\n"
                 kitchen_count += 1
                 for supp in order_item.orderItemSupplements:
-                    ticket_kitchen_txt += f"+ {supp.name:<23}\n"
+                    ticket_kitchen_txt += f"+ {pretty_string(supp.name, 23):<23}\n"
                 if db.getMenuCategoryById(order_item.productCategory).printing_place == 1:
                     if pizza_group != order_item.group_id:
                         ticket_pizza_txt += f"{'*' * 15}{f'Group {order_item.group_id}':^16}{'*' * 15}\n"
                         pizza_group = order_item.group_id
-                    ticket_pizza_txt += f"{order_item.productName:<23} {order_item.orderItemQuantity:^23}\n"
+                    ticket_pizza_txt += f"{pretty_string(order_item.productName, 23):<23} {order_item.orderItemQuantity:^23}\n"
                     for supp in order_item.orderItemSupplements:
-                        ticket_pizza_txt += f"+ {supp.name:<23}\n"
+                        ticket_pizza_txt += f"+ {pretty_string(supp.name, 23):<23}\n"
                     pizza_count += 1
 
     if len(comment) > 0:

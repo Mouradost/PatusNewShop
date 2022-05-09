@@ -525,6 +525,7 @@ class PrinterThread(QThread):
         self.callingThread = calling_thread
         self.printer_setting = ServerSetting()
         self.printer_setting.load()
+        self.db = DBHelper()
 
     def run(self):
         try:
@@ -532,6 +533,11 @@ class PrinterThread(QThread):
                 f"[PRINTER THREAD] Start printing", False)
 
             if self.which_printer == "Kitchen":
+                # if self.old:
+                #     self.order_items = self.oldOrderHandler(
+                #         order_items=self.order_items,
+                #         ticket_number=self.ticket_number)
+                # else:
                 self.ticket_kitchen, self.ticket_pizza, self.ticket_bar, self.kitchen_count, self.pizza_count, self.drink_count = prepareTicketForOrder(
                     worker_name=self.worker_name,
                     order_items=self.order_items,
@@ -544,26 +550,30 @@ class PrinterThread(QThread):
                 try:
                     if self.kitchen_count > 0:
                         kitchen = Network(self.printer_setting.KITCHEN_IP)
+                        kitchen.charcode("CA_FRENCH")
 
                         kitchen.text(self.ticket_kitchen)
                         kitchen.cut()
+                        # kitchen.text(self.ticket_kitchen)
+                        # kitchen.cut()
 
-                        if self.pizza_count > 0:
-                            kitchen.text(self.ticket_pizza)
-                            kitchen.cut()
+                        # if self.pizza_count > 0:
+                        #     kitchen.text(self.ticket_pizza)
+                        #     kitchen.cut()
                 except Exception as e:
                     self.logUpdater.emit(
                         f"[PRINTER THREAD] Kitchen ({self.printer_setting.KITCHEN_IP}) is down with error ({e})", True)
                     if self.kitchen_count > 0:
                         kitchen_tickets.append(self.ticket_kitchen)
                         kitchen_places.append("Kitchen")
-                    if self.pizza_count > 0:
-                        kitchen_tickets.append(self.ticket_pizza)
-                        kitchen_places.append("Pizza")
+                    # if self.pizza_count > 0:
+                    #     kitchen_tickets.append(self.ticket_pizza)
+                    #     kitchen_places.append("Pizza")
 
                 try:
                     if self.drink_count > 0:
                         bar = Network(self.printer_setting.BAR_IP)
+                        bar.charcode("CA_FRENCH")
                         bar.text(self.ticket_bar)
                         bar.cut()
                 except Exception as e:
@@ -590,6 +600,7 @@ class PrinterThread(QThread):
                 # Print the receipt
                 try:
                     cashier = Network(self.printer_setting.CASHIER_IP)
+                    cashier.charcode("CA_FRENCH")
                     cashier.image(os.path.join(
                         os.getcwd(), "resource", "patus_ticket_logo.jpg"))
                     cashier.text(self.ticket)
@@ -615,6 +626,9 @@ class PrinterThread(QThread):
                 # Print the Checker
                 try:
                     cashier = Network(self.printer_setting.CASHIER_IP)
+                    cashier.charcode("CA_FRENCH")
+                    cashier.image(os.path.join(
+                        os.getcwd(), "resource", "patus_ticket_logo.jpg"))
                     cashier.text(self.ticket)
                     cashier.cut()
                 except Exception as e:
@@ -626,6 +640,14 @@ class PrinterThread(QThread):
             self.logUpdater.emit(
                 f"[PRINTER THREAD] {e}", True)
         self.stop()
+
+    def oldOrderHandler(
+            self, order_items: list,
+            ticket_number: int):
+        # print(order_items)
+        # print("*"*100)
+        # print(self.db.getOrderBySellId(sell_id=ticket_number))
+        return order_items
 
     def stop(self):
         self.logUpdater.emit(

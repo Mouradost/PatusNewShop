@@ -3626,6 +3626,41 @@ QRadioButton::indicator::unChecked
                               <number>0</number>
                              </property>
                              <item>
+                              <widget class="QPushButton" name="btn_cashRegisterDeleteCurrent">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <family>MS Shell Dlg 2</family>
+                                 <pointsize>14</pointsize>
+                                 <weight>50</weight>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="tabletTracking">
+                                <bool>false</bool>
+                               </property>
+                               <property name="text">
+                                <string/>
+                               </property>
+                               <property name="icon">
+                                <iconset resource="../resource/resource.qrc">
+                                 <normaloff>:/Simple icons/simple_icons/fi-rr-delete.svg</normaloff>:/Simple icons/simple_icons/fi-rr-delete.svg</iconset>
+                               </property>
+                               <property name="iconSize">
+                                <size>
+                                 <width>32</width>
+                                 <height>32</height>
+                                </size>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
                               <widget class="QPushButton" name="btn_cashRegisterClear">
                                <property name="sizePolicy">
                                 <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
@@ -5688,7 +5723,7 @@ QComboBox
                               <string/>
                              </property>
                              <property name="maxLength">
-                              <number>40</number>
+                              <number>150</number>
                              </property>
                              <property name="placeholderText">
                               <string>Name</string>
@@ -6311,7 +6346,7 @@ QComboBox
                               <string/>
                              </property>
                              <property name="maxLength">
-                              <number>40</number>
+                              <number>150</number>
                              </property>
                              <property name="placeholderText">
                               <string>Name</string>
@@ -7288,7 +7323,7 @@ QComboBox
                               <string/>
                              </property>
                              <property name="maxLength">
-                              <number>40</number>
+                              <number>150</number>
                              </property>
                              <property name="placeholderText">
                               <string>Name</string>
@@ -7760,7 +7795,7 @@ QPushButton:pressed
                               <string/>
                              </property>
                              <property name="maxLength">
-                              <number>40</number>
+                              <number>150</number>
                              </property>
                              <property name="placeholderText">
                               <string>First and Last Name</string>
@@ -9246,6 +9281,26 @@ QComboBox
                              <property name="icon">
                               <iconset resource="../resource/resource.qrc">
                                <normaloff>:/Simple icons/simple_icons/fi-rr-broom.svg</normaloff>:/Simple icons/simple_icons/fi-rr-broom.svg</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>32</width>
+                               <height>32</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="btn_sellShow">
+                             <property name="enabled">
+                              <bool>false</bool>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../resource/resource.qrc">
+                               <normaloff>:/Simple icons/simple_icons/fi-rr-upload.svg</normaloff>:/Simple icons/simple_icons/fi-rr-upload.svg</iconset>
                              </property>
                              <property name="iconSize">
                               <size>

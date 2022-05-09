@@ -2,6 +2,18 @@
 *.pyc
 **/__pycach__/
 .idea
-# *.db
+*.db
 
-/tmp/
+**/tmp/*
+
+**/DB/*.db
+
+# fonts
+**/fonts/
+
+# Testing folder
+**/Testing/
+
+# Builds
+**/build/*
+**/Dist/*

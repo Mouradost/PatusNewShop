@@ -58,7 +58,7 @@ QLabel
 
 QPlainTextEdit
 {
-	font: 10pt &quot;Cascadia Code&quot;;
+	font: 10pt &quot;Cascadia Code PL&quot;;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -69,6 +69,11 @@ QPlainTextEdit
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code PL</family>
+      </font>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>

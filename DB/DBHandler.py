@@ -1006,6 +1006,16 @@ class DBHelper(object):
             else:
                 return x
 
+    def getMenuItemByNameCat(self, name: str, category: int) -> MenuItem:
+        with self.conn:
+            self.c.execute(
+                f"SELECT * FROM {MenuTable.TABLE_NAME} WHERE {MenuTable.COLUMN_NAME}=? AND {MenuTable.COLUMN_CATEGORY_ID}=?", (name, category))
+            x = self.c.fetchone()
+            if x is not None:
+                return MenuItem(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[0])
+            else:
+                return x
+
     def getMenuItemReceiptById(self, _id: int, ingredient_id: int):
         with self.conn:
             self.c.execute(
@@ -1601,6 +1611,18 @@ class DBHelper(object):
                 )
         return sell_id
 
+    def deleteOrder(
+            self,
+            sell: Sell,
+            order_items: list,
+            completed: int = 0):
+        self.deleteSell(sell.id)
+        if order_items[0].tableId is not None and completed == 0:
+            table = self.getTableById(order_items[0].tableId)
+            table.id_sell = None
+            self.updateTable(table)
+        self.deleteSellContent(sell.id)
+
     def updateOrder(
             self,
             sell: Sell,
@@ -2164,3 +2186,69 @@ class DBHelper(object):
             sell_item = self.getSellItemById(order.id)
             sell_item.ready = order.ready
             self.updateSellItem(sell_item)
+
+    def expenseSuggestions(self, name: str) -> List[Expense]:
+        with self.conn:
+            self.c.execute(
+                f"SELECT * FROM {ExpenseTable.TABLE_NAME} WHERE {ExpenseTable.COLUMN_NAME} LIKE ?", (f"%{name}",))
+            all_x = self.c.fetchall()
+            results = []
+            if all_x is not None:
+                for x in all_x:
+                    results.append(
+                        Expense(
+                            name=x[1],
+                            category=x[2],
+                            unit=x[3],
+                            quantity=x[4],
+                            price=x[5],
+                            supplier_id=x[6],
+                            date=x[7],
+                            payed=x[8],
+                            id=x[0]
+                        ))
+        return results
+
+    def getSellItemBySellId(self, sell_id: int) -> List[SellItem]:
+        with self.conn:
+            self.c.execute(
+                f"SELECT * FROM {SellItemTable.TABLE_NAME} WHERE {SellItemTable.COLUMN_ID_SELL}=?", (sell_id,))
+            all_x = self.c.fetchall()
+            print(all_x)
+            results = []
+            if all_x is not None:
+                for x in all_x:
+                    results.append(
+                        SellItem(
+                            id=x[0],
+                            id_product=x[1],
+                            id_sell=x[2],
+                            quantity=x[3],
+                            total=x[4],
+                            group=x[5],
+                            ready=x[6],
+                            served=x[7]
+                        ))
+        return results
+
+    def getOrderBySellId(self, sell_id: str) -> List[OrderItem]:
+        sell = self.getSellById(sell_id)
+        sell_items = self.getSellItemBySellId(sell.id)
+        results = []
+        for sell_item in sell_items:
+            product = self.getMenuItemById(sell_item.id_product)
+            results.append(OrderItem(
+                tableId=sell.on_table,
+                productId=sell_item.id_product,
+                productName=product.name,
+                productCategory=product.category_id,
+                productUnit=product.unit,
+                orderItemQuantity=sell_item.quantity,
+                orderItemTotal=sell_item.total,
+                orderItemSupplements=self.getSupplementByMenuId(sell_item.id),
+                group_id=sell_item.group,
+                nb_covers=sell.nb_covers,
+                ready=sell_item.ready,
+                served=sell_item.served,
+                id=sell_item.id))
+        return results

@@ -2,7 +2,7 @@ from DB.DBHandler import DBHelper
 from DB.DbTables import *
 from Utilities.Threads import *
 from Utilities.LicenseChecker import *
-from DashBoardShow import DashBoard
+from Utilities.DashBoardShow import DashBoard
 
 from Utilities.UiUtilities import *
 from resource import resource_rc
@@ -121,9 +121,11 @@ class PatusMainUI(QMainWindow):
         self.populateMenu()
         self.btn_cashRegisterPay.clicked.connect(self.pay)
         self.btn_cashRegisterClear.clicked.connect(self.clearCashRegister)
+        self.btn_cashRegisterDeleteCurrent.clicked.connect(self.deleteCurrent)
         self.btn_cashRegisterHold.clicked.connect(self.holdOrder)
         self.btn_cashRegisterResume.clicked.connect(self.resumeOrder)
         self.btn_cashRegisterChangeTable.clicked.connect(self.changeTable)
+        self.tw_orderList.doubleClicked.connect(self.editOnFly)
         self.btn_cashRegisterTicket.clicked.connect(
             lambda: self.cashRegisterPrintFunction("Cashier", True))
         self.btn_cashRegisterTicketKitchen.clicked.connect(
@@ -205,6 +207,7 @@ class PatusMainUI(QMainWindow):
         self.le_supplementQuantity.setValidator(QDoubleValidator())
         self.le_supplementPrice.setValidator(QDoubleValidator())
         # Expense
+        self.expenseSetUp()
         self.btn_expenseAdd.clicked.connect(self.addExpense)
         self.btn_expenseEdit.clicked.connect(self.editExpense)
         self.btn_expenseDelete.clicked.connect(self.deleteExpense)
@@ -330,6 +333,9 @@ class PatusMainUI(QMainWindow):
         self.btn_sellAdd.clicked.connect(self.addSell)
         self.btn_sellEdit.clicked.connect(self.editSell)
         self.btn_sellDelete.clicked.connect(self.deleteSell)
+        self.btn_sellShow.clicked.connect(self.showSell)
+        self.btn_sellClear.clicked.connect(
+            lambda: self.btn_sellShow.setEnabled(False))
         self.btn_sellClear.clicked.connect(
             lambda: self.btn_sellAdd.setEnabled(True))
         self.btn_sellClear.clicked.connect(
@@ -777,6 +783,7 @@ class PatusMainUI(QMainWindow):
             self.current.category = self.cb_menuItemCategory.currentText()
             self.current.category_id = self.menuCustomCategoryNameDict[self.cb_menuItemCategoryCustom.currentIndex(
             )]
+            self.current.unit = self.le_menuItemUnit.text()
             self.current.quantity = float(self.le_menuItemUnitQuantity.text())
             self.current.price = float(self.le_menuItemPrice.text())
             self.current.picture = self.l_menuItemPicture.text()
@@ -1021,6 +1028,14 @@ class PatusMainUI(QMainWindow):
             msg.exec_()
 
     # Expense
+    def expenseSetUp(self):
+        expenses = self.DB.getAllExpenses()
+        self.setCompleter(
+            self.le_expenseName,
+            [item.name for item in expenses])
+        self.setCompleter(
+            self.le_expenseUnit,
+            [item.unit for item in expenses])
 
     def loadExpense(self):
 
@@ -1508,8 +1523,9 @@ class PatusMainUI(QMainWindow):
             assert isinstance(self.current, Worker)
             self.current.name = self.le_workerName.text()
             self.current.username = self.le_workerUsername.text()
-            self.current.password = hashlib.sha3_512(
-                self.le_workerPassword.text().encode()).hexdigest()
+            if self.le_workerPassword.text() != "":
+                self.current.password = hashlib.sha3_512(
+                    self.le_workerPassword.text().encode()).hexdigest()
             self.current.phone = self.le_workerPhone.text()
             self.current.id_category = self.categoryDict[self.cb_workerCategory.currentIndex(
             )]
@@ -1594,6 +1610,30 @@ class PatusMainUI(QMainWindow):
         self.btn_sellAdd.setEnabled(False)
         self.btn_sellEdit.setEnabled(True)
         self.btn_sellDelete.setEnabled(True)
+        self.btn_sellShow.setEnabled(True)
+
+    def showSell(self):
+        try:
+            ticket = prepareTicketForCashier(
+                worker_name=self.DB.getWorkerById(self.current.id_worker).name,
+                order_items=self.DB.getOrderBySellId(self.current.id),
+                tax=0,
+                comment="",
+                ticket_number=self.current.id,
+                given=self.current.total,
+                time_date=self.current.date
+            )
+            printerUi = PrinterProblem(tickets=[ticket], places=["Preview"])
+            printerUi.show()
+            printerUi.exec_()
+        except Exception as e:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText('Loading Error')
+            msg.setInformativeText("Unable to load ticket")
+            msg.setDetailedText(str(e))
+            msg.setWindowTitle("Warning message")
+            msg.exec_()
 
     def addSell(self):
 
@@ -1642,6 +1682,7 @@ class PatusMainUI(QMainWindow):
             self.btn_sellAdd.setEnabled(True)
             self.btn_sellEdit.setEnabled(False)
             self.btn_sellDelete.setEnabled(False)
+            self.btn_sellShow.setEnabled(False)
             self.twDbHandler()
         except Exception as e:
             msg = QMessageBox()
@@ -1657,6 +1698,10 @@ class PatusMainUI(QMainWindow):
         try:
             assert isinstance(self.current, Sell)
             self.DB.deleteSell(self.current.id)
+            for table in self.DB.getAllTables():
+                if table.id_sell == self.current.id:
+                    table.id_sell = None
+                    self.DB.updateTable(table)
             # clear all
             self.le_sellTotal.clear()
             self.le_sellNbCovers.clear()
@@ -1665,6 +1710,7 @@ class PatusMainUI(QMainWindow):
             self.btn_sellAdd.setEnabled(True)
             self.btn_sellEdit.setEnabled(False)
             self.btn_sellDelete.setEnabled(False)
+            self.btn_sellShow.setEnabled(False)
             self.twDbHandler()
         except Exception as e:
             msg = QMessageBox()
@@ -2056,6 +2102,33 @@ class PatusMainUI(QMainWindow):
             msg.setWindowTitle("Warning message")
             msg.exec_()
 
+    def editOnFly(self):
+        return
+        # print(self.tw_orderList.item(
+        #     self.tw_orderList.currentRow(), 0).text())
+        # print(self.tw_orderList.item(
+        #     self.tw_orderList.currentRow(), 1).text())
+        # print(self.tw_orderList.item(
+        #     self.tw_orderList.currentRow(), 2).text())
+        # print(self.tw_orderList.item(
+        #     self.tw_orderList.currentRow(), 3).text())
+        # print(self.tw_orderList.item(
+        #     self.tw_orderList.currentRow(), 4).text())
+        # print(self.tw_orderList.item(
+        #     self.tw_orderList.currentRow(), 5).text())
+        # print(self.tw_orderList.item(
+        #     self.tw_orderList.currentRow(), 6).text())
+
+        # # print(self.currentOrder)
+        # name = self.tw_orderList.item(
+        #     self.tw_orderList.currentRow(), 1).text()
+        # cat = self.tw_orderList.item(
+        #     self.tw_orderList.currentRow(), 2).text()
+        # print(self.DB.getMenuItemByNameCat(
+        #     name, self.DB.getMenuCategoryByName(cat)))
+
+        # OrderItem()
+
     def changeTable(self):
         try:
             free_tables = self.DB.getFreeTables()
@@ -2134,6 +2207,7 @@ class PatusMainUI(QMainWindow):
         return total - self.tax
 
     def addOrderItem(self, order_item, supp_item, rank):
+        # print(order_item, supp_item, rank.currentIndex() + 1)
         try:
             tag = True
             supp_list = []
@@ -2150,6 +2224,7 @@ class PatusMainUI(QMainWindow):
             order_item.orderItemSupplements = supp_list
             order_item.group_id = rank.currentIndex() + 1
             rank.setCurrentIndex(0)
+
             # Check if it is in the current orders
             for order in self.currentOrder:
                 if order_item.productId == order.productId and order_item.orderItemSupplements == order.orderItemSupplements and order_item.group_id == order.group_id:
@@ -2186,6 +2261,26 @@ class PatusMainUI(QMainWindow):
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
             msg.setText('Unable to add item')
+            msg.setDetailedText(str(e))
+            msg.setWindowTitle("Error message")
+            msg.exec_()
+
+    def deleteCurrent(self):
+        try:
+            confirmDeletingOrder = ConfirmDeletingOrder()
+            confirmDeletingOrder.show()
+            rsp = confirmDeletingOrder.exec_()
+            if rsp:
+                self.DB.deleteOrder(
+                    self.currentSell,
+                    self.currentOrder)
+                self.notifyClients("TABLES")
+                self.clearCashRegister()
+        except Exception as e:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText(
+                'Unable delete order\nMaybe this order is not saved yet check if it has a ticket number')
             msg.setDetailedText(str(e))
             msg.setWindowTitle("Error message")
             msg.exec_()
@@ -2252,7 +2347,7 @@ class PatusMainUI(QMainWindow):
                         )],
                         completed=1,
                         nb_covers=self.currentNbCovers,
-                        on_table=self.current_table is not None)
+                        on_table=self.current_table if self.current_table else 0)
                     customer = self.DB.getCustomerById(self.customerDict[self.cb_orderCustomer.currentIndex(
                     )])
                     worker = self.currentWorker
@@ -2291,8 +2386,9 @@ class PatusMainUI(QMainWindow):
                     )],
                     completed=0,
                     nb_covers=self.currentNbCovers,
-                    on_table=self.current_table is not None)
+                    on_table=self.current_table if self.current_table else 0)
             else:
+                self.currentSell.total = self.calculateTotal()
                 self.DB.updateOrder(
                     sell=self.currentSell,
                     order_items=self.currentOrder
@@ -2755,7 +2851,7 @@ class PatusMainUI(QMainWindow):
                     )],
                     completed=0,
                     nb_covers=self.currentNbCovers,
-                    on_table=self.current_table is not None)
+                    on_table=self.current_table if self.current_table else 0)
                 self.currentSell = self.DB.getSellById(sell_id)
 
                 old = False
@@ -2782,6 +2878,37 @@ class PatusMainUI(QMainWindow):
                         orders=self.currentOrder
                     ))
 
+            if use_printer:
+                try:
+                    self.printerThread = PrinterThread(
+                        which_printer=place,
+                        worker_name=self.DB.getWorkerById(
+                            self.currentSell.id_worker).name,
+                        order_items=self.currentOrder,
+                        comment=self.le_cashRegisterComment.toPlainText(),
+                        ticket_number=self.currentSell.id,
+                        old=old,
+                        tax=self.tax,
+                        mobile=True)
+                    self.printerThread.printStatus.connect(
+                        self.printerProblem)
+                    self.printerThread.logUpdater.connect(self.callLog)
+                    self.printerThread.start()
+
+                    msg = QMessageBox()
+                    msg.setIcon(QMessageBox.Information)
+                    msg.setText('Sent to printer!')
+                    msg.setWindowTitle("Information message")
+                    msg.exec_()
+
+                except Exception as e:
+                    msg = QMessageBox()
+                    msg.setIcon(QMessageBox.Critical)
+                    msg.setText('Problem sending to printer!')
+                    msg.setDetailedText(str(e))
+                    msg.setWindowTitle("Warning message")
+                    msg.exec_()
+
         except Exception as e:
             #
             msg = QMessageBox()
@@ -2791,35 +2918,6 @@ class PatusMainUI(QMainWindow):
             msg.setDetailedText(str(e))
             msg.setWindowTitle("Warning message")
             msg.exec_()
-        if use_printer:
-            try:
-                self.printerThread = PrinterThread(
-                    which_printer=place,
-                    worker_name=self.DB.getWorkerById(
-                        self.currentSell.id_worker).name,
-                    order_items=self.currentOrder,
-                    comment=self.le_cashRegisterComment.toPlainText(),
-                    ticket_number=self.currentSell.id,
-                    old=old,
-                    tax=self.tax,
-                    mobile=True)
-                self.printerThread.printStatus.connect(self.printerProblem)
-                self.printerThread.logUpdater.connect(self.callLog)
-                self.printerThread.start()
-
-                msg = QMessageBox()
-                msg.setIcon(QMessageBox.Information)
-                msg.setText('Sent to printer!')
-                msg.setWindowTitle("Information message")
-                msg.exec_()
-
-            except Exception as e:
-                msg = QMessageBox()
-                msg.setIcon(QMessageBox.Critical)
-                msg.setText('Problem sending to printer!')
-                msg.setDetailedText(str(e))
-                msg.setWindowTitle("Warning message")
-                msg.exec_()
 
     """Dashboard functions"""
 
@@ -2862,6 +2960,9 @@ class PatusMainUI(QMainWindow):
             logging.error(f"Failed to notify Client ({e})")
 
     """Utility functions"""
+
+    def setCompleter(self, lineEdit: QLineEdit, suggestions: list) -> None:
+        lineEdit.setCompleter(QCompleter(suggestions))
 
     def printerCall(self, worker_name, order_items, comment, ticket_number, old, tax=0, calling_thread=None):
         self.printerThread = PrinterThread(
