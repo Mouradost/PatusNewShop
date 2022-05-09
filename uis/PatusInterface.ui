@@ -1520,7 +1520,7 @@ QLabel
                              <x>0</x>
                              <y>0</y>
                              <width>374</width>
-                             <height>644</height>
+                             <height>646</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_13">
@@ -1773,8 +1773,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>178</width>
-                             <height>129</height>
+                             <width>374</width>
+                             <height>646</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_6">
@@ -1991,8 +1991,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>178</width>
-                             <height>129</height>
+                             <width>374</width>
+                             <height>646</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_7">
@@ -2209,8 +2209,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>178</width>
-                             <height>129</height>
+                             <width>374</width>
+                             <height>646</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_11">
@@ -2427,8 +2427,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>178</width>
-                             <height>129</height>
+                             <width>374</width>
+                             <height>646</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_16">
@@ -2645,8 +2645,8 @@ QLabel
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>178</width>
-                             <height>161</height>
+                             <width>374</width>
+                             <height>646</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_17">
@@ -3927,6 +3927,71 @@ QRadioButton::indicator::unChecked
                               </widget>
                              </item>
                             </layout>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QFrame" name="f_orderWorker">
+                         <property name="tabletTracking">
+                          <bool>false</bool>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QHBoxLayout" name="horizontalLayout_63">
+                          <property name="spacing">
+                           <number>5</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="l_orderWorker">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>MS Shell Dlg 2</family>
+                              <pointsize>14</pointsize>
+                              <weight>50</weight>
+                              <italic>false</italic>
+                              <bold>false</bold>
+                             </font>
+                            </property>
+                            <property name="tabletTracking">
+                             <bool>false</bool>
+                            </property>
+                            <property name="text">
+                             <string>Worker name</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QComboBox" name="cb_orderWorker">
+                            <property name="enabled">
+                             <bool>false</bool>
+                            </property>
+                            <property name="tabletTracking">
+                             <bool>false</bool>
+                            </property>
                            </widget>
                           </item>
                          </layout>
@@ -10532,8 +10597,8 @@ QComboBox
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>473</width>
-                      <height>712</height>
+                      <width>142</width>
+                      <height>177</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_21">

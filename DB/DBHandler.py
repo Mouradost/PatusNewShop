@@ -1627,7 +1627,9 @@ class DBHelper(object):
             self,
             sell: Sell,
             order_items: list,
-            completed: int = 0):
+            completed: int = 0)-> List[OrderItem]:
+        
+        old_order = self.getOrderBySellId(sell.id)
         self.updateSell(sell)
         if order_items[0].tableId is not None and completed == 0:
             table = self.getTableById(order_items[0].tableId)
@@ -1652,6 +1654,7 @@ class DBHelper(object):
                         price=sup.price,
                     )
                 )
+        return old_order
 
     def deleteSellContent(self, id_sell: int):
         with self.conn:
@@ -2214,7 +2217,6 @@ class DBHelper(object):
             self.c.execute(
                 f"SELECT * FROM {SellItemTable.TABLE_NAME} WHERE {SellItemTable.COLUMN_ID_SELL}=?", (sell_id,))
             all_x = self.c.fetchall()
-            print(all_x)
             results = []
             if all_x is not None:
                 for x in all_x:

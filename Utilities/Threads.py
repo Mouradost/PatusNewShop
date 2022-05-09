@@ -4,7 +4,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from DB.DBHandler import DBHelper
 from Setting.Setting import ServerSetting
-from Utilities.UiUtilities import prepareTicketForOrder, prepareTicketForCashier, prepareTicketForReceipt
+from Utilities.UiUtilities import prepareTicketForOrder, prepareTicketForCashier, prepareTicketForReceipt, getTicketDifference
 from DB.DbTables import *
 import datetime
 import hashlib
@@ -381,6 +381,7 @@ class ClientHandler(QThread):
             orders, sell_id, total, comment, nb_covers = data[0].split(
                 ";")
             orders = self.constructOrder(json.loads(orders))
+            order_show = orders
             old = False
             if sell_id == "":
                 sell_id = self.db.insertOrder(
@@ -396,15 +397,16 @@ class ClientHandler(QThread):
 
                 sell = self.db.getSellById(int(sell_id))
                 sell.total = total
-                self.db.updateOrder(
+                old_order = self.db.updateOrder(
                     sell=sell,
                     order_items=orders,
                     completed=0)
+                order_show = getTicketDifference(old_order, orders)
 
                 old = True
             self.printerCall.emit(
                 self.worker.name,
-                orders,
+                order_show,
                 comment,
                 int(sell_id),
                 old,
@@ -503,7 +505,8 @@ class PrinterThread(QThread):
             tax: float,
             mobile: bool = False,
             given: float = 0.,
-            calling_thread: QThread = None):
+            calling_thread: QThread = None,
+            cancel: bool = False):
 
         super(PrinterThread, self).__init__()
         self.which_printer = which_printer
@@ -515,6 +518,7 @@ class PrinterThread(QThread):
         self.tax = tax
         self.mobile = mobile
         self.given = given
+        self.cancel = cancel
         self.ticket = None
         self.ticket_kitchen = None
         self.ticket_pizza = None
@@ -533,17 +537,13 @@ class PrinterThread(QThread):
                 f"[PRINTER THREAD] Start printing", False)
 
             if self.which_printer == "Kitchen":
-                # if self.old:
-                #     self.order_items = self.oldOrderHandler(
-                #         order_items=self.order_items,
-                #         ticket_number=self.ticket_number)
-                # else:
                 self.ticket_kitchen, self.ticket_pizza, self.ticket_bar, self.kitchen_count, self.pizza_count, self.drink_count = prepareTicketForOrder(
                     worker_name=self.worker_name,
                     order_items=self.order_items,
                     comment=self.comment,
                     ticket_number=self.ticket_number,
-                    old=self.old)
+                    old=self.old,
+                    cancel=self.cancel)
                 kitchen_tickets = []
                 kitchen_places = []
 
@@ -640,14 +640,6 @@ class PrinterThread(QThread):
             self.logUpdater.emit(
                 f"[PRINTER THREAD] {e}", True)
         self.stop()
-
-    def oldOrderHandler(
-            self, order_items: list,
-            ticket_number: int):
-        # print(order_items)
-        # print("*"*100)
-        # print(self.db.getOrderBySellId(sell_id=ticket_number))
-        return order_items
 
     def stop(self):
         self.logUpdater.emit(

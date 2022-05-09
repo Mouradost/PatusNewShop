@@ -669,6 +669,7 @@ class PatusMainUI(QMainWindow):
         self.cb_workerCategory.clear()
         self.cb_sellIdWorker.clear()
         self.cb_orderCustomer.clear()
+        self.cb_orderWorker.clear()
         self.cb_sellIdCustomer.clear()
         self.cb_wasteStockWorkerId.clear()
         self.cb_wasteCustomWorkerId.clear()
@@ -686,6 +687,7 @@ class PatusMainUI(QMainWindow):
         for i, worker in enumerate(self.DB.getAllWorkers()):
             self.workerDict[i] = worker.id
             self.workerDictId[worker.id] = i
+            self.cb_orderWorker.insertItem(i, worker.name)
             self.cb_sellIdWorker.insertItem(i, worker.name)
             self.cb_wasteCustomWorkerId.insertItem(i, worker.name)
             self.cb_wasteStockWorkerId.insertItem(i, worker.name)
@@ -2067,6 +2069,8 @@ class PatusMainUI(QMainWindow):
             if self.currentSell is not None:
                 self.l_cashRegisterTicketNumber.setText(
                     f"{self.currentSell.id}")
+                self.cb_orderWorker.setCurrentIndex(
+                    self.workerDictId[self.currentSell.id_worker])
             else:
                 self.setNbCoversSetup()
             currentOrderShow = []
@@ -2271,6 +2275,7 @@ class PatusMainUI(QMainWindow):
             confirmDeletingOrder.show()
             rsp = confirmDeletingOrder.exec_()
             if rsp:
+                self.sendCancelTicket()
                 self.DB.deleteOrder(
                     self.currentSell,
                     self.currentOrder)
@@ -2285,6 +2290,38 @@ class PatusMainUI(QMainWindow):
             msg.setWindowTitle("Error message")
             msg.exec_()
 
+    def sendCancelTicket(self):
+        try:
+            self.printerThread = PrinterThread(
+                which_printer="Kitchen",
+                worker_name=self.DB.getWorkerById(
+                    self.currentSell.id_worker).name,
+                order_items=self.currentOrder,
+                comment=self.le_cashRegisterComment.toPlainText(),
+                ticket_number=self.currentSell.id,
+                old=False,
+                tax=self.tax,
+                mobile=True,
+                cancel=True)
+            self.printerThread.printStatus.connect(
+                self.printerProblem)
+            self.printerThread.logUpdater.connect(self.callLog)
+            self.printerThread.start()
+
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.setText('Sent cancel ticket to printer!')
+            msg.setWindowTitle("Information message")
+            msg.exec_()
+
+        except Exception as e:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText('Problem sending cancel ticket to printer!')
+            msg.setDetailedText(str(e))
+            msg.setWindowTitle("Warning message")
+            msg.exec_()
+
     def clearCashRegister(self):
         self.tax = 0
         self.l_cashRegisterTableNumber.setText("-")
@@ -2294,6 +2331,8 @@ class PatusMainUI(QMainWindow):
         self.tw_orderList.setRowCount(0)
         self.tw_orderList.setColumnCount(0)
         self.cb_orderCustomer.setCurrentIndex(0)
+        self.cb_orderWorker.setCurrentIndex(
+            self.workerDictId[self.currentWorker.id])
         self.rb_takeAway.setChecked(True)
         self.currentOrder = []
         self.current_table = None
@@ -2389,10 +2428,11 @@ class PatusMainUI(QMainWindow):
                     on_table=self.current_table if self.current_table else 0)
             else:
                 self.currentSell.total = self.calculateTotal()
-                self.DB.updateOrder(
+                old_order = self.DB.updateOrder(
                     sell=self.currentSell,
                     order_items=self.currentOrder
                 )
+                getTicketDifference(old_order, self.currentOrder)
             self.clearCashRegister()
             self.currentOrder = []
             self.notifyClients("TABLES")
@@ -2418,6 +2458,8 @@ class PatusMainUI(QMainWindow):
                 if self.currentSell is not None:
                     self.l_cashRegisterTicketNumber.setText(
                         f"{self.currentSell.id}")
+                    self.cb_orderWorker.setCurrentIndex(
+                        self.workerDictId[self.currentSell.id_worker])
                 currentOrderShow = []
                 for co in self.currentOrder:
                     currentSuppShow = []
@@ -2840,6 +2882,7 @@ class PatusMainUI(QMainWindow):
     def cashRegisterPrintFunction(self, place: str, use_printer: bool):
         try:
             assert len(self.currentOrder)
+            order_show = self.currentOrder
             total = self.calculateTotal()
             if self.currentSell is None:
 
@@ -2856,11 +2899,12 @@ class PatusMainUI(QMainWindow):
 
                 old = False
             else:
-
-                self.DB.updateOrder(
+                self.currentSell.total = total
+                old_order = self.DB.updateOrder(
                     sell=self.currentSell,
                     order_items=self.currentOrder
                 )
+                order_show = getTicketDifference(old_order, self.currentOrder)
 
                 old = True
 
@@ -2884,7 +2928,7 @@ class PatusMainUI(QMainWindow):
                         which_printer=place,
                         worker_name=self.DB.getWorkerById(
                             self.currentSell.id_worker).name,
-                        order_items=self.currentOrder,
+                        order_items=order_show if place == "Kitchen" else self.currentOrder,
                         comment=self.le_cashRegisterComment.toPlainText(),
                         ticket_number=self.currentSell.id,
                         old=old,
@@ -3043,6 +3087,7 @@ class PatusMainUI(QMainWindow):
                 date_start=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 date_end=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 id_worker=self.currentWorker.id)
+            self.clearCashRegister()
             self.btn_tables.click()
         else:
             msg = QMessageBox()

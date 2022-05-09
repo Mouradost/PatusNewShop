@@ -270,6 +270,44 @@ class OrderItem:
             "id": self.id
         }
 
+    def getDiff(self, other):
+        return OrderItem(
+            tableId=self.tableId,
+            productId=self.productId,
+            productName=self.productName,
+            productCategory=self.productCategory,
+            productUnit=self.productUnit,
+            orderItemQuantity=self.orderItemQuantity - other.orderItemQuantity,
+            orderItemTotal=self.orderItemTotal - other.orderItemTotal,
+            orderItemSupplements=self.orderItemSupplements,
+            group_id=self.group_id,
+            nb_covers=self.nb_covers,
+            ready=self.ready,
+            served=self.served,
+            id=self.id)
+
+    def isChanged(self, other):
+        return (self.orderItemQuantity != other.orderItemQuantity) and (self.orderItemTotal != other.orderItemTotal)
+
+    def compare(self, other):
+        return (self.productId == other.productId) and (self.ready == other.ready)
+
+    def getDeleted(self):
+        return OrderItem(
+            tableId=self.tableId,
+            productId=self.productId,
+            productName=self.productName,
+            productCategory=self.productCategory,
+            productUnit=self.productUnit,
+            orderItemQuantity=-self.orderItemQuantity,
+            orderItemTotal=-self.orderItemTotal,
+            orderItemSupplements=self.orderItemSupplements,
+            group_id=self.group_id,
+            nb_covers=self.nb_covers,
+            ready=self.ready,
+            served=self.served,
+            id=self.id)
+
 
 @dataclass
 class Ticket:

@@ -594,7 +594,8 @@ def prepareTicketForOrder(
         order_items: List[OrderItem],
         comment: str,
         ticket_number: int,
-        old: bool) -> Union[str, str, str, int, int, int]:
+        old: bool,
+        cancel: bool = False) -> Union[str, str, str, int, int, int]:
     db = DBHelper()
     kitchen_count, pizza_count, drink_count = 0, 0, 0
     kitchen_group, pizza_group, drink_group = 0, 0, 0
@@ -613,6 +614,16 @@ def prepareTicketForOrder(
 
         ticket_bar_txt += '=' * 46 + ' \n'
         ticket_bar_txt += f"{'UPDATE':^46}" + ' \n'
+
+    if cancel:
+        ticket_kitchen_txt += '=' * 46 + ' \n'
+        ticket_kitchen_txt += f"{'CANCEL':^46}" + ' \n'
+
+        ticket_pizza_txt += '=' * 46 + ' \n'
+        ticket_pizza_txt += f"{'CANCEL':^46}" + ' \n'
+
+        ticket_bar_txt += '=' * 46 + ' \n'
+        ticket_bar_txt += f"{'CANCEL':^46}" + ' \n'
 
     # chef
     ticket_kitchen_txt += '=' * 46 + ' \n'
@@ -818,3 +829,31 @@ def addNewNotification(parent: QWidget, message: str) -> None:
     frame.layout().addWidget(label)
 
     parent.layout().addWidget(frame)
+
+
+def getTicketDifference(old_orders: List[OrderItem], new_orders: List[OrderItem]) -> List[OrderItem]:
+    results = []
+    # Check for updates
+    for new_order in new_orders:
+        new = None
+        found = False
+        for old_order in old_orders:
+            if old_order.compare(new_order):
+                found = True
+                if new_order.isChanged(old_order):
+                    new = new_order.getDiff(old_order)
+                    break
+        if not found:
+            new = new_order
+        if new is not None:
+            results.append(new)
+
+    # Check for deleted orders
+    for old_order in old_orders:
+        found = False
+        for new_order in new_orders:
+            if old_order.productId == new_order.productId:
+                found = True
+        if not found:
+            results.append(old_order.getDeleted())
+    return results

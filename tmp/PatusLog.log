@@ -1,1092 +1,353 @@
-2022-04-26 23:34:57,494 INFO: restart server with new settings...
-2022-04-26 23:34:57,495 INFO: [SERVER] Server is stopped
-2022-04-26 23:34:57,501 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-04-26 23:34:57,501 INFO: [SERVER] Server is stopped
-2022-04-26 23:34:57,541 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-04-26 23:34:57,541 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-04-26 23:34:57,541 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-04-26 23:34:57,542 INFO: [SERVER] Server is configured
-2022-04-26 23:34:57,542 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-04-26 23:35:02,684 INFO: restart server with new settings...
-2022-04-26 23:35:02,684 INFO: [SERVER] Server is stopped
-2022-04-26 23:35:02,689 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-04-26 23:35:02,691 INFO: [SERVER] Server is stopped
-2022-04-26 23:35:02,710 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-04-26 23:35:02,710 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-04-26 23:35:02,711 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-04-26 23:35:02,711 INFO: [SERVER] Server is configured
-2022-04-26 23:35:02,712 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-04-26 23:35:20,812 INFO: restart server with new settings...
-2022-04-26 23:35:20,812 INFO: [SERVER] Server is stopped
-2022-04-26 23:35:20,820 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-04-26 23:35:20,821 INFO: [SERVER] Server is stopped
-2022-04-26 23:35:20,848 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-04-26 23:35:20,848 INFO: [SERVER] Server is configured
-2022-04-26 23:35:20,848 INFO: [SERVER] Server is listening on 192.168.0.105:7800
-2022-04-26 23:35:20,946 INFO: [SERVER] New connection: Connected to 192.168.0.102
-2022-04-26 23:35:20,950 INFO: [SERVER] Active connection: 1
-2022-04-26 23:35:57,580 ERROR: [192.168.0.102] [WinError 10054] An existing connection was forcibly closed by the remote host
-2022-04-26 23:35:57,580 INFO: [SERVER] Client list size: 0
-2022-04-26 23:35:57,580 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
-2022-04-26 23:36:47,928 INFO: restart server with new settings...
-2022-04-26 23:36:47,930 INFO: [SERVER] Server is stopped
-2022-04-26 23:36:47,937 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-04-26 23:36:47,937 INFO: [SERVER] Server is stopped
-2022-04-26 23:36:47,966 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-04-26 23:36:47,966 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-04-26 23:36:47,966 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-04-26 23:36:47,966 INFO: [SERVER] Server is configured
-2022-04-26 23:36:47,966 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-04-26 23:36:53,799 INFO: [SERVER] Server is stopped
-2022-04-26 23:36:53,838 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-04-26 23:36:53,838 INFO: [SERVER] Server is stopped
-2022-04-26 23:37:12,170 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-04-26 23:37:12,171 INFO: [SERVER] Server is configured
-2022-04-26 23:37:12,171 INFO: [SERVER] Server is listening on 192.168.0.105:7800
-2022-04-26 23:37:13,593 INFO: [SERVER] New connection: Connected to 192.168.0.102
-2022-04-26 23:37:13,601 INFO: [SERVER] Active connection: 1
-2022-04-26 23:37:24,731 ERROR: [192.168.0.102] string index out of range
-2022-04-26 23:37:24,731 INFO: [SERVER] Client list size: 0
-2022-04-26 23:37:24,732 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
-2022-04-26 23:37:26,088 INFO: [SERVER] New connection: Connected to 192.168.0.102
-2022-04-26 23:37:26,091 INFO: [SERVER] Active connection: 1
-2022-04-26 23:37:34,284 ERROR: [192.168.0.102] string index out of range
-2022-04-26 23:37:34,284 INFO: [SERVER] Client list size: 0
-2022-04-26 23:37:34,285 INFO: [SERVER] Server is not connected anymore to 192.168.0.102
-2022-04-26 23:46:46,387 INFO: restart server with new settings...
-2022-04-26 23:46:46,390 INFO: [SERVER] Server is stopped
-2022-04-26 23:46:46,396 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-04-26 23:46:46,397 INFO: [SERVER] Server is stopped
-2022-04-26 23:46:46,468 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-04-26 23:46:46,469 INFO: [SERVER] Server is configured
-2022-04-26 23:46:46,469 INFO: [SERVER] Server is listening on 192.168.0.105:7800
-2022-04-26 23:46:51,521 INFO: [SERVER] Server is stopped
-2022-04-26 23:46:51,563 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-04-26 23:46:51,563 INFO: [SERVER] Server is stopped
-2022-04-26 23:48:06,780 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-04-26 23:48:06,781 INFO: [SERVER] Server is configured
-2022-04-26 23:48:06,781 INFO: [SERVER] Server is listening on 192.168.0.105:7800
-2022-04-26 23:48:08,854 INFO: [SERVER] New connection: Connected to 192.168.0.105
-2022-04-26 23:48:08,864 INFO: [SERVER] Active connection: 1
-2022-04-26 23:58:53,693 ERROR: [192.168.0.105] string index out of range
-2022-04-26 23:58:53,694 INFO: [SERVER] Client list size: 0
-2022-04-26 23:58:53,694 INFO: [SERVER] Server is not connected anymore to 192.168.0.105
-2022-04-26 23:58:57,446 INFO: [SERVER] Server is stopped
-2022-04-26 23:58:57,503 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-04-26 23:58:57,504 INFO: [SERVER] Server is stopped
-2022-04-27 00:26:24,122 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-04-27 00:26:24,159 INFO: [SERVER] Server is configured
-2022-04-27 00:26:24,160 INFO: [SERVER] Server is listening on 192.168.0.105:7800
-2022-04-27 00:27:25,719 INFO: [SERVER] New connection: Connected to 192.168.0.105
-2022-04-27 00:27:25,723 INFO: [SERVER] Active connection: 1
-2022-04-27 00:32:40,506 INFO: [192.168.0.105] New order send to kitchen
-2022-04-27 00:32:40,661 INFO: [PRINTER THREAD] Start printing
-2022-04-27 00:33:00,391 INFO: [192.168.0.105] New order send to kitchen
-2022-04-27 00:33:00,527 INFO: [PRINTER THREAD] Start printing
-2022-04-27 00:33:01,642 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-04-27 00:33:01,960 INFO: [PRINTER THREAD] Finished printing
-2022-04-27 00:33:21,455 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-04-27 00:33:21,520 INFO: [PRINTER THREAD] Finished printing
-2022-04-27 00:33:23,967 ERROR: [192.168.0.105] 'NoneType' object has no attribute 'ready'
-2022-04-27 00:33:23,968 INFO: [SERVER] Client list size: 0
-2022-04-27 00:33:23,969 INFO: [SERVER] Server is not connected anymore to 192.168.0.105
-2022-04-27 00:33:24,013 INFO: [SERVER] New connection: Connected to 192.168.0.105
-2022-04-27 00:33:24,020 INFO: [SERVER] Active connection: 1
-2022-04-27 00:35:38,068 ERROR: [192.168.0.105] string index out of range
-2022-04-27 00:35:38,068 INFO: [SERVER] Client list size: 0
-2022-04-27 00:35:38,068 INFO: [SERVER] Server is not connected anymore to 192.168.0.105
-2022-04-27 00:35:43,583 INFO: [SERVER] New connection: Connected to 192.168.0.105
-2022-04-27 00:35:43,585 INFO: [SERVER] Active connection: 1
-2022-04-27 00:35:50,094 ERROR: [192.168.0.105] string index out of range
-2022-04-27 00:35:50,095 INFO: [SERVER] Client list size: 0
-2022-04-27 00:35:50,095 INFO: [SERVER] Server is not connected anymore to 192.168.0.105
-2022-04-27 00:35:54,088 INFO: [SERVER] New connection: Connected to 192.168.0.105
-2022-04-27 00:35:54,093 INFO: [SERVER] Active connection: 1
-2022-04-27 00:36:17,428 ERROR: [192.168.0.105] string index out of range
-2022-04-27 00:36:17,428 INFO: [SERVER] Client list size: 0
-2022-04-27 00:36:17,428 INFO: [SERVER] Server is not connected anymore to 192.168.0.105
-2022-04-27 00:36:21,098 INFO: [SERVER] New connection: Connected to 192.168.0.105
-2022-04-27 00:36:21,112 INFO: [SERVER] Active connection: 1
-2022-04-27 00:36:42,419 INFO: [192.168.0.105] !MENUCATEGORY
-2022-04-27 00:36:42,425 INFO: [192.168.0.105] !TABLES
-2022-04-27 00:36:48,374 INFO: [192.168.0.105] 1!TABLECONTENT
-2022-04-27 00:36:48,376 INFO: [192.168.0.105] !MENUITEM
-2022-04-27 00:36:51,843 INFO: [192.168.0.105] !TABLES
-2022-04-27 00:37:04,195 INFO: [PRINTER THREAD] Start printing
-2022-04-27 00:37:07,353 INFO: [192.168.0.105] !MENUITEM
-2022-04-27 00:37:07,354 INFO: [192.168.0.105] 2!TABLECONTENT
-2022-04-27 00:37:18,278 INFO: [192.168.0.105] !TABLES
-2022-04-27 00:37:19,109 INFO: [192.168.0.105] 2!TABLECONTENT
-2022-04-27 00:37:19,115 INFO: [192.168.0.105] !MENUITEM
-2022-04-27 00:37:25,182 ERROR: [PRINTER THREAD] Cashier (192.168.1.202) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-04-27 00:37:25,287 INFO: [PRINTER THREAD] Finished printing
-2022-04-27 00:40:25,347 ERROR: [192.168.0.105] string index out of range
-2022-04-27 00:40:25,713 INFO: [SERVER] Client list size: 0
-2022-04-27 00:40:25,713 INFO: [SERVER] Server is not connected anymore to 192.168.0.105
-2022-04-27 00:40:28,218 INFO: [SERVER] New connection: Connected to 192.168.0.105
-2022-04-27 00:40:28,230 INFO: [SERVER] Active connection: 1
-2022-04-27 00:40:57,737 ERROR: [192.168.0.105] string index out of range
-2022-04-27 00:40:57,738 INFO: [SERVER] Client list size: 0
-2022-04-27 00:40:57,738 INFO: [SERVER] Server is not connected anymore to 192.168.0.105
-2022-04-27 00:41:10,865 INFO: [SERVER] Server is stopped
-2022-04-27 00:41:10,924 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-04-27 00:41:10,925 INFO: [SERVER] Server is stopped
-2022-05-01 21:06:18,049 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-01 21:06:18,071 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-01 21:06:18,072 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.63.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-01 21:06:18,072 INFO: [SERVER] Server is configured
-2022-05-01 21:06:18,073 INFO: [SERVER] Server is listening on 10.63.0.6:7800
-2022-05-01 21:06:49,692 INFO: [SERVER] New connection: Connected to 10.63.0.6
-2022-05-01 21:06:49,694 INFO: [SERVER] Active connection: 1
-2022-05-01 21:06:56,567 INFO: [10.63.0.6] !MENUCATEGORY&!TABLES
-2022-05-01 21:06:58,330 INFO: [10.63.0.6] 1!TABLECONTENT
-2022-05-01 21:06:58,355 INFO: [10.63.0.6] !MENUITEM
-2022-05-01 21:07:58,584 INFO: [10.63.0.6] !MENUITEM
-2022-05-01 21:08:14,370 INFO: [10.63.0.6] [{"group_id":1,"nb_covers":5,"orderItemQuantity":1.0,"orderItemSupplements":[],"orderItemTotal":500.0,"productCategory":2,"productId":2,"productName":"ttttt","productUnit":"t","ready":1,"served":0,"tableId":1},{"group_id":1,"nb_covers":5,"orderItemQuantity":1.0,"orderItemSupplements":[],"orderItemTotal":500.0,"productCategory":2,"productId":2,"productName":"ttttt","productUnit":"t","ready":0,"served":0,"tableId":1},{"group_id":1,"nb_covers":1,"orderItemQuantity":1.0,"orderItemSupplements":[],"orderItemTotal":500.0,"productCategory":1,"productId":3,"productName":"this is the longest menu item title here","productUnit":"t","ready":0,"served":0,"tableId":1}];11;1500.0;;1!ORDER
-2022-05-01 21:08:15,002 INFO: [10.63.0.6] New order send to kitchen
-2022-05-01 21:08:15,006 INFO: [PRINTER THREAD] Start printing
-2022-05-01 21:08:15,007 INFO: [10.63.0.6] !TABLES
-2022-05-01 21:08:17,610 ERROR: [10.63.0.6] string index out of range
-2022-05-01 21:08:17,701 INFO: [SERVER] Client list size: 0
-2022-05-01 21:08:17,701 INFO: [SERVER] Server is not connected anymore to 10.63.0.6
-2022-05-01 21:08:36,137 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-01 21:08:36,174 ERROR: Failed to notify Client ([WinError 10038] An operation was attempted on something that is not a socket)
-2022-05-01 21:08:36,311 INFO: [PRINTER THREAD] Finished printing
-2022-05-01 21:08:48,734 INFO: [SERVER] Server is stopped
-2022-05-01 21:08:48,785 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-01 21:08:48,786 INFO: [SERVER] Server is stopped
-2022-05-01 21:17:59,164 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-01 21:17:59,176 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-01 21:17:59,176 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.190.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-01 21:17:59,177 INFO: [SERVER] Server is configured
-2022-05-01 21:17:59,177 INFO: [SERVER] Server is listening on 10.190.0.6:7800
-2022-05-01 21:18:23,015 INFO: [SERVER] New connection: Connected to 10.190.0.6
-2022-05-01 21:18:23,020 INFO: [SERVER] Active connection: 1
-2022-05-01 21:21:44,332 ERROR: [10.190.0.6] string index out of range
-2022-05-01 21:21:44,368 INFO: [SERVER] Client list size: 0
-2022-05-01 21:21:44,369 INFO: [SERVER] Server is not connected anymore to 10.190.0.6
-2022-05-01 21:21:47,371 INFO: [SERVER] New connection: Connected to 10.190.0.6
-2022-05-01 21:21:47,398 INFO: [SERVER] Active connection: 1
-2022-05-01 21:24:39,675 INFO: [SERVER] Client list size: 0
-2022-05-01 21:24:39,676 INFO: [SERVER] Server is not connected anymore to 10.190.0.6
-2022-05-01 21:24:39,676 INFO: [SERVER] Server is stopped
-2022-05-01 21:24:39,727 ERROR: [10.190.0.6] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-01 21:24:39,728 ERROR: [SERVER ERROR] Client removed error: list.remove(x): x not in list
-2022-05-01 21:24:39,728 INFO: [SERVER] Server is not connected anymore to 10.190.0.6
-2022-05-01 21:24:39,728 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-01 21:24:39,728 INFO: [SERVER] Server is stopped
-2022-05-04 17:54:40,831 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 17:54:40,844 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-04 17:54:40,844 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.73.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 17:54:40,844 INFO: [SERVER] Server is configured
-2022-05-04 17:54:40,845 INFO: [SERVER] Server is listening on 10.73.0.6:7800
-2022-05-04 17:55:25,601 INFO: [SERVER] Server is stopped
-2022-05-04 17:55:25,648 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-04 17:55:25,649 INFO: [SERVER] Server is stopped
-2022-05-04 17:55:29,113 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 17:55:29,113 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-04 17:55:29,113 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.73.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 17:55:29,113 INFO: [SERVER] Server is configured
-2022-05-04 17:55:29,113 INFO: [SERVER] Server is listening on 10.73.0.6:7800
-2022-05-04 17:56:41,924 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 17:56:41,926 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-04 17:56:41,927 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.73.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 17:56:41,927 INFO: [SERVER] Server is configured
-2022-05-04 17:56:41,928 INFO: [SERVER] Server is listening on 10.73.0.6:7800
-2022-05-04 17:57:28,148 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 17:57:28,150 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-04 17:57:28,150 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.73.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 17:57:28,151 INFO: [SERVER] Server is configured
-2022-05-04 17:57:28,151 INFO: [SERVER] Server is listening on 10.73.0.6:7800
-2022-05-04 17:57:57,172 INFO: [SERVER] Server is stopped
-2022-05-04 17:57:57,200 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-04 17:57:57,200 INFO: [SERVER] Server is stopped
-2022-05-04 18:00:45,909 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:00:45,910 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-04 18:00:45,911 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.73.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:00:45,911 INFO: [SERVER] Server is configured
-2022-05-04 18:00:45,911 INFO: [SERVER] Server is listening on 10.73.0.6:7800
-2022-05-04 18:01:02,829 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:01:02,830 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-04 18:01:02,830 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.73.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:01:02,830 INFO: [SERVER] Server is configured
-2022-05-04 18:01:02,831 INFO: [SERVER] Server is listening on 10.73.0.6:7800
-2022-05-04 18:02:09,083 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:02:09,086 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-04 18:02:09,086 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.73.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:02:09,088 INFO: [SERVER] Server is configured
-2022-05-04 18:02:09,088 INFO: [SERVER] Server is listening on 10.73.0.6:7800
-2022-05-04 18:02:40,172 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:02:40,174 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-04 18:02:40,175 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.73.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:02:40,175 INFO: [SERVER] Server is configured
-2022-05-04 18:02:40,176 INFO: [SERVER] Server is listening on 10.73.0.6:7800
-2022-05-04 18:03:50,746 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:03:50,747 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-04 18:03:50,748 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.73.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:03:50,748 INFO: [SERVER] Server is configured
-2022-05-04 18:03:50,750 INFO: [SERVER] Server is listening on 10.73.0.6:7800
-2022-05-04 18:06:12,006 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:06:12,010 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-04 18:06:12,011 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.73.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:06:12,012 INFO: [SERVER] Server is configured
-2022-05-04 18:06:12,013 INFO: [SERVER] Server is listening on 10.73.0.6:7800
-2022-05-04 18:06:13,923 INFO: [SERVER] Server is stopped
-2022-05-04 18:06:13,954 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-04 18:06:13,955 INFO: [SERVER] Server is stopped
-2022-05-04 18:06:39,885 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:06:39,886 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-04 18:06:39,887 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.73.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:06:39,887 INFO: [SERVER] Server is configured
-2022-05-04 18:06:39,888 INFO: [SERVER] Server is listening on 10.73.0.6:7800
-2022-05-04 18:20:35,280 INFO: [SERVER] Server is stopped
-2022-05-04 18:20:35,300 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-04 18:20:35,301 INFO: [SERVER] Server is stopped
-2022-05-04 18:24:56,747 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:24:56,747 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-04 18:24:56,747 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.73.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:24:56,747 INFO: [SERVER] Server is configured
-2022-05-04 18:24:56,747 INFO: [SERVER] Server is listening on 10.73.0.6:7800
-2022-05-04 18:25:21,594 INFO: [SERVER] Server is stopped
-2022-05-04 18:25:21,609 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-04 18:25:21,609 INFO: [SERVER] Server is stopped
-2022-05-04 18:27:39,795 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:27:39,795 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-04 18:27:39,796 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.73.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-04 18:27:39,796 INFO: [SERVER] Server is configured
-2022-05-04 18:27:39,796 INFO: [SERVER] Server is listening on 10.73.0.6:7800
-2022-05-04 18:28:51,356 INFO: [SERVER] Server is stopped
-2022-05-04 18:28:51,375 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-04 18:28:51,375 INFO: [SERVER] Server is stopped
-2022-05-07 15:18:52,691 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 15:18:52,701 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 15:18:52,701 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.86.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 15:18:52,701 INFO: [SERVER] Server is configured
-2022-05-07 15:18:52,701 INFO: [SERVER] Server is listening on 10.86.0.6:7800
-2022-05-07 15:21:57,081 INFO: [SERVER] Server is stopped
-2022-05-07 15:21:57,122 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 15:21:57,122 INFO: [SERVER] Server is stopped
-2022-05-07 15:22:05,583 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 15:22:05,584 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 15:22:05,585 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.86.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 15:22:05,586 INFO: [SERVER] Server is configured
-2022-05-07 15:22:05,586 INFO: [SERVER] Server is listening on 10.86.0.6:7800
-2022-05-07 15:24:54,997 INFO: [SERVER] New connection: Connected to 10.86.0.6
-2022-05-07 15:24:55,006 INFO: [SERVER] Active connection: 1
-2022-05-07 15:25:00,307 INFO: [10.86.0.6] New order send to kitchen
-2022-05-07 15:25:00,474 INFO: [PRINTER THREAD] Start printing
-2022-05-07 15:25:18,171 INFO: [PRINTER THREAD] Start printing
-2022-05-07 15:25:21,512 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-07 15:25:21,666 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 15:25:39,176 ERROR: [PRINTER THREAD] Cashier (192.168.1.202) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-07 15:25:39,202 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 15:31:41,383 INFO: [SERVER] Client list size: 0
-2022-05-07 15:31:41,384 INFO: [SERVER] Server is not connected anymore to 10.86.0.6
-2022-05-07 15:31:41,384 INFO: [SERVER] Server is stopped
-2022-05-07 15:31:41,428 ERROR: [10.86.0.6] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 15:31:41,429 ERROR: [SERVER ERROR] Client removed error: list.remove(x): x not in list
-2022-05-07 15:31:41,429 INFO: [SERVER] Server is not connected anymore to 10.86.0.6
-2022-05-07 15:31:41,429 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 15:31:41,430 INFO: [SERVER] Server is stopped
-2022-05-07 15:33:12,169 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 15:33:12,173 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 15:33:12,174 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.86.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 15:33:12,174 INFO: [SERVER] Server is configured
-2022-05-07 15:33:12,175 INFO: [SERVER] Server is listening on 10.86.0.6:7800
-2022-05-07 15:33:22,345 INFO: [PRINTER THREAD] Start printing
-2022-05-07 15:33:43,659 ERROR: [PRINTER THREAD] Cashier (192.168.1.202) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-07 15:33:43,742 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 15:34:37,100 INFO: [SERVER] Server is stopped
-2022-05-07 15:34:37,146 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 15:34:37,147 INFO: [SERVER] Server is stopped
-2022-05-07 15:34:40,817 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 15:34:40,817 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 15:34:40,818 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.86.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 15:34:40,818 INFO: [SERVER] Server is configured
-2022-05-07 15:34:40,818 INFO: [SERVER] Server is listening on 10.86.0.6:7800
-2022-05-07 15:34:54,839 INFO: [PRINTER THREAD] Start printing
-2022-05-07 15:35:15,863 ERROR: [PRINTER THREAD] Cashier (192.168.1.202) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-07 15:35:15,912 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 15:35:28,090 INFO: [SERVER] Server is stopped
-2022-05-07 15:35:28,121 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 15:35:28,122 INFO: [SERVER] Server is stopped
-2022-05-07 15:36:39,278 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 15:36:39,279 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 15:36:39,279 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.86.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 15:36:39,279 INFO: [SERVER] Server is configured
-2022-05-07 15:36:39,279 INFO: [SERVER] Server is listening on 10.86.0.6:7800
-2022-05-07 15:36:49,412 INFO: [PRINTER THREAD] Start printing
-2022-05-07 15:37:10,443 ERROR: [PRINTER THREAD] Cashier (192.168.1.202) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-07 15:37:10,494 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 15:55:17,352 INFO: [PRINTER THREAD] Start printing
-2022-05-07 15:55:38,385 ERROR: [PRINTER THREAD] Cashier (192.168.1.202) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-07 15:55:38,420 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 16:06:02,298 INFO: [SERVER] Server is stopped
-2022-05-07 16:06:02,326 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 16:06:02,326 INFO: [SERVER] Server is stopped
-2022-05-07 16:36:39,181 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 16:36:39,182 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 16:36:39,183 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.86.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 16:36:39,183 INFO: [SERVER] Server is configured
-2022-05-07 16:36:39,183 INFO: [SERVER] Server is listening on 10.86.0.6:7800
-2022-05-07 16:36:51,224 INFO: [SERVER] Server is stopped
-2022-05-07 16:36:51,253 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 16:36:51,253 INFO: [SERVER] Server is stopped
-2022-05-07 16:38:05,799 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 16:38:05,800 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 16:38:05,800 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.86.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 16:38:05,800 INFO: [SERVER] Server is configured
-2022-05-07 16:38:05,801 INFO: [SERVER] Server is listening on 10.86.0.6:7800
-2022-05-07 16:38:58,258 INFO: [SERVER] Server is stopped
-2022-05-07 16:38:58,296 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 16:38:58,296 INFO: [SERVER] Server is stopped
-2022-05-07 16:39:02,060 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 16:39:02,061 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 16:39:02,061 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.86.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 16:39:02,061 INFO: [SERVER] Server is configured
-2022-05-07 16:39:02,061 INFO: [SERVER] Server is listening on 10.86.0.6:7800
-2022-05-07 16:39:18,634 INFO: [SERVER] Server is stopped
-2022-05-07 16:39:18,663 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 16:39:18,663 INFO: [SERVER] Server is stopped
-2022-05-07 16:41:06,447 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 16:41:06,448 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 16:41:06,448 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.86.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 16:41:06,448 INFO: [SERVER] Server is configured
-2022-05-07 16:41:06,448 INFO: [SERVER] Server is listening on 10.86.0.6:7800
-2022-05-07 16:42:14,725 INFO: [SERVER] Server is stopped
-2022-05-07 16:42:14,771 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 16:42:14,771 INFO: [SERVER] Server is stopped
-2022-05-07 16:42:20,751 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 16:42:20,753 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 16:42:20,753 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.86.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 16:42:20,753 INFO: [SERVER] Server is configured
-2022-05-07 16:42:20,753 INFO: [SERVER] Server is listening on 10.86.0.6:7800
-2022-05-07 16:42:42,167 INFO: [SERVER] Server is stopped
-2022-05-07 16:42:42,200 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 16:42:42,200 INFO: [SERVER] Server is stopped
-2022-05-07 17:13:15,640 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 17:13:15,673 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 17:13:15,673 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.86.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 17:13:15,674 INFO: [SERVER] Server is configured
-2022-05-07 17:13:15,674 INFO: [SERVER] Server is listening on 10.86.0.6:7800
-2022-05-07 17:14:02,751 INFO: [SERVER] New connection: Connected to 10.86.0.6
-2022-05-07 17:14:02,752 INFO: [SERVER] Active connection: 1
-2022-05-07 17:14:10,557 INFO: [10.86.0.6] !MENUCATEGORY
-2022-05-07 17:14:10,559 INFO: [10.86.0.6] !TABLES
-2022-05-07 17:14:12,400 INFO: [10.86.0.6] 1!TABLECONTENT
-2022-05-07 17:14:12,401 INFO: [10.86.0.6] !MENUITEM
-2022-05-07 17:14:38,963 INFO: [10.86.0.6] !MENUITEM
-2022-05-07 17:15:32,715 INFO: [SERVER] Client list size: 0
-2022-05-07 17:15:32,716 INFO: [SERVER] Server is not connected anymore to 10.86.0.6
-2022-05-07 17:15:32,716 INFO: [SERVER] Server is stopped
-2022-05-07 17:15:32,749 ERROR: [10.86.0.6] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 17:15:32,749 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 17:15:32,749 INFO: [SERVER] Server is stopped
-2022-05-07 18:38:29,554 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 18:38:29,588 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 18:38:29,589 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 18:38:29,589 INFO: [SERVER] Server is configured
-2022-05-07 18:38:29,589 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 18:39:03,622 INFO: [SERVER] Server is stopped
-2022-05-07 18:39:03,660 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 18:39:03,660 INFO: [SERVER] Server is stopped
-2022-05-07 18:39:29,718 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 18:39:29,719 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 18:39:29,720 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 18:39:29,721 INFO: [SERVER] Server is configured
-2022-05-07 18:39:29,721 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 18:39:46,587 INFO: [SERVER] Server is stopped
-2022-05-07 18:39:46,622 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 18:39:46,622 INFO: [SERVER] Server is stopped
-2022-05-07 19:23:23,176 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 19:23:23,177 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 19:23:23,177 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 19:23:23,178 INFO: [SERVER] Server is configured
-2022-05-07 19:23:23,178 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 19:23:30,866 INFO: [PRINTER THREAD] Start printing
-2022-05-07 19:23:51,880 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-07 19:23:51,932 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 19:58:09,853 INFO: [SERVER] Server is stopped
-2022-05-07 19:58:09,884 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 19:58:09,885 INFO: [SERVER] Server is stopped
-2022-05-07 20:10:01,870 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 20:10:01,870 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 20:10:01,870 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 20:10:01,870 INFO: [SERVER] Server is configured
-2022-05-07 20:10:01,870 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 20:10:10,885 INFO: [PRINTER THREAD] Start printing
-2022-05-07 20:10:31,910 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-07 20:10:31,960 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 20:10:50,501 INFO: [PRINTER THREAD] Start printing
-2022-05-07 20:11:11,510 ERROR: [PRINTER THREAD] Cashier (192.168.1.202) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-07 20:11:11,554 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 20:11:29,275 INFO: [PRINTER THREAD] Start printing
-2022-05-07 20:11:50,290 ERROR: [PRINTER THREAD] Cashier (192.168.1.202) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-07 20:11:50,323 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 20:12:00,170 INFO: [SERVER] Server is stopped
-2022-05-07 20:12:00,198 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 20:12:00,199 INFO: [SERVER] Server is stopped
-2022-05-07 20:12:44,337 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 20:12:44,337 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 20:12:44,338 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 20:12:44,338 INFO: [SERVER] Server is configured
-2022-05-07 20:12:44,338 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 20:12:57,751 INFO: [PRINTER THREAD] Start printing
-2022-05-07 20:12:57,751 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 20:13:07,012 INFO: [PRINTER THREAD] Start printing
-2022-05-07 20:13:07,013 ERROR: [PRINTER THREAD] Cashier (192.168.1.202) is down with error (name 'cashier' is not defined)
-2022-05-07 20:13:07,080 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 20:13:40,292 INFO: [SERVER] Server is stopped
-2022-05-07 20:13:40,345 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 20:13:40,345 INFO: [SERVER] Server is stopped
-2022-05-07 20:13:47,123 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 20:13:47,129 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 20:13:47,129 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 20:13:47,129 INFO: [SERVER] Server is configured
-2022-05-07 20:13:47,129 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 20:14:15,030 INFO: [PRINTER THREAD] Start printing
-2022-05-07 20:14:15,030 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 20:14:19,042 INFO: [PRINTER THREAD] Start printing
-2022-05-07 20:14:19,042 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 20:14:28,114 INFO: [PRINTER THREAD] Start printing
-2022-05-07 20:14:28,114 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 20:16:42,874 INFO: [SERVER] Server is stopped
-2022-05-07 20:16:42,884 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 20:16:42,884 INFO: [SERVER] Server is stopped
-2022-05-07 20:39:24,739 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 20:39:24,740 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 20:39:24,741 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 20:39:24,743 INFO: [SERVER] Server is configured
-2022-05-07 20:39:24,743 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 20:39:50,510 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 20:39:50,533 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 20:39:50,534 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 20:39:50,535 INFO: [SERVER] Server is configured
-2022-05-07 20:39:50,536 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 20:40:53,684 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 20:40:53,684 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 20:40:53,685 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 20:40:53,685 INFO: [SERVER] Server is configured
-2022-05-07 20:40:53,685 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 20:42:34,214 INFO: [SERVER] Server is stopped
-2022-05-07 20:42:34,252 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 20:42:34,253 INFO: [SERVER] Server is stopped
-2022-05-07 20:49:36,712 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 20:49:36,712 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 20:49:36,712 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 20:49:36,712 INFO: [SERVER] Server is configured
-2022-05-07 20:49:36,712 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 21:00:58,984 INFO: [PRINTER THREAD] Start printing
-2022-05-07 21:01:14,077 INFO: [PRINTER THREAD] Start printing
-2022-05-07 21:01:20,009 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-07 21:01:20,050 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 21:01:35,119 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-07 21:01:35,142 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 21:07:19,137 INFO: [SERVER] Server is stopped
-2022-05-07 21:07:19,138 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 21:07:19,138 INFO: [SERVER] Server is stopped
-2022-05-07 21:07:31,158 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:07:31,158 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 21:07:31,159 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:07:31,159 INFO: [SERVER] Server is configured
-2022-05-07 21:07:31,159 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 21:14:31,956 INFO: [SERVER] Server is stopped
-2022-05-07 21:14:32,010 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 21:14:32,011 INFO: [SERVER] Server is stopped
-2022-05-07 21:14:38,569 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:14:38,570 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 21:14:38,570 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:14:38,570 INFO: [SERVER] Server is configured
-2022-05-07 21:14:38,570 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 21:14:54,696 INFO: [SERVER] Server is stopped
-2022-05-07 21:14:54,735 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 21:14:54,735 INFO: [SERVER] Server is stopped
-2022-05-07 21:15:16,048 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:15:16,048 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 21:15:16,048 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:15:16,048 INFO: [SERVER] Server is configured
-2022-05-07 21:15:16,049 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 21:17:09,043 INFO: [PRINTER THREAD] Start printing
-2022-05-07 21:17:23,806 INFO: [SERVER] Server is stopped
-2022-05-07 21:17:23,830 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 21:17:23,830 INFO: [SERVER] Server is stopped
-2022-05-07 21:38:51,712 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:38:51,712 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 21:38:51,712 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:38:51,712 INFO: [SERVER] Server is configured
-2022-05-07 21:38:51,713 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 21:39:05,629 INFO: [PRINTER THREAD] Start printing
-2022-05-07 21:39:26,631 ERROR: [PRINTER THREAD] Cashier (192.168.1.202) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-07 21:39:26,660 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 21:42:25,529 INFO: [SERVER] Server is stopped
-2022-05-07 21:42:25,563 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 21:42:25,563 INFO: [SERVER] Server is stopped
-2022-05-07 21:42:40,740 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:42:40,740 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 21:42:40,741 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:42:40,741 INFO: [SERVER] Server is configured
-2022-05-07 21:42:40,741 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 21:43:23,170 INFO: [SERVER] Server is stopped
-2022-05-07 21:43:23,222 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 21:43:23,222 INFO: [SERVER] Server is stopped
-2022-05-07 21:43:28,742 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:43:28,757 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 21:43:28,758 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:43:28,759 INFO: [SERVER] Server is configured
-2022-05-07 21:43:28,760 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 21:44:44,550 INFO: [SERVER] Server is stopped
-2022-05-07 21:44:44,605 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 21:44:44,606 INFO: [SERVER] Server is stopped
-2022-05-07 21:44:50,543 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:44:50,543 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 21:44:50,544 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:44:50,544 INFO: [SERVER] Server is configured
-2022-05-07 21:44:50,544 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 21:50:44,368 INFO: [SERVER] Server is stopped
-2022-05-07 21:50:44,409 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 21:50:44,410 INFO: [SERVER] Server is stopped
-2022-05-07 21:50:50,901 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:50:50,903 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 21:50:50,904 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:50:50,904 INFO: [SERVER] Server is configured
-2022-05-07 21:50:50,904 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 21:54:24,507 INFO: [SERVER] Server is stopped
-2022-05-07 21:54:24,563 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 21:54:24,563 INFO: [SERVER] Server is stopped
-2022-05-07 21:54:31,007 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:54:31,007 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 21:54:31,007 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 21:54:31,007 INFO: [SERVER] Server is configured
-2022-05-07 21:54:31,007 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 22:03:43,458 INFO: [SERVER] Server is stopped
-2022-05-07 22:03:43,510 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 22:03:43,510 INFO: [SERVER] Server is stopped
-2022-05-07 22:04:58,809 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:04:58,810 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 22:04:58,810 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:04:58,810 INFO: [SERVER] Server is configured
-2022-05-07 22:04:58,810 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 22:05:54,840 INFO: [SERVER] Server is stopped
-2022-05-07 22:05:54,883 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 22:05:54,884 INFO: [SERVER] Server is stopped
-2022-05-07 22:06:00,123 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:06:00,125 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 22:06:00,126 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:06:00,126 INFO: [SERVER] Server is configured
-2022-05-07 22:06:00,126 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 22:06:28,865 INFO: [SERVER] Server is stopped
-2022-05-07 22:06:28,906 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 22:06:28,906 INFO: [SERVER] Server is stopped
-2022-05-07 22:06:37,257 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:06:37,277 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 22:06:37,279 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:06:37,280 INFO: [SERVER] Server is configured
-2022-05-07 22:06:37,280 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 22:09:01,361 INFO: [SERVER] Server is stopped
-2022-05-07 22:09:01,409 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 22:09:01,410 INFO: [SERVER] Server is stopped
-2022-05-07 22:09:07,765 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:09:07,774 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 22:09:07,775 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:09:07,775 INFO: [SERVER] Server is configured
-2022-05-07 22:09:07,775 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 22:09:43,409 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:09:43,411 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 22:09:43,411 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:09:43,411 INFO: [SERVER] Server is configured
-2022-05-07 22:09:43,411 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 22:10:02,229 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:10:02,247 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 22:10:02,247 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:10:02,247 INFO: [SERVER] Server is configured
-2022-05-07 22:10:02,254 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 22:10:46,565 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:10:46,566 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 22:10:46,567 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:10:46,567 INFO: [SERVER] Server is configured
-2022-05-07 22:10:46,568 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 22:32:02,305 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:32:02,305 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 22:32:02,305 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:32:02,305 INFO: [SERVER] Server is configured
-2022-05-07 22:32:02,305 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 22:36:48,293 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:36:48,294 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 22:36:48,294 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:36:48,294 INFO: [SERVER] Server is configured
-2022-05-07 22:36:48,294 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 22:37:01,793 INFO: [PRINTER THREAD] Start printing
-2022-05-07 22:37:22,828 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-07 22:37:22,862 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 22:37:29,288 INFO: [SERVER] Server is stopped
-2022-05-07 22:37:29,323 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 22:37:29,323 INFO: [SERVER] Server is stopped
-2022-05-07 22:43:07,376 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:43:07,377 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 22:43:07,377 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:43:07,377 INFO: [SERVER] Server is configured
-2022-05-07 22:43:07,377 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 22:47:21,726 INFO: [SERVER] Server is stopped
-2022-05-07 22:47:21,753 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 22:47:21,754 INFO: [SERVER] Server is stopped
-2022-05-07 22:53:56,526 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:53:56,527 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 22:53:56,527 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 22:53:56,527 INFO: [SERVER] Server is configured
-2022-05-07 22:53:56,527 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 22:57:59,484 INFO: [SERVER] Server is stopped
-2022-05-07 22:57:59,531 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 22:57:59,531 INFO: [SERVER] Server is stopped
-2022-05-07 23:48:54,910 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 23:48:54,910 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 23:48:54,910 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 23:48:54,910 INFO: [SERVER] Server is configured
-2022-05-07 23:48:54,910 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 23:49:08,833 INFO: [PRINTER THREAD] Start printing
-2022-05-07 23:49:29,863 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-07 23:49:29,903 INFO: [PRINTER THREAD] Finished printing
-2022-05-07 23:50:01,782 INFO: [SERVER] Server is stopped
-2022-05-07 23:50:01,825 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 23:50:01,825 INFO: [SERVER] Server is stopped
-2022-05-07 23:53:41,043 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 23:53:41,043 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 23:53:41,043 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 23:53:41,043 INFO: [SERVER] Server is configured
-2022-05-07 23:53:41,044 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 23:53:57,022 INFO: [SERVER] Server is stopped
-2022-05-07 23:53:57,074 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 23:53:57,074 INFO: [SERVER] Server is stopped
-2022-05-07 23:54:07,819 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 23:54:07,820 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-07 23:54:07,820 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-07 23:54:07,820 INFO: [SERVER] Server is configured
-2022-05-07 23:54:07,820 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-07 23:54:22,721 INFO: [SERVER] Server is stopped
-2022-05-07 23:54:22,761 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-07 23:54:22,762 INFO: [SERVER] Server is stopped
-2022-05-08 00:56:52,705 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 00:56:52,705 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 00:56:52,705 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 00:56:52,705 INFO: [SERVER] Server is configured
-2022-05-08 00:56:52,705 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 00:57:28,733 INFO: [SERVER] Server is stopped
-2022-05-08 00:57:28,776 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 00:57:28,776 INFO: [SERVER] Server is stopped
-2022-05-08 00:58:02,475 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 00:58:02,479 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 00:58:02,481 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 00:58:02,482 INFO: [SERVER] Server is configured
-2022-05-08 00:58:02,482 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 20:47:55,596 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 20:47:55,609 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 20:47:55,609 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 20:47:55,609 INFO: [SERVER] Server is configured
-2022-05-08 20:47:55,609 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 20:48:11,906 INFO: [PRINTER THREAD] Start printing
-2022-05-08 20:48:11,907 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 20:48:35,418 INFO: [SERVER] Server is stopped
-2022-05-08 20:48:35,452 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 20:48:35,452 INFO: [SERVER] Server is stopped
-2022-05-08 20:48:41,563 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 20:48:41,564 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 20:48:41,564 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 20:48:41,564 INFO: [SERVER] Server is configured
-2022-05-08 20:48:41,564 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 20:48:54,331 INFO: [PRINTER THREAD] Start printing
-2022-05-08 20:48:54,331 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 21:40:46,836 INFO: [SERVER] Server is stopped
-2022-05-08 21:40:46,893 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 21:40:46,893 INFO: [SERVER] Server is stopped
-2022-05-08 21:49:07,138 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:49:07,140 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 21:49:07,140 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:49:07,140 INFO: [SERVER] Server is configured
-2022-05-08 21:49:07,140 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 21:49:19,119 INFO: [PRINTER THREAD] Start printing
-2022-05-08 21:49:19,119 ERROR: [PRINTER THREAD] incomplete input
-2022-05-08 21:49:19,119 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 21:49:29,014 INFO: [SERVER] Server is stopped
-2022-05-08 21:49:29,037 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 21:49:29,038 INFO: [SERVER] Server is stopped
-2022-05-08 21:50:15,185 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:50:15,194 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 21:50:15,194 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:50:15,194 INFO: [SERVER] Server is configured
-2022-05-08 21:50:15,194 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 21:50:27,315 INFO: [PRINTER THREAD] Start printing
-2022-05-08 21:50:27,315 ERROR: [PRINTER THREAD] incomplete input
-2022-05-08 21:50:27,315 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 21:50:47,084 INFO: [SERVER] Server is stopped
-2022-05-08 21:50:47,123 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 21:50:47,123 INFO: [SERVER] Server is stopped
-2022-05-08 21:51:08,212 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:51:08,214 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 21:51:08,214 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:51:08,215 INFO: [SERVER] Server is configured
-2022-05-08 21:51:08,215 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 21:51:17,241 INFO: [PRINTER THREAD] Start printing
-2022-05-08 21:51:17,241 ERROR: [PRINTER THREAD] incomplete input
-2022-05-08 21:51:17,241 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 21:51:59,241 INFO: [SERVER] Server is stopped
-2022-05-08 21:51:59,267 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 21:51:59,268 INFO: [SERVER] Server is stopped
-2022-05-08 21:52:04,187 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:52:04,187 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 21:52:04,187 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:52:04,187 INFO: [SERVER] Server is configured
-2022-05-08 21:52:04,187 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 21:52:14,466 INFO: [PRINTER THREAD] Start printing
-2022-05-08 21:52:14,466 ERROR: [PRINTER THREAD] incomplete input
-2022-05-08 21:52:14,466 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 21:53:01,349 INFO: [SERVER] Server is stopped
-2022-05-08 21:53:01,376 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 21:53:01,376 INFO: [SERVER] Server is stopped
-2022-05-08 21:53:05,573 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:53:05,573 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 21:53:05,573 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:53:05,573 INFO: [SERVER] Server is configured
-2022-05-08 21:53:05,575 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 21:53:15,100 INFO: [PRINTER THREAD] Start printing
-2022-05-08 21:53:15,100 ERROR: [PRINTER THREAD] 'PrinterThread' object has no attribute 'getSellById'
-2022-05-08 21:53:15,100 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 21:53:54,267 INFO: [SERVER] Server is stopped
-2022-05-08 21:53:54,305 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 21:53:54,305 INFO: [SERVER] Server is stopped
-2022-05-08 21:53:59,330 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:53:59,332 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 21:53:59,333 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:53:59,333 INFO: [SERVER] Server is configured
-2022-05-08 21:53:59,333 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 21:54:08,513 INFO: [PRINTER THREAD] Start printing
-2022-05-08 21:54:08,513 ERROR: [PRINTER THREAD] incomplete input
-2022-05-08 21:54:08,513 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 21:55:21,513 INFO: [SERVER] Server is stopped
-2022-05-08 21:55:21,540 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 21:55:21,541 INFO: [SERVER] Server is stopped
-2022-05-08 21:55:27,379 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:55:27,380 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 21:55:27,380 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:55:27,381 INFO: [SERVER] Server is configured
-2022-05-08 21:55:27,381 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 21:55:37,600 INFO: [PRINTER THREAD] Start printing
-2022-05-08 21:55:37,600 ERROR: [PRINTER THREAD] incomplete input
-2022-05-08 21:55:37,600 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 21:56:42,992 INFO: [SERVER] Server is stopped
-2022-05-08 21:56:43,022 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 21:56:43,022 INFO: [SERVER] Server is stopped
-2022-05-08 21:56:47,343 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:56:47,343 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 21:56:47,343 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:56:47,343 INFO: [SERVER] Server is configured
-2022-05-08 21:56:47,343 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 21:56:59,661 INFO: [PRINTER THREAD] Start printing
-2022-05-08 21:56:59,661 ERROR: [PRINTER THREAD] 'PrinterThread' object has no attribute 'getSellItemBySellId'
-2022-05-08 21:56:59,661 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 21:57:26,822 INFO: [SERVER] Server is stopped
-2022-05-08 21:57:26,853 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 21:57:26,854 INFO: [SERVER] Server is stopped
-2022-05-08 21:57:33,153 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:57:33,153 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 21:57:33,157 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:57:33,157 INFO: [SERVER] Server is configured
-2022-05-08 21:57:33,157 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 21:57:43,479 INFO: [PRINTER THREAD] Start printing
-2022-05-08 21:57:43,479 ERROR: [PRINTER THREAD] incomplete input
-2022-05-08 21:57:43,479 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 21:59:26,162 INFO: [SERVER] Server is stopped
-2022-05-08 21:59:26,198 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 21:59:26,198 INFO: [SERVER] Server is stopped
-2022-05-08 21:59:31,516 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:59:31,517 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 21:59:31,517 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 21:59:31,517 INFO: [SERVER] Server is configured
-2022-05-08 21:59:31,517 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 21:59:46,955 INFO: [PRINTER THREAD] Start printing
-2022-05-08 21:59:46,955 ERROR: [PRINTER THREAD] incomplete input
-2022-05-08 21:59:46,956 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 22:03:29,711 INFO: [SERVER] Server is stopped
-2022-05-08 22:03:29,749 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 22:03:29,749 INFO: [SERVER] Server is stopped
-2022-05-08 22:23:53,992 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:23:53,993 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 22:23:53,993 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:23:53,994 INFO: [SERVER] Server is configured
-2022-05-08 22:23:53,994 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 22:24:06,289 INFO: [PRINTER THREAD] Start printing
-2022-05-08 22:24:06,289 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 22:26:51,666 INFO: [SERVER] Server is stopped
-2022-05-08 22:26:51,708 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 22:26:51,708 INFO: [SERVER] Server is stopped
-2022-05-08 22:26:56,865 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:26:56,865 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 22:26:56,865 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:26:56,865 INFO: [SERVER] Server is configured
-2022-05-08 22:26:56,865 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 22:27:09,062 INFO: [PRINTER THREAD] Start printing
-2022-05-08 22:27:09,062 ERROR: [PRINTER THREAD] not enough values to unpack (expected 6, got 1)
-2022-05-08 22:27:09,062 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 22:27:57,576 INFO: [SERVER] Server is stopped
-2022-05-08 22:27:57,607 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 22:27:57,607 INFO: [SERVER] Server is stopped
-2022-05-08 22:36:57,154 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:36:57,154 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 22:36:57,154 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:36:57,167 INFO: [SERVER] Server is configured
-2022-05-08 22:36:57,167 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 22:39:07,693 INFO: [SERVER] Server is stopped
-2022-05-08 22:39:07,730 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 22:39:07,730 INFO: [SERVER] Server is stopped
-2022-05-08 22:39:32,492 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:39:32,492 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 22:39:32,492 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:39:32,492 INFO: [SERVER] Server is configured
-2022-05-08 22:39:32,492 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 22:39:50,927 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:39:50,928 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 22:39:50,928 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:39:50,929 INFO: [SERVER] Server is configured
-2022-05-08 22:39:50,929 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 22:41:04,122 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:41:04,125 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 22:41:04,125 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:41:04,125 INFO: [SERVER] Server is configured
-2022-05-08 22:41:04,126 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 22:41:58,910 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:41:58,913 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 22:41:58,914 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:41:58,916 INFO: [SERVER] Server is configured
-2022-05-08 22:41:58,918 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 22:42:39,992 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:42:39,992 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 22:42:39,992 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='D:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:42:39,992 INFO: [SERVER] Server is configured
-2022-05-08 22:42:39,992 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 22:43:15,123 INFO: [SERVER] Server is stopped
-2022-05-08 22:43:15,152 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 22:43:15,152 INFO: [SERVER] Server is stopped
-2022-05-08 22:43:22,883 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:43:22,885 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 22:43:22,886 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 22:43:22,886 INFO: [SERVER] Server is configured
-2022-05-08 22:43:22,886 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 22:43:31,782 INFO: [SERVER] Server is stopped
-2022-05-08 22:43:31,837 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 22:43:31,838 INFO: [SERVER] Server is stopped
-2022-05-08 23:32:14,488 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 23:32:14,488 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 23:32:14,488 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 23:32:14,491 INFO: [SERVER] Server is configured
-2022-05-08 23:32:14,492 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 23:33:40,652 INFO: [SERVER] New connection: Connected to 169.254.27.6
-2022-05-08 23:33:40,654 INFO: [SERVER] Active connection: 1
-2022-05-08 23:33:47,400 INFO: [169.254.27.6] !MENUCATEGORY
-2022-05-08 23:33:47,402 INFO: [169.254.27.6] !TABLES
-2022-05-08 23:33:49,669 INFO: [169.254.27.6] 2!TABLECONTENT
-2022-05-08 23:33:49,670 INFO: [169.254.27.6] !MENUITEM
-2022-05-08 23:33:53,700 INFO: [169.254.27.6] [{"group_id":1,"nb_covers":2,"orderItemQuantity":20.0,"orderItemSupplements":[],"orderItemTotal":10000.0,"productCategory":2,"productId":2,"productName":"ttttt","productUnit":"t","ready":0,"served":0,"tableId":2}];24;10000.0;;1!ORDER
-2022-05-08 23:33:54,123 INFO: [169.254.27.6] New order send to kitchen
-2022-05-08 23:33:54,125 INFO: [PRINTER THREAD] Start printing
-2022-05-08 23:33:54,125 ERROR: [PRINTER THREAD] not enough values to unpack (expected 6, got 1)
-2022-05-08 23:33:54,125 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 23:33:54,125 INFO: [169.254.27.6] !TABLES
-2022-05-08 23:34:06,850 INFO: [169.254.27.6] 2!TABLECONTENT
-2022-05-08 23:34:06,851 INFO: [169.254.27.6] !MENUITEM
-2022-05-08 23:36:30,795 INFO: [169.254.27.6] !TABLES
-2022-05-08 23:36:31,591 INFO: [169.254.27.6] !MENUITEM
-2022-05-08 23:36:31,592 INFO: [169.254.27.6] 1!TABLECONTENT
-2022-05-08 23:36:41,830 INFO: [169.254.27.6] [{"group_id":1,"nb_covers":1,"orderItemQuantity":1.0,"orderItemSupplements":[],"orderItemTotal":100.0,"productCategory":1,"productId":1,"productName":"napo","productUnit":"plat","ready":0,"served":0,"tableId":1}];;100.0;;2!ORDER
-2022-05-08 23:36:42,215 INFO: [169.254.27.6] New order send to kitchen
-2022-05-08 23:36:42,217 INFO: [169.254.27.6] !TABLES
-2022-05-08 23:36:42,218 INFO: [PRINTER THREAD] Start printing
-2022-05-08 23:36:59,303 INFO: [169.254.27.6] 2!TABLECONTENT
-2022-05-08 23:36:59,306 INFO: [169.254.27.6] !MENUITEM
-2022-05-08 23:37:03,259 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-08 23:37:03,263 INFO: [169.254.27.6] Message send
-2022-05-08 23:37:03,344 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 23:37:04,743 INFO: [169.254.27.6] [{"group_id":1,"nb_covers":2,"orderItemQuantity":20.0,"orderItemSupplements":[],"orderItemTotal":10000.0,"productCategory":2,"productId":2,"productName":"ttttt","productUnit":"t","ready":0,"served":0,"tableId":2}];24;10000.0;;2!ORDER
-2022-05-08 23:37:05,112 INFO: [169.254.27.6] New order send to kitchen
-2022-05-08 23:37:05,114 INFO: [PRINTER THREAD] Start printing
-2022-05-08 23:37:05,115 ERROR: [PRINTER THREAD] not enough values to unpack (expected 6, got 1)
-2022-05-08 23:37:05,115 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 23:37:05,118 INFO: [169.254.27.6] !TABLES
-2022-05-08 23:37:17,866 INFO: [169.254.27.6] 2!TABLECONTENT
-2022-05-08 23:37:17,874 INFO: [169.254.27.6] !MENUITEM
-2022-05-08 23:37:24,757 INFO: [169.254.27.6] [{"group_id":1,"nb_covers":2,"orderItemQuantity":20.0,"orderItemSupplements":[],"orderItemTotal":10000.0,"productCategory":2,"productId":2,"productName":"ttttt","productUnit":"t","ready":0,"served":0,"tableId":2},{"group_id":1,"nb_covers":1,"orderItemQuantity":1.0,"orderItemSupplements":[],"orderItemTotal":100.0,"productCategory":1,"productId":1,"productName":"napo","productUnit":"plat","ready":0,"served":0,"tableId":2}];24;10100.0;;2!ORDER
-2022-05-08 23:37:25,287 INFO: [169.254.27.6] New order send to kitchen
-2022-05-08 23:37:25,289 INFO: [169.254.27.6] !TABLES
-2022-05-08 23:37:25,290 INFO: [PRINTER THREAD] Start printing
-2022-05-08 23:37:25,291 ERROR: [PRINTER THREAD] not enough values to unpack (expected 6, got 2)
-2022-05-08 23:37:25,291 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 23:42:31,763 INFO: [SERVER] Client list size: 0
-2022-05-08 23:42:31,763 INFO: [SERVER] Server is not connected anymore to 169.254.27.6
-2022-05-08 23:42:31,763 INFO: [SERVER] Server is stopped
-2022-05-08 23:42:31,806 ERROR: [169.254.27.6] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 23:42:31,807 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 23:42:31,807 INFO: [SERVER] Server is stopped
-2022-05-08 23:51:27,018 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 23:51:27,019 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-08 23:51:27,019 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-08 23:51:27,019 INFO: [SERVER] Server is configured
-2022-05-08 23:51:27,019 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-08 23:51:28,703 INFO: [SERVER] New connection: Connected to 169.254.27.6
-2022-05-08 23:51:28,703 INFO: [SERVER] Active connection: 1
-2022-05-08 23:51:35,804 INFO: [169.254.27.6] !MENUCATEGORY
-2022-05-08 23:51:35,806 INFO: [169.254.27.6] !TABLES
-2022-05-08 23:51:37,493 INFO: [169.254.27.6] 1!TABLECONTENT
-2022-05-08 23:51:37,495 INFO: [169.254.27.6] !MENUITEM
-2022-05-08 23:51:43,146 INFO: [169.254.27.6] [{"group_id":1,"nb_covers":2,"orderItemQuantity":2.0,"orderItemSupplements":[],"orderItemTotal":200.0,"productCategory":1,"productId":1,"productName":"napo","productUnit":"plat","ready":0,"served":0,"tableId":1}];25;200.0;;2!ORDER
-2022-05-08 23:51:43,606 INFO: [169.254.27.6] New order send to kitchen
-2022-05-08 23:51:43,611 INFO: [PRINTER THREAD] Start printing
-2022-05-08 23:51:43,615 INFO: [169.254.27.6] !TABLES
-2022-05-08 23:52:04,642 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
-2022-05-08 23:52:04,644 INFO: [169.254.27.6] Message send
-2022-05-08 23:52:04,695 INFO: [PRINTER THREAD] Finished printing
-2022-05-08 23:52:25,087 INFO: [SERVER] Client list size: 0
-2022-05-08 23:52:25,088 INFO: [SERVER] Server is not connected anymore to 169.254.27.6
-2022-05-08 23:52:25,088 INFO: [SERVER] Server is stopped
-2022-05-08 23:52:25,220 ERROR: [169.254.27.6] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 23:52:25,221 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-08 23:52:25,221 INFO: [SERVER] Server is stopped
-2022-05-09 00:23:04,977 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-09 00:23:04,979 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-09 00:23:04,979 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-09 00:23:04,979 INFO: [SERVER] Server is configured
-2022-05-09 00:23:04,981 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-09 00:23:33,331 INFO: [SERVER] Server is stopped
-2022-05-09 00:23:33,367 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-09 00:23:33,368 INFO: [SERVER] Server is stopped
-2022-05-09 00:24:13,637 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-09 00:24:13,640 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-09 00:24:13,640 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-09 00:24:13,641 INFO: [SERVER] Server is configured
-2022-05-09 00:24:13,641 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-09 00:24:33,414 INFO: [SERVER] Server is stopped
-2022-05-09 00:24:33,447 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-09 00:24:33,447 INFO: [SERVER] Server is stopped
-2022-05-09 00:25:18,277 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-09 00:25:18,278 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-09 00:25:18,278 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-09 00:25:18,278 INFO: [SERVER] Server is configured
-2022-05-09 00:25:18,278 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-09 00:25:41,936 INFO: [SERVER] Server is stopped
-2022-05-09 00:25:41,974 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-09 00:25:41,976 INFO: [SERVER] Server is stopped
-2022-05-09 00:26:38,707 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-09 00:26:38,709 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-09 00:26:38,710 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='169.254.27.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-09 00:26:38,710 INFO: [SERVER] Server is configured
-2022-05-09 00:26:38,711 INFO: [SERVER] Server is listening on 169.254.27.6:7800
-2022-05-09 00:27:06,628 INFO: [PRINTER THREAD] Start printing
-2022-05-09 00:27:21,310 INFO: [SERVER] Server is stopped
-2022-05-09 00:27:21,355 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-09 00:27:21,355 INFO: [SERVER] Server is stopped
-2022-05-09 00:51:05,858 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-09 00:51:05,878 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-09 00:51:05,878 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.51.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-09 00:51:05,878 INFO: [SERVER] Server is configured
-2022-05-09 00:51:05,878 INFO: [SERVER] Server is listening on 10.51.0.6:7800
-2022-05-09 00:51:23,413 INFO: [SERVER] Server is stopped
-2022-05-09 00:51:23,467 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-09 00:51:23,467 INFO: [SERVER] Server is stopped
-2022-05-09 00:52:25,669 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-09 00:52:25,670 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
-2022-05-09 00:52:25,670 INFO: [SERVER] Trying default setting 
- ServerSetting(IP='10.51.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
-2022-05-09 00:52:25,670 INFO: [SERVER] Server is configured
-2022-05-09 00:52:25,670 INFO: [SERVER] Server is listening on 10.51.0.6:7800
-2022-05-09 00:52:35,510 INFO: [PRINTER THREAD] Start printing
-2022-05-09 00:52:38,033 INFO: [SERVER] Server is stopped
-2022-05-09 00:52:38,059 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-09 00:52:38,060 INFO: [SERVER] Server is stopped
+2022-05-09 11:11:27,118 INFO: [SERVER] Server is stopped
+2022-05-09 11:11:27,149 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 11:11:27,149 INFO: [SERVER] Server is stopped
+2022-05-09 11:14:29,407 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:14:29,407 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 11:14:29,407 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.89.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:14:29,408 INFO: [SERVER] Server is configured
+2022-05-09 11:14:29,408 INFO: [SERVER] Server is listening on 10.89.0.6:7800
+2022-05-09 11:14:50,472 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:15:11,481 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 11:15:11,532 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:15:34,947 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:15:34,947 ERROR: [PRINTER THREAD] list index out of range
+2022-05-09 11:15:34,947 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:18:45,648 INFO: [SERVER] Server is stopped
+2022-05-09 11:18:45,688 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 11:18:45,688 INFO: [SERVER] Server is stopped
+2022-05-09 11:18:49,980 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:18:49,981 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 11:18:49,981 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.89.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:18:49,981 INFO: [SERVER] Server is configured
+2022-05-09 11:18:49,981 INFO: [SERVER] Server is listening on 10.89.0.6:7800
+2022-05-09 11:19:04,353 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:19:18,078 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:19:25,375 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 11:19:25,414 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:19:39,106 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 11:19:39,153 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:26:52,683 INFO: [SERVER] Server is stopped
+2022-05-09 11:26:52,716 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 11:26:52,717 INFO: [SERVER] Server is stopped
+2022-05-09 11:26:57,179 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:26:57,180 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 11:26:57,180 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.89.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:26:57,180 INFO: [SERVER] Server is configured
+2022-05-09 11:26:57,181 INFO: [SERVER] Server is listening on 10.89.0.6:7800
+2022-05-09 11:27:24,919 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:27:45,925 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 11:27:45,969 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:27:51,131 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:28:12,164 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 11:28:12,185 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:28:36,775 INFO: [SERVER] Server is stopped
+2022-05-09 11:28:36,815 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 11:28:36,815 INFO: [SERVER] Server is stopped
+2022-05-09 11:28:41,052 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:28:41,053 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 11:28:41,053 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.89.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:28:41,053 INFO: [SERVER] Server is configured
+2022-05-09 11:28:41,053 INFO: [SERVER] Server is listening on 10.89.0.6:7800
+2022-05-09 11:28:57,561 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:29:16,538 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:29:18,564 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 11:29:18,607 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:29:33,726 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:29:33,726 ERROR: [PRINTER THREAD] list index out of range
+2022-05-09 11:29:33,726 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:29:37,575 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 11:29:37,603 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:30:12,358 INFO: [SERVER] Server is stopped
+2022-05-09 11:30:12,377 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 11:30:12,378 INFO: [SERVER] Server is stopped
+2022-05-09 11:30:17,323 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:30:17,323 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 11:30:17,323 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.89.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:30:17,323 INFO: [SERVER] Server is configured
+2022-05-09 11:30:17,323 INFO: [SERVER] Server is listening on 10.89.0.6:7800
+2022-05-09 11:30:41,672 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:31:02,706 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 11:31:02,770 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:31:11,384 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:31:32,425 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 11:31:32,455 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:32:28,676 INFO: [SERVER] Server is stopped
+2022-05-09 11:32:28,707 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 11:32:28,707 INFO: [SERVER] Server is stopped
+2022-05-09 11:32:33,814 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:32:33,814 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 11:32:33,814 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.89.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:32:33,814 INFO: [SERVER] Server is configured
+2022-05-09 11:32:33,814 INFO: [SERVER] Server is listening on 10.89.0.6:7800
+2022-05-09 11:33:35,393 INFO: [SERVER] Server is stopped
+2022-05-09 11:33:35,425 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 11:33:35,425 INFO: [SERVER] Server is stopped
+2022-05-09 11:33:40,331 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:33:40,340 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 11:33:40,340 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.89.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:33:40,340 INFO: [SERVER] Server is configured
+2022-05-09 11:33:40,340 INFO: [SERVER] Server is listening on 10.89.0.6:7800
+2022-05-09 11:33:56,460 INFO: [SERVER] Server is stopped
+2022-05-09 11:33:56,498 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 11:33:56,499 INFO: [SERVER] Server is stopped
+2022-05-09 11:34:08,979 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:34:08,981 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 11:34:08,982 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.89.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:34:08,982 INFO: [SERVER] Server is configured
+2022-05-09 11:34:08,982 INFO: [SERVER] Server is listening on 10.89.0.6:7800
+2022-05-09 11:34:17,838 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:34:17,838 ERROR: [PRINTER THREAD] list index out of range
+2022-05-09 11:34:17,838 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:34:40,042 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:35:01,058 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 11:35:01,105 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:35:04,288 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:35:04,288 ERROR: [PRINTER THREAD] list index out of range
+2022-05-09 11:35:04,289 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:36:15,285 INFO: [SERVER] Server is stopped
+2022-05-09 11:36:15,323 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 11:36:15,324 INFO: [SERVER] Server is stopped
+2022-05-09 11:38:42,192 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:38:42,193 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 11:38:42,193 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.89.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:38:42,193 INFO: [SERVER] Server is configured
+2022-05-09 11:38:42,193 INFO: [SERVER] Server is listening on 10.89.0.6:7800
+2022-05-09 11:39:40,429 INFO: [SERVER] Server is stopped
+2022-05-09 11:39:40,488 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 11:39:40,488 INFO: [SERVER] Server is stopped
+2022-05-09 11:39:46,130 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:39:46,131 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 11:39:46,131 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.89.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:39:46,131 INFO: [SERVER] Server is configured
+2022-05-09 11:39:46,131 INFO: [SERVER] Server is listening on 10.89.0.6:7800
+2022-05-09 11:39:53,716 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:39:53,716 ERROR: [PRINTER THREAD] list index out of range
+2022-05-09 11:39:53,716 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:40:08,445 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:40:29,468 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 11:40:29,510 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:40:35,258 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:40:56,274 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 11:40:56,293 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:41:11,555 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:41:32,577 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 11:41:32,603 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:41:45,047 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:42:06,070 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 11:42:06,093 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:42:19,322 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:42:40,341 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 11:42:40,364 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:42:51,983 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:42:51,984 ERROR: [PRINTER THREAD] list index out of range
+2022-05-09 11:42:51,984 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:43:50,981 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:43:50,982 ERROR: [PRINTER THREAD] list index out of range
+2022-05-09 11:43:50,982 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 11:45:53,285 INFO: [SERVER] Server is stopped
+2022-05-09 11:45:53,310 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 11:45:53,310 INFO: [SERVER] Server is stopped
+2022-05-09 11:45:57,923 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:45:57,923 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 11:45:57,923 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.89.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 11:45:57,924 INFO: [SERVER] Server is configured
+2022-05-09 11:45:57,924 INFO: [SERVER] Server is listening on 10.89.0.6:7800
+2022-05-09 11:46:06,123 INFO: [PRINTER THREAD] Start printing
+2022-05-09 11:46:27,170 ERROR: [PRINTER THREAD] Cashier (192.168.1.202) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 11:46:27,232 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 12:21:14,410 INFO: [PRINTER THREAD] Start printing
+2022-05-09 12:21:35,416 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 12:21:35,455 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 12:22:19,208 INFO: [PRINTER THREAD] Start printing
+2022-05-09 12:22:40,232 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 12:22:40,256 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 12:46:15,652 INFO: [SERVER] Server is stopped
+2022-05-09 12:46:15,685 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 12:46:15,686 INFO: [SERVER] Server is stopped
+2022-05-09 12:51:53,680 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 12:51:53,680 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 12:51:53,680 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.38.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 12:51:53,680 INFO: [SERVER] Server is configured
+2022-05-09 12:51:53,680 INFO: [SERVER] Server is listening on 10.38.0.6:7800
+2022-05-09 12:52:04,053 INFO: [PRINTER THREAD] Start printing
+2022-05-09 12:52:04,053 ERROR: [PRINTER THREAD] list index out of range
+2022-05-09 12:52:04,053 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 12:52:25,826 INFO: [PRINTER THREAD] Start printing
+2022-05-09 12:52:46,835 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 12:52:46,905 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 12:54:29,328 INFO: [SERVER] New connection: Connected to 10.38.0.6
+2022-05-09 12:54:29,331 INFO: [SERVER] Active connection: 1
+2022-05-09 12:54:35,111 INFO: [10.38.0.6] !MENUCATEGORY&!TABLES
+2022-05-09 12:54:37,037 INFO: [10.38.0.6] 1!TABLECONTENT
+2022-05-09 12:54:37,038 INFO: [10.38.0.6] !MENUITEM
+2022-05-09 12:54:40,468 INFO: [10.38.0.6] !MENUITEM
+2022-05-09 12:54:46,769 INFO: [10.38.0.6] !MENUITEM
+2022-05-09 12:54:52,989 INFO: [10.38.0.6] [{"group_id":1,"nb_covers":2,"orderItemQuantity":2.0,"orderItemSupplements":[],"orderItemTotal":200.0,"productCategory":1,"productId":1,"productName":"napo","productUnit":"plat","ready":0,"served":0,"tableId":1},{"group_id":1,"nb_covers":1,"orderItemQuantity":1.0,"orderItemSupplements":[],"orderItemTotal":500.0,"productCategory":2,"productId":2,"productName":"ttttt","productUnit":"t","ready":0,"served":0,"tableId":1},{"group_id":1,"nb_covers":1,"orderItemQuantity":1.0,"orderItemSupplements":[],"orderItemTotal":1.0,"productCategory":1,"productId":5,"productName":"unit","productUnit":"1","ready":0,"served":0,"tableId":1}];25;701.0;;1!ORDER
+2022-05-09 12:54:53,749 INFO: [10.38.0.6] New order send to kitchen
+2022-05-09 12:54:53,750 INFO: [10.38.0.6] !TABLES
+2022-05-09 12:54:53,750 INFO: [PRINTER THREAD] Start printing
+2022-05-09 12:54:56,536 INFO: [10.38.0.6] 1!TABLECONTENT
+2022-05-09 12:54:56,539 INFO: [10.38.0.6] !MENUITEM
+2022-05-09 12:55:00,153 INFO: [10.38.0.6] !TABLES
+2022-05-09 12:55:01,233 INFO: [10.38.0.6] 2!TABLECONTENT
+2022-05-09 12:55:01,235 INFO: [10.38.0.6] !MENUITEM
+2022-05-09 12:55:03,053 INFO: [10.38.0.6] !TABLES
+2022-05-09 12:55:03,848 INFO: [10.38.0.6] 1!TABLECONTENT
+2022-05-09 12:55:03,852 INFO: [10.38.0.6] !MENUITEM
+2022-05-09 12:55:06,017 INFO: [10.38.0.6] !TABLES
+2022-05-09 12:55:14,787 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 12:55:14,788 INFO: [10.38.0.6] Message send
+2022-05-09 12:55:14,838 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 12:55:31,090 INFO: [10.38.0.6] 1!TABLECONTENT
+2022-05-09 12:55:31,091 INFO: [10.38.0.6] !MENUITEM
+2022-05-09 12:55:44,198 INFO: [10.38.0.6] [{"group_id":1,"nb_covers":2,"orderItemQuantity":1.0,"orderItemSupplements":[],"orderItemTotal":100.0,"productCategory":1,"productId":1,"productName":"napo","productUnit":"plat","ready":0,"served":0,"tableId":1},{"group_id":1,"nb_covers":2,"orderItemQuantity":2.0,"orderItemSupplements":[],"orderItemTotal":1000.0,"productCategory":2,"productId":2,"productName":"ttttt","productUnit":"t","ready":0,"served":0,"tableId":1}];25;1100.0;;1!ORDER
+2022-05-09 12:55:44,866 INFO: [10.38.0.6] New order send to kitchen
+2022-05-09 12:55:44,869 INFO: [10.38.0.6] !TABLES
+2022-05-09 12:55:44,870 INFO: [PRINTER THREAD] Start printing
+2022-05-09 12:56:05,922 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 12:56:05,925 INFO: [10.38.0.6] Message send
+2022-05-09 12:56:05,985 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 12:56:36,853 INFO: [10.38.0.6] 1!TABLECONTENT
+2022-05-09 12:56:36,855 INFO: [10.38.0.6] !MENUITEM
+2022-05-09 12:56:40,723 INFO: [10.38.0.6] [{"group_id":1,"nb_covers":2,"orderItemQuantity":1.0,"orderItemSupplements":[],"orderItemTotal":100.0,"productCategory":1,"productId":1,"productName":"napo","productUnit":"plat","ready":0,"served":0,"tableId":1},{"group_id":1,"nb_covers":2,"orderItemQuantity":2.0,"orderItemSupplements":[],"orderItemTotal":1000.0,"productCategory":2,"productId":2,"productName":"ttttt","productUnit":"t","ready":0,"served":0,"tableId":1}];25;1100.0;;1!ORDER
+2022-05-09 12:56:41,231 INFO: [10.38.0.6] New order send to kitchen
+2022-05-09 12:56:41,233 INFO: [PRINTER THREAD] Start printing
+2022-05-09 12:56:41,235 ERROR: [PRINTER THREAD] list index out of range
+2022-05-09 12:56:41,235 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 12:56:41,237 INFO: [10.38.0.6] !TABLES
+2022-05-09 12:57:01,418 INFO: [10.38.0.6] 1!TABLECONTENT
+2022-05-09 12:57:01,424 INFO: [10.38.0.6] !MENUITEM
+2022-05-09 12:57:05,081 INFO: [10.38.0.6] [{"group_id":1,"nb_covers":2,"orderItemQuantity":2.0,"orderItemSupplements":[],"orderItemTotal":200.0,"productCategory":1,"productId":1,"productName":"napo","productUnit":"plat","ready":0,"served":0,"tableId":1},{"group_id":1,"nb_covers":2,"orderItemQuantity":2.0,"orderItemSupplements":[],"orderItemTotal":1000.0,"productCategory":2,"productId":2,"productName":"ttttt","productUnit":"t","ready":0,"served":0,"tableId":1}];25;1200.0;;1!ORDER
+2022-05-09 12:57:05,696 INFO: [10.38.0.6] New order send to kitchen
+2022-05-09 12:57:05,699 INFO: [10.38.0.6] !TABLES
+2022-05-09 12:57:05,700 INFO: [PRINTER THREAD] Start printing
+2022-05-09 12:57:26,761 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 12:57:26,762 INFO: [10.38.0.6] Message send
+2022-05-09 12:57:26,787 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 12:57:40,223 ERROR: [10.38.0.6] string index out of range
+2022-05-09 12:57:40,607 INFO: [SERVER] Client list size: 0
+2022-05-09 12:57:40,608 INFO: [SERVER] Server is not connected anymore to 10.38.0.6
+2022-05-09 12:58:58,212 INFO: [SERVER] New connection: Connected to 10.38.0.6
+2022-05-09 12:58:58,230 INFO: [SERVER] Active connection: 1
+2022-05-09 12:59:51,609 INFO: [SERVER] New connection: Connected to 10.38.0.6
+2022-05-09 12:59:51,610 INFO: [SERVER] Active connection: 2
+2022-05-09 13:00:26,063 INFO: [10.38.0.6] !TABLES
+2022-05-09 13:00:26,065 INFO: [10.38.0.6] !MENUCATEGORY
+2022-05-09 13:00:32,061 INFO: [10.38.0.6] !MENUITEM
+2022-05-09 13:00:32,064 INFO: [10.38.0.6] 1!TABLECONTENT
+2022-05-09 13:01:40,338 ERROR: [10.38.0.6] string index out of range
+2022-05-09 13:01:40,500 INFO: [SERVER] Client list size: 1
+2022-05-09 13:01:40,501 INFO: [SERVER] Server is not connected anymore to 10.38.0.6
+2022-05-09 13:01:45,266 INFO: [SERVER] Client list size: 0
+2022-05-09 13:01:45,267 INFO: [SERVER] Server is not connected anymore to 10.38.0.6
+2022-05-09 13:01:45,267 INFO: [SERVER] Server is stopped
+2022-05-09 13:01:45,325 ERROR: [10.38.0.6] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 13:01:45,326 ERROR: [SERVER ERROR] Client removed error: list.remove(x): x not in list
+2022-05-09 13:01:45,326 INFO: [SERVER] Server is not connected anymore to 10.38.0.6
+2022-05-09 13:01:45,326 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 13:01:45,326 INFO: [SERVER] Server is stopped
+2022-05-09 14:38:06,188 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 14:38:06,243 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 14:38:06,243 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.127.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 14:38:06,243 INFO: [SERVER] Server is configured
+2022-05-09 14:38:06,243 INFO: [SERVER] Server is listening on 10.127.0.6:7800
+2022-05-09 14:38:16,730 INFO: [PRINTER THREAD] Start printing
+2022-05-09 14:38:28,762 INFO: [PRINTER THREAD] Start printing
+2022-05-09 14:38:37,746 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 14:38:37,825 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 14:38:49,759 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 14:38:49,788 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 14:40:47,340 INFO: [SERVER] Server is stopped
+2022-05-09 14:40:47,368 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 14:40:47,368 INFO: [SERVER] Server is stopped
+2022-05-09 14:40:50,698 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 14:40:50,698 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 14:40:50,698 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.127.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 14:40:50,698 INFO: [SERVER] Server is configured
+2022-05-09 14:40:50,698 INFO: [SERVER] Server is listening on 10.127.0.6:7800
+2022-05-09 14:41:01,467 INFO: [PRINTER THREAD] Start printing
+2022-05-09 14:41:01,467 ERROR: [PRINTER THREAD] list index out of range
+2022-05-09 14:41:01,467 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 14:41:06,854 INFO: [PRINTER THREAD] Start printing
+2022-05-09 14:41:15,866 INFO: [PRINTER THREAD] Start printing
+2022-05-09 14:41:27,872 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 14:41:27,916 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 14:41:36,886 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 14:41:36,914 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 14:41:41,852 INFO: [PRINTER THREAD] Start printing
+2022-05-09 14:42:02,874 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 14:42:02,899 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 14:42:41,104 INFO: [PRINTER THREAD] Start printing
+2022-05-09 14:43:02,103 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 14:43:02,161 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 14:52:31,872 INFO: [SERVER] Server is stopped
+2022-05-09 14:52:31,908 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 14:52:31,909 INFO: [SERVER] Server is stopped
+2022-05-09 14:53:18,398 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 14:53:18,398 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 14:53:18,398 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.127.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 14:53:18,398 INFO: [SERVER] Server is configured
+2022-05-09 14:53:18,398 INFO: [SERVER] Server is listening on 10.127.0.6:7800
+2022-05-09 14:53:46,944 INFO: [SERVER] Server is stopped
+2022-05-09 14:53:46,974 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 14:53:46,975 INFO: [SERVER] Server is stopped
+2022-05-09 14:55:44,270 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 14:55:44,271 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 14:55:44,271 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.127.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 14:55:44,272 INFO: [SERVER] Server is configured
+2022-05-09 14:55:44,272 INFO: [SERVER] Server is listening on 10.127.0.6:7800
+2022-05-09 14:56:32,374 INFO: [SERVER] Server is stopped
+2022-05-09 14:56:32,404 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 14:56:32,404 INFO: [SERVER] Server is stopped
+2022-05-09 14:56:37,129 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 14:56:37,129 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 14:56:37,130 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.127.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 14:56:37,130 INFO: [SERVER] Server is configured
+2022-05-09 14:56:37,130 INFO: [SERVER] Server is listening on 10.127.0.6:7800
+2022-05-09 14:57:40,940 INFO: [SERVER] Server is stopped
+2022-05-09 14:57:40,960 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 14:57:40,961 INFO: [SERVER] Server is stopped
+2022-05-09 14:59:43,290 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 14:59:43,291 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 14:59:43,291 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.127.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 14:59:43,291 INFO: [SERVER] Server is configured
+2022-05-09 14:59:43,291 INFO: [SERVER] Server is listening on 10.127.0.6:7800
+2022-05-09 15:00:23,513 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 15:00:23,514 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 15:00:23,514 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.127.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 15:00:23,514 INFO: [SERVER] Server is configured
+2022-05-09 15:00:23,514 INFO: [SERVER] Server is listening on 10.127.0.6:7800
+2022-05-09 15:00:41,366 INFO: [SERVER] Server is stopped
+2022-05-09 15:00:41,397 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 15:00:41,397 INFO: [SERVER] Server is stopped
+2022-05-09 15:01:31,625 INFO: [SERVER] Load setting: ServerSetting(IP='192.168.0.105', PORT=7800, MAX_CLIENTS=10, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 15:01:31,625 ERROR: [SERVER] [WinError 10049] The requested address is not valid in its context
+2022-05-09 15:01:31,625 INFO: [SERVER] Trying default setting 
+ ServerSetting(IP='10.127.0.6', PORT=7800, MAX_CLIENTS=5, CASHIER_IP='192.168.1.203', KITCHEN_IP='192.168.1.204', PIZZA_IP='192.168.1.204', BAR_IP='192.168.1.202', PATH='d:\\Code\\Python_projects\\PatusNewShop\\Setting\\Setting.json')
+2022-05-09 15:01:31,625 INFO: [SERVER] Server is configured
+2022-05-09 15:01:31,625 INFO: [SERVER] Server is listening on 10.127.0.6:7800
+2022-05-09 15:01:55,390 INFO: [PRINTER THREAD] Start printing
+2022-05-09 15:02:16,421 ERROR: [PRINTER THREAD] Kitchen (192.168.1.204) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-09 15:02:16,467 INFO: [PRINTER THREAD] Finished printing
+2022-05-09 15:02:23,539 INFO: [SERVER] Server is stopped
+2022-05-09 15:02:23,563 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-09 15:02:23,563 INFO: [SERVER] Server is stopped
