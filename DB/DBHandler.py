@@ -1,4 +1,6 @@
 import sqlite3 as sql
+
+from threading import Lock
 from typing import List
 
 from DB.ShopDbInfo import *
@@ -7,43 +9,42 @@ from DB.DbTables import *
 import datetime
 import hashlib
 import os
+from Utilities import Utility
 
 
 class DBHelper(object):
     DATABASE_NAME = "Shop.db"
     DATABASE_VERSION = 1
+    # lock = QtCore.QMutex()
 
     def __init__(self):
-        self.conn = sql.connect(os.path.join(
-            os.getcwd(), "DB", DBHelper.DATABASE_NAME), check_same_thread=False)
+        self.lock = Lock()
+        self.conn = sql.connect(
+            os.path.join(os.getcwd(), "DB", DBHelper.DATABASE_NAME),
+            check_same_thread=False,
+            timeout=20,
+        )
         self.c = self.conn.cursor()
         self.createTables()
 
         if len(self.getAllWorkers()) < 1:
             self.insertWorker(
                 Worker(
-                    name="Administrator", username="admin", password=hashlib.sha3_512(
-                        "admin".encode()).hexdigest(),
-                    phone="008615542642820")
+                    name="Administrator",
+                    username="admin",
+                    password=hashlib.sha3_512("admin".encode()).hexdigest(),
+                    phone="008615542642820",
+                )
             )
 
         if len(self.getAllCategories()) < 1:
-            self.insertCategory(
-                Category(
-                    name="Administrator"
-                ))
+            self.insertCategory(Category(name="Administrator"))
 
         if len(self.getAllCustomers()) < 1:
-            self.insertCustomer(
-                Customer(
-                    name="Unknown"
-                ))
+            self.insertCustomer(Customer(name="Unknown"))
 
         if len(self.getAllSuppliers()) < 1:
-            self.insertSupplier(
-                Supplier(
-                    name="Unknown"
-                ))
+            self.insertSupplier(Supplier(name="Unknown"))
 
     def createTables(self):
         with self.conn:
@@ -292,304 +293,547 @@ class DBHelper(object):
             )"""
             self.c.execute(sql_command)
 
+            sql_command = f"""
+            CREATE TABLE IF NOT EXISTS {TableOwnershipTable.TABLE_NAME} ( 
+            {TableOwnershipTable.COLUMN_ID} INTEGER PRIMARY KEY AUTOINCREMENT, 
+            {TableOwnershipTable.COLUMN_TABLE_ID} INTEGER NOT NULL,   
+            {TableOwnershipTable.COLUMN_WORKER_ID} INTEGER NOT NULL,  
+            FOREIGN KEY ( {TableOwnershipTable.COLUMN_WORKER_ID} ) 
+            REFERENCES {WorkerTable.TABLE_NAME} ({WorkerTable.COLUMN_ID}),  
+            FOREIGN KEY ( {TableOwnershipTable.COLUMN_TABLE_ID} ) 
+            REFERENCES {TableTable.TABLE_NAME} ({TableTable.COLUMN_ID})
+            )"""
+            self.c.execute(sql_command)
+
+            sql_command = f"""
+            CREATE TABLE IF NOT EXISTS {FileDocTable.TABLE_NAME} ( 
+            {FileDocTable.COLUMN_ID} INTEGER PRIMARY KEY AUTOINCREMENT, 
+            {FileDocTable.COLUMN_NAME} TEXT NOT NULL,   
+            {FileDocTable.COLUMN_DATE} TEXT NOT NULL,   
+            {FileDocTable.COLUMN_COMMENT} TEXT,   
+            {FileDocTable.COLUMN_FILE} BLOB NOT NULL
+            )"""
+            self.c.execute(sql_command)
+
+            sql_command = f"""
+            CREATE TABLE IF NOT EXISTS {PaymentTable.TABLE_NAME} ( 
+            {PaymentTable.COLUMN_ID} INTEGER PRIMARY KEY AUTOINCREMENT,   
+            {PaymentTable.COLUMN_WORKER_ID} INTEGER NOT NULL,  
+            {PaymentTable.COLUMN_DATE} TEXT NOT NULL,   
+            {PaymentTable.COLUMN_AMOUNT} REAL NOT NULL, 
+            FOREIGN KEY ( {PaymentTable.COLUMN_WORKER_ID} ) 
+            REFERENCES {WorkerTable.TABLE_NAME} ({WorkerTable.COLUMN_ID})
+            )"""
+            self.c.execute(sql_command)
+
     # Insertions
     def insertMenuItem(self, x: MenuItem):
-        with self.conn:
-            sql_command = f"""
-            INSERT INTO {MenuTable.TABLE_NAME} (
-                {MenuTable.COLUMN_NAME}, 
-                {MenuTable.COLUMN_CATEGORY},
-                {MenuTable.COLUMN_CATEGORY_ID},
-                {MenuTable.COLUMN_UNIT},
-                {MenuTable.COLUMN_QUANTITY}, 
-                {MenuTable.COLUMN_PRICE},
-                {MenuTable.COLUMN_AVAILABLE},
-                {MenuTable.COLUMN_PICTURE}
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"""
-            self.c.execute(sql_command, astuple(x)[:-1])
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {MenuTable.TABLE_NAME} (
+                    {MenuTable.COLUMN_NAME}, 
+                    {MenuTable.COLUMN_CATEGORY},
+                    {MenuTable.COLUMN_CATEGORY_ID},
+                    {MenuTable.COLUMN_UNIT},
+                    {MenuTable.COLUMN_QUANTITY}, 
+                    {MenuTable.COLUMN_PRICE},
+                    {MenuTable.COLUMN_AVAILABLE},
+                    {MenuTable.COLUMN_PICTURE}
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
 
     def insertMenuItemReceipt(self, x: MenuItemReceipt):
-        with self.conn:
-            sql_command = f"""
-            INSERT INTO {MenuItemReceiptTable.TABLE_NAME} (
-                {MenuItemReceiptTable.COLUMN_ID}, 
-                {MenuItemReceiptTable.COLUMN_INGREDIENT_NAME}, {MenuItemReceiptTable.COLUMN_INGREDIENT_ID},
-                {MenuItemReceiptTable.COLUMN_QUANTITY}
-                ) VALUES (?, ?, ?, ?)"""
-            self.c.execute(sql_command, astuple(x))
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {MenuItemReceiptTable.TABLE_NAME} (
+                    {MenuItemReceiptTable.COLUMN_ID}, 
+                    {MenuItemReceiptTable.COLUMN_INGREDIENT_NAME}, {MenuItemReceiptTable.COLUMN_INGREDIENT_ID},
+                    {MenuItemReceiptTable.COLUMN_QUANTITY}
+                    ) VALUES (?, ?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x))
+        # self.lock.unlock()
 
     def insertExpense(self, x: Expense):
-        with self.conn:
-            sql_command = f"""
-            INSERT INTO {ExpenseTable.TABLE_NAME} (
-                {ExpenseTable.COLUMN_NAME},
-                {ExpenseTable.COLUMN_CATEGORY},
-                {ExpenseTable.COLUMN_UNIT},
-                {ExpenseTable.COLUMN_QUANTITY},
-                {ExpenseTable.COLUMN_PRICE},
-                {ExpenseTable.COLUMN_SUPPLIER_ID},
-                {ExpenseTable.COLUMN_DATE},
-                {ExpenseTable.COLUMN_PAYED}
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"""
-            self.c.execute(sql_command, astuple(x)[:-1])
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {ExpenseTable.TABLE_NAME} (
+                    {ExpenseTable.COLUMN_NAME},
+                    {ExpenseTable.COLUMN_CATEGORY},
+                    {ExpenseTable.COLUMN_UNIT},
+                    {ExpenseTable.COLUMN_QUANTITY},
+                    {ExpenseTable.COLUMN_PRICE},
+                    {ExpenseTable.COLUMN_SUPPLIER_ID},
+                    {ExpenseTable.COLUMN_DATE},
+                    {ExpenseTable.COLUMN_PAYED}
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
 
     def insertStock(self, x: Stock):
-        with self.conn:
-            sql_command = f"""
-            INSERT INTO {StockTable.TABLE_NAME} (
-                {StockTable.COLUMN_NAME},
-                {StockTable.COLUMN_CATEGORY},
-                {StockTable.COLUMN_UNIT},
-                {StockTable.COLUMN_QUANTITY},
-                {StockTable.COLUMN_IS_INGREDIENT}
-                ) VALUES (?, ?, ?, ?, ?)"""
-            self.c.execute(sql_command, astuple(x)[:-1])
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {StockTable.TABLE_NAME} (
+                    {StockTable.COLUMN_NAME},
+                    {StockTable.COLUMN_CATEGORY},
+                    {StockTable.COLUMN_UNIT},
+                    {StockTable.COLUMN_QUANTITY},
+                    {StockTable.COLUMN_IS_INGREDIENT}
+                    ) VALUES (?, ?, ?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
 
     def insertSupplement(self, x: Supplement):
-        with self.conn:
-            sql_command = f"""
-            INSERT INTO {SupplementTable.TABLE_NAME} ({SupplementTable.COLUMN_NAME}, 
-                            {SupplementTable.COLUMN_RELATED_ITEM_ID}, {SupplementTable.COLUMN_QUANTITY}, {SupplementTable.COLUMN_PRICE}) 
-                            VALUES (?, ?, ?, ?)"""
-            self.c.execute(sql_command, astuple(x)[:-1])
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {SupplementTable.TABLE_NAME} ({SupplementTable.COLUMN_NAME}, 
+                                {SupplementTable.COLUMN_RELATED_ITEM_ID}, {SupplementTable.COLUMN_QUANTITY}, {SupplementTable.COLUMN_PRICE}) 
+                                VALUES (?, ?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
 
     def insertCustomer(self, x: Customer):
-        with self.conn:
-            sql_command = f"""
-            INSERT INTO {CustomerTable.TABLE_NAME} (
-                {CustomerTable.COLUMN_NAME}, 
-                {CustomerTable.COLUMN_PHONE},
-                {CustomerTable.COLUMN_ADDRESS}, 
-                {CustomerTable.COLUMN_SCORE},
-                {CustomerTable.COLUMN_PICTURE}, 
-                {CustomerTable.COLUMN_FACE}
-                ) VALUES (?, ?, ?, ?, ?, ?)"""
-            self.c.execute(sql_command, astuple(x)[:-1])
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {CustomerTable.TABLE_NAME} (
+                    {CustomerTable.COLUMN_NAME}, 
+                    {CustomerTable.COLUMN_PHONE},
+                    {CustomerTable.COLUMN_ADDRESS}, 
+                    {CustomerTable.COLUMN_SCORE},
+                    {CustomerTable.COLUMN_PICTURE}, 
+                    {CustomerTable.COLUMN_FACE}
+                    ) VALUES (?, ?, ?, ?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
 
     def insertWorker(self, x: Worker):
-        with self.conn:
-            sql_command = f"""
-            INSERT INTO {WorkerTable.TABLE_NAME} (
-                {WorkerTable.COLUMN_NAME}, 
-                {WorkerTable.COLUMN_USERNAME},
-                {WorkerTable.COLUMN_PASSWORD},
-                {WorkerTable.COLUMN_PHONE}, 
-                {WorkerTable.COLUMN_ID_CATEGORY},
-                {WorkerTable.COLUMN_ADDRESS},
-                {WorkerTable.COLUMN_SALARY},
-                {WorkerTable.COLUMN_SCORE},
-                {WorkerTable.COLUMN_PICTURE}, 
-                {WorkerTable.COLUMN_FACE}, 
-                {WorkerTable.COLUMN_CV}
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""
-            self.c.execute(sql_command, astuple(x)[:-1])
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {WorkerTable.TABLE_NAME} (
+                    {WorkerTable.COLUMN_NAME}, 
+                    {WorkerTable.COLUMN_USERNAME},
+                    {WorkerTable.COLUMN_PASSWORD},
+                    {WorkerTable.COLUMN_PHONE}, 
+                    {WorkerTable.COLUMN_ID_CATEGORY},
+                    {WorkerTable.COLUMN_ADDRESS},
+                    {WorkerTable.COLUMN_SALARY},
+                    {WorkerTable.COLUMN_SCORE},
+                    {WorkerTable.COLUMN_PICTURE}, 
+                    {WorkerTable.COLUMN_FACE}, 
+                    {WorkerTable.COLUMN_CV}
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
 
     def insertSell(self, x: Sell):
-        with self.conn:
-            sql_command = f"""
-            INSERT INTO {SellTable.TABLE_NAME} (
-                {SellTable.COLUMN_ID_WORKER},
-                {SellTable.COLUMN_ID_CUSTOMER},
-                {SellTable.COLUMN_DATE},
-                {SellTable.COLUMN_TOTAL},
-                {SellTable.COLUMN_COMPLETED},
-                {SellTable.COLUMN_NB_COVERS},
-                {SellTable.COLUMN_ON_TABLE}
-                ) VALUES (?, ?, ?, ?, ?, ?, ?)"""
-            self.c.execute(sql_command, astuple(x)[:-1])
-            return self.c.execute("SELECT last_insert_rowid()").fetchone()[0]
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {SellTable.TABLE_NAME} (
+                    {SellTable.COLUMN_ID_WORKER},
+                    {SellTable.COLUMN_ID_CUSTOMER},
+                    {SellTable.COLUMN_DATE},
+                    {SellTable.COLUMN_TOTAL},
+                    {SellTable.COLUMN_COMPLETED},
+                    {SellTable.COLUMN_NB_COVERS},
+                    {SellTable.COLUMN_ON_TABLE}
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+                # self.lock.unlock()
+                return self.c.execute("SELECT last_insert_rowid()").fetchone()[0]
 
     def insertSellItem(self, x: SellItem):
-        with self.conn:
-            sql_command = f"""
-            INSERT INTO {SellItemTable.TABLE_NAME} (
-                {SellItemTable.COLUMN_ID_PRODUCT},
-                {SellItemTable.COLUMN_ID_SELL},
-                {SellItemTable.COLUMN_QUANTITY},
-                {SellItemTable.COLUMN_TOTAL},
-                {SellItemTable.COLUMN_GROUP},
-                {SellItemTable.COLUMN_READY},
-                {SellItemTable.COLUMN_SERVED}
-                ) VALUES (?, ?, ?, ?, ?, ?, ?)"""
-            self.c.execute(sql_command, astuple(x)[:-1])
-            return self.c.execute("SELECT last_insert_rowid()").fetchone()[0]
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {SellItemTable.TABLE_NAME} (
+                    {SellItemTable.COLUMN_ID_PRODUCT},
+                    {SellItemTable.COLUMN_ID_SELL},
+                    {SellItemTable.COLUMN_QUANTITY},
+                    {SellItemTable.COLUMN_TOTAL},
+                    {SellItemTable.COLUMN_GROUP},
+                    {SellItemTable.COLUMN_READY},
+                    {SellItemTable.COLUMN_SERVED}
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+                # self.lock.unlock()
+                return self.c.execute("SELECT last_insert_rowid()").fetchone()[0]
 
     def insertSellItemSupplement(self, x: SellItemSupplement):
-        with self.conn:
-            sql_command = f"""
-            INSERT INTO {SellItemSupplementTable.TABLE_NAME} (
-                {SellItemSupplementTable.COLUMN_ID_SUPPLEMENT},
-                {SellItemSupplementTable.COLUMN_ID_SELL_ITEM},
-                {SellItemSupplementTable.COLUMN_PRICE}
-                ) VALUES (?, ?, ?)"""
-            self.c.execute(sql_command, astuple(x)[:-1])
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {SellItemSupplementTable.TABLE_NAME} (
+                    {SellItemSupplementTable.COLUMN_ID_SUPPLEMENT},
+                    {SellItemSupplementTable.COLUMN_ID_SELL_ITEM},
+                    {SellItemSupplementTable.COLUMN_PRICE}
+                    ) VALUES (?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
 
     def insertTable(self, x: Table):
-        with self.conn:
-            sql_command = f"""
-            INSERT INTO {TableTable.TABLE_NAME} (
-                {TableTable.COLUMN_ID},
-                {TableTable.COLUMN_NAME},
-                {TableTable.COLUMN_SEATS},
-                {TableTable.COLUMN_COMMENT},
-                {TableTable.COLUMN_RESERVED},
-                {TableTable.COLUMN_ID_SELL}
-                ) VALUES (?, ?, ?, ?, ?, ?)"""
-            self.c.execute(sql_command, astuple(x))
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {TableTable.TABLE_NAME} (
+                    {TableTable.COLUMN_ID},
+                    {TableTable.COLUMN_NAME},
+                    {TableTable.COLUMN_SEATS},
+                    {TableTable.COLUMN_COMMENT},
+                    {TableTable.COLUMN_RESERVED},
+                    {TableTable.COLUMN_ID_SELL}
+                    ) VALUES (?, ?, ?, ?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x))
+            # self.lock.unlock()
 
     def insertCategory(self, x: Category):
-        with self.conn:
-            sql_command = f"""
-            INSERT INTO {CategoryTable.TABLE_NAME} (
-                {CategoryTable.COLUMN_NAME},
-                {CategoryTable.COLUMN_TABLES},
-                {CategoryTable.COLUMN_CASHIER},
-                {CategoryTable.COLUMN_RESERVATION},
-                {CategoryTable.COLUMN_WASTE},
-                {CategoryTable.COLUMN_STOCK},
-                {CategoryTable.COLUMN_RECEIPT},
-                {CategoryTable.COLUMN_DATABASE},
-                {CategoryTable.COLUMN_PHONE},
-                {CategoryTable.COLUMN_DASHBOARD}
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""
-            self.c.execute(sql_command, astuple(x)[:-1])
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {CategoryTable.TABLE_NAME} (
+                    {CategoryTable.COLUMN_NAME},
+                    {CategoryTable.COLUMN_TABLES},
+                    {CategoryTable.COLUMN_CASHIER},
+                    {CategoryTable.COLUMN_RESERVATION},
+                    {CategoryTable.COLUMN_WASTE},
+                    {CategoryTable.COLUMN_STOCK},
+                    {CategoryTable.COLUMN_RECEIPT},
+                    {CategoryTable.COLUMN_DATABASE},
+                    {CategoryTable.COLUMN_PHONE},
+                    {CategoryTable.COLUMN_DASHBOARD}
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
 
     def insertPointer(self, x: Pointer):
-        with self.conn:
-            sql_command = f"""INSERT INTO {PointerTable.TABLE_NAME} ({PointerTable.COLUMN_DATE_START}, 
-                            {PointerTable.COLUMN_DATE_END}, {PointerTable.COLUMN_ID_WORKER}) 
-                            VALUES (?, ?, ?)"""
-            self.c.execute(sql_command, astuple(x)[:-1])
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""INSERT INTO {PointerTable.TABLE_NAME} ({PointerTable.COLUMN_DATE_START}, 
+                                {PointerTable.COLUMN_DATE_END}, {PointerTable.COLUMN_ID_WORKER}) 
+                                VALUES (?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
 
     def insertSupplier(self, x: Supplier):
-        with self.conn:
-            sql_command = f"""INSERT INTO {SupplierTable.TABLE_NAME} ({SupplierTable.COLUMN_NAME}, 
-                            {SupplierTable.COLUMN_PHONE}, {SupplierTable.COLUMN_ADDRESS}, {SupplierTable.COLUMN_MAIL}) 
-                            VALUES (?, ?, ?, ?)"""
-            self.c.execute(sql_command, astuple(x)[:-1])
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""INSERT INTO {SupplierTable.TABLE_NAME} ({SupplierTable.COLUMN_NAME}, 
+                                {SupplierTable.COLUMN_PHONE}, {SupplierTable.COLUMN_ADDRESS}, {SupplierTable.COLUMN_MAIL}) 
+                                VALUES (?, ?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
 
     def insertExpenseCategory(self, x: ExpenseCategory):
-        with self.conn:
-            sql_command = f"""
-            INSERT INTO {ExpenseCategoryTable.TABLE_NAME} (
-                {ExpenseCategoryTable.COLUMN_NAME},
-                {ExpenseCategoryTable.COLUMN_STOCK}, 
-                {ExpenseCategoryTable.COLUMN_IS_INGREDIENT}
-                ) VALUES (?, ?, ?)"""
-            self.c.execute(sql_command, astuple(x)[:-1])
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {ExpenseCategoryTable.TABLE_NAME} (
+                    {ExpenseCategoryTable.COLUMN_NAME},
+                    {ExpenseCategoryTable.COLUMN_STOCK}, 
+                    {ExpenseCategoryTable.COLUMN_IS_INGREDIENT}
+                    ) VALUES (?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
 
     def insertMenuCategory(self, x: MenuCategory):
-        with self.conn:
-            sql_command = f"""INSERT INTO {MenuCategoryTable.TABLE_NAME} ({MenuCategoryTable.COLUMN_NAME}, {MenuCategoryTable.COLUMN_PRINTING_PLACE}) 
-                            VALUES (?, ?)"""
-            self.c.execute(sql_command, astuple(x)[:-1])
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""INSERT INTO {MenuCategoryTable.TABLE_NAME} ({MenuCategoryTable.COLUMN_NAME}, {MenuCategoryTable.COLUMN_PRINTING_PLACE}) 
+                                VALUES (?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
 
     def insertReservation(self, x: Reservation):
-        with self.conn:
-            sql_command = f"""INSERT INTO {ReservationTable.TABLE_NAME} ({ReservationTable.COLUMN_NAME}, 
-                            {ReservationTable.COLUMN_PHONE}, {ReservationTable.COLUMN_CUSTOMER_ID}, {ReservationTable.COLUMN_NB_PERSON}, 
-                            {ReservationTable.COLUMN_TABLE_ID}, {ReservationTable.COLUMN_DATE}) 
-                            VALUES (?, ?, ?, ?, ?, ?)"""
-            self.c.execute(sql_command, astuple(x)[:-1])
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""INSERT INTO {ReservationTable.TABLE_NAME} ({ReservationTable.COLUMN_NAME}, 
+                                {ReservationTable.COLUMN_PHONE}, {ReservationTable.COLUMN_CUSTOMER_ID}, {ReservationTable.COLUMN_NB_PERSON}, 
+                                {ReservationTable.COLUMN_TABLE_ID}, {ReservationTable.COLUMN_DATE}) 
+                                VALUES (?, ?, ?, ?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
 
     def insertWaste(self, x: Waste):
-        with self.conn:
-            sql_command = f"""INSERT INTO {WasteTable.TABLE_NAME} ({WasteTable.COLUMN_WORKER_ID}, {WasteTable.COLUMN_NAME}, 
-                            {WasteTable.COLUMN_CATEGORY}, {WasteTable.COLUMN_QUANTITY}, {WasteTable.COLUMN_PRICE}, {WasteTable.COLUMN_DATE}) 
-                            VALUES (?, ?, ?, ?, ?, ?)"""
-            self.c.execute(sql_command, astuple(x)[:-1])
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""INSERT INTO {WasteTable.TABLE_NAME} ({WasteTable.COLUMN_WORKER_ID}, {WasteTable.COLUMN_NAME}, 
+                                {WasteTable.COLUMN_CATEGORY}, {WasteTable.COLUMN_QUANTITY}, {WasteTable.COLUMN_PRICE}, {WasteTable.COLUMN_DATE}) 
+                                VALUES (?, ?, ?, ?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
+
+    def insertTableOwnership(self, x: TableOwnership):
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {TableOwnershipTable.TABLE_NAME} (
+                    {TableOwnershipTable.COLUMN_TABLE_ID}, 
+                    {TableOwnershipTable.COLUMN_WORKER_ID}) 
+                    VALUES (?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
+
+    def insertPayment(self, x: Payment):
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {PaymentTable.TABLE_NAME} (
+                    {PaymentTable.COLUMN_WORKER_ID}, 
+                    {PaymentTable.COLUMN_DATE}, 
+                    {PaymentTable.COLUMN_AMOUNT}) 
+                    VALUES (?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
+
+    def insertFileDoc(self, x: FileDoc):
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {FileDocTable.TABLE_NAME} (
+                    {FileDocTable.COLUMN_NAME}, 
+                    {FileDocTable.COLUMN_DATE}, 
+                    {FileDocTable.COLUMN_COMMENT}, 
+                    {FileDocTable.COLUMN_FILE}) 
+                    VALUES (?, ?, ?, ?)"""
+                self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
 
     # Delete one
     def deleteExpense(self, _id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {ExpenseTable.TABLE_NAME} WHERE {ExpenseTable.COLUMN_ID}=?", (_id,))
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {ExpenseTable.TABLE_NAME} WHERE {ExpenseTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
 
     def deleteMenuItem(self, _id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {MenuTable.TABLE_NAME} WHERE {MenuTable.COLUMN_ID}=?", (_id,))
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {MenuTable.TABLE_NAME} WHERE {MenuTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
 
     def deleteMenuItemReceipt(self, _id: int, ingredient_id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {MenuItemReceiptTable.TABLE_NAME} WHERE {MenuItemReceiptTable.COLUMN_ID}=? AND {MenuItemReceiptTable.COLUMN_INGREDIENT_ID}=?", (_id, ingredient_id))
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {MenuItemReceiptTable.TABLE_NAME} WHERE {MenuItemReceiptTable.COLUMN_ID}=? AND {MenuItemReceiptTable.COLUMN_INGREDIENT_ID}=?",
+                    (_id, ingredient_id),
+                )
+        # self.lock.unlock()
 
     def deleteCustomer(self, _id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {CustomerTable.TABLE_NAME} WHERE {CustomerTable.COLUMN_ID}=?", (_id,))
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {CustomerTable.TABLE_NAME} WHERE {CustomerTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
 
     def deleteWorker(self, _id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {WorkerTable.TABLE_NAME} WHERE {WorkerTable.COLUMN_ID}=?", (_id,))
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {WorkerTable.TABLE_NAME} WHERE {WorkerTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
 
     def deleteSell(self, _id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {SellTable.TABLE_NAME} WHERE {SellTable.COLUMN_ID}=?", (_id,))
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {SellTable.TABLE_NAME} WHERE {SellTable.COLUMN_ID}=?",
+                    (_id,),
+                )
         self.deleteSellContent(_id)
+        # self.lock.unlock()
 
     def deleteSellItem(self, _id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {SellItemTable.TABLE_NAME} WHERE {SellItemTable.COLUMN_ID}=?", (_id,))
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {SellItemTable.TABLE_NAME} WHERE {SellItemTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
 
     def deleteSellItemSupplement(self, _id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {SellItemSupplementTable.TABLE_NAME} WHERE {SellItemSupplementTable.COLUMN_ID}=?", (_id,))
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {SellItemSupplementTable.TABLE_NAME} WHERE {SellItemSupplementTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
 
     def deleteTable(self, _id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {TableTable.TABLE_NAME} WHERE {TableTable.COLUMN_ID}=?", (_id,))
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {TableTable.TABLE_NAME} WHERE {TableTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
 
     def deleteCategory(self, _id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {CategoryTable.TABLE_NAME} WHERE {CategoryTable.COLUMN_ID}=?", (_id,))
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {CategoryTable.TABLE_NAME} WHERE {CategoryTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
 
     def deletePointer(self, _id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {PointerTable.TABLE_NAME} WHERE {PointerTable.COLUMN_ID}=?", (_id,))
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {PointerTable.TABLE_NAME} WHERE {PointerTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
 
     def deleteStock(self, _id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {StockTable.TABLE_NAME} WHERE {StockTable.COLUMN_ID}=?", (_id,))
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {StockTable.TABLE_NAME} WHERE {StockTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
 
     def deleteSupplement(self, _id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {SupplementTable.TABLE_NAME} WHERE {SupplementTable.COLUMN_ID}=?", (_id,))
+        with self.lock:
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {SupplementTable.TABLE_NAME} WHERE {SupplementTable.COLUMN_ID}=?",
+                    (_id,),
+                )
 
     def deleteSupplier(self, _id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {SupplierTable.TABLE_NAME} WHERE {SupplierTable.COLUMN_ID}=?", (_id,))
+        with self.lock:
+
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {SupplierTable.TABLE_NAME} WHERE {SupplierTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
 
     def deleteExpenseCategory(self, _id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {ExpenseCategoryTable.TABLE_NAME} WHERE {ExpenseCategoryTable.COLUMN_ID}=?", (_id,))
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {ExpenseCategoryTable.TABLE_NAME} WHERE {ExpenseCategoryTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
 
     def deleteMenuCategory(self, _id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {MenuCategoryTable.TABLE_NAME} WHERE {MenuCategoryTable.COLUMN_ID}=?", (_id,))
+        with self.lock:
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {MenuCategoryTable.TABLE_NAME} WHERE {MenuCategoryTable.COLUMN_ID}=?",
+                    (_id,),
+                )
 
     def deleteReservation(self, _id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {ReservationTable.TABLE_NAME} WHERE {ReservationTable.COLUMN_ID}=?", (_id,))
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {ReservationTable.TABLE_NAME} WHERE {ReservationTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
 
     def deleteWaste(self, _id: int):
-        with self.conn:
-            self.c.execute(
-                f"DELETE FROM {WasteTable.TABLE_NAME} WHERE {WasteTable.COLUMN_ID}=?", (_id,))
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {WasteTable.TABLE_NAME} WHERE {WasteTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
+
+    def deleteTableOwnership(self, _id: int):
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {TableOwnershipTable.TABLE_NAME} WHERE {TableOwnershipTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
+
+    def deletePayment(self, _id: int):
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {PaymentTable.TABLE_NAME} WHERE {PaymentTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
+
+    def deleteFileDoc(self, _id: int):
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {FileDocTable.TABLE_NAME} WHERE {FileDocTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
 
     # Delete all
 
@@ -604,7 +848,9 @@ class DBHelper(object):
     def deleteStock(self, _id: int):
         with self.conn:
             self.c.execute(
-                f"DELETE FROM {StockTable.TABLE_NAME} WHERE {StockTable.COLUMN_ID}=?", (_id,))
+                f"DELETE FROM {StockTable.TABLE_NAME} WHERE {StockTable.COLUMN_ID}=?",
+                (_id,),
+            )
 
     def deleteAllSupplements(self):
         with self.conn:
@@ -662,6 +908,18 @@ class DBHelper(object):
         with self.conn:
             self.c.execute(f"DELETE FROM {WasteTable.TABLE_NAME}")
 
+    def deleteAllTableOwnership(self):
+        with self.conn:
+            self.c.execute(f"DELETE FROM {TableOwnershipTable.TABLE_NAME}")
+
+    def deleteAllPayments(self):
+        with self.conn:
+            self.c.execute(f"DELETE FROM {PaymentTable.TABLE_NAME}")
+
+    def deleteAllFileDoc(self):
+        with self.conn:
+            self.c.execute(f"DELETE FROM {FileDocTable.TABLE_NAME}")
+
     # Get all
 
     def getAllExpenses(self):
@@ -671,35 +929,49 @@ class DBHelper(object):
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(Expense(
-                        name=x[1],
-                        category=x[2],
-                        unit=x[3],
-                        quantity=x[4],
-                        price=x[5],
-                        supplier_id=x[6],
-                        date=x[7],
-                        payed=x[8],
-                        id=x[0]))
+                    results.append(
+                        Expense(
+                            name=x[1],
+                            category=x[2],
+                            unit=x[3],
+                            quantity=x[4],
+                            price=x[5],
+                            supplier_id=x[6],
+                            date=x[7],
+                            payed=x[8],
+                            id=x[0],
+                        )
+                    )
             return results
 
-    def getAllMenus(self):
+    def getAllMenus(self, sorted: bool = True) -> List[MenuItem]:
         with self.conn:
-            self.c.execute(f"SELECT * FROM {MenuTable.TABLE_NAME}")
+            if sorted:
+                self.c.execute(
+                    f"SELECT * FROM {MenuTable.TABLE_NAME} ORDER BY {MenuTable.COLUMN_NAME} ASC"
+                )
+                # self.c.execute(
+                #     f"SELECT * FROM {MenuTable.TABLE_NAME} ORDER BY {MenuTable.COLUMN_PRICE} ASC"
+                # )
+            else:
+                self.c.execute(f"SELECT * FROM {MenuTable.TABLE_NAME}")
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(MenuItem(
-                        name=x[1],
-                        category=x[2],
-                        category_id=x[3],
-                        unit=x[4],
-                        quantity=x[5],
-                        price=x[6],
-                        available=x[7],
-                        picture=x[8],
-                        id=x[0]))
+                    results.append(
+                        MenuItem(
+                            name=x[1],
+                            category=x[2],
+                            category_id=x[3],
+                            unit=x[4],
+                            quantity=x[5],
+                            price=x[6],
+                            available=x[7],
+                            picture=x[8],
+                            id=x[0],
+                        )
+                    )
             return results
 
     def getAllMenusPhone(self):
@@ -709,42 +981,64 @@ class DBHelper(object):
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(MenuItemPhone(
-                        x[1], x[2], x[3], x[4], x[5], x[6], x[7], f"{x[8]}", self.getSupplementByMenuId(x[0]), x[0]))
+                    results.append(
+                        MenuItemPhone(
+                            x[1],
+                            x[2],
+                            x[3],
+                            x[4],
+                            x[5],
+                            x[6],
+                            x[7],
+                            f"{x[8]}",
+                            self.getSupplementByMenuId(x[0]),
+                            x[0],
+                        )
+                    )
             return results
 
     def getAllMenuItemReceiptById(self, _id: int):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {MenuItemReceiptTable.TABLE_NAME} WHERE {MenuItemReceiptTable.COLUMN_ID}=?", (_id,))
+                f"SELECT * FROM {MenuItemReceiptTable.TABLE_NAME} WHERE {MenuItemReceiptTable.COLUMN_ID}=?",
+                (_id,),
+            )
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(MenuItemReceipt(
-                        x[0], x[1], x[2], x[3]))
+                    results.append(MenuItemReceipt(x[0], x[1], x[2], x[3]))
             return results
 
-    def getAllCustomers(self):
+    def getAllCustomers(self, sorted: bool = True) -> List[Customer]:
         with self.conn:
-            self.c.execute(f"SELECT * FROM {CustomerTable.TABLE_NAME}")
+            if sorted:
+                self.c.execute(
+                    f"SELECT * FROM {CustomerTable.TABLE_NAME} ORDER BY {CustomerTable.COLUMN_NAME} ASC"
+                )
+            else:
+                self.c.execute(f"SELECT * FROM {CustomerTable.TABLE_NAME}")
+            all_x = self.c.fetchall()
+            results = []
+            if all_x is not None:
+                for x in all_x:
+                    results.append(Customer(x[1], x[2], x[3], x[4], x[5], x[6], x[0]))
+            return results
+
+    def getAllWorkers(self, sorted: bool = True) -> List[Worker]:
+        with self.conn:
+            if sorted:
+                self.c.execute(
+                    f"SELECT * FROM {WorkerTable.TABLE_NAME} ORDER BY {WorkerTable.COLUMN_NAME} ASC"
+                )
+            else:
+                self.c.execute(f"SELECT * FROM {WorkerTable.TABLE_NAME}")
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
                 for x in all_x:
                     results.append(
-                        Customer(x[1], x[2], x[3], x[4], x[5], x[6], x[0]))
-            return results
-
-    def getAllWorkers(self):
-        with self.conn:
-            self.c.execute(f"SELECT * FROM {WorkerTable.TABLE_NAME}")
-            all_x = self.c.fetchall()
-            results = []
-            if all_x is not None:
-                for x in all_x:
-                    results.append(
-                        Worker(
+                        WorkerShow(
                             name=x[1],
                             username=x[2],
                             password=x[3],
@@ -753,11 +1047,9 @@ class DBHelper(object):
                             address=x[6],
                             salary=x[7],
                             score=x[8],
-                            picture=x[9],
-                            face=x[10],
-                            cv=x[11],
-                            id=x[0]
-                        ))
+                            id=x[0],
+                        )
+                    )
             return results
 
     def getAllSells(self):
@@ -776,8 +1068,9 @@ class DBHelper(object):
                             completed=x[5],
                             nb_covers=x[6],
                             on_table=x[7],
-                            id=x[0]
-                        ))
+                            id=x[0],
+                        )
+                    )
             return results
 
     def getAllSellItems(self):
@@ -796,14 +1089,14 @@ class DBHelper(object):
                             group=x[5],
                             ready=x[6],
                             served=x[7],
-                            id=x[0]
-                        ))
+                            id=x[0],
+                        )
+                    )
             return results
 
     def getAllSellItemSupplements(self):
         with self.conn:
-            self.c.execute(
-                f"SELECT * FROM {SellItemSupplementTable.TABLE_NAME}")
+            self.c.execute(f"SELECT * FROM {SellItemSupplementTable.TABLE_NAME}")
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
@@ -811,9 +1104,14 @@ class DBHelper(object):
                     results.append(SellItemSupplement(x[1], x[2], x[3], x[0]))
             return results
 
-    def getAllTables(self):
+    def getAllTables(self, sorted: bool = True) -> List[Table]:
         with self.conn:
-            self.c.execute(f"SELECT * FROM {TableTable.TABLE_NAME}")
+            if sorted:
+                self.c.execute(
+                    f"SELECT * FROM {TableTable.TABLE_NAME} ORDER BY {TableTable.COLUMN_ID} ASC"
+                )
+            else:
+                self.c.execute(f"SELECT * FROM {TableTable.TABLE_NAME}")
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
@@ -821,15 +1119,46 @@ class DBHelper(object):
                     results.append(Table(x[0], x[1], x[2], x[3], x[4], x[5]))
             return results
 
-    def getAllCategories(self):
+    def getAllTablesByIdSell(self, sell_id: int) -> List[Table]:
         with self.conn:
-            self.c.execute(f"SELECT * FROM {CategoryTable.TABLE_NAME}")
+            self.c.execute(
+                f"SELECT * FROM {TableTable.TABLE_NAME} WHERE {TableTable.COLUMN_ID_SELL}=?",
+                (sell_id,),
+            )
+            all_x = self.c.fetchall()
+            results = []
+            if all_x is not None:
+                for x in all_x:
+                    results.append(Table(x[0], x[1], x[2], x[3], x[4], x[5]))
+            return results
+
+    def getAllCategories(self, sorted: bool = True) -> List[Category]:
+        with self.conn:
+            if sorted:
+                self.c.execute(
+                    f"SELECT * FROM {CategoryTable.TABLE_NAME} ORDER BY {CategoryTable.COLUMN_NAME} ASC"
+                )
+            else:
+                self.c.execute(f"SELECT * FROM {CategoryTable.TABLE_NAME}")
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
                 for x in all_x:
                     results.append(
-                        Category(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10], x[0]))
+                        Category(
+                            x[1],
+                            x[2],
+                            x[3],
+                            x[4],
+                            x[5],
+                            x[6],
+                            x[7],
+                            x[8],
+                            x[9],
+                            x[10],
+                            x[0],
+                        )
+                    )
             return results
 
     def getAllPointers(self):
@@ -843,9 +1172,14 @@ class DBHelper(object):
                     results.append(Pointer(x[1], x[2], x[3], x[0]))
             return results
 
-    def getAllStocks(self):
+    def getAllStocks(self, sorted: bool = True) -> List[Stock]:
         with self.conn:
-            self.c.execute(f"SELECT * FROM {StockTable.TABLE_NAME}")
+            if sorted:
+                self.c.execute(
+                    f"SELECT * FROM {StockTable.TABLE_NAME} ORDER BY {StockTable.COLUMN_NAME} ASC"
+                )
+            else:
+                self.c.execute(f"SELECT * FROM {StockTable.TABLE_NAME}")
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
@@ -857,17 +1191,28 @@ class DBHelper(object):
                             unit=x[3],
                             quantity=x[4],
                             is_ingredient=x[5],
-                            id=x[0]
-                        ))
+                            id=x[0],
+                        )
+                    )
             return results
 
-    def getAllStockIngredients(self):
+    def getAllStockIngredients(self, sorted: bool = True) -> List[Stock]:
         with self.conn:
-            self.c.execute(
-                f"""
-                SELECT * FROM {StockTable.TABLE_NAME}
-                WHERE {StockTable.COLUMN_IS_INGREDIENT}=1
-                """)
+            if sorted:
+                self.c.execute(
+                    f"""
+                    SELECT * FROM {StockTable.TABLE_NAME}
+                    WHERE {StockTable.COLUMN_IS_INGREDIENT}=1
+                    ORDER BY {StockTable.COLUMN_NAME} ASC
+                    """
+                )
+            else:
+                self.c.execute(
+                    f"""
+                    SELECT * FROM {StockTable.TABLE_NAME}
+                    WHERE {StockTable.COLUMN_IS_INGREDIENT}=1
+                    """
+                )
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
@@ -879,8 +1224,9 @@ class DBHelper(object):
                             unit=x[3],
                             quantity=x[4],
                             is_ingredient=x[5],
-                            id=x[0]
-                        ))
+                            id=x[0],
+                        )
+                    )
             return results
 
     def getAllStockOthers(self):
@@ -889,7 +1235,8 @@ class DBHelper(object):
                 f"""
                 SELECT * FROM {StockTable.TABLE_NAME}
                 WHERE {StockTable.COLUMN_IS_INGREDIENT}=0
-                """)
+                """
+            )
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
@@ -901,8 +1248,9 @@ class DBHelper(object):
                             unit=x[3],
                             quantity=x[4],
                             is_ingredient=x[5],
-                            id=x[0]
-                        ))
+                            id=x[0],
+                        )
+                    )
             return results
 
     def getAllSupplements(self):
@@ -912,44 +1260,56 @@ class DBHelper(object):
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(Supplement(
-                        x[1], x[2], x[3], x[4], x[0]))
+                    results.append(Supplement(x[1], x[2], x[3], x[4], x[0]))
             return results
 
-    def getAllSuppliers(self):
+    def getAllSuppliers(self, sorted: bool = True) -> List[Supplier]:
         with self.conn:
-            self.c.execute(f"SELECT * FROM {SupplierTable.TABLE_NAME}")
+            if sorted:
+                self.c.execute(
+                    f"SELECT * FROM {SupplierTable.TABLE_NAME} ORDER BY {SupplierTable.COLUMN_NAME} ASC"
+                )
+            else:
+                self.c.execute(f"SELECT * FROM {SupplierTable.TABLE_NAME}")
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(Supplier(
-                        x[1], x[2], x[3], x[4], x[0]))
+                    results.append(Supplier(x[1], x[2], x[3], x[4], x[0]))
             return results
 
-    def getAllExpenseCategories(self):
+    def getAllExpenseCategories(self, sorted: bool = True) -> List[ExpenseCategory]:
         with self.conn:
-            self.c.execute(f"SELECT * FROM {ExpenseCategoryTable.TABLE_NAME}")
+            if sorted:
+                self.c.execute(
+                    f"SELECT * FROM {ExpenseCategoryTable.TABLE_NAME} ORDER BY {ExpenseCategoryTable.COLUMN_NAME} ASC"
+                )
+            else:
+                self.c.execute(f"SELECT * FROM {ExpenseCategoryTable.TABLE_NAME}")
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(ExpenseCategory(
-                        name=x[1],
-                        stock=x[2],
-                        is_ingredient=x[3],
-                        id=x[0]))
+                    results.append(
+                        ExpenseCategory(
+                            name=x[1], stock=x[2], is_ingredient=x[3], id=x[0]
+                        )
+                    )
             return results
 
-    def getAllMenuCategories(self):
+    def getAllMenuCategories(self, sorted: bool = True) -> List[MenuCategory]:
         with self.conn:
-            self.c.execute(f"SELECT * FROM {MenuCategoryTable.TABLE_NAME}")
+            if sorted:
+                self.c.execute(
+                    f"SELECT * FROM {MenuCategoryTable.TABLE_NAME} ORDER BY {MenuCategoryTable.COLUMN_NAME} ASC"
+                )
+            else:
+                self.c.execute(f"SELECT * FROM {MenuCategoryTable.TABLE_NAME}")
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(MenuCategory(
-                        x[1], x[2], x[0]))
+                    results.append(MenuCategory(x[1], x[2], x[0]))
             return results
 
     def getAllReservations(self):
@@ -959,19 +1319,59 @@ class DBHelper(object):
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(Reservation(
-                        x[1], x[2], x[3], x[4], x[5], x[6], x[0]))
+                    results.append(
+                        Reservation(x[1], x[2], x[3], x[4], x[5], x[6], x[0])
+                    )
             return results
 
-    def getAllWastes(self):
+    def getAllWastes(self) -> List[Waste]:
         with self.conn:
             self.c.execute(f"SELECT * FROM {WasteTable.TABLE_NAME}")
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(Waste(
-                        x[1], x[2], x[3], x[4], x[5], x[6], x[0]))
+                    results.append(Waste(x[1], x[2], x[3], x[4], x[5], x[6], x[0]))
+            return results
+
+    def getAllTableOwnership(self) -> List[TableOwnership]:
+        with self.conn:
+            self.c.execute(f"SELECT * FROM {TableOwnershipTable.TABLE_NAME}")
+            all_x = self.c.fetchall()
+            results = []
+            if all_x is not None:
+                for x in all_x:
+                    results.append(TableOwnership(x[1], x[2], x[0]))
+            return results
+
+    def getAllPayments(self, sorted: bool = True) -> List[Payment]:
+        with self.conn:
+            if sorted:
+                self.c.execute(
+                    f"SELECT * FROM {PaymentTable.TABLE_NAME} ORDER BY {PaymentTable.COLUMN_DATE}"
+                )
+            else:
+                self.c.execute(f"SELECT * FROM {PaymentTable.TABLE_NAME}")
+            all_x = self.c.fetchall()
+            results = []
+            if all_x is not None:
+                for x in all_x:
+                    results.append(Payment(x[1], x[2], x[3], x[0]))
+            return results
+
+    def getAllFileDoc(self, sorted: bool = False) -> List[FileDoc]:
+        with self.conn:
+            if sorted:
+                self.c.execute(
+                    f"SELECT * FROM {FileDocTable.TABLE_NAME} ORDER BY {FileDocTable.COLUMN_NAME}"
+                )
+            else:
+                self.c.execute(f"SELECT * FROM {FileDocTable.TABLE_NAME}")
+            all_x = self.c.fetchall()
+            results = []
+            if all_x is not None:
+                for x in all_x:
+                    results.append(FileDoc(name=x[1], date=x[2], comment=x[3], id=x[0]))
             return results
 
     # Get by id
@@ -979,7 +1379,9 @@ class DBHelper(object):
     def getExpenseById(self, _id: int):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {ExpenseTable.TABLE_NAME} WHERE {ExpenseTable.COLUMN_ID}=?", (_id,))
+                f"SELECT * FROM {ExpenseTable.TABLE_NAME} WHERE {ExpenseTable.COLUMN_ID}=?",
+                (_id,),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return Expense(
@@ -991,7 +1393,7 @@ class DBHelper(object):
                     supplier_id=x[6],
                     date=x[7],
                     payed=x[8],
-                    id=x[0]
+                    id=x[0],
                 )
             else:
                 return x
@@ -999,7 +1401,9 @@ class DBHelper(object):
     def getMenuItemById(self, _id: int):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {MenuTable.TABLE_NAME} WHERE {MenuTable.COLUMN_ID}=?", (_id,))
+                f"SELECT * FROM {MenuTable.TABLE_NAME} WHERE {MenuTable.COLUMN_ID}=?",
+                (_id,),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return MenuItem(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[0])
@@ -1009,7 +1413,9 @@ class DBHelper(object):
     def getMenuItemByNameCat(self, name: str, category: int) -> MenuItem:
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {MenuTable.TABLE_NAME} WHERE {MenuTable.COLUMN_NAME}=? AND {MenuTable.COLUMN_CATEGORY_ID}=?", (name, category))
+                f"SELECT * FROM {MenuTable.TABLE_NAME} WHERE {MenuTable.COLUMN_NAME}=? AND {MenuTable.COLUMN_CATEGORY_ID}=?",
+                (name, category),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return MenuItem(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[0])
@@ -1019,7 +1425,9 @@ class DBHelper(object):
     def getMenuItemReceiptById(self, _id: int, ingredient_id: int):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {MenuItemReceiptTable.TABLE_NAME} WHERE {MenuItemReceiptTable.COLUMN_ID}=? AND {MenuItemReceiptTable.COLUMN_INGREDIENT_ID}=?", (_id, ingredient_id))
+                f"SELECT * FROM {MenuItemReceiptTable.TABLE_NAME} WHERE {MenuItemReceiptTable.COLUMN_ID}=? AND {MenuItemReceiptTable.COLUMN_INGREDIENT_ID}=?",
+                (_id, ingredient_id),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return MenuItemReceipt(x[0], x[1], x[2], x[3])
@@ -1028,8 +1436,10 @@ class DBHelper(object):
 
     def getCustomerById(self, _id: int):
         with self.conn:
-            self.c.execute(f"SELECT * FROM {CustomerTable.TABLE_NAME} WHERE {CustomerTable.COLUMN_ID}=?",
-                           (_id,))
+            self.c.execute(
+                f"SELECT * FROM {CustomerTable.TABLE_NAME} WHERE {CustomerTable.COLUMN_ID}=?",
+                (_id,),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return Customer(x[1], x[2], x[3], x[4], x[5], x[6], x[0])
@@ -1039,7 +1449,9 @@ class DBHelper(object):
     def getWorkerById(self, _id: int):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {WorkerTable.TABLE_NAME} WHERE {WorkerTable.COLUMN_ID}=?", (_id,))
+                f"SELECT * FROM {WorkerTable.TABLE_NAME} WHERE {WorkerTable.COLUMN_ID}=?",
+                (_id,),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return Worker(
@@ -1053,8 +1465,8 @@ class DBHelper(object):
                     score=x[8],
                     picture=x[9],
                     face=x[10],
-                    cv=x[11],
-                    id=x[0]
+                    cv=Utility.loadConvertFile(x[11]),
+                    id=x[0],
                 )
             else:
                 return x
@@ -1065,7 +1477,9 @@ class DBHelper(object):
                 f"""
                 SELECT * FROM {SellTable.TABLE_NAME} 
                 WHERE {SellTable.COLUMN_ID}=?
-                """, (_id,))
+                """,
+                (_id,),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return Sell(
@@ -1076,7 +1490,7 @@ class DBHelper(object):
                     completed=x[5],
                     nb_covers=x[6],
                     on_table=x[7],
-                    id=x[0]
+                    id=x[0],
                 )
             else:
                 return x
@@ -1084,7 +1498,9 @@ class DBHelper(object):
     def getSellItemById(self, _id: int):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {SellItemTable.TABLE_NAME} WHERE {SellItemTable.COLUMN_ID}=?", (_id,))
+                f"SELECT * FROM {SellItemTable.TABLE_NAME} WHERE {SellItemTable.COLUMN_ID}=?",
+                (_id,),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return SellItem(
@@ -1095,15 +1511,17 @@ class DBHelper(object):
                     group=x[5],
                     ready=x[6],
                     served=x[7],
-                    id=x[0]
+                    id=x[0],
                 )
             else:
                 return x
 
     def getSellItemSupplementById(self, _id: int):
         with self.conn:
-            self.c.execute(f"SELECT * FROM {SellItemSupplementTable.TABLE_NAME} WHERE {SellItemSupplementTable.COLUMN_ID}=?",
-                           (_id,))
+            self.c.execute(
+                f"SELECT * FROM {SellItemSupplementTable.TABLE_NAME} WHERE {SellItemSupplementTable.COLUMN_ID}=?",
+                (_id,),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return SellItemSupplement(x[1], x[2], x[3], x[0])
@@ -1111,29 +1529,38 @@ class DBHelper(object):
                 return x
 
     def getTableById(self, _id: int):
-        with self.conn:
-            self.c.execute(f"SELECT * FROM {TableTable.TABLE_NAME} WHERE {TableTable.COLUMN_ID}=?",
-                           (_id,))
-            x = self.c.fetchone()
-            if x is not None:
-                return Table(x[0], x[1], x[2], x[3], x[4], x[5])
-            else:
-                return x
+        with self.lock:
+            with self.conn:
+                self.c.execute(
+                    f"SELECT * FROM {TableTable.TABLE_NAME} WHERE {TableTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+                x = self.c.fetchone()
+                if x is not None:
+                    return Table(x[0], x[1], x[2], x[3], x[4], x[5])
+                else:
+                    return x
 
-    def getCategoryById(self, _id: int):
+    def getCategoryById(self, _id: int) -> Category:
         with self.conn:
-            self.c.execute(f"SELECT * FROM {CategoryTable.TABLE_NAME} WHERE {CategoryTable.COLUMN_ID}=?",
-                           (_id,))
+            self.c.execute(
+                f"SELECT * FROM {CategoryTable.TABLE_NAME} WHERE {CategoryTable.COLUMN_ID}=?",
+                (_id,),
+            )
             x = self.c.fetchone()
             if x is not None:
-                return Category(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10], x[0])
+                return Category(
+                    x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10], x[0]
+                )
             else:
                 return x
 
     def getPointerById(self, _id: int):
         with self.conn:
-            self.c.execute(f"SELECT * FROM {PointerTable.TABLE_NAME} WHERE {PointerTable.COLUMN_ID}=?",
-                           (_id,))
+            self.c.execute(
+                f"SELECT * FROM {PointerTable.TABLE_NAME} WHERE {PointerTable.COLUMN_ID}=?",
+                (_id,),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return Pointer(x[1], x[2], x[3], x[0])
@@ -1143,7 +1570,9 @@ class DBHelper(object):
     def getStockById(self, _id: int):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {StockTable.TABLE_NAME} WHERE {StockTable.COLUMN_ID}=?", (_id,))
+                f"SELECT * FROM {StockTable.TABLE_NAME} WHERE {StockTable.COLUMN_ID}=?",
+                (_id,),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return Stock(
@@ -1152,7 +1581,7 @@ class DBHelper(object):
                     unit=x[3],
                     quantity=x[4],
                     is_ingredient=x[5],
-                    id=x[0]
+                    id=x[0],
                 )
             else:
                 return x
@@ -1160,7 +1589,9 @@ class DBHelper(object):
     def getSupplementById(self, _id: int):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {SupplementTable.TABLE_NAME} WHERE {SupplementTable.COLUMN_ID}=?", (_id,))
+                f"SELECT * FROM {SupplementTable.TABLE_NAME} WHERE {SupplementTable.COLUMN_ID}=?",
+                (_id,),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return Supplement(x[1], x[2], x[3], x[4], x[0])
@@ -1170,7 +1601,9 @@ class DBHelper(object):
     def getSupplierById(self, _id: int):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {SupplierTable.TABLE_NAME} WHERE {SupplierTable.COLUMN_ID}=?", (_id,))
+                f"SELECT * FROM {SupplierTable.TABLE_NAME} WHERE {SupplierTable.COLUMN_ID}=?",
+                (_id,),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return Supplier(x[1], x[2], x[3], x[4], x[0])
@@ -1180,21 +1613,23 @@ class DBHelper(object):
     def getExpenseCategoryById(self, _id: int):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {ExpenseCategoryTable.TABLE_NAME} WHERE {ExpenseCategoryTable.COLUMN_ID}=?", (_id,))
+                f"SELECT * FROM {ExpenseCategoryTable.TABLE_NAME} WHERE {ExpenseCategoryTable.COLUMN_ID}=?",
+                (_id,),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return ExpenseCategory(
-                    name=x[1],
-                    stock=x[2],
-                    is_ingredient=x[3],
-                    id=x[0])
+                    name=x[1], stock=x[2], is_ingredient=x[3], id=x[0]
+                )
             else:
                 return x
 
     def getMenuCategoryById(self, _id: int):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {MenuCategoryTable.TABLE_NAME} WHERE {MenuCategoryTable.COLUMN_ID}=?", (_id,))
+                f"SELECT * FROM {MenuCategoryTable.TABLE_NAME} WHERE {MenuCategoryTable.COLUMN_ID}=?",
+                (_id,),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return MenuCategory(x[1], x[2], x[0])
@@ -1204,7 +1639,9 @@ class DBHelper(object):
     def getMenuCategoryByName(self, name: str):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {MenuCategoryTable.TABLE_NAME} WHERE {MenuCategoryTable.COLUMN_NAME}=?", (name,))
+                f"SELECT * FROM {MenuCategoryTable.TABLE_NAME} WHERE {MenuCategoryTable.COLUMN_NAME}=?",
+                (name,),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return MenuCategory(x[1], x[2], x[0])
@@ -1214,20 +1651,60 @@ class DBHelper(object):
     def getReservationById(self, _id: int):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {ReservationTable.TABLE_NAME} WHERE {ReservationTable.COLUMN_ID}=?", (_id,))
+                f"SELECT * FROM {ReservationTable.TABLE_NAME} WHERE {ReservationTable.COLUMN_ID}=?",
+                (_id,),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return Reservation(x[1], x[2], x[3], x[4], x[5], x[6], x[0])
             else:
                 return x
 
-    def getWasteById(self, _id: int):
+    def getWasteById(self, _id: int) -> Waste:
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {WasteTable.TABLE_NAME} WHERE {WasteTable.COLUMN_ID}=?", (_id,))
+                f"SELECT * FROM {WasteTable.TABLE_NAME} WHERE {WasteTable.COLUMN_ID}=?",
+                (_id,),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return Waste(x[1], x[2], x[3], x[4], x[5], x[6], x[0])
+            else:
+                return x
+
+    def getTableOwnershipById(self, _id: int) -> TableOwnership:
+        with self.conn:
+            self.c.execute(
+                f"SELECT * FROM {TableOwnershipTable.TABLE_NAME} WHERE {TableOwnershipTable.COLUMN_ID}=?",
+                (_id,),
+            )
+            x = self.c.fetchone()
+            if x is not None:
+                return TableOwnership(x[1], x[2], x[0])
+            else:
+                return x
+
+    def getPaymentById(self, _id: int) -> Payment:
+        with self.conn:
+            self.c.execute(
+                f"SELECT * FROM {PaymentTable.TABLE_NAME} WHERE {PaymentTable.COLUMN_ID}=?",
+                (_id,),
+            )
+            x = self.c.fetchone()
+            if x is not None:
+                return Payment(x[1], x[2], x[3], x[0])
+            else:
+                return x
+
+    def getFileDocById(self, _id: int) -> FileDoc:
+        with self.conn:
+            self.c.execute(
+                f"SELECT * FROM {FileDocTable.TABLE_NAME} WHERE {FileDocTable.COLUMN_ID}=?",
+                (_id,),
+            )
+            x = self.c.fetchone()
+            if x is not None:
+                return FileDoc(x[1], x[2], x[3], Utility.loadConvertFile(x[4]), x[0])
             else:
                 return x
 
@@ -1291,18 +1768,19 @@ class DBHelper(object):
             self.c.execute(sql_command, astuple(x))
 
     def updateSell(self, x: Sell):
-        with self.conn:
-            sql_command = f"""
-            UPDATE {SellTable.TABLE_NAME} SET 
-            {SellTable.COLUMN_ID_WORKER}=?,
-            {SellTable.COLUMN_ID_CUSTOMER}=?,
-            {SellTable.COLUMN_DATE}=?,
-            {SellTable.COLUMN_TOTAL}=?,
-            {SellTable.COLUMN_COMPLETED}=?,
-            {SellTable.COLUMN_NB_COVERS}=?,
-            {SellTable.COLUMN_ON_TABLE}=?
-            WHERE {SellTable.COLUMN_ID}=? """
-            self.c.execute(sql_command, astuple(x))
+        with self.lock:
+            with self.conn:
+                sql_command = f"""
+                UPDATE {SellTable.TABLE_NAME} SET 
+                {SellTable.COLUMN_ID_WORKER}=?,
+                {SellTable.COLUMN_ID_CUSTOMER}=?,
+                {SellTable.COLUMN_DATE}=?,
+                {SellTable.COLUMN_TOTAL}=?,
+                {SellTable.COLUMN_COMPLETED}=?,
+                {SellTable.COLUMN_NB_COVERS}=?,
+                {SellTable.COLUMN_ON_TABLE}=?
+                WHERE {SellTable.COLUMN_ID}=? """
+                self.c.execute(sql_command, astuple(x))
 
     def updateSellItem(self, x: SellItem):
         with self.conn:
@@ -1330,18 +1808,19 @@ class DBHelper(object):
             self.c.execute(sql_command, astuple(x))
 
     def updateTable(self, x: Table):
-        with self.conn:
-            sql_command = f"""
-            UPDATE {TableTable.TABLE_NAME} SET 
-            {TableTable.COLUMN_ID}=?,
-            {TableTable.COLUMN_NAME}=?,
-            {TableTable.COLUMN_SEATS}=?,
-            {TableTable.COLUMN_COMMENT}=?,
-            {TableTable.COLUMN_RESERVED}=?,
-            {TableTable.COLUMN_ID_SELL}=?
-            WHERE {TableTable.COLUMN_ID}=? 
-            """
-            self.c.execute(sql_command, astuple(x) + (x.id,))
+        with self.lock:
+            with self.conn:
+                sql_command = f"""
+                UPDATE {TableTable.TABLE_NAME} SET 
+                {TableTable.COLUMN_ID}=?,
+                {TableTable.COLUMN_NAME}=?,
+                {TableTable.COLUMN_SEATS}=?,
+                {TableTable.COLUMN_COMMENT}=?,
+                {TableTable.COLUMN_RESERVED}=?,
+                {TableTable.COLUMN_ID_SELL}=?
+                WHERE {TableTable.COLUMN_ID}=? 
+                """
+                self.c.execute(sql_command, astuple(x) + (x.id,))
 
     def updateCategory(self, x: Category):
         with self.conn:
@@ -1419,11 +1898,45 @@ class DBHelper(object):
 
     def updateWaste(self, x: Waste):
         with self.conn:
-            sql_command = f"""UPDATE {WasteTable.TABLE_NAME} SET {WasteTable.COLUMN_WORKER_ID}=?, {WasteTable.COLUMN_NAME}=?,
-                        {WasteTable.COLUMN_NAME}=?, {WasteTable.COLUMN_CATEGORY}=?, {WasteTable.COLUMN_QUANTITY}=?, 
-                        {WasteTable.COLUMN_PRICE}=?, 
-                        {WasteTable.COLUMN_DATE}=? 
-                        WHERE {WasteTable.COLUMN_ID}=? """
+            sql_command = f"""
+            UPDATE {WasteTable.TABLE_NAME} SET 
+            {WasteTable.COLUMN_WORKER_ID}=?, 
+            {WasteTable.COLUMN_NAME}=?,
+            {WasteTable.COLUMN_CATEGORY}=?, 
+            {WasteTable.COLUMN_QUANTITY}=?, 
+            {WasteTable.COLUMN_PRICE}=?, 
+            {WasteTable.COLUMN_DATE}=? 
+            WHERE {WasteTable.COLUMN_ID}=? """
+            self.c.execute(sql_command, astuple(x))
+
+    def updateTableOwnership(self, x: TableOwnership):
+        with self.conn:
+            sql_command = f"""
+            UPDATE {TableOwnershipTable.TABLE_NAME} SET
+            {TableOwnershipTable.COLUMN_TABLE_ID}=?,
+            {TableOwnershipTable.COLUMN_WORKER_ID}=?
+            WHERE {TableOwnershipTable.COLUMN_ID}=? """
+            self.c.execute(sql_command, astuple(x))
+
+    def updatePayment(self, x: Payment):
+        with self.conn:
+            sql_command = f"""
+            UPDATE {PaymentTable.TABLE_NAME} SET
+            {PaymentTable.COLUMN_WORKER_ID}=?,
+            {PaymentTable.COLUMN_DATE}=?,
+            {PaymentTable.COLUMN_AMOUNT}=?
+            WHERE {PaymentTable.COLUMN_ID}=? """
+            self.c.execute(sql_command, astuple(x))
+
+    def updateFileDoc(self, x: FileDoc):
+        with self.conn:
+            sql_command = f"""
+            UPDATE {FileDocTable.TABLE_NAME} SET
+            {FileDocTable.COLUMN_NAME}=?,
+            {FileDocTable.COLUMN_DATE}=?,
+            {FileDocTable.COLUMN_COMMENT}=?,
+            {FileDocTable.COLUMN_FILE}=?
+            WHERE {FileDocTable.COLUMN_ID}=? """
             self.c.execute(sql_command, astuple(x))
 
     # Special Calls
@@ -1481,13 +1994,17 @@ class DBHelper(object):
                             nb_covers=x[11],
                             ready=x[12],
                             served=x[13],
-                            id=x[5]))
+                            id=x[5],
+                        )
+                    )
             return results, total, sell
 
     def getWorkerByUsername(self, username):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {WorkerTable.TABLE_NAME} WHERE {WorkerTable.COLUMN_USERNAME}=?", (username,))
+                f"SELECT * FROM {WorkerTable.TABLE_NAME} WHERE {WorkerTable.COLUMN_USERNAME}=?",
+                (username,),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return Worker(
@@ -1501,8 +2018,7 @@ class DBHelper(object):
                     score=x[8],
                     picture=x[9],
                     face=x[10],
-                    cv=x[11],
-                    id=x[0]
+                    id=x[0],
                 )
             else:
                 return x
@@ -1510,19 +2026,25 @@ class DBHelper(object):
     def deleteAllRelatedSellItems(self, _id: int):
         with self.conn:
             self.c.execute(
-                f"DELETE FROM {SellItemTable.TABLE_NAME} WHERE {SellItemTable.COLUMN_ID_SELL}=?", (_id,))
+                f"DELETE FROM {SellItemTable.TABLE_NAME} WHERE {SellItemTable.COLUMN_ID_SELL}=?",
+                (_id,),
+            )
 
     def deleteAllRelatedSellItemSupplements(self, _id: int):
         with self.conn:
             self.c.execute(
-                f"DELETE FROM {SellItemSupplementTable.TABLE_NAME} WHERE {SellItemSupplementTable.COLUMN_ID_SELL_ITEM}=?", (_id,))
+                f"DELETE FROM {SellItemSupplementTable.TABLE_NAME} WHERE {SellItemSupplementTable.COLUMN_ID_SELL_ITEM}=?",
+                (_id,),
+            )
 
     def getAllUncompletedSells(self):
         with self.conn:
             self.c.execute(
                 f"""SELECT * FROM {SellTable.TABLE_NAME} 
                 WHERE {SellTable.TABLE_NAME}.{SellTable.COLUMN_COMPLETED}=?
-                """, (0,))
+                """,
+                (0,),
+            )
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
@@ -1536,8 +2058,9 @@ class DBHelper(object):
                             completed=x[5],
                             nb_covers=x[6],
                             on_table=x[7],
-                            id=x[0]
-                        ))
+                            id=x[0],
+                        )
+                    )
             return results
 
     def getAllHoldingSells(self):
@@ -1564,19 +2087,21 @@ class DBHelper(object):
                             completed=x[5],
                             nb_covers=x[6],
                             on_table=x[7],
-                            id=x[0]
-                        ))
+                            id=x[0],
+                        )
+                    )
             return results
 
     def insertOrder(
-            self,
-            order_items: list,
-            total: float,
-            id_worker: int,
-            id_customer: int,
-            completed: int = 0,
-            nb_covers: int = 1,
-            on_table: bool = False):
+        self,
+        order_items: list,
+        total: float,
+        id_worker: int,
+        id_customer: int,
+        completed: int = 0,
+        nb_covers: int = 1,
+        on_table: bool = False,
+    ):
 
         sell_id = self.insertSell(
             Sell(
@@ -1586,7 +2111,9 @@ class DBHelper(object):
                 total=total,
                 completed=completed,
                 nb_covers=nb_covers,
-                on_table=on_table))
+                on_table=on_table,
+            )
+        )
         if order_items[0].tableId is not None and completed == 0:
             table = self.getTableById(order_items[0].tableId)
             table.id_sell = sell_id
@@ -1600,7 +2127,9 @@ class DBHelper(object):
                     total=item.orderItemTotal,
                     group=item.group_id,
                     ready=item.ready,
-                    served=item.served))
+                    served=item.served,
+                )
+            )
             for sup in item.orderItemSupplements:
                 self.insertSellItemSupplement(
                     SellItemSupplement(
@@ -1611,24 +2140,19 @@ class DBHelper(object):
                 )
         return sell_id
 
-    def deleteOrder(
-            self,
-            sell: Sell,
-            order_items: list,
-            completed: int = 0):
+    def deleteOrder(self, sell: Sell, order_items: list, completed: int = 0):
         self.deleteSell(sell.id)
-        if order_items[0].tableId is not None and completed == 0:
-            table = self.getTableById(order_items[0].tableId)
-            table.id_sell = None
-            self.updateTable(table)
+        if len(order_items) > 0:
+            if order_items[0].tableId is not None and completed == 0:
+                table = self.getTableById(order_items[0].tableId)
+                table.id_sell = None
+                self.updateTable(table)
         self.deleteSellContent(sell.id)
 
     def updateOrder(
-            self,
-            sell: Sell,
-            order_items: list,
-            completed: int = 0)-> List[OrderItem]:
-        
+        self, sell: Sell, order_items: list, completed: int = 0
+    ) -> List[OrderItem]:
+
         old_order = self.getOrderBySellId(sell.id)
         self.updateSell(sell)
         if order_items[0].tableId is not None and completed == 0:
@@ -1645,7 +2169,9 @@ class DBHelper(object):
                     total=item.orderItemTotal,
                     group=item.group_id,
                     ready=item.ready,
-                    served=item.served))
+                    served=item.served,
+                )
+            )
             for sup in item.orderItemSupplements:
                 self.insertSellItemSupplement(
                     SellItemSupplement(
@@ -1657,17 +2183,20 @@ class DBHelper(object):
         return old_order
 
     def deleteSellContent(self, id_sell: int):
-        with self.conn:
-            self.c.execute(
-                f"""SELECT {SellItemTable.TABLE_NAME}.{SellItemTable.COLUMN_ID} 
-                FROM {SellItemTable.TABLE_NAME} 
-                WHERE {SellItemTable.COLUMN_ID_SELL}=?
-                """, (id_sell,))
-            all_x = self.c.fetchall()
-            if all_x is not None:
-                for id_sell_item in all_x:
-                    self.deleteAllRelatedSellItemSupplements(id_sell_item[0])
-            self.deleteAllRelatedSellItems(id_sell)
+        with self.lock:
+            with self.conn:
+                self.c.execute(
+                    f"""SELECT {SellItemTable.TABLE_NAME}.{SellItemTable.COLUMN_ID} 
+                    FROM {SellItemTable.TABLE_NAME} 
+                    WHERE {SellItemTable.COLUMN_ID_SELL}=?
+                    """,
+                    (id_sell,),
+                )
+                all_x = self.c.fetchall()
+                if all_x is not None:
+                    for id_sell_item in all_x:
+                        self.deleteAllRelatedSellItemSupplements(id_sell_item[0])
+                self.deleteAllRelatedSellItems(id_sell)
 
     def getUncompletedOrdersBySellId(self, _id):
         sql_command = f"""SELECT NULL, 
@@ -1713,7 +2242,9 @@ class DBHelper(object):
                         nb_covers=x[10],
                         ready=x[11],
                         served=x[12],
-                        id=x[5]))
+                        id=x[5],
+                    )
+                )
                 total = x[8]
         return results, total
 
@@ -1760,7 +2291,9 @@ class DBHelper(object):
                             nb_covers=x[9],
                             ready=x[10],
                             served=x[11],
-                            id=x[5]))
+                            id=x[5],
+                        )
+                    )
             return results
 
     def getUncompletedTickets(self) -> List[Ticket]:
@@ -1815,7 +2348,9 @@ class DBHelper(object):
                             nb_covers=x[9],
                             ready=x[10],
                             served=x[11],
-                            id=x[5]))
+                            id=x[5],
+                        )
+                    )
                     if i + 1 != len(all_x):
                         if x[12] != all_x[i + 1][12]:
                             tickets.append(
@@ -1824,8 +2359,9 @@ class DBHelper(object):
                                     table_id=x[0],
                                     worker_id=x[13],
                                     worker_name=x[14],
-                                    orders=results
-                                ))
+                                    orders=results,
+                                )
+                            )
                             results = []
                     else:
                         tickets.append(
@@ -1834,18 +2370,21 @@ class DBHelper(object):
                                 table_id=x[0],
                                 worker_id=x[13],
                                 worker_name=x[14],
-                                orders=results
-                            ))
+                                orders=results,
+                            )
+                        )
             return tickets
 
     def getHomeScreenInfo(self, month_date: str, day_date: str):
         with self.conn:
             self.c.execute(
-                f"SELECT count(*) FROM {TableTable.TABLE_NAME} WHERE {TableTable.COLUMN_ID_SELL} IS NULL")
+                f"SELECT count(*) FROM {TableTable.TABLE_NAME} WHERE {TableTable.COLUMN_ID_SELL} IS NULL"
+            )
             nb_free_tables = self.c.fetchone()
         with self.conn:
             self.c.execute(
-                f"SELECT count(*) FROM {TableTable.TABLE_NAME} WHERE {TableTable.COLUMN_ID_SELL} IS NOT NULL")
+                f"SELECT count(*) FROM {TableTable.TABLE_NAME} WHERE {TableTable.COLUMN_ID_SELL} IS NOT NULL"
+            )
             nb_busy_tables = self.c.fetchone()
         sql_command = "SELECT count(*) FROM Sells WHERE date >=?"
         with self.conn:
@@ -1864,7 +2403,9 @@ class DBHelper(object):
                 SELECT * FROM {StockTable.TABLE_NAME} 
                 WHERE {StockTable.COLUMN_NAME}=? 
                 AND {StockTable.COLUMN_CATEGORY}=?
-                """, (name, category))
+                """,
+                (name, category),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return Stock(
@@ -1873,7 +2414,7 @@ class DBHelper(object):
                     unit=x[3],
                     quantity=x[4],
                     is_ingredient=x[5],
-                    id=x[0]
+                    id=x[0],
                 )
             else:
                 return x
@@ -1881,31 +2422,35 @@ class DBHelper(object):
     def getSupplementByMenuId(self, _id: int):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {SupplementTable.TABLE_NAME} WHERE {SupplementTable.COLUMN_RELATED_ITEM_ID}=?", (_id,))
+                f"SELECT * FROM {SupplementTable.TABLE_NAME} WHERE {SupplementTable.COLUMN_RELATED_ITEM_ID}=?",
+                (_id,),
+            )
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(Supplement(
-                        x[1], x[2], x[3], x[4], x[0]))
+                    results.append(Supplement(x[1], x[2], x[3], x[4], x[0]))
             return results
 
     def getSellItemSupplementBySellItem(self, sell_item_id: int):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {SellItemSupplementTable.TABLE_NAME} WHERE {SellItemSupplementTable.COLUMN_ID_SELL_ITEM}=?", (sell_item_id,))
+                f"SELECT * FROM {SellItemSupplementTable.TABLE_NAME} WHERE {SellItemSupplementTable.COLUMN_ID_SELL_ITEM}=?",
+                (sell_item_id,),
+            )
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(self.getSupplementById(
-                        x[1]))
+                    results.append(self.getSupplementById(x[1]))
             return results
 
     def getExpenseByNameCat(self, name: str, category: int):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {ExpenseTable.TABLE_NAME} WHERE {ExpenseTable.COLUMN_NAME}=? AND {ExpenseTable.COLUMN_CATEGORY}=?", (name, category))
+                f"SELECT * FROM {ExpenseTable.TABLE_NAME} WHERE {ExpenseTable.COLUMN_NAME}=? AND {ExpenseTable.COLUMN_CATEGORY}=?",
+                (name, category),
+            )
             x = self.c.fetchone()
             if x is not None:
                 return Expense(
@@ -1917,7 +2462,7 @@ class DBHelper(object):
                     supplier_id=x[6],
                     date=x[7],
                     payed=x[8],
-                    id=x[0]
+                    id=x[0],
                 )
             else:
                 return x
@@ -1925,7 +2470,9 @@ class DBHelper(object):
     def getExpenseByName(self, name: str):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {ExpenseTable.TABLE_NAME} WHERE {ExpenseTable.COLUMN_NAME}=?", (name,))
+                f"SELECT * FROM {ExpenseTable.TABLE_NAME} WHERE {ExpenseTable.COLUMN_NAME}=?",
+                (name,),
+            )
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
@@ -1940,95 +2487,112 @@ class DBHelper(object):
                             supplier_id=x[6],
                             date=x[7],
                             payed=x[8],
-                            id=x[0]
-                        ))
+                            id=x[0],
+                        )
+                    )
             return results
 
     def getFreeTables(self):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {TableTable.TABLE_NAME} WHERE {TableTable.COLUMN_ID_SELL} IS NULL AND {TableTable.COLUMN_RESERVED} = 0")
+                f"SELECT * FROM {TableTable.TABLE_NAME} WHERE {TableTable.COLUMN_ID_SELL} IS NULL AND {TableTable.COLUMN_RESERVED} = 0"
+            )
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(
-                        Table(x[0], x[1], x[2], x[3], x[4], x[5]))
+                    results.append(Table(x[0], x[1], x[2], x[3], x[4], x[5]))
             return results
 
     def getReservedTables(self):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {TableTable.TABLE_NAME} WHERE {TableTable.COLUMN_RESERVED} = 1")
+                f"SELECT * FROM {TableTable.TABLE_NAME} WHERE {TableTable.COLUMN_RESERVED} = 1"
+            )
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(
-                        Table(x[0], x[1], x[2], x[3], x[4], x[5]))
+                    results.append(Table(x[0], x[1], x[2], x[3], x[4], x[5]))
             return results
+
     # Search
 
     def customSearchSingle(self, table_name, table_field, value):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {table_name} WHERE {table_field}=?", (value,))
+                f"SELECT * FROM {table_name} WHERE {table_field}=?", (value,)
+            )
             return self.c.fetchall()
 
     def getReservationByName(self, name: str):
         name = f"%{name}%"
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {ReservationTable.TABLE_NAME} WHERE {ReservationTable.COLUMN_NAME} LIKE ?", (name,))
+                f"SELECT * FROM {ReservationTable.TABLE_NAME} WHERE {ReservationTable.COLUMN_NAME} LIKE ?",
+                (name,),
+            )
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(Reservation(
-                        x[1], x[2], x[3], x[4], x[5], x[6], x[0]))
+                    results.append(
+                        Reservation(x[1], x[2], x[3], x[4], x[5], x[6], x[0])
+                    )
             return results
 
     def getReservationByPhone(self, phone: str):
         phone = f"{phone}%"
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {ReservationTable.TABLE_NAME} WHERE {ReservationTable.COLUMN_PHONE} LIKE ?", (phone,))
+                f"SELECT * FROM {ReservationTable.TABLE_NAME} WHERE {ReservationTable.COLUMN_PHONE} LIKE ?",
+                (phone,),
+            )
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(Reservation(
-                        x[1], x[2], x[3], x[4], x[5], x[6], x[0]))
+                    results.append(
+                        Reservation(x[1], x[2], x[3], x[4], x[5], x[6], x[0])
+                    )
             return results
 
     def getReservationByDate(self, selected_date: str):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {ReservationTable.TABLE_NAME} WHERE {ReservationTable.COLUMN_DATE}>=?", (selected_date,))
+                f"SELECT * FROM {ReservationTable.TABLE_NAME} WHERE {ReservationTable.COLUMN_DATE}>=?",
+                (selected_date,),
+            )
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(Reservation(
-                        x[1], x[2], x[3], x[4], x[5], x[6], x[0]))
+                    results.append(
+                        Reservation(x[1], x[2], x[3], x[4], x[5], x[6], x[0])
+                    )
             return results
 
     def getReservationByDateRange(self, start_date: str, end_date: str):
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {ReservationTable.TABLE_NAME} WHERE {ReservationTable.COLUMN_DATE} BETWEEN ? AND ?", (start_date, end_date))
+                f"SELECT * FROM {ReservationTable.TABLE_NAME} WHERE {ReservationTable.COLUMN_DATE} BETWEEN ? AND ?",
+                (start_date, end_date),
+            )
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
                 for x in all_x:
-                    results.append(Reservation(
-                        x[1], x[2], x[3], x[4], x[5], x[6], x[0]))
+                    results.append(
+                        Reservation(x[1], x[2], x[3], x[4], x[5], x[6], x[0])
+                    )
             return results
 
     def getFreeTablesByDateRange(self, start_date: str, end_date: str):
         results = []
         reserved_tables = []
-        for reservation in self.getReservationByDateRange(start_date=start_date, end_date=end_date):
+        for reservation in self.getReservationByDateRange(
+            start_date=start_date, end_date=end_date
+        ):
             reserved_tables.append(reservation.table_id)
         for table in self.getAllTables():
             if table.id not in reserved_tables:
@@ -2038,7 +2602,9 @@ class DBHelper(object):
     def getExpensesByDateRange(self, start_date: str, end_date: str) -> List[Expense]:
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {ExpenseTable.TABLE_NAME} WHERE {ExpenseTable.COLUMN_DATE} BETWEEN ? AND ?", (start_date, end_date))
+                f"SELECT * FROM {ExpenseTable.TABLE_NAME} WHERE {ExpenseTable.COLUMN_DATE} BETWEEN ? AND ?",
+                (start_date, end_date),
+            )
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
@@ -2052,7 +2618,9 @@ class DBHelper(object):
                 f"""
                 SELECT * FROM {SellTable.TABLE_NAME} 
                 WHERE {SellTable.COLUMN_DATE} 
-                BETWEEN ? AND ?""", (start_date, end_date))
+                BETWEEN ? AND ?""",
+                (start_date, end_date),
+            )
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
@@ -2066,8 +2634,9 @@ class DBHelper(object):
                             completed=x[5],
                             nb_covers=x[6],
                             on_table=x[7],
-                            id=x[0]
-                        ))
+                            id=x[0],
+                        )
+                    )
             return results
 
     def getSellsTotalPriceByDateRange(self, start_date: str, end_date: str) -> float:
@@ -2077,8 +2646,10 @@ class DBHelper(object):
                 SELECT sum({SellTable.COLUMN_TOTAL}) FROM {SellTable.TABLE_NAME} 
                 WHERE {SellTable.COLUMN_DATE} 
                 BETWEEN ? AND ?
-                """, (start_date, end_date))
-            result, = self.c.fetchone()
+                """,
+                (start_date, end_date),
+            )
+            (result,) = self.c.fetchone()
             if result is not None:
                 return result
             else:
@@ -2087,8 +2658,10 @@ class DBHelper(object):
     def getExpensesTotalPriceByDateRange(self, start_date: str, end_date: str) -> float:
         with self.conn:
             self.c.execute(
-                f"SELECT sum({ExpenseTable.COLUMN_PRICE}) FROM {ExpenseTable.TABLE_NAME} WHERE {ExpenseTable.COLUMN_DATE} BETWEEN ? AND ?", (start_date, end_date))
-            result, = self.c.fetchone()
+                f"SELECT sum({ExpenseTable.COLUMN_PRICE}) FROM {ExpenseTable.TABLE_NAME} WHERE {ExpenseTable.COLUMN_DATE} BETWEEN ? AND ?",
+                (start_date, end_date),
+            )
+            (result,) = self.c.fetchone()
             if result is not None:
                 return result
             else:
@@ -2164,6 +2737,38 @@ class DBHelper(object):
             self.c.execute(sql_command, (start_date, end_date))
             return self.c.fetchall()
 
+    def getWorkerPaymentByDateRange(self, start_date: str, end_date: str) -> List:
+        with self.conn:
+            # sql_command = f"""
+            #     SELECT {WorkerTable.TABLE_NAME}.{WorkerTable.COLUMN_NAME},
+            #     sum({PaymentTable.TABLE_NAME}.{PaymentTable.COLUMN_AMOUNT}),
+            #     {WorkerTable.TABLE_NAME}.{WorkerTable.COLUMN_SALARY} - sum({PaymentTable.TABLE_NAME}.{PaymentTable.COLUMN_AMOUNT}),
+            #     {WorkerTable.TABLE_NAME}.{WorkerTable.COLUMN_SALARY}
+            #     FROM {PaymentTable.TABLE_NAME} LEFT JOIN {WorkerTable.TABLE_NAME}
+            #     ON {PaymentTable.TABLE_NAME}.{PaymentTable.COLUMN_WORKER_ID}=
+            #     {WorkerTable.TABLE_NAME}.{WorkerTable.COLUMN_ID}
+            #     WHERE {PaymentTable.TABLE_NAME}.{PaymentTable.COLUMN_DATE}
+            #     BETWEEN ? AND ?
+            #     GROUP BY {WorkerTable.TABLE_NAME}.{WorkerTable.COLUMN_NAME}
+            #     ORDER BY {WorkerTable.TABLE_NAME}.{WorkerTable.COLUMN_NAME} ASC
+            # """
+
+            sql_command = f"""
+                SELECT {WorkerTable.TABLE_NAME}.{WorkerTable.COLUMN_NAME},
+                sum({PaymentTable.TABLE_NAME}.{PaymentTable.COLUMN_AMOUNT}),
+                {WorkerTable.TABLE_NAME}.{WorkerTable.COLUMN_SALARY} - sum({PaymentTable.TABLE_NAME}.{PaymentTable.COLUMN_AMOUNT}),
+                {WorkerTable.TABLE_NAME}.{WorkerTable.COLUMN_SALARY}
+                FROM  {WorkerTable.TABLE_NAME} LEFT JOIN {PaymentTable.TABLE_NAME}
+                ON {WorkerTable.TABLE_NAME}.{WorkerTable.COLUMN_ID}=
+                {PaymentTable.TABLE_NAME}.{PaymentTable.COLUMN_WORKER_ID}
+                WHERE {PaymentTable.TABLE_NAME}.{PaymentTable.COLUMN_DATE}
+                BETWEEN ? AND ?
+                GROUP BY {WorkerTable.TABLE_NAME}.{WorkerTable.COLUMN_NAME}
+                ORDER BY {WorkerTable.TABLE_NAME}.{WorkerTable.COLUMN_NAME} ASC
+            """
+            self.c.execute(sql_command, (start_date, end_date))
+            return self.c.fetchall()
+
     def getBestSellingProductByDateRange(self, start_date: str, end_date: str) -> List:
         with self.conn:
             sql_command = f"""
@@ -2193,7 +2798,9 @@ class DBHelper(object):
     def expenseSuggestions(self, name: str) -> List[Expense]:
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {ExpenseTable.TABLE_NAME} WHERE {ExpenseTable.COLUMN_NAME} LIKE ?", (f"%{name}",))
+                f"SELECT * FROM {ExpenseTable.TABLE_NAME} WHERE {ExpenseTable.COLUMN_NAME} LIKE ?",
+                (f"%{name}",),
+            )
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
@@ -2208,14 +2815,17 @@ class DBHelper(object):
                             supplier_id=x[6],
                             date=x[7],
                             payed=x[8],
-                            id=x[0]
-                        ))
+                            id=x[0],
+                        )
+                    )
         return results
 
     def getSellItemBySellId(self, sell_id: int) -> List[SellItem]:
         with self.conn:
             self.c.execute(
-                f"SELECT * FROM {SellItemTable.TABLE_NAME} WHERE {SellItemTable.COLUMN_ID_SELL}=?", (sell_id,))
+                f"SELECT * FROM {SellItemTable.TABLE_NAME} WHERE {SellItemTable.COLUMN_ID_SELL}=?",
+                (sell_id,),
+            )
             all_x = self.c.fetchall()
             results = []
             if all_x is not None:
@@ -2229,8 +2839,9 @@ class DBHelper(object):
                             total=x[4],
                             group=x[5],
                             ready=x[6],
-                            served=x[7]
-                        ))
+                            served=x[7],
+                        )
+                    )
         return results
 
     def getOrderBySellId(self, sell_id: str) -> List[OrderItem]:
@@ -2239,18 +2850,21 @@ class DBHelper(object):
         results = []
         for sell_item in sell_items:
             product = self.getMenuItemById(sell_item.id_product)
-            results.append(OrderItem(
-                tableId=sell.on_table,
-                productId=sell_item.id_product,
-                productName=product.name,
-                productCategory=product.category_id,
-                productUnit=product.unit,
-                orderItemQuantity=sell_item.quantity,
-                orderItemTotal=sell_item.total,
-                orderItemSupplements=self.getSupplementByMenuId(sell_item.id),
-                group_id=sell_item.group,
-                nb_covers=sell.nb_covers,
-                ready=sell_item.ready,
-                served=sell_item.served,
-                id=sell_item.id))
+            results.append(
+                OrderItem(
+                    tableId=sell.on_table,
+                    productId=sell_item.id_product,
+                    productName=product.name,
+                    productCategory=product.category_id,
+                    productUnit=product.unit,
+                    orderItemQuantity=sell_item.quantity,
+                    orderItemTotal=sell_item.total,
+                    orderItemSupplements=self.getSupplementByMenuId(sell_item.id),
+                    group_id=sell_item.group,
+                    nb_covers=sell.nb_covers,
+                    ready=sell_item.ready,
+                    served=sell_item.served,
+                    id=sell_item.id,
+                )
+            )
         return results

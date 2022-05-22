@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1065</width>
+    <height>744</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>400</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Patus Block Note</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../resource/resource.qrc">
+    <normaloff>:/Simple icons/simple_icons/fi-rr-call-incoming.svg</normaloff>:/Simple icons/simple_icons/fi-rr-call-incoming.svg</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QPushButton
+{ 
+	alternate-background-color: rgb(255, 255, 255);
+	background: rgba(225, 225, 225, 100);
+	border-width: 2px;
+    border-radius: 10px;
+	qproperty-iconSize: 32px 32px;
+	border-style: dashed;
+ }
+
+QPushButton:hover
+{
+	background: rgba(225, 225, 225, 180);
+	border-style: dashed;
+}
+
+QPushButton:pressed
+{
+	background: rgba(75, 75, 75, 180);
+	border-style: inset;
+}
+
+QLineEdit
+{
+	background: transparent;
+	color: rgb(88, 88, 88);
+	border: none;
+	border-bottom: 1px solid #717072;
+	font: 14pt &quot;MS Shell Dlg 2&quot;;
+}
+QComboBox
+{
+	background: transparent;
+	color: rgb(88, 88, 88);
+	border: none;
+	border-bottom: 1px solid #717072;
+	font: 14pt &quot;MS Shell Dlg 2&quot;;
+}
+
+
+
+QComboBox
+{
+	background: transparent;
+	color: rgb(88, 88, 88);
+	border: none;
+	border-bottom: 1px solid #717072;
+	font: 14pt &quot;MS Shell Dlg 2&quot;;
+}
+
+QLineEdit:hover{
+	alternate-background-color: rgb(255, 255, 255);
+	background: rgba(225, 225, 225, 100);
+	border-width: 2px;
+    border-radius: 10px;
+	qproperty-iconSize: 32px 32px;
+	border-style: dashed;
+    font-size: 24px;
+}
+QLineEdit:pressed{
+	background: rgba(225, 225, 225, 100);
+	border-width: 3px;
+    border-radius: 20px;
+	border-style: line;
+    font-size: 24px;
+}
+QFrame
+{
+	background-color: rgb(192, 192, 192)
+}
+QWidget
+{
+	background-color: rgb(192, 192, 192)
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QPlainTextEdit" name="pte_blockNote">
+     <property name="font">
+      <font>
+       <family>Cascadia Code PL</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="frame_2">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="btn_save">
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Save and Close</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resource/resource.qrc">
+          <normaloff>:/Simple icons/simple_icons/fi-rr-cloud-upload.svg</normaloff>:/Simple icons/simple_icons/fi-rr-cloud-upload.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_clear">
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Clear</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resource/resource.qrc">
+          <normaloff>:/Simple icons/simple_icons/fi-rr-trash.svg</normaloff>:/Simple icons/simple_icons/fi-rr-trash.svg</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../resource/resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

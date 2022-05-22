@@ -4,6 +4,16 @@ from typing import List
 
 
 @dataclass
+class TableOwnership:
+    table_id: int
+    worker_id: int
+    id: int = None
+
+    def toJson(self):
+        return {"table_id": self.table_id, "worker_id": self.worker_id, "id": self.id}
+
+
+@dataclass
 class Expense:
     name: str
     category: int
@@ -43,20 +53,21 @@ class MenuItemPhone:
     id: int = None
 
     def toJson(self):
+        print(self)
         if self.supplements is None:
             self.supplements = []
 
         return {
-            'name': self.name,
-            'category': self.category,
-            'category_id': self.category_id,
-            'unit': self.unit,
-            'quantity': self.quantity,
-            'price': self.price,
+            "name": self.name,
+            "category": self.category,
+            "category_id": self.category_id,
+            "unit": self.unit,
+            "quantity": self.quantity,
+            "price": self.price,
             "available": self.available,
             "picture": self.picture,
             "supplements": [x.toJson() for x in self.supplements],
-            "id": self.id
+            "id": self.id,
         }
 
 
@@ -69,12 +80,13 @@ class Supplement:
     id: int = None
 
     def toJson(self):
+        print(self)
         return {
             "name": self.name,
             "related_item_id": self.related_item_id,
             "quantity": self.quantity,
             "price": self.price,
-            "id": self.id
+            "id": self.id,
         }
 
 
@@ -161,6 +173,19 @@ class Worker:
     picture: object = None
     face: object = None
     cv: object = None
+    id: int = None
+
+
+@dataclass
+class WorkerShow:
+    name: str
+    username: str
+    password: object
+    phone: str = None
+    id_category: int = 1
+    address: str = ""
+    salary: float = 0
+    score: float = 0
     id: int = None
 
 
@@ -267,7 +292,7 @@ class OrderItem:
             "nb_covers": self.nb_covers,
             "ready": self.ready,
             "served": self.served,
-            "id": self.id
+            "id": self.id,
         }
 
     def getDiff(self, other):
@@ -284,10 +309,13 @@ class OrderItem:
             nb_covers=self.nb_covers,
             ready=self.ready,
             served=self.served,
-            id=self.id)
+            id=self.id,
+        )
 
     def isChanged(self, other):
-        return (self.orderItemQuantity != other.orderItemQuantity) and (self.orderItemTotal != other.orderItemTotal)
+        return (self.orderItemQuantity != other.orderItemQuantity) and (
+            self.orderItemTotal != other.orderItemTotal
+        )
 
     def compare(self, other):
         return (self.productId == other.productId) and (self.ready == other.ready)
@@ -306,7 +334,8 @@ class OrderItem:
             nb_covers=self.nb_covers,
             ready=self.ready,
             served=self.served,
-            id=self.id)
+            id=self.id,
+        )
 
 
 @dataclass
@@ -323,7 +352,7 @@ class Ticket:
             "table_id": self.table_id,
             "worker_id": self.worker_id,
             "worker_name": self.worker_name,
-            "orders": [x.toJson() for x in self.orders]
+            "orders": [x.toJson() for x in self.orders],
         }
 
 
@@ -343,3 +372,20 @@ class HoldingSellShow:
     Ticket_Number: str
     Total: float
     Date: str
+
+
+@dataclass
+class FileDoc:
+    name: str
+    date: str
+    comment: str
+    file: object = None
+    id: int = None
+
+
+@dataclass
+class Payment:
+    worker_id: int
+    date: str
+    amount: float
+    id: int = None

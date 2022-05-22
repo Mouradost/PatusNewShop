@@ -11,12 +11,55 @@ from functools import partial
 from Setting.Setting import ServerSetting
 from Utilities import LicenseChecker
 import logging
+from escpos.printer import Network
+from Utilities.Utility import openConvertFile
+
+
+def handlePrint(
+    ip_address: str,
+    text: str,
+    show_logo: bool = False,
+    show_qr_code: bool = False,
+    height: int = 1,
+) -> None:
+    printer = Network(ip_address)
+    printer.set(
+        align="center",
+        font="a",
+        text_type="normal",
+        width=1,
+        height=height,
+        density=9,
+        invert=False,
+        smooth=False,
+        flip=False,
+    )
+    printer.charcode("MULTILINGUAL")
+    if show_logo:
+        printer.image(os.path.join(os.getcwd(), "resource", "patus_ticket_logo.jpg"))
+    printer.text(text)
+    if show_qr_code:
+        printer.qr("https://www.instagram.com/__patus_/")
+        printer.qr("https://www.facebook.com/PATUS-il-dio-della-pasta-106229107452308")
+    printer.cut()
+    printer.close()
 
 
 class Pay(QDialog):
-    def __init__(self, callLog, printerProblem, worker_name: str, order_items: list, tax: float, comment: str, ticket_number: int, total: float, printerThread):
+    def __init__(
+        self,
+        callLog,
+        printerProblem,
+        worker_name: str,
+        order_items: list,
+        tax: float,
+        comment: str,
+        ticket_number: int,
+        total: float,
+        printerThread,
+    ):
         super(Pay, self).__init__()
-        uic.loadUi(os.path.join(os.getcwd(), 'uis', 'pay.ui'), self)
+        uic.loadUi(os.path.join(os.getcwd(), "uis", "pay.ui"), self)
         self.lcdN_total.setProperty("value", total)
         self.le_givenAmount.setValidator(QDoubleValidator())
         self.le_givenAmount.textChanged.connect(self.calculator)
@@ -38,10 +81,12 @@ class Pay(QDialog):
         if self.buttonBox.signalsBlocked():
             self.buttonBox.blockSignals(False)
         try:
-            total = float(self.le_givenAmount.text()) - self.lcdN_total.value()
-            self.lcdN_return.setProperty("value", total)
+
+            if self.le_givenAmount.text() != "":
+                total = float(self.le_givenAmount.text()) - self.lcdN_total.value()
+                self.lcdN_return.setProperty("value", total)
         except Exception as e:
-            logging.error(e)
+            logging.error(f"[PAY] ERROR: {e}")
             self.lcdN_return.setProperty("value", 0)
 
     def validate_print(self):
@@ -59,22 +104,22 @@ class Pay(QDialog):
                             old=False,
                             tax=self.tax,
                             mobile=True,
-                            given=given)
-                        self.printerThread.printStatus.connect(
-                            self.printerProblem)
+                            given=given,
+                        )
+                        self.printerThread.printStatus.connect(self.printerProblem)
                         self.printerThread.logUpdater.connect(self.callLog)
                         self.printerThread.start()
 
                         msg = QMessageBox()
                         msg.setIcon(QMessageBox.Information)
-                        msg.setText('Sent to printer!')
+                        msg.setText("Sent to printer!")
                         msg.setWindowTitle("Information message")
                         msg.exec_()
 
                     except Exception as e:
                         msg = QMessageBox()
                         msg.setIcon(QMessageBox.Critical)
-                        msg.setText('Problem sending to printer!')
+                        msg.setText("Problem sending to printer!")
                         msg.setDetailedText(str(e))
                         msg.setWindowTitle("Warning message")
                         msg.exec_()
@@ -83,16 +128,15 @@ class Pay(QDialog):
             except Exception as e:
                 msg = QMessageBox()
                 msg.setIcon(QMessageBox.Critical)
-                msg.setText('Printer problem')
-                msg.setInformativeText(
-                    "Check if the cashier printer is connected")
+                msg.setText("Printer problem")
+                msg.setInformativeText("Check if the cashier printer is connected")
                 msg.setDetailedText(str(e))
                 msg.setWindowTitle("Warning message")
                 msg.exec_()
         except Exception as e:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
-            msg.setText('Received money error')
+            msg.setText("Received money error")
             msg.setInformativeText("Received money should not be empty")
             msg.setDetailedText(str(e))
             msg.setWindowTitle("Warning message")
@@ -103,7 +147,7 @@ class Pay(QDialog):
 class CheckerL(QDialog):
     def __init__(self):
         super(CheckerL, self).__init__()
-        uic.loadUi(os.path.join(os.getcwd(), 'uis', 'LicenseProblem.ui'), self)
+        uic.loadUi(os.path.join(os.getcwd(), "uis", "LicenseProblem.ui"), self)
         self.l_adressMac.setText(LicenseChecker.get_mac())
         self.tb_copyMac.clicked.connect(self.copyMac)
 
@@ -123,18 +167,77 @@ class CheckerL(QDialog):
 class Reducer(QDialog):
     def __init__(self):
         super(Reducer, self).__init__()
-        uic.loadUi(os.path.join(os.getcwd(), 'uis', 'reducer.ui'), self)
+        uic.loadUi(os.path.join(os.getcwd(), "uis", "reducer.ui"), self)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
         self.le_reduction.clear()
         self.le_reduction.setValidator(QDoubleValidator())
 
 
+class LogPreviewer(QDialog):
+    def __init__(self, logPath: str) -> None:
+        super(LogPreviewer, self).__init__()
+        uic.loadUi(os.path.join(os.getcwd(), "uis", "LogPreview.ui"), self)
+        self.logPath = logPath
+        self.btn_clear_logs.clicked.connect(self.clearLogs)
+        self.btn_refresh_logs.clicked.connect(self.readLogs)
+        self.btn_refresh_logs.click()
+
+    def readLogs(self) -> None:
+        if not os.path.exists(self.logPath):
+            os.makedirs(self.logPath)
+        self.tb_logs.clear()
+        with open(self.logPath, "r") as f:
+            self.tb_logs.setText(f.read())
+
+    def clearLogs(self):
+        with open(self.logPath, "r+") as f:
+            f.truncate(0)
+        self.readLogs()
+
+
+class BlockNote(QDialog):
+    def __init__(self, db=None) -> None:
+        super(BlockNote, self).__init__()
+        uic.loadUi(os.path.join(os.getcwd(), "uis", "BlockNote.ui"), self)
+        self.db = db
+        self.btn_clear.clicked.connect(self.clearNote)
+        self.btn_save.clicked.connect(self.saveNote)
+
+    def clearNote(self):
+        self.pte_blockNote.clear()
+
+    def saveNote(self):
+        try:
+            with open(os.path.join(os.getcwd(), "tmp", "note.txt"), "w") as f:
+                f.write(self.pte_blockNote.toPlainText())
+            description_json = openConvertFile(
+                os.path.join(os.getcwd(), "tmp", "note.txt")
+            )
+            fileDoc = FileDoc(
+                name="Block_Note",
+                date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                comment="AUTO_GENERATED",
+                file=description_json,
+            )
+            self.db.insertFileDoc(fileDoc)
+            self.close()
+        except Exception as e:
+            logging.error(f"[BLOCK NOTE] Error: {e}")
+
+
 class ConfirmDeletingOrder(QDialog):
     def __init__(self):
         super(ConfirmDeletingOrder, self).__init__()
-        uic.loadUi(os.path.join(os.getcwd(), 'uis',
-                   'ConfirmDeleteOrder.ui'), self)
+        uic.loadUi(os.path.join(os.getcwd(), "uis", "ConfirmDeleteOrder.ui"), self)
+        self.buttonBox.accepted.connect(self.accept)
+        self.buttonBox.rejected.connect(self.reject)
+
+
+class ConfirmFullTicket(QDialog):
+    def __init__(self):
+        super(ConfirmFullTicket, self).__init__()
+        uic.loadUi(os.path.join(os.getcwd(), "uis", "ConfirmFullTicket.ui"), self)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
 
@@ -142,7 +245,7 @@ class ConfirmDeletingOrder(QDialog):
 class NbCoversChooser(QDialog):
     def __init__(self):
         super(NbCoversChooser, self).__init__()
-        uic.loadUi(os.path.join(os.getcwd(), 'uis', 'NbCovers.ui'), self)
+        uic.loadUi(os.path.join(os.getcwd(), "uis", "NbCovers.ui"), self)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
         self.le_nb_covers.clear()
@@ -152,7 +255,7 @@ class NbCoversChooser(QDialog):
 class EditOrderOnFly(QDialog):
     def __init__(self, quantity):
         super(EditOrderOnFly, self).__init__()
-        uic.loadUi(os.path.join(os.getcwd(), 'uis', 'EditOrderOnFly.ui'), self)
+        uic.loadUi(os.path.join(os.getcwd(), "uis", "EditOrderOnFly.ui"), self)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
         self.le_orderItemOnFly_quantity.clear()
@@ -163,7 +266,7 @@ class EditOrderOnFly(QDialog):
 class Holder(QDialog):
     def __init__(self):
         super(Holder, self).__init__()
-        uic.loadUi(os.path.join(os.getcwd(), 'uis', 'holder.ui'), self)
+        uic.loadUi(os.path.join(os.getcwd(), "uis", "holder.ui"), self)
         self.buttonBox.accepted.connect(self.validate_click)
         self.buttonBox.rejected.connect(self.reject)
         self.tw_orderHold.clear()
@@ -172,11 +275,8 @@ class Holder(QDialog):
         ho_show = []
         for ho in self.holdingOrders:
             ho_show.append(
-                HoldingSellShow(
-                    Ticket_Number=ho.id,
-                    Total=ho.total,
-                    Date=ho.date
-                ))
+                HoldingSellShow(Ticket_Number=ho.id, Total=ho.total, Date=ho.date)
+            )
         displayDbData(self.tw_orderHold, ho_show)
 
     def validate_click(self):
@@ -186,7 +286,7 @@ class Holder(QDialog):
             self.buttonBox.blockSignals(True)
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
-            msg.setText('No order to resume')
+            msg.setText("No order to resume")
             msg.setInformativeText("Please select the order to resume")
             msg.setWindowTitle("Warning message")
             msg.exec_()
@@ -195,7 +295,7 @@ class Holder(QDialog):
 class TableChanger(QDialog):
     def __init__(self, free_tables):
         super(TableChanger, self).__init__()
-        uic.loadUi(os.path.join(os.getcwd(), 'uis', 'TableChanger.ui'), self)
+        uic.loadUi(os.path.join(os.getcwd(), "uis", "TableChanger.ui"), self)
         self.buttonBox.accepted.connect(self.validate_click)
         self.buttonBox.rejected.connect(self.reject)
         self.tw_freeTables.clear()
@@ -208,7 +308,7 @@ class TableChanger(QDialog):
         else:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
-            msg.setText('No table selected')
+            msg.setText("No table selected")
             msg.setInformativeText("Please select the new table")
             msg.setWindowTitle("Warning message")
             msg.exec_()
@@ -218,7 +318,7 @@ class TableChanger(QDialog):
 class SettingUI(QDialog):
     def __init__(self):
         super(SettingUI, self).__init__()
-        uic.loadUi(os.path.join(os.getcwd(), 'uis', 'Setting.ui'), self)
+        uic.loadUi(os.path.join(os.getcwd(), "uis", "Setting.ui"), self)
         self.buttonBox.accepted.connect(self.validate_click)
         self.buttonBox.rejected.connect(self.reject)
         self.serverSetting = ServerSetting()
@@ -231,16 +331,41 @@ class SettingUI(QDialog):
         self.le_pizza_ip.setText(self.serverSetting.PIZZA_IP)
         self.le_bar_ip.setText(self.serverSetting.BAR_IP)
 
-        self.le_ip.setValidator(QRegExpValidator(
-            QRegExp("(\\b25[0-5]|\\b2[0-4][0-9]|\\b[01]?[0-9][0-9]?)(\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}")))
-        self.le_cashier_ip.setValidator(QRegExpValidator(
-            QRegExp("(\\b25[0-5]|\\b2[0-4][0-9]|\\b[01]?[0-9][0-9]?)(\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}")))
-        self.le_kitchen_ip.setValidator(QRegExpValidator(
-            QRegExp("(\\b25[0-5]|\\b2[0-4][0-9]|\\b[01]?[0-9][0-9]?)(\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}")))
-        self.le_pizza_ip.setValidator(QRegExpValidator(
-            QRegExp("(\\b25[0-5]|\\b2[0-4][0-9]|\\b[01]?[0-9][0-9]?)(\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}")))
-        self.le_bar_ip.setValidator(QRegExpValidator(
-            QRegExp("(\\b25[0-5]|\\b2[0-4][0-9]|\\b[01]?[0-9][0-9]?)(\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}")))
+        self.le_ip.setValidator(
+            QRegExpValidator(
+                QRegExp(
+                    "(\\b25[0-5]|\\b2[0-4][0-9]|\\b[01]?[0-9][0-9]?)(\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}"
+                )
+            )
+        )
+        self.le_cashier_ip.setValidator(
+            QRegExpValidator(
+                QRegExp(
+                    "(\\b25[0-5]|\\b2[0-4][0-9]|\\b[01]?[0-9][0-9]?)(\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}"
+                )
+            )
+        )
+        self.le_kitchen_ip.setValidator(
+            QRegExpValidator(
+                QRegExp(
+                    "(\\b25[0-5]|\\b2[0-4][0-9]|\\b[01]?[0-9][0-9]?)(\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}"
+                )
+            )
+        )
+        self.le_pizza_ip.setValidator(
+            QRegExpValidator(
+                QRegExp(
+                    "(\\b25[0-5]|\\b2[0-4][0-9]|\\b[01]?[0-9][0-9]?)(\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}"
+                )
+            )
+        )
+        self.le_bar_ip.setValidator(
+            QRegExpValidator(
+                QRegExp(
+                    "(\\b25[0-5]|\\b2[0-4][0-9]|\\b[01]?[0-9][0-9]?)(\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}"
+                )
+            )
+        )
 
     def validate_click(self):
         if len(self.le_ip.text()) > 0:
@@ -257,24 +382,24 @@ class SettingUI(QDialog):
             self.buttonBox.blockSignals(True)
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
-            msg.setText('No order to resume')
+            msg.setText("No order to resume")
             msg.setInformativeText("Please select the order to resume")
             msg.setWindowTitle("Warning message")
             msg.exec_()
 
 
 class PrinterProblem(QDialog):
-
     def __init__(self, tickets: list, places: list):
         super(PrinterProblem, self).__init__()
-        uic.loadUi(os.path.join(os.getcwd(), 'uis', 'PrinterProblem.ui'), self)
+        uic.loadUi(os.path.join(os.getcwd(), "uis", "PrinterProblem.ui"), self)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
         for child in self.f_ticketProblem.findChildren(QFrame):
             child.deleteLater()
         for ticket, place in zip(tickets, places):
             self.f_ticketProblem.layout().addWidget(
-                createTicketContainer(self.f_ticketProblem, ticket, place))
+                createTicketContainer(self.f_ticketProblem, ticket, place)
+            )
 
 
 def createTicketContainer(parent, ticket, place):
@@ -323,7 +448,7 @@ def displayDbData(table_widget: QTableWidget, data):
         table_widget.setColumnCount(0)
 
 
-def createProductContainer(parent, db, product, table_id, fc):
+def createProductContainer(parent, db, product: MenuItem, table_id, fc):
     frame = QFrame(parent=parent)
     frame.setFrameShape(QFrame.StyledPanel)
     frame.setLineWidth(1)
@@ -331,14 +456,18 @@ def createProductContainer(parent, db, product, table_id, fc):
     frame.setMaximumSize(200, 400)
     # Picture or name
     label = QLabel()
-    label.setPixmap(QPixmap(os.path.join(
-        os.getcwd(), "resource", "patus_logo.jpg")))
+    label.setPixmap(QPixmap(os.path.join(os.getcwd(), "resource", "patus_logo.jpg")))
     label.setScaledContents(True)
     label.setAlignment(Qt.AlignHCenter)
     label.setMaximumSize(200, 150)
     frame.layout().addWidget(label)
     label = QLabel()
     label.setText(pretty_string(product.name, 20, "returnLine"))
+    label.setAlignment(Qt.AlignHCenter)
+    frame.layout().addWidget(label)
+    label = QLabel()
+    label.setText(f"{to_money(product.price)} / {product.quantity} ({product.unit})")
+    label.setStyleSheet("font-size: 8pt;")
     label.setAlignment(Qt.AlignHCenter)
     frame.layout().addWidget(label)
     # Ranking system
@@ -371,7 +500,8 @@ def createProductContainer(parent, db, product, table_id, fc):
         group_id=0,
         nb_covers=1,
         ready=0,
-        served=0)
+        served=0,
+    )
     order_item_ = OrderItem(
         tableId=table_id,
         productId=product.id,
@@ -384,11 +514,10 @@ def createProductContainer(parent, db, product, table_id, fc):
         group_id=0,
         nb_covers=1,
         ready=0,
-        served=0)
-    add_button.clicked.connect(
-        partial(fc, order_item, supp_list, comboBox))
-    remove_button.clicked.connect(
-        partial(fc, order_item_, supp_list, comboBox))
+        served=0,
+    )
+    add_button.clicked.connect(partial(fc, order_item, supp_list, comboBox))
+    remove_button.clicked.connect(partial(fc, order_item_, supp_list, comboBox))
     # Buttons add specific number
     add_button_s = QPushButton(parent=btn_layout, text="++")
     remove_button_s = QPushButton(parent=btn_layout, text="--")
@@ -404,7 +533,8 @@ def createProductContainer(parent, db, product, table_id, fc):
         group_id=0,
         nb_covers=1,
         ready=0,
-        served=0)
+        served=0,
+    )
     order_item__s = OrderItem(
         tableId=table_id,
         productId=product.id,
@@ -417,12 +547,15 @@ def createProductContainer(parent, db, product, table_id, fc):
         group_id=0,
         nb_covers=1,
         ready=0,
-        served=0)
+        served=0,
+    )
 
     add_button_s.clicked.connect(
-        partial(custom_quantity, fc, order_item_s, supp_list, comboBox))
+        partial(custom_quantity, fc, order_item_s, supp_list, comboBox)
+    )
     remove_button_s.clicked.connect(
-        partial(custom_quantity, fc, order_item__s, supp_list, comboBox))
+        partial(custom_quantity, fc, order_item__s, supp_list, comboBox)
+    )
 
     btn_layout.layout().addWidget(add_button_s)
     btn_layout.layout().addWidget(add_button)
@@ -451,7 +584,7 @@ def createClientDashBoardContainer(parent, client, fc_ring, fc_message):
     # Name
     label = QLabel()
     label.setText(client.name)
-    label.setFont(QFont('Times', 20))
+    label.setFont(QFont("Times", 20))
     label.setScaledContents(True)
     label.setAlignment(Qt.AlignHCenter)
     label.setMaximumSize(250, 50)
@@ -472,8 +605,7 @@ def createClientDashBoardContainer(parent, client, fc_ring, fc_message):
     ring_button.clicked.connect(partial(fc_ring, client))
     btn_layout.layout().addWidget(ring_button)
     message_button = QPushButton(parent=btn_layout, text="Send")
-    message_button.clicked.connect(
-        partial(fc_message, client, text_edit))
+    message_button.clicked.connect(partial(fc_message, client, text_edit))
     # message_button.clicked.connect(text_edit.clear)
     btn_layout.layout().addWidget(message_button)
     # buttons
@@ -488,114 +620,142 @@ def pretty_string(text: str, size: int = 20, mode: str = "strip") -> str:
         old_text = text
         new_test = ""
         for i in range(0, len(text), size):
-            new_test += old_text[i:i+size] + "\n"
+            new_test += old_text[i : i + size] + "\n"
         return fr"{new_test}"
 
 
-def prepareTicketForReceipt(worker_name: str, order_items: list, tax: float, comment: str, ticket_number: int):
+def prepareTicketForReceipt(
+    worker_name: str, order_items: list, tax: float, comment: str, ticket_number: int
+):
     total = 0
-    group = 0
     ticket_txt = ""
-    ticket_txt += '=' * 46 + ' \n'
-    ticket_txt += f'Ticket Number : {ticket_number:>30}\n'
-    ticket_txt += f'Worker Name : {worker_name:>32}\n'
-    ticket_txt += f'Date and time : {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"):>30}\n'
-    ticket_txt += '-' * 46 + ' \n'
+    ticket_txt += "=" * 46 + " \n"
+    ticket_txt += f"Ticket Number : {ticket_number:>30}\n"
+    ticket_txt += f"Worker Name : {worker_name:>32}\n"
+    ticket_txt += (
+        f'Date and time : {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"):>30}\n'
+    )
+    ticket_txt += "-" * 46 + " \n"
     if order_items[0].tableId is not None:
-        ticket_txt += f'Table {order_items[0].tableId:>30}\n'
+        ticket_txt += f"Table {order_items[0].tableId:>30}\n"
     else:
-        ticket_txt += 'Take away \n'
-    ticket_txt += '-' * 46 + ' \n'
+        ticket_txt += "Take away \n"
+    ticket_txt += "-" * 46 + " \n"
     ticket_txt += f"{'ITEM':<20}{'QUANTITY':^13}{'PRICE':^13}\n"
-    ticket_txt += '-' * 46 + ' \n'
+    ticket_txt += "-" * 46 + " \n"
     for order_item in order_items:
         # if group != order_item.group_id:
         #     ticket_txt += f"{'*' * 46}\n"
         #     group = order_item.group_id
         total += order_item.orderItemTotal
-        if order_item.productUnit.strip().lower() == "g" or order_item.productUnit.strip().lower() == "kg":
+        if (
+            order_item.productUnit.strip().lower() == "g"
+            or order_item.productUnit.strip().lower() == "kg"
+        ):
             ticket_txt += f"{pretty_string(order_item.productName):<20}{f'{order_item.orderItemQuantity} {order_item.productUnit.strip().lower()}':^13}{to_money(order_item.orderItemTotal):^13}\n"
         else:
             ticket_txt += f"{pretty_string(order_item.productName):<20}{order_item.orderItemQuantity:^13}{to_money(order_item.orderItemTotal):^13}\n"
         for supp in order_item.orderItemSupplements:
-            if order_item.productUnit.strip().lower() == "g" or order_item.productUnit.strip().lower() == "kg":
-                ticket_txt += f"+ {pretty_string(supp.name, 31):<31}{to_money(supp.price):^13}\n"
+            if (
+                order_item.productUnit.strip().lower() == "g"
+                or order_item.productUnit.strip().lower() == "kg"
+            ):
+                ticket_txt += (
+                    f"+ {pretty_string(supp.name, 31):<31}{to_money(supp.price):^13}\n"
+                )
                 total += supp.price
             else:
                 ticket_txt += f"+ {pretty_string(supp.name, 31):<31}{to_money(order_item.orderItemQuantity * supp.price):^13}\n"
                 total += order_item.orderItemQuantity * supp.price
 
     if len(comment) > 0:
-        ticket_txt += '-' * 46 + ' \n'
-        ticket_txt += comment + ' \n'
-    ticket_txt += '-' * 46 + ' \n'
+        ticket_txt += "-" * 46 + " \n"
+        ticket_txt += comment + " \n"
+    ticket_txt += "-" * 46 + " \n"
     ticket_txt += f"{'TOTAL':<33}{to_money(total):^13}\n"
     ticket_txt += f"{'REDUCTION':<33}{to_money(tax):^13}\n"
     ticket_txt += f"{'TOTAL TO PAY':<33}{to_money(total - tax):^13}\n"
-    ticket_txt += '=' * 46 + ' \n'
+    ticket_txt += "=" * 46 + " \n"
     return ticket_txt
 
 
-def prepareTicketForCashier(worker_name: str, order_items: list, tax: float, comment: str, ticket_number: int, given: float, time_date: datetime.datetime = None):
+def prepareTicketForCashier(
+    worker_name: str,
+    order_items: list,
+    tax: float,
+    comment: str,
+    ticket_number: int,
+    given: float,
+    time_date: datetime.datetime = None,
+):
     total = 0
-    group = 0
     ticket_txt = ""
-    ticket_txt += '=' * 46 + ' \n'
-    ticket_txt += f'Ticket Number : {ticket_number:>30}\n'
-    ticket_txt += f'Worker Name : {worker_name:>32}\n'
+    ticket_txt += "=" * 46 + " \n"
+    ticket_txt += f"Ticket Number : {ticket_number:>30}\n"
+    ticket_txt += f"Worker Name : {worker_name:>32}\n"
     if time_date is None:
         ticket_txt += f'Date and time : {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"):>30}\n'
     else:
-        ticket_txt += f'Date and time : {time_date:>30}\n'
-    ticket_txt += '-' * 46 + ' \n'
+        ticket_txt += f"Date and time : {time_date:>30}\n"
+    ticket_txt += "-" * 46 + " \n"
     if order_items[0].tableId is not None:
-        ticket_txt += f'Table {order_items[0].tableId:>30}\n'
+        ticket_txt += f"Table {order_items[0].tableId:>30}\n"
     else:
-        ticket_txt += 'Take away \n'
-    ticket_txt += '-' * 46 + ' \n'
+        ticket_txt += "Take away \n"
+    ticket_txt += "-" * 46 + " \n"
     ticket_txt += f"{'ITEM':<20}{'QUANTITY':^13}{'PRICE':^13}\n"
-    ticket_txt += '-' * 46 + ' \n'
+    ticket_txt += "-" * 46 + " \n"
     for order_item in order_items:
         # if group != order_item.group_id:
         #     ticket_txt += f"{'*' * 46}\n"
         #     group = order_item.group_id
         total += order_item.orderItemTotal
 
-        if order_item.productUnit.strip().lower() == "g" or order_item.productUnit.strip().lower() == "kg":
+        if (
+            order_item.productUnit.strip().lower() == "g"
+            or order_item.productUnit.strip().lower() == "kg"
+        ):
             ticket_txt += f"{pretty_string(order_item.productName):<20}{f'{order_item.orderItemQuantity} {order_item.productUnit.strip().lower()}':^13}{to_money(order_item.orderItemTotal):^13}\n"
         else:
             ticket_txt += f"{pretty_string(order_item.productName):<20}{order_item.orderItemQuantity:^13}{to_money(order_item.orderItemTotal):^13}\n"
         for supp in order_item.orderItemSupplements:
-            if order_item.productUnit.strip().lower() == "g" or order_item.productUnit.strip().lower() == "kg":
-                ticket_txt += f"+ {pretty_string(supp.name, 31):<31}{to_money(supp.price):^13}\n"
+            if (
+                order_item.productUnit.strip().lower() == "g"
+                or order_item.productUnit.strip().lower() == "kg"
+            ):
+                ticket_txt += (
+                    f"+ {pretty_string(supp.name, 31):<31}{to_money(supp.price):^13}\n"
+                )
                 total += supp.price
             else:
                 ticket_txt += f"+ {pretty_string(supp.name, 31):<31}{to_money(order_item.orderItemQuantity * supp.price):^13}\n"
                 total += order_item.orderItemQuantity * supp.price
     if len(comment) > 0:
-        ticket_txt += '-' * 46 + ' \n'
-        ticket_txt += comment + ' \n'
-    ticket_txt += '-' * 46 + ' \n'
+        ticket_txt += "-" * 46 + " \n"
+        ticket_txt += comment + " \n"
+    ticket_txt += "-" * 46 + " \n"
     ticket_txt += f"{'TOTAL':<33}{to_money(total):^13}\n"
     ticket_txt += f"{'REDUCTION':<33}{to_money(tax):^13}\n"
     ticket_txt += f"{'TOTAL TO PAY':<33}{to_money(total - tax):^13}\n"
-    ticket_txt += '=' * 46 + ' \n'
+    ticket_txt += "=" * 46 + " \n"
     ticket_txt += f"{'RECEIVED':<33}{to_money(given):^13}\n"
     ticket_txt += f"{'RETURNED':<33}{to_money(given - total):^13}\n"
-    ticket_txt += '=' * 46 + ' \n'
+    ticket_txt += "=" * 46 + " \n"
     ticket_txt += f"{'PATUS vous remercie pour votre visite':^46}\n"
-    ticket_txt += '=' * 46 + ' \n'
+    ticket_txt += "=" * 46 + " \n"
 
     return ticket_txt
 
 
 def prepareTicketForOrder(
-        worker_name: str,
-        order_items: List[OrderItem],
-        comment: str,
-        ticket_number: int,
-        old: bool,
-        cancel: bool = False) -> Union[str, str, str, int, int, int]:
+    worker_name: str,
+    order_items: List[OrderItem],
+    comment: str,
+    ticket_number: int,
+    old: bool,
+    cancel: bool = False,
+    fr: bool = True,
+) -> Union[str, str, str, int, int, int]:
     db = DBHelper()
     kitchen_count, pizza_count, drink_count = 0, 0, 0
     kitchen_group, pizza_group, drink_group = 0, 0, 0
@@ -606,79 +766,98 @@ def prepareTicketForOrder(
 
     now = datetime.datetime.now()
     if old:
-        ticket_kitchen_txt += '=' * 46 + ' \n'
-        ticket_kitchen_txt += f"{'UPDATE':^46}" + ' \n'
+        ticket_kitchen_txt += "=" * 46 + " \n"
+        ticket_pizza_txt += "=" * 46 + " \n"
+        ticket_bar_txt += "=" * 46 + " \n"
 
-        ticket_pizza_txt += '=' * 46 + ' \n'
-        ticket_pizza_txt += f"{'UPDATE':^46}" + ' \n'
-
-        ticket_bar_txt += '=' * 46 + ' \n'
-        ticket_bar_txt += f"{'UPDATE':^46}" + ' \n'
+        if fr:
+            ticket_kitchen_txt += f"{'MISE A JOUR':^46}" + " \n"
+            ticket_pizza_txt += f"{'MISE A JOUR':^46}" + " \n"
+            ticket_bar_txt += f"{'MISE A JOUR':^46}" + " \n"
+        else:
+            ticket_kitchen_txt += f"{'UPDATE':^46}" + " \n"
+            ticket_pizza_txt += f"{'UPDATE':^46}" + " \n"
+            ticket_bar_txt += f"{'UPDATE':^46}" + " \n"
 
     if cancel:
-        ticket_kitchen_txt += '=' * 46 + ' \n'
-        ticket_kitchen_txt += f"{'CANCEL':^46}" + ' \n'
+        ticket_kitchen_txt += "=" * 46 + " \n"
+        ticket_pizza_txt += "=" * 46 + " \n"
+        ticket_bar_txt += "=" * 46 + " \n"
 
-        ticket_pizza_txt += '=' * 46 + ' \n'
-        ticket_pizza_txt += f"{'CANCEL':^46}" + ' \n'
-
-        ticket_bar_txt += '=' * 46 + ' \n'
-        ticket_bar_txt += f"{'CANCEL':^46}" + ' \n'
+        if fr:
+            ticket_kitchen_txt += f"{'ANNULATION':^46}" + " \n"
+            ticket_pizza_txt += f"{'ANNULATION':^46}" + " \n"
+            ticket_bar_txt += f"{'ANNULATION':^46}" + " \n"
+        else:
+            ticket_kitchen_txt += f"{'CANCEL':^46}" + " \n"
+            ticket_pizza_txt += f"{'CANCEL':^46}" + " \n"
+            ticket_bar_txt += f"{'CANCEL':^46}" + " \n"
 
     # chef
-    ticket_kitchen_txt += '=' * 46 + ' \n'
-    ticket_kitchen_txt += f'Ticket Number : {ticket_number:>30}\n'
-    ticket_kitchen_txt += f'Worker Name : {worker_name:>32}\n'
+    ticket_kitchen_txt += "=" * 46 + " \n"
+    ticket_kitchen_txt += f"Ticket Number : {ticket_number:>30}\n"
+    ticket_kitchen_txt += f"Worker Name : {worker_name:>32}\n"
     ticket_kitchen_txt += f'Date and time : {now.strftime("%Y-%m-%d %H:%M:%S"):>30}\n'
-    ticket_kitchen_txt += '-' * 46 + ' \n'
+    ticket_kitchen_txt += "-" * 46 + " \n"
     if order_items[0].tableId is not None:
-        ticket_kitchen_txt += f'Table {order_items[0].tableId:>40}\n'
+        ticket_kitchen_txt += f"Table {order_items[0].tableId:>40}\n"
     else:
-        ticket_kitchen_txt += 'Take away \n'
+        if fr:
+            ticket_pizza_txt += "à emporter \n"
+        else:
+            ticket_pizza_txt += "Take away \n"
 
     # pizza yolo
-    ticket_pizza_txt += '=' * 46 + ' \n'
-    ticket_pizza_txt += f'Ticket Number : {ticket_number:>30}\n'
-    ticket_pizza_txt += f'Worker Name : {worker_name:>32}\n'
+    ticket_pizza_txt += "=" * 46 + " \n"
+    ticket_pizza_txt += f"Ticket Number : {ticket_number:>30}\n"
+    ticket_pizza_txt += f"Worker Name : {worker_name:>32}\n"
     ticket_pizza_txt += f'Date and time : {now.strftime("%Y-%m-%d %H:%M:%S"):>30}\n'
-    ticket_pizza_txt += '-' * 46 + ' \n'
+    ticket_pizza_txt += "-" * 46 + " \n"
     if order_items[0].tableId is not None:
-        ticket_pizza_txt += f'Table {order_items[0].tableId:>40}\n'
+        ticket_pizza_txt += f"Table {order_items[0].tableId:>40}\n"
     else:
-        ticket_pizza_txt += 'Take away \n'
+        if fr:
+            ticket_pizza_txt += "à emporter \n"
+        else:
+            ticket_pizza_txt += "Take away \n"
 
     # bar
-    ticket_bar_txt += '=' * 46 + ' \n'
-    ticket_bar_txt += f'Ticket Number : {ticket_number:>30}\n'
-    ticket_bar_txt += f'Worker Name : {worker_name:>32}\n'
+    ticket_bar_txt += "=" * 46 + " \n"
+    ticket_bar_txt += f"Ticket Number : {ticket_number:>30}\n"
+    ticket_bar_txt += f"Worker Name : {worker_name:>32}\n"
     ticket_bar_txt += f'Date and time : {now.strftime("%Y-%m-%d %H:%M:%S"):>30}\n'
-    ticket_bar_txt += '-' * 46 + ' \n'
+    ticket_bar_txt += "-" * 46 + " \n"
     if order_items[0].tableId is not None:
-        ticket_bar_txt += f'Table {order_items[0].tableId:>40}\n'
+        ticket_bar_txt += f"Table {order_items[0].tableId:>40}\n"
     else:
-        ticket_bar_txt += 'Take away \n'
+        if fr:
+            ticket_pizza_txt += "à emporter \n"
+        else:
+            ticket_pizza_txt += "Take away \n"
 
     # chef
-    ticket_kitchen_txt += '-' * 46 + ' \n'
+    ticket_kitchen_txt += "-" * 46 + " \n"
     ticket_kitchen_txt += f"{'ITEM':<23}{'QUANTITY':^23}\n"
-    ticket_kitchen_txt += '-' * 46 + ' \n'
+    ticket_kitchen_txt += "-" * 46 + " \n"
 
     # pizza yolo
-    ticket_pizza_txt += '-' * 46 + ' \n'
+    ticket_pizza_txt += "-" * 46 + " \n"
     ticket_pizza_txt += f"{'ITEM':<23}{'QUANTITY':^23}\n"
-    ticket_pizza_txt += '-' * 46 + ' \n'
+    ticket_pizza_txt += "-" * 46 + " \n"
 
     # bar
-    ticket_bar_txt += '-' * 46 + ' \n'
+    ticket_bar_txt += "-" * 46 + " \n"
     ticket_bar_txt += f"{'ITEM':<23}{'QUANTITY':^23}\n"
-    ticket_bar_txt += '-' * 46 + ' \n'
+    ticket_bar_txt += "-" * 46 + " \n"
     order_items.sort(key=lambda x: x.group_id)
 
     for order_item in order_items:
         if not bool(order_item.ready):
             if db.getMenuCategoryById(order_item.productCategory).printing_place == 2:
                 if drink_group != order_item.group_id:
-                    ticket_bar_txt += f"{'*' * 15}{f'Group {order_item.group_id}':^16}{'*' * 15}\n"
+                    ticket_bar_txt += (
+                        f"{'*' * 15}{f'Group {order_item.group_id}':^16}{'*' * 15}\n"
+                    )
                     drink_group = order_item.group_id
                 ticket_bar_txt += f"{pretty_string(order_item.productName, 23):<23} {order_item.orderItemQuantity:^23}\n"
                 for supp in order_item.orderItemSupplements:
@@ -686,16 +865,24 @@ def prepareTicketForOrder(
                 drink_count += 1
             else:
                 if kitchen_group != order_item.group_id:
-                    ticket_kitchen_txt += f"{'*' * 15}{f'Group {order_item.group_id}':^16}{'*' * 15}\n"
+                    ticket_kitchen_txt += (
+                        f"{'*' * 15}{f'Group {order_item.group_id}':^16}{'*' * 15}\n"
+                    )
                     kitchen_group = order_item.group_id
-                if order_item.productUnit.strip().lower() == "g" or order_item.productUnit.strip().lower() == "kg":
+                if (
+                    order_item.productUnit.strip().lower() == "g"
+                    or order_item.productUnit.strip().lower() == "kg"
+                ):
                     ticket_kitchen_txt += f"{pretty_string(order_item.productName, 23):<23} {f'{order_item.orderItemQuantity} {order_item.productUnit.strip().lower()}':^23}\n"
                 else:
                     ticket_kitchen_txt += f"{pretty_string(order_item.productName, 23):<23} {order_item.orderItemQuantity:^23}\n"
                 kitchen_count += 1
                 for supp in order_item.orderItemSupplements:
                     ticket_kitchen_txt += f"+ {pretty_string(supp.name, 23):<23}\n"
-                if db.getMenuCategoryById(order_item.productCategory).printing_place == 1:
+                if (
+                    db.getMenuCategoryById(order_item.productCategory).printing_place
+                    == 1
+                ):
                     if pizza_group != order_item.group_id:
                         ticket_pizza_txt += f"{'*' * 15}{f'Group {order_item.group_id}':^16}{'*' * 15}\n"
                         pizza_group = order_item.group_id
@@ -705,19 +892,26 @@ def prepareTicketForOrder(
                     pizza_count += 1
 
     if len(comment) > 0:
-        ticket_kitchen_txt += '-' * 46 + ' \n'
-        ticket_pizza_txt += '-' * 46 + ' \n'
-        ticket_bar_txt += '-' * 46 + ' \n'
+        ticket_kitchen_txt += "-" * 46 + " \n"
+        ticket_pizza_txt += "-" * 46 + " \n"
+        ticket_bar_txt += "-" * 46 + " \n"
 
-        ticket_kitchen_txt += comment + ' \n'
-        ticket_pizza_txt += comment + ' \n'
-        ticket_bar_txt += comment + ' \n'
+        ticket_kitchen_txt += comment + " \n"
+        ticket_pizza_txt += comment + " \n"
+        ticket_bar_txt += comment + " \n"
 
-    ticket_kitchen_txt += '=' * 46 + ' \n'
-    ticket_pizza_txt += '=' * 46 + ' \n'
-    ticket_bar_txt += '=' * 46 + ' \n'
+    ticket_kitchen_txt += "=" * 46 + " \n"
+    ticket_pizza_txt += "=" * 46 + " \n"
+    ticket_bar_txt += "=" * 46 + " \n"
 
-    return ticket_kitchen_txt, ticket_pizza_txt, ticket_bar_txt, kitchen_count, pizza_count, drink_count
+    return (
+        ticket_kitchen_txt,
+        ticket_pizza_txt,
+        ticket_bar_txt,
+        kitchen_count,
+        pizza_count,
+        drink_count,
+    )
 
 
 class MovableButton(QPushButton):
@@ -752,20 +946,18 @@ class CustomTablesWidget(QWidget):
     def dropEvent(self, event):
         position = event.pos()
         if self.moving_btn:
-            position.setX(position.x()-80)
-            position.setY(position.y()-50)
+            position.setX(position.x() - 60)
+            position.setY(position.y() - 30)
             self.moving_btn.move(position)
-            self.settings.setValue(
-                f"table_{self.moving_btn.objectName()}", position)
+            self.settings.setValue(f"table_{self.moving_btn.objectName()}", position)
         event.accept()
 
 
 class CustomQuantity(QDialog):
     def __init__(self, fc, order_item: OrderItem, supp_list: list, comboBox: QComboBox):
         super(CustomQuantity, self).__init__()
-        uic.loadUi(os.path.join(os.getcwd(), 'uis', 'customQuantity.ui'), self)
-        self.le_quantity.setPlaceholderText(
-            f"Quantity ({order_item.productUnit})")
+        uic.loadUi(os.path.join(os.getcwd(), "uis", "customQuantity.ui"), self)
+        self.le_quantity.setPlaceholderText(f"Quantity ({order_item.productUnit})")
         self.le_quantity.setValidator(QDoubleValidator())
         self.buttonBox.accepted.connect(self.validate_print)
         self.buttonBox.rejected.connect(self.reject)
@@ -780,28 +972,29 @@ class CustomQuantity(QDialog):
             try:
 
                 if self.order_item.orderItemQuantity < 0:
-                    self.order_item.orderItemTotal = -self.order_item.orderItemTotal * \
-                        (quantity / self.order_item.orderItemQuantity)
+                    self.order_item.orderItemTotal = -self.order_item.orderItemTotal * (
+                        quantity / self.order_item.orderItemQuantity
+                    )
                     self.order_item.orderItemQuantity = -quantity
                 else:
-                    self.order_item.orderItemTotal = self.order_item.orderItemTotal * \
-                        (quantity / self.order_item.orderItemQuantity)
+                    self.order_item.orderItemTotal = self.order_item.orderItemTotal * (
+                        quantity / self.order_item.orderItemQuantity
+                    )
                     self.order_item.orderItemQuantity = quantity
                 self.fc(self.order_item, self.supp_list, self.comboBox)
                 self.accept()
             except Exception as e:
                 msg = QMessageBox()
                 msg.setIcon(QMessageBox.Critical)
-                msg.setText('Printer problem')
-                msg.setInformativeText(
-                    "Check if the cashier printer is connected")
+                msg.setText("Printer problem")
+                msg.setInformativeText("Check if the cashier printer is connected")
                 msg.setDetailedText(str(e))
                 msg.setWindowTitle("Warning message")
                 msg.exec_()
         except Exception as e:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
-            msg.setText('Quantity error')
+            msg.setText("Quantity error")
             msg.setInformativeText("Quantity should not be empty")
             msg.setDetailedText(str(e))
             msg.setWindowTitle("Warning message")
@@ -817,6 +1010,7 @@ def addNewNotification(parent: QWidget, message: str) -> None:
     frame.setFrameShape(QFrame.StyledPanel)
     frame.setLineWidth(1)
     frame.setLayout(QHBoxLayout())
+    frame.setSizePolicy(QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Maximum))
 
     label = QLabel()
     label.setText(datetime.datetime.now().strftime("%H:%M:%S"))
@@ -831,7 +1025,9 @@ def addNewNotification(parent: QWidget, message: str) -> None:
     parent.layout().addWidget(frame)
 
 
-def getTicketDifference(old_orders: List[OrderItem], new_orders: List[OrderItem]) -> List[OrderItem]:
+def getTicketDifference(
+    old_orders: List[OrderItem], new_orders: List[OrderItem]
+) -> List[OrderItem]:
     results = []
     # Check for updates
     for new_order in new_orders:

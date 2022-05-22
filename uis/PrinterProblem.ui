@@ -46,7 +46,7 @@ QPushButton:hover
 QPushButton:pressed
 {
 	font: 26pt &quot;MS Shell Dlg 2&quot;;
-	background-color: rgb(136, 136, 136, 180);
+	background-color: rgb(136, 136, 136);
 	border-width: 2px;
     border-radius: 10px;
 }

@@ -2,6 +2,14 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
+class TableOwnershipTable:
+    TABLE_NAME: str = "TableOwnership"
+    COLUMN_ID: str = "_id"
+    COLUMN_TABLE_ID: str = "table_id"
+    COLUMN_WORKER_ID: str = "worker_id"
+
+
+@dataclass(frozen=True)
 class ExpenseTable:
     TABLE_NAME: str = "Expense"
     COLUMN_ID: str = "_id"
@@ -208,3 +216,22 @@ class PointerTable:
     COLUMN_DATE_START: str = "date_start"
     COLUMN_DATE_END: str = "date_end"
     COLUMN_ID_WORKER: str = "id_worker"
+
+
+@dataclass(frozen=True)
+class FileDocTable:
+    TABLE_NAME: str = "FileDoc"
+    COLUMN_ID: str = "_id"
+    COLUMN_NAME: str = "name"
+    COLUMN_DATE: str = "date"
+    COLUMN_COMMENT: str = "comment"
+    COLUMN_FILE: str = "file"
+
+
+@dataclass(frozen=True)
+class PaymentTable:
+    TABLE_NAME: str = "Payment"
+    COLUMN_ID: str = "_id"
+    COLUMN_WORKER_ID: str = "worker_id"
+    COLUMN_DATE: str = "date"
+    COLUMN_AMOUNT: str = "amount"

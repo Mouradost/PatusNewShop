@@ -46,19 +46,11 @@ QPushButton:hover
 
 QPushButton:pressed
 {
-	
-	background-color: rgb(136, 136, 136, 180);
+	background-color: rgb(136, 136, 136);
 	border-width: 2px;
     border-radius: 10px;
 }
 
-QLineEdit
-{
-	background: transparent;
-	color: rgb(121, 121, 121);
-	border: none;
-	border-bottom: 1px solid #717072
-}
 </string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
