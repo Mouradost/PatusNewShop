@@ -45,13 +45,13 @@
     </message>
     <message>
         <location filename="../../uis/PatusInterface.ui" line="1317"/>
-        <location filename="../../uis/PatusInterface.ui" line="8938"/>
+        <location filename="../../uis/PatusInterface.ui" line="8943"/>
         <source>Username</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../uis/PatusInterface.ui" line="1336"/>
-        <location filename="../../uis/PatusInterface.ui" line="8960"/>
+        <location filename="../../uis/PatusInterface.ui" line="8965"/>
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
@@ -73,30 +73,30 @@
     <message>
         <location filename="../../uis/PatusInterface.ui" line="1577"/>
         <location filename="../../uis/PatusInterface.ui" line="1615"/>
-        <location filename="../../uis/PatusInterface.ui" line="2922"/>
-        <location filename="../../uis/PatusInterface.ui" line="3034"/>
-        <location filename="../../uis/PatusInterface.ui" line="3146"/>
-        <location filename="../../uis/PatusInterface.ui" line="3270"/>
-        <location filename="../../uis/PatusInterface.ui" line="3364"/>
-        <location filename="../../uis/PatusInterface.ui" line="3458"/>
-        <location filename="../../uis/PatusInterface.ui" line="3582"/>
-        <location filename="../../uis/PatusInterface.ui" line="3676"/>
-        <location filename="../../uis/PatusInterface.ui" line="3770"/>
-        <location filename="../../uis/PatusInterface.ui" line="3894"/>
-        <location filename="../../uis/PatusInterface.ui" line="3988"/>
-        <location filename="../../uis/PatusInterface.ui" line="4082"/>
-        <location filename="../../uis/PatusInterface.ui" line="4206"/>
-        <location filename="../../uis/PatusInterface.ui" line="4300"/>
-        <location filename="../../uis/PatusInterface.ui" line="4394"/>
-        <location filename="../../uis/PatusInterface.ui" line="4518"/>
-        <location filename="../../uis/PatusInterface.ui" line="4636"/>
-        <location filename="../../uis/PatusInterface.ui" line="4730"/>
+        <location filename="../../uis/PatusInterface.ui" line="2927"/>
+        <location filename="../../uis/PatusInterface.ui" line="3039"/>
+        <location filename="../../uis/PatusInterface.ui" line="3151"/>
+        <location filename="../../uis/PatusInterface.ui" line="3275"/>
+        <location filename="../../uis/PatusInterface.ui" line="3369"/>
+        <location filename="../../uis/PatusInterface.ui" line="3463"/>
+        <location filename="../../uis/PatusInterface.ui" line="3587"/>
+        <location filename="../../uis/PatusInterface.ui" line="3681"/>
+        <location filename="../../uis/PatusInterface.ui" line="3775"/>
+        <location filename="../../uis/PatusInterface.ui" line="3899"/>
+        <location filename="../../uis/PatusInterface.ui" line="3993"/>
+        <location filename="../../uis/PatusInterface.ui" line="4087"/>
+        <location filename="../../uis/PatusInterface.ui" line="4211"/>
+        <location filename="../../uis/PatusInterface.ui" line="4305"/>
+        <location filename="../../uis/PatusInterface.ui" line="4399"/>
+        <location filename="../../uis/PatusInterface.ui" line="4523"/>
+        <location filename="../../uis/PatusInterface.ui" line="4641"/>
+        <location filename="../../uis/PatusInterface.ui" line="4735"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../uis/PatusInterface.ui" line="1605"/>
-        <location filename="../../uis/PatusInterface.ui" line="10147"/>
+        <location filename="../../uis/PatusInterface.ui" line="10152"/>
         <source>Table Number</source>
         <translation type="unfinished"></translation>
     </message>
@@ -124,7 +124,7 @@
     </message>
     <message>
         <location filename="../../uis/PatusInterface.ui" line="2240"/>
-        <location filename="../../uis/PatusInterface.ui" line="9823"/>
+        <location filename="../../uis/PatusInterface.ui" line="9828"/>
         <source>Total</source>
         <translation type="unfinished"></translation>
     </message>
@@ -145,513 +145,513 @@
     </message>
     <message>
         <location filename="../../uis/PatusInterface.ui" line="2704"/>
-        <location filename="../../uis/PatusInterface.ui" line="10176"/>
-        <location filename="../../uis/PatusInterface.ui" line="10896"/>
+        <location filename="../../uis/PatusInterface.ui" line="10181"/>
+        <location filename="../../uis/PatusInterface.ui" line="10901"/>
         <source>Comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="2866"/>
-        <location filename="../../uis/PatusInterface.ui" line="2978"/>
-        <location filename="../../uis/PatusInterface.ui" line="3090"/>
-        <location filename="../../uis/PatusInterface.ui" line="3223"/>
-        <location filename="../../uis/PatusInterface.ui" line="3317"/>
-        <location filename="../../uis/PatusInterface.ui" line="3411"/>
-        <location filename="../../uis/PatusInterface.ui" line="3535"/>
-        <location filename="../../uis/PatusInterface.ui" line="3629"/>
-        <location filename="../../uis/PatusInterface.ui" line="3723"/>
-        <location filename="../../uis/PatusInterface.ui" line="3847"/>
-        <location filename="../../uis/PatusInterface.ui" line="3941"/>
-        <location filename="../../uis/PatusInterface.ui" line="4035"/>
-        <location filename="../../uis/PatusInterface.ui" line="4159"/>
-        <location filename="../../uis/PatusInterface.ui" line="4253"/>
-        <location filename="../../uis/PatusInterface.ui" line="4347"/>
-        <location filename="../../uis/PatusInterface.ui" line="4471"/>
-        <location filename="../../uis/PatusInterface.ui" line="4565"/>
-        <location filename="../../uis/PatusInterface.ui" line="4683"/>
+        <location filename="../../uis/PatusInterface.ui" line="2871"/>
+        <location filename="../../uis/PatusInterface.ui" line="2983"/>
+        <location filename="../../uis/PatusInterface.ui" line="3095"/>
+        <location filename="../../uis/PatusInterface.ui" line="3228"/>
+        <location filename="../../uis/PatusInterface.ui" line="3322"/>
+        <location filename="../../uis/PatusInterface.ui" line="3416"/>
+        <location filename="../../uis/PatusInterface.ui" line="3540"/>
+        <location filename="../../uis/PatusInterface.ui" line="3634"/>
+        <location filename="../../uis/PatusInterface.ui" line="3728"/>
+        <location filename="../../uis/PatusInterface.ui" line="3852"/>
+        <location filename="../../uis/PatusInterface.ui" line="3946"/>
+        <location filename="../../uis/PatusInterface.ui" line="4040"/>
+        <location filename="../../uis/PatusInterface.ui" line="4164"/>
+        <location filename="../../uis/PatusInterface.ui" line="4258"/>
+        <location filename="../../uis/PatusInterface.ui" line="4352"/>
+        <location filename="../../uis/PatusInterface.ui" line="4476"/>
+        <location filename="../../uis/PatusInterface.ui" line="4570"/>
+        <location filename="../../uis/PatusInterface.ui" line="4688"/>
         <source>Burger</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="2912"/>
-        <location filename="../../uis/PatusInterface.ui" line="3024"/>
-        <location filename="../../uis/PatusInterface.ui" line="3136"/>
-        <location filename="../../uis/PatusInterface.ui" line="3263"/>
-        <location filename="../../uis/PatusInterface.ui" line="3357"/>
-        <location filename="../../uis/PatusInterface.ui" line="3451"/>
-        <location filename="../../uis/PatusInterface.ui" line="3575"/>
-        <location filename="../../uis/PatusInterface.ui" line="3669"/>
-        <location filename="../../uis/PatusInterface.ui" line="3763"/>
-        <location filename="../../uis/PatusInterface.ui" line="3887"/>
-        <location filename="../../uis/PatusInterface.ui" line="3981"/>
-        <location filename="../../uis/PatusInterface.ui" line="4075"/>
-        <location filename="../../uis/PatusInterface.ui" line="4199"/>
-        <location filename="../../uis/PatusInterface.ui" line="4293"/>
-        <location filename="../../uis/PatusInterface.ui" line="4387"/>
-        <location filename="../../uis/PatusInterface.ui" line="4511"/>
-        <location filename="../../uis/PatusInterface.ui" line="4629"/>
-        <location filename="../../uis/PatusInterface.ui" line="4723"/>
+        <location filename="../../uis/PatusInterface.ui" line="2917"/>
+        <location filename="../../uis/PatusInterface.ui" line="3029"/>
+        <location filename="../../uis/PatusInterface.ui" line="3141"/>
+        <location filename="../../uis/PatusInterface.ui" line="3268"/>
+        <location filename="../../uis/PatusInterface.ui" line="3362"/>
+        <location filename="../../uis/PatusInterface.ui" line="3456"/>
+        <location filename="../../uis/PatusInterface.ui" line="3580"/>
+        <location filename="../../uis/PatusInterface.ui" line="3674"/>
+        <location filename="../../uis/PatusInterface.ui" line="3768"/>
+        <location filename="../../uis/PatusInterface.ui" line="3892"/>
+        <location filename="../../uis/PatusInterface.ui" line="3986"/>
+        <location filename="../../uis/PatusInterface.ui" line="4080"/>
+        <location filename="../../uis/PatusInterface.ui" line="4204"/>
+        <location filename="../../uis/PatusInterface.ui" line="4298"/>
+        <location filename="../../uis/PatusInterface.ui" line="4392"/>
+        <location filename="../../uis/PatusInterface.ui" line="4516"/>
+        <location filename="../../uis/PatusInterface.ui" line="4634"/>
+        <location filename="../../uis/PatusInterface.ui" line="4728"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="4576"/>
+        <location filename="../../uis/PatusInterface.ui" line="4581"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="4581"/>
+        <location filename="../../uis/PatusInterface.ui" line="4586"/>
         <source>2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="4586"/>
+        <location filename="../../uis/PatusInterface.ui" line="4591"/>
         <source>3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="4591"/>
+        <location filename="../../uis/PatusInterface.ui" line="4596"/>
         <source>4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="4812"/>
-        <location filename="../../uis/PatusInterface.ui" line="9466"/>
+        <location filename="../../uis/PatusInterface.ui" line="4817"/>
+        <location filename="../../uis/PatusInterface.ui" line="9471"/>
         <source>Reservation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="4824"/>
-        <location filename="../../uis/PatusInterface.ui" line="5068"/>
-        <location filename="../../uis/PatusInterface.ui" line="5351"/>
-        <location filename="../../uis/PatusInterface.ui" line="6376"/>
-        <location filename="../../uis/PatusInterface.ui" line="6758"/>
-        <location filename="../../uis/PatusInterface.ui" line="6998"/>
-        <location filename="../../uis/PatusInterface.ui" line="7290"/>
-        <location filename="../../uis/PatusInterface.ui" line="7647"/>
-        <location filename="../../uis/PatusInterface.ui" line="7970"/>
-        <location filename="../../uis/PatusInterface.ui" line="9379"/>
-        <location filename="../../uis/PatusInterface.ui" line="10131"/>
-        <location filename="../../uis/PatusInterface.ui" line="10544"/>
-        <location filename="../../uis/PatusInterface.ui" line="10865"/>
+        <location filename="../../uis/PatusInterface.ui" line="4829"/>
+        <location filename="../../uis/PatusInterface.ui" line="5073"/>
+        <location filename="../../uis/PatusInterface.ui" line="5356"/>
+        <location filename="../../uis/PatusInterface.ui" line="6381"/>
+        <location filename="../../uis/PatusInterface.ui" line="6763"/>
+        <location filename="../../uis/PatusInterface.ui" line="7003"/>
+        <location filename="../../uis/PatusInterface.ui" line="7295"/>
+        <location filename="../../uis/PatusInterface.ui" line="7652"/>
+        <location filename="../../uis/PatusInterface.ui" line="7975"/>
+        <location filename="../../uis/PatusInterface.ui" line="9384"/>
+        <location filename="../../uis/PatusInterface.ui" line="10136"/>
+        <location filename="../../uis/PatusInterface.ui" line="10549"/>
+        <location filename="../../uis/PatusInterface.ui" line="10870"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="4840"/>
-        <location filename="../../uis/PatusInterface.ui" line="5073"/>
-        <location filename="../../uis/PatusInterface.ui" line="7986"/>
-        <location filename="../../uis/PatusInterface.ui" line="8460"/>
-        <location filename="../../uis/PatusInterface.ui" line="8976"/>
+        <location filename="../../uis/PatusInterface.ui" line="4845"/>
+        <location filename="../../uis/PatusInterface.ui" line="5078"/>
+        <location filename="../../uis/PatusInterface.ui" line="7991"/>
+        <location filename="../../uis/PatusInterface.ui" line="8465"/>
+        <location filename="../../uis/PatusInterface.ui" line="8981"/>
         <source>Phone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="4856"/>
+        <location filename="../../uis/PatusInterface.ui" line="4861"/>
         <source>Number of person</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="4874"/>
+        <location filename="../../uis/PatusInterface.ui" line="4879"/>
         <source>yyyy-MM-dd HH:mm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="5087"/>
+        <location filename="../../uis/PatusInterface.ui" line="5092"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="5131"/>
+        <location filename="../../uis/PatusInterface.ui" line="5136"/>
         <source>Use date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="5155"/>
-        <location filename="../../uis/PatusInterface.ui" line="11543"/>
+        <location filename="../../uis/PatusInterface.ui" line="5160"/>
+        <location filename="../../uis/PatusInterface.ui" line="11548"/>
         <source>yyyy-MM-dd</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="5259"/>
+        <location filename="../../uis/PatusInterface.ui" line="5264"/>
         <source>Waste from Stock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="5268"/>
-        <location filename="../../uis/PatusInterface.ui" line="5361"/>
-        <location filename="../../uis/PatusInterface.ui" line="5796"/>
-        <location filename="../../uis/PatusInterface.ui" line="7017"/>
-        <location filename="../../uis/PatusInterface.ui" line="7325"/>
+        <location filename="../../uis/PatusInterface.ui" line="5273"/>
+        <location filename="../../uis/PatusInterface.ui" line="5366"/>
+        <location filename="../../uis/PatusInterface.ui" line="5801"/>
+        <location filename="../../uis/PatusInterface.ui" line="7022"/>
+        <location filename="../../uis/PatusInterface.ui" line="7330"/>
         <source>Quantity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="5342"/>
+        <location filename="../../uis/PatusInterface.ui" line="5347"/>
         <source>Other Waste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="5368"/>
-        <location filename="../../uis/PatusInterface.ui" line="7030"/>
+        <location filename="../../uis/PatusInterface.ui" line="5373"/>
+        <location filename="../../uis/PatusInterface.ui" line="7035"/>
         <source>Price</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="5543"/>
-        <location filename="../../uis/PatusInterface.ui" line="9449"/>
-        <location filename="../../uis/PatusInterface.ui" line="10532"/>
+        <location filename="../../uis/PatusInterface.ui" line="5548"/>
+        <location filename="../../uis/PatusInterface.ui" line="9454"/>
+        <location filename="../../uis/PatusInterface.ui" line="10537"/>
         <source>Stock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="5567"/>
+        <location filename="../../uis/PatusInterface.ui" line="5572"/>
         <source>Ingredients</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="5582"/>
+        <location filename="../../uis/PatusInterface.ui" line="5587"/>
         <source>Others</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="5674"/>
+        <location filename="../../uis/PatusInterface.ui" line="5679"/>
         <source>Menu Item Receipt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="5702"/>
-        <location filename="../../uis/PatusInterface.ui" line="6177"/>
+        <location filename="../../uis/PatusInterface.ui" line="5707"/>
+        <location filename="../../uis/PatusInterface.ui" line="6182"/>
         <source>Menu Item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="5838"/>
+        <location filename="../../uis/PatusInterface.ui" line="5843"/>
         <source>Ingredient</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="5909"/>
+        <location filename="../../uis/PatusInterface.ui" line="5914"/>
         <source>Sell price</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="5935"/>
+        <location filename="../../uis/PatusInterface.ui" line="5940"/>
         <source>Estimated production price</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="5961"/>
+        <location filename="../../uis/PatusInterface.ui" line="5966"/>
         <source>Estimated quantity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="5986"/>
-        <location filename="../../uis/PatusInterface.ui" line="6011"/>
-        <location filename="../../uis/PatusInterface.ui" line="6036"/>
+        <location filename="../../uis/PatusInterface.ui" line="5991"/>
+        <location filename="../../uis/PatusInterface.ui" line="6016"/>
+        <location filename="../../uis/PatusInterface.ui" line="6041"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="6393"/>
+        <location filename="../../uis/PatusInterface.ui" line="6398"/>
         <source>Salade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="6398"/>
+        <location filename="../../uis/PatusInterface.ui" line="6403"/>
         <source>Meal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="6403"/>
+        <location filename="../../uis/PatusInterface.ui" line="6408"/>
         <source>Pizza</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="6408"/>
+        <location filename="../../uis/PatusInterface.ui" line="6413"/>
         <source>Cold Drink</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="6413"/>
+        <location filename="../../uis/PatusInterface.ui" line="6418"/>
         <source>Hot Drink</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="6418"/>
+        <location filename="../../uis/PatusInterface.ui" line="6423"/>
         <source>Dessert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="6429"/>
-        <location filename="../../uis/PatusInterface.ui" line="7309"/>
+        <location filename="../../uis/PatusInterface.ui" line="6434"/>
+        <location filename="../../uis/PatusInterface.ui" line="7314"/>
         <source>Unit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="6442"/>
+        <location filename="../../uis/PatusInterface.ui" line="6447"/>
         <source>Unit Quantity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="6458"/>
+        <location filename="../../uis/PatusInterface.ui" line="6463"/>
         <source>Unit Price</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="6743"/>
+        <location filename="../../uis/PatusInterface.ui" line="6748"/>
         <source>Menu Category</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="6769"/>
+        <location filename="../../uis/PatusInterface.ui" line="6774"/>
         <source>Kitchen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="6774"/>
+        <location filename="../../uis/PatusInterface.ui" line="6779"/>
         <source>Pizza Yolo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="6779"/>
+        <location filename="../../uis/PatusInterface.ui" line="6784"/>
         <source>Bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="6986"/>
+        <location filename="../../uis/PatusInterface.ui" line="6991"/>
         <source>Supplement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="7278"/>
+        <location filename="../../uis/PatusInterface.ui" line="7283"/>
         <source>Expense</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="7338"/>
+        <location filename="../../uis/PatusInterface.ui" line="7343"/>
         <source>Total price</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="7349"/>
+        <location filename="../../uis/PatusInterface.ui" line="7354"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="7368"/>
+        <location filename="../../uis/PatusInterface.ui" line="7373"/>
         <source>Is payed ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="7632"/>
+        <location filename="../../uis/PatusInterface.ui" line="7637"/>
         <source>Expense Category</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="7668"/>
+        <location filename="../../uis/PatusInterface.ui" line="7673"/>
         <source>Save to stock ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="7699"/>
-        <location filename="../../uis/PatusInterface.ui" line="10597"/>
+        <location filename="../../uis/PatusInterface.ui" line="7704"/>
+        <location filename="../../uis/PatusInterface.ui" line="10602"/>
         <source>Is ingredient ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="7958"/>
+        <location filename="../../uis/PatusInterface.ui" line="7963"/>
         <source>Supplier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="8002"/>
-        <location filename="../../uis/PatusInterface.ui" line="8476"/>
-        <location filename="../../uis/PatusInterface.ui" line="8992"/>
+        <location filename="../../uis/PatusInterface.ui" line="8007"/>
+        <location filename="../../uis/PatusInterface.ui" line="8481"/>
+        <location filename="../../uis/PatusInterface.ui" line="8997"/>
         <source>Address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="8015"/>
+        <location filename="../../uis/PatusInterface.ui" line="8020"/>
         <source>Mail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="8254"/>
+        <location filename="../../uis/PatusInterface.ui" line="8259"/>
         <source>Customer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="8441"/>
-        <location filename="../../uis/PatusInterface.ui" line="8919"/>
+        <location filename="../../uis/PatusInterface.ui" line="8446"/>
+        <location filename="../../uis/PatusInterface.ui" line="8924"/>
         <source>First and Last Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="8498"/>
-        <location filename="../../uis/PatusInterface.ui" line="9015"/>
+        <location filename="../../uis/PatusInterface.ui" line="8503"/>
+        <location filename="../../uis/PatusInterface.ui" line="9020"/>
         <source>Score</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="8735"/>
+        <location filename="../../uis/PatusInterface.ui" line="8740"/>
         <source>Worker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="9002"/>
+        <location filename="../../uis/PatusInterface.ui" line="9007"/>
         <source>Salary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="9049"/>
+        <location filename="../../uis/PatusInterface.ui" line="9054"/>
         <source>CV extension</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="9367"/>
+        <location filename="../../uis/PatusInterface.ui" line="9372"/>
         <source>Worker Category</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="9398"/>
+        <location filename="../../uis/PatusInterface.ui" line="9403"/>
         <source>Cashier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="9415"/>
+        <location filename="../../uis/PatusInterface.ui" line="9420"/>
         <source>Waste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="9432"/>
+        <location filename="../../uis/PatusInterface.ui" line="9437"/>
         <source>Tables</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="9483"/>
+        <location filename="../../uis/PatusInterface.ui" line="9488"/>
         <source>Receipt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="9500"/>
+        <location filename="../../uis/PatusInterface.ui" line="9505"/>
         <source>DataBase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="9517"/>
+        <location filename="../../uis/PatusInterface.ui" line="9522"/>
         <source>Phones</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="9534"/>
+        <location filename="../../uis/PatusInterface.ui" line="9539"/>
         <source>DashBoard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="9790"/>
+        <location filename="../../uis/PatusInterface.ui" line="9795"/>
         <source>Sell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="9807"/>
-        <location filename="../../uis/PatusInterface.ui" line="10880"/>
+        <location filename="../../uis/PatusInterface.ui" line="9812"/>
+        <location filename="../../uis/PatusInterface.ui" line="10885"/>
         <source>yyyy-MM-dd HH:mm:ss</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="9839"/>
+        <location filename="../../uis/PatusInterface.ui" line="9844"/>
         <source>Number of covers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="10119"/>
+        <location filename="../../uis/PatusInterface.ui" line="10124"/>
         <source>Table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="10163"/>
+        <location filename="../../uis/PatusInterface.ui" line="10168"/>
         <source>Number of seats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="10411"/>
+        <location filename="../../uis/PatusInterface.ui" line="10416"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="10563"/>
+        <location filename="../../uis/PatusInterface.ui" line="10568"/>
         <source>Stock unit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="10576"/>
+        <location filename="../../uis/PatusInterface.ui" line="10581"/>
         <source>Stock quantity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="10853"/>
+        <location filename="../../uis/PatusInterface.ui" line="10858"/>
         <source>Doccuments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="10930"/>
+        <location filename="../../uis/PatusInterface.ui" line="10935"/>
         <source>Doc extension</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="11248"/>
+        <location filename="../../uis/PatusInterface.ui" line="11253"/>
         <source>Table Ownership</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="11509"/>
+        <location filename="../../uis/PatusInterface.ui" line="11514"/>
         <source>Eployee payment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="11553"/>
+        <location filename="../../uis/PatusInterface.ui" line="11558"/>
         <source>Amount</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="11819"/>
-        <location filename="../../uis/PatusInterface.ui" line="11897"/>
-        <location filename="../../uis/PatusInterface.ui" line="11975"/>
+        <location filename="../../uis/PatusInterface.ui" line="11824"/>
+        <location filename="../../uis/PatusInterface.ui" line="11902"/>
+        <location filename="../../uis/PatusInterface.ui" line="11980"/>
         <source>Mourad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="11862"/>
-        <location filename="../../uis/PatusInterface.ui" line="11940"/>
-        <location filename="../../uis/PatusInterface.ui" line="12018"/>
+        <location filename="../../uis/PatusInterface.ui" line="11867"/>
+        <location filename="../../uis/PatusInterface.ui" line="11945"/>
+        <location filename="../../uis/PatusInterface.ui" line="12023"/>
         <source>Send</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="11869"/>
-        <location filename="../../uis/PatusInterface.ui" line="11947"/>
-        <location filename="../../uis/PatusInterface.ui" line="12025"/>
+        <location filename="../../uis/PatusInterface.ui" line="11874"/>
+        <location filename="../../uis/PatusInterface.ui" line="11952"/>
+        <location filename="../../uis/PatusInterface.ui" line="12030"/>
         <source>Ring</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="12130"/>
+        <location filename="../../uis/PatusInterface.ui" line="12135"/>
         <source>Patus 1.0.1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="12148"/>
+        <location filename="../../uis/PatusInterface.ui" line="12153"/>
         <source>Server Starting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="12166"/>
+        <location filename="../../uis/PatusInterface.ui" line="12171"/>
         <source>Made by Lablack Mourad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../uis/PatusInterface.ui" line="12279"/>
+        <location filename="../../uis/PatusInterface.ui" line="12284"/>
         <source>Clear all notifications</source>
         <translation type="unfinished"></translation>
     </message>

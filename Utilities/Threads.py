@@ -720,6 +720,7 @@ class PrinterThread(QThread):
                             text=self.ticket,
                             show_logo=True,
                             show_qr_code=False,
+                            cash_drawer=True,
                         )
                     except Exception as e:
                         self.logUpdater.emit(
@@ -777,6 +778,7 @@ class PrinterThread(QThread):
                             text=self.errors_dictionary[place],
                             show_logo=True,
                             show_qr_code=False,
+                            cash_drawer=True,
                         )
                     except Exception as e:
                         self.logUpdater.emit(

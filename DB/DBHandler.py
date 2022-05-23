@@ -1422,6 +1422,21 @@ class DBHelper(object):
             else:
                 return x
 
+    def getMenuItemByCat(self, category: int) -> MenuItem:
+        with self.conn:
+            self.c.execute(
+                f"SELECT * FROM {MenuTable.TABLE_NAME} WHERE {MenuTable.COLUMN_CATEGORY_ID}=? ORDER BY {MenuTable.COLUMN_NAME} ASC",
+                (category,),
+            )
+            results = []
+            all_x = self.c.fetchall()
+            if all_x is not None:
+                for x in all_x:
+                    results.append(
+                        MenuItem(x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[0])
+                    )
+            return results
+
     def getMenuItemReceiptById(self, _id: int, ingredient_id: int):
         with self.conn:
             self.c.execute(

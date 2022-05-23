@@ -635,12 +635,12 @@ class PatusMainUI(QMainWindow):
     """Logger file"""
 
     @staticmethod
-    def prepareLogFile():
+    def prepareLogFile(level: int = logging.ERROR):
         logFilePath = os.path.join(os.getcwd(), "tmp", "PatusLog.log")
         os.makedirs(os.path.join(os.getcwd(), "tmp"), exist_ok=True)
         logging.basicConfig(
             filename=logFilePath,
-            level=logging.ERROR,
+            level=level,
             format="%(asctime)s %(levelname)s: %(message)s",
         )
 
@@ -2799,47 +2799,102 @@ class PatusMainUI(QMainWindow):
 
     """Cash Register"""
 
-    def clearAllProducts(self):
-        parents = [
-            self.w_salade,
-            self.w_meal,
-            self.w_pizza,
-            self.w_hotDrink,
-            self.w_hotDrink,
-            self.w_coldDrink,
-            self.w_dessert,
-        ]
-        for parent in parents:
-            for child in parent.findChildren(QFrame):
-                child.deleteLater()
+    def clearAllProducts(self, fixed: bool = False) -> None:
+        if fixed:
+            parents = [
+                self.w_salade,
+                self.w_meal,
+                self.w_pizza,
+                self.w_hotDrink,
+                self.w_hotDrink,
+                self.w_coldDrink,
+                self.w_dessert,
+            ]
+            for parent in parents:
+                for child in parent.findChildren(QFrame):
+                    child.deleteLater()
+        else:
+            for parent in self.tw_foodMenu.findChildren(QWidget):
+                if parent.objectName() != "":
+                    if parent.objectName()[:2] != "qt":
+                        parent.deleteLater()
 
-    def populateMenu(self):
-        self.clearAllProducts()
+    def populateMenu(self, fixed: bool = False) -> None:
+        self.clearAllProducts(fixed)
+        if fixed:
+            all_menu_item = self.DB.getAllMenus(sorted=True)
 
-        all_menu_item = self.DB.getAllMenus(sorted=True)
-
-        for menu_item in all_menu_item:
-            if menu_item.category == "Salade":
-                parent = self.w_salade
-            elif menu_item.category == "Meal":
-                parent = self.w_meal
-            elif menu_item.category == "Pizza":
-                parent = self.w_pizza
-            elif menu_item.category == "Hot Drink":
-                parent = self.w_hotDrink
-            elif menu_item.category == "Cold Drink":
-                parent = self.w_coldDrink
-            else:
-                parent = self.w_dessert
-            parent.layout().addWidget(
-                createProductContainer(
-                    parent=parent,
-                    db=self.DB,
-                    product=menu_item,
-                    table_id=self.current_table,
-                    fc=self.addOrderItem,
+            for menu_item in all_menu_item:
+                if menu_item.category == "Salade":
+                    parent = self.w_salade
+                elif menu_item.category == "Meal":
+                    parent = self.w_meal
+                elif menu_item.category == "Pizza":
+                    parent = self.w_pizza
+                elif menu_item.category == "Hot Drink":
+                    parent = self.w_hotDrink
+                elif menu_item.category == "Cold Drink":
+                    parent = self.w_coldDrink
+                else:
+                    parent = self.w_dessert
+                parent.layout().addWidget(
+                    createProductContainer(
+                        parent=parent,
+                        db=self.DB,
+                        product=menu_item,
+                        table_id=self.current_table,
+                        fc=self.addOrderItem,
+                    )
                 )
-            )
+
+        else:
+            all_menu_category = self.DB.getAllMenuCategories()
+            for menu_category in all_menu_category:
+
+                tab_widget = QWidget(
+                    parent=self.tw_foodMenu, objectName=f"tab_{menu_category.name}"
+                )
+                tab_grid_layout = QGridLayout(tab_widget)
+                tab_widget.setSizePolicy(
+                    QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding
+                )
+
+                scroll_area = QScrollArea(
+                    parent=tab_widget, objectName=f"sa_{menu_category.name}"
+                )
+                tab_grid_layout.addWidget(scroll_area)
+                scroll_area.setSizePolicy(
+                    QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding
+                )
+
+                widget = QWidget(
+                    parent=scroll_area, objectName=f"w_{menu_category.name}"
+                )
+                grid_layout = QGridLayout(widget)
+                widget.setSizePolicy(
+                    QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding
+                )
+
+                i, j = 0, 0
+                for menu_item in self.DB.getMenuItemByCat(menu_category.id):
+                    grid_layout.addWidget(
+                        createProductContainer(
+                            parent=widget,
+                            db=self.DB,
+                            product=menu_item,
+                            table_id=self.current_table,
+                            fc=self.addOrderItem,
+                        ),
+                        i,
+                        j,
+                    )
+                    j += 1
+                    if j > 3:
+                        i += 1
+                        j = 0
+                # self.tw_foodMenu.addTab(scroll_area, menu_category.name)
+                scroll_area.setWidget(widget)
+                self.tw_foodMenu.addTab(tab_widget, menu_category.name)
 
     def calculateTotal(self):
         total = 0

@@ -21,6 +21,8 @@ def handlePrint(
     show_logo: bool = False,
     show_qr_code: bool = False,
     height: int = 1,
+    cash_drawer: bool = False,
+    pin: int = 2,
 ) -> None:
     printer = Network(ip_address)
     printer.set(
@@ -42,6 +44,8 @@ def handlePrint(
         printer.qr("https://www.instagram.com/__patus_/")
         printer.qr("https://www.facebook.com/PATUS-il-dio-della-pasta-106229107452308")
     printer.cut()
+    if cash_drawer and pin in [2, 5]:
+        printer.cashdraw(pin)
     printer.close()
 
 
@@ -455,23 +459,23 @@ def createProductContainer(parent, db, product: MenuItem, table_id, fc):
     frame.setLayout(QVBoxLayout())
     frame.setMaximumSize(200, 400)
     # Picture or name
-    label = QLabel()
+    label = QLabel(parent=frame)
     label.setPixmap(QPixmap(os.path.join(os.getcwd(), "resource", "patus_logo.jpg")))
     label.setScaledContents(True)
     label.setAlignment(Qt.AlignHCenter)
     label.setMaximumSize(200, 150)
     frame.layout().addWidget(label)
-    label = QLabel()
+    label = QLabel(parent=frame)
     label.setText(pretty_string(product.name, 20, "returnLine"))
     label.setAlignment(Qt.AlignHCenter)
     frame.layout().addWidget(label)
-    label = QLabel()
+    label = QLabel(parent=frame)
     label.setText(f"{to_money(product.price)} / {product.quantity} ({product.unit})")
     label.setStyleSheet("font-size: 8pt;")
     label.setAlignment(Qt.AlignHCenter)
     frame.layout().addWidget(label)
     # Ranking system
-    comboBox = QComboBox()
+    comboBox = QComboBox(parent=frame)
     for i in range(5):
         comboBox.insertItem(i, f"Group {i+1}")
     frame.layout().addWidget(comboBox)
