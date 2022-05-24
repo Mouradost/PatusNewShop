@@ -14,10 +14,11 @@ class ServerSetting:
     KITCHEN_IP: str = "192.168.1.203"
     PIZZA_IP: str = "192.168.1.203"
     BAR_IP: str = "192.168.1.202"
-    PATH: str = os.path.join(os.getcwd(), 'Setting', 'Setting.json')
+    DRAWER_PIN: int = 2
+    PATH: str = os.path.join(os.getcwd(), "Setting", "Setting.json")
 
     def save(self):
-        with open(self.PATH, 'w') as f:
+        with open(self.PATH, "w") as f:
             json.dump(self.__dict__, f)
 
     def load(self):
@@ -25,13 +26,14 @@ class ServerSetting:
             with open(self.PATH, "r") as f:
                 # print(f)
                 settings = json.load(f)
-                self.IP = settings['IP']
-                self.PORT = settings['PORT']
-                self.MAX_CLIENTS = settings['MAX_CLIENTS']
-                self.CASHIER_IP = settings['CASHIER_IP']
-                self.KITCHEN_IP = settings['KITCHEN_IP']
-                self.PIZZA_IP = settings['PIZZA_IP']
-                self.BAR_IP = settings['BAR_IP']
+                self.IP = settings["IP"]
+                self.PORT = settings["PORT"]
+                self.MAX_CLIENTS = settings["MAX_CLIENTS"]
+                self.CASHIER_IP = settings["CASHIER_IP"]
+                self.KITCHEN_IP = settings["KITCHEN_IP"]
+                self.PIZZA_IP = settings["PIZZA_IP"]
+                self.BAR_IP = settings["BAR_IP"]
+                self.DRAWER_PIN = settings["DRAWER_PIN"]
         except Exception as e:
             logging.error(f"No settings found --> {e}")
             logging.debug("Saving default settings")

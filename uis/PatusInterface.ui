@@ -9998,6 +9998,26 @@ QComboBox
                              </property>
                             </widget>
                            </item>
+                           <item>
+                            <widget class="QPushButton" name="btn_sellHistory">
+                             <property name="enabled">
+                              <bool>false</bool>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../resource/resource.qrc">
+                               <normaloff>:/Simple icons/simple_icons/fi-rr-incognito.svg</normaloff>:/Simple icons/simple_icons/fi-rr-incognito.svg</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>32</width>
+                               <height>32</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
                           </layout>
                          </widget>
                         </item>
@@ -11538,7 +11558,7 @@ QComboBox
                                <second>0</second>
                                <year>2022</year>
                                <month>5</month>
-                               <day>21</day>
+                               <day>20</day>
                               </datetime>
                              </property>
                              <property name="currentSection">
@@ -11798,8 +11818,8 @@ QComboBox
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>411</width>
-                      <height>175</height>
+                      <width>569</width>
+                      <height>714</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_21">

@@ -389,3 +389,19 @@ class Payment:
     date: str
     amount: float
     id: int = None
+
+
+@dataclass
+class DifferenceHistory:
+    sell_id: int
+    sell_completed: bool
+    worker_name: str
+    table_id: int
+    product_name: str
+    product_unit: str
+    quantity: float
+    total: float
+    is_ready: bool
+    is_served: bool
+    date: str
+    id: int = None

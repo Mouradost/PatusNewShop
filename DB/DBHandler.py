@@ -326,6 +326,25 @@ class DBHelper(object):
             )"""
             self.c.execute(sql_command)
 
+            sql_command = f"""
+            CREATE TABLE IF NOT EXISTS {DifferenceHistoryTable.TABLE_NAME} ( 
+            {DifferenceHistoryTable.COLUMN_ID} INTEGER PRIMARY KEY AUTOINCREMENT,   
+            {DifferenceHistoryTable.COLUMN_SELL_ID} INTEGER NOT NULL,  
+            {DifferenceHistoryTable.COLUMN_SELL_COMPLETED} INTEGER NOT NULL,  
+            {DifferenceHistoryTable.COLUMN_WORKER_NAME} TEXT NOT NULL,  
+            {DifferenceHistoryTable.COLUMN_TABLE_ID} INTEGER,  
+            {DifferenceHistoryTable.COLUMN_PRODUCT_NAME} TEXT NOT NULL,  
+            {DifferenceHistoryTable.COLUMN_PRODUCT_UNIT} TEXT NOT NULL,  
+            {DifferenceHistoryTable.COLUMN_QUANTITY} REAL NOT NULL,  
+            {DifferenceHistoryTable.COLUMN_TOTAL} REAL NOT NULL,  
+            {DifferenceHistoryTable.COLUMN_IS_READY} INTEGER NOT NULL,  
+            {DifferenceHistoryTable.COLUMN_IS_SERVED} INTEGER NOT NULL,
+            {DifferenceHistoryTable.COLUMN_DATE} TEXT NOT NULL, 
+            FOREIGN KEY ( {DifferenceHistoryTable.COLUMN_SELL_ID} ) 
+            REFERENCES {SellTable.TABLE_NAME} ({SellTable.COLUMN_ID})
+            )"""
+            self.c.execute(sql_command)
+
     # Insertions
     def insertMenuItem(self, x: MenuItem):
         with self.lock:
@@ -2196,6 +2215,192 @@ class DBHelper(object):
                     )
                 )
         return old_order
+
+    def insertDifferenceHistory(self, history: DifferenceHistory) -> None:
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {DifferenceHistoryTable.TABLE_NAME} (
+                    {DifferenceHistoryTable.COLUMN_SELL_ID},
+                    {DifferenceHistoryTable.COLUMN_SELL_COMPLETED},
+                    {DifferenceHistoryTable.COLUMN_WORKER_NAME},
+                    {DifferenceHistoryTable.COLUMN_TABLE_ID},
+                    {DifferenceHistoryTable.COLUMN_PRODUCT_NAME},
+                    {DifferenceHistoryTable.COLUMN_PRODUCT_UNIT},
+                    {DifferenceHistoryTable.COLUMN_QUANTITY},
+                    {DifferenceHistoryTable.COLUMN_TOTAL},
+                    {DifferenceHistoryTable.COLUMN_IS_READY},
+                    {DifferenceHistoryTable.COLUMN_IS_SERVED},
+                    {DifferenceHistoryTable.COLUMN_DATE}
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"""
+                self.c.execute(sql_command, astuple(history)[:-1])
+
+    def getAllDifferenceHistory(self) -> List[DifferenceHistory]:
+        with self.conn:
+            self.c.execute(f"SELECT * FROM {DifferenceHistoryTable.TABLE_NAME}")
+            all_x = self.c.fetchall()
+            results = []
+            if all_x is not None:
+                for x in all_x:
+                    results.append(
+                        DifferenceHistory(
+                            sell_id=x[1],
+                            sell_completed=bool(x[2]),
+                            worker_name=x[3],
+                            table_id=x[4],
+                            product_name=x[5],
+                            product_unit=x[6],
+                            quantity=x[7],
+                            total=x[8],
+                            is_ready=bool(x[9]),
+                            is_served=bool(x[10]),
+                            date=x[11],
+                            id=x[0],
+                        )
+                    )
+            return results
+
+    def getDifferenceHistoryBySellId(self, sell_id: int) -> List[DifferenceHistory]:
+        with self.conn:
+            self.c.execute(
+                f"SELECT * FROM {DifferenceHistoryTable.TABLE_NAME} WHERE {DifferenceHistoryTable.COLUMN_SELL_ID}=?",
+                (sell_id,),
+            )
+            all_x = self.c.fetchall()
+            results = []
+            if all_x is not None:
+                for x in all_x:
+                    results.append(
+                        DifferenceHistory(
+                            sell_id=x[1],
+                            sell_completed=bool(x[2]),
+                            worker_name=x[3],
+                            table_id=x[4],
+                            product_name=x[5],
+                            product_unit=x[6],
+                            quantity=x[7],
+                            total=x[8],
+                            is_ready=bool(x[9]),
+                            is_served=bool(x[10]),
+                            date=x[11],
+                            id=x[0],
+                        )
+                    )
+            return results
+
+    def getDifferenceHistoryByWorkerName(
+        self, worker_name: str
+    ) -> List[DifferenceHistory]:
+        with self.conn:
+            worker_name = f"%{worker_name}%"
+            self.c.execute(
+                f"SELECT * FROM {DifferenceHistoryTable.TABLE_NAME} WHERE {DifferenceHistoryTable.COLUMN_WORKER_NAME} LIKE ?",
+                (worker_name,),
+            )
+            all_x = self.c.fetchall()
+            results = []
+            if all_x is not None:
+                for x in all_x:
+                    results.append(
+                        DifferenceHistory(
+                            sell_id=x[1],
+                            sell_completed=bool(x[2]),
+                            worker_name=x[3],
+                            table_id=x[4],
+                            product_name=x[5],
+                            product_unit=x[6],
+                            quantity=x[7],
+                            total=x[8],
+                            is_ready=bool(x[9]),
+                            is_served=bool(x[10]),
+                            date=x[11],
+                            id=x[0],
+                        )
+                    )
+            return results
+
+    def getDifferenceHistoryByWorkerNameDateRange(
+        self, worker_name: str, date_start: str, date_end: str
+    ) -> List[DifferenceHistory]:
+        with self.conn:
+            worker_name = f"%{worker_name}%"
+            self.c.execute(
+                f"SELECT * FROM {DifferenceHistoryTable.TABLE_NAME} WHERE {DifferenceHistoryTable.COLUMN_WORKER_NAME} LIKE ? AND {DifferenceHistoryTable.COLUMN_DATE} BETWEEN ? AND ?",
+                (worker_name, date_start, date_end),
+            )
+            all_x = self.c.fetchall()
+            results = []
+            if all_x is not None:
+                for x in all_x:
+                    results.append(
+                        DifferenceHistory(
+                            sell_id=x[1],
+                            sell_completed=bool(x[2]),
+                            worker_name=x[3],
+                            table_id=x[4],
+                            product_name=x[5],
+                            product_unit=x[6],
+                            quantity=x[7],
+                            total=x[8],
+                            is_ready=bool(x[9]),
+                            is_served=bool(x[10]),
+                            date=x[11],
+                            id=x[0],
+                        )
+                    )
+            return results
+
+    def getDifferenceHistoryByDateRange(
+        self, date_start: str, date_end: str
+    ) -> List[DifferenceHistory]:
+        with self.conn:
+            worker_name = f"%{worker_name}%"
+            self.c.execute(
+                f"SELECT * FROM {DifferenceHistoryTable.TABLE_NAME} WHERE {DifferenceHistoryTable.COLUMN_DATE} BETWEEN ? AND ?",
+                (worker_name, date_start, date_end),
+            )
+            all_x = self.c.fetchall()
+            results = []
+            if all_x is not None:
+                for x in all_x:
+                    results.append(
+                        DifferenceHistory(
+                            sell_id=x[1],
+                            sell_completed=bool(x[2]),
+                            worker_name=x[3],
+                            table_id=x[4],
+                            product_name=x[5],
+                            product_unit=x[6],
+                            quantity=x[7],
+                            total=x[8],
+                            is_ready=bool(x[9]),
+                            is_served=bool(x[10]),
+                            date=x[11],
+                            id=x[0],
+                        )
+                    )
+            return results
+
+    def updateOrderHistory(
+        self, sell: Sell, order_dif: List[OrderItem], worker: Worker
+    ):
+        for o_d in order_dif:
+            self.insertDifferenceHistory(
+                DifferenceHistory(
+                    sell_id=sell.id,
+                    sell_completed=sell.completed,
+                    worker_name=worker.name,
+                    table_id=o_d.tableId,
+                    product_name=o_d.productName,
+                    product_unit=o_d.productUnit,
+                    quantity=o_d.orderItemQuantity,
+                    total=o_d.orderItemTotal,
+                    is_ready=o_d.ready,
+                    is_served=o_d.served,
+                    date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                )
+            )
 
     def deleteSellContent(self, id_sell: int):
         with self.lock:

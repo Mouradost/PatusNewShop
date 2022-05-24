@@ -235,3 +235,20 @@ class PaymentTable:
     COLUMN_WORKER_ID: str = "worker_id"
     COLUMN_DATE: str = "date"
     COLUMN_AMOUNT: str = "amount"
+
+
+@dataclass
+class DifferenceHistoryTable:
+    TABLE_NAME: str = "DifferenceHistory"
+    COLUMN_ID: str = "_id"
+    COLUMN_SELL_ID: str = "sell_id"
+    COLUMN_SELL_COMPLETED: str = "sell_completed"
+    COLUMN_WORKER_NAME: str = "worker_name"
+    COLUMN_TABLE_ID: str = "table_id"
+    COLUMN_PRODUCT_NAME: str = "product_name"
+    COLUMN_PRODUCT_UNIT: str = "product_unit"
+    COLUMN_QUANTITY: str = "quantity"
+    COLUMN_TOTAL: str = "total"
+    COLUMN_IS_READY: str = "is_ready"
+    COLUMN_IS_SERVED: str = "is_served"
+    COLUMN_DATE: str = "date"

@@ -296,6 +296,17 @@ class Holder(QDialog):
             msg.exec_()
 
 
+class SellHistory(QDialog):
+    def __init__(self, sell_id: int, parent: QWidget = None) -> None:
+        super(SellHistory, self).__init__(parent=parent)
+        uic.loadUi(os.path.join(os.getcwd(), "uis", "SellHistory.ui"), self)
+        self.l_title.setText(self.l_title.text() + f" {sell_id}")
+        self.tw_sellHistory.clear()
+        self.DB = DBHelper()
+        self.history = self.DB.getDifferenceHistoryBySellId(sell_id)
+        displayDbData(self.tw_sellHistory, self.history)
+
+
 class TableChanger(QDialog):
     def __init__(self, free_tables):
         super(TableChanger, self).__init__()
@@ -304,6 +315,9 @@ class TableChanger(QDialog):
         self.buttonBox.rejected.connect(self.reject)
         self.tw_freeTables.clear()
         self.free_tables = free_tables
+        print("-" * 100)
+        print(self.free_tables)
+        print("-" * 100)
         displayDbData(self.tw_freeTables, self.free_tables)
 
     def validate_click(self):
@@ -323,6 +337,7 @@ class SettingUI(QDialog):
     def __init__(self):
         super(SettingUI, self).__init__()
         uic.loadUi(os.path.join(os.getcwd(), "uis", "Setting.ui"), self)
+        self.dict_pin_index = {2: 0, 5: 1}
         self.buttonBox.accepted.connect(self.validate_click)
         self.buttonBox.rejected.connect(self.reject)
         self.serverSetting = ServerSetting()
@@ -334,6 +349,9 @@ class SettingUI(QDialog):
         self.le_kitchen_ip.setText(self.serverSetting.KITCHEN_IP)
         self.le_pizza_ip.setText(self.serverSetting.PIZZA_IP)
         self.le_bar_ip.setText(self.serverSetting.BAR_IP)
+        self.cb_drawer_pin.setCurrentIndex(
+            self.dict_pin_index[self.serverSetting.DRAWER_PIN]
+        )
 
         self.le_ip.setValidator(
             QRegExpValidator(
@@ -380,6 +398,7 @@ class SettingUI(QDialog):
             self.serverSetting.KITCHEN_IP = self.le_kitchen_ip.text()
             self.serverSetting.PIZZA_IP = self.le_pizza_ip.text()
             self.serverSetting.BAR_IP = self.le_bar_ip.text()
+            self.serverSetting.DRAWER_PIN = int(self.cb_drawer_pin.currentText())
             self.serverSetting.save()
             self.done(1)
         else:

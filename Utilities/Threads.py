@@ -721,6 +721,7 @@ class PrinterThread(QThread):
                             show_logo=True,
                             show_qr_code=False,
                             cash_drawer=True,
+                            pin=self.printer_setting.DRAWER_PIN,
                         )
                     except Exception as e:
                         self.logUpdater.emit(
@@ -779,6 +780,7 @@ class PrinterThread(QThread):
                             show_logo=True,
                             show_qr_code=False,
                             cash_drawer=True,
+                            pin=self.printer_setting.DRAWER_PIN,
                         )
                     except Exception as e:
                         self.logUpdater.emit(

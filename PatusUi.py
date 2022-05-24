@@ -381,8 +381,12 @@ class PatusMainUI(QMainWindow):
         self.btn_sellDelete.clicked.connect(self.deleteSell)
         self.btn_sellShow.clicked.connect(self.showSell)
         self.btn_sellLoad.clicked.connect(self.loadOrder)
+        self.btn_sellHistory.clicked.connect(self.showOrderHistory)
         self.btn_sellClear.clicked.connect(lambda: self.btn_sellShow.setEnabled(False))
         self.btn_sellClear.clicked.connect(lambda: self.btn_sellLoad.setEnabled(False))
+        self.btn_sellClear.clicked.connect(
+            lambda: self.btn_sellHistory.setEnabled(False)
+        )
         self.btn_sellClear.clicked.connect(lambda: self.btn_sellAdd.setEnabled(True))
         self.btn_sellClear.clicked.connect(lambda: self.btn_sellEdit.setEnabled(False))
         self.btn_sellClear.clicked.connect(
@@ -1890,6 +1894,7 @@ class PatusMainUI(QMainWindow):
         self.btn_sellDelete.setEnabled(True)
         self.btn_sellShow.setEnabled(True)
         self.btn_sellLoad.setEnabled(True)
+        self.btn_sellHistory.setEnabled(True)
 
     def showSell(self):
         try:
@@ -1968,6 +1973,7 @@ class PatusMainUI(QMainWindow):
             self.btn_sellDelete.setEnabled(False)
             self.btn_sellShow.setEnabled(False)
             self.btn_sellLoad.setEnabled(False)
+            self.btn_sellHistory.setEnabled(False)
             self.twDbHandler()
         except Exception as e:
             msg = QMessageBox()
@@ -1996,6 +2002,7 @@ class PatusMainUI(QMainWindow):
             self.btn_sellDelete.setEnabled(False)
             self.btn_sellShow.setEnabled(False)
             self.btn_sellLoad.setEnabled(False)
+            self.btn_sellHistory.setEnabled(False)
             self.twDbHandler()
         except Exception as e:
             msg = QMessageBox()
@@ -2725,12 +2732,12 @@ class PatusMainUI(QMainWindow):
                 )
             currentOrderShow.sort(key=lambda x: x.Group)
             displayDbData(self.tw_orderList, currentOrderShow)
-            self.current_table = table_id
+            self.current_table = int(table_id)
             self.lcdN_totalHtt.setProperty("value", total)
             self.lcdN_tax.setProperty("value", self.tax)
             self.lcdN_totalTtc.setProperty("value", total - self.tax)
         except Exception as e:
-            self.current_table = table_id
+            self.current_table = int(table_id)
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Warning)
             msg.setText("Table empty")
@@ -2781,7 +2788,7 @@ class PatusMainUI(QMainWindow):
                 current_table = self.DB.getTableById(rsp)
                 current_table.id_sell = self.currentSell.id
                 self.DB.updateTable(current_table)
-                self.current_table = current_table.id
+                self.current_table = int(current_table.id)
                 self.l_cashRegisterTableNumber.setText(str(rsp))
                 self.notifyClients("TABLES")
         except Exception as e:
@@ -2939,13 +2946,30 @@ class PatusMainUI(QMainWindow):
                     and order_item.orderItemSupplements == order.orderItemSupplements
                     and order_item.group_id == order.group_id
                 ):
-                    tag = False
-                    order.orderItemQuantity += order_item.orderItemQuantity
-                    order.orderItemTotal += order_item.orderItemTotal
-                    # total += order.orderItemTotal
-                    if order.orderItemQuantity <= 0:
-                        self.currentOrder.remove(order)
-
+                    if order_item.ready == order.ready:
+                        tag = False
+                        order.orderItemQuantity += order_item.orderItemQuantity
+                        order.orderItemTotal += order_item.orderItemTotal
+                        # total += order.orderItemTotal
+                        if order.orderItemQuantity <= 0:
+                            self.currentOrder.remove(order)
+                    elif (
+                        order_item.orderItemQuantity < 0
+                        and self.currentWorkerCat.name == "Administrator"
+                    ):
+                        btn_answer = QMessageBox.question(
+                            self,
+                            "Removing ready order",
+                            "Do you want to remove an order that is ready\nClick [No]if you are targeting another order",
+                            QMessageBox.Yes | QMessageBox.No,
+                        )
+                        if btn_answer == QMessageBox.Yes:
+                            tag = False
+                            order.orderItemQuantity += order_item.orderItemQuantity
+                            order.orderItemTotal += order_item.orderItemTotal
+                            # total += order.orderItemTotal
+                            if order.orderItemQuantity <= 0:
+                                self.currentOrder.remove(order)
             if tag and order_item.orderItemQuantity > 0:
                 # total += order_item.orderItemTotal
                 self.currentOrder.append(order_item)
@@ -3091,7 +3115,9 @@ class PatusMainUI(QMainWindow):
                         ],
                         completed=1,
                         nb_covers=self.currentNbCovers,
-                        on_table=self.current_table if self.current_table else 0,
+                        on_table=self.current_table
+                        if self.current_table is not None
+                        else 0,
                     )
                     customer = self.DB.getCustomerById(
                         self.customerDict[self.cb_orderCustomer.currentIndex()]
@@ -3131,14 +3157,22 @@ class PatusMainUI(QMainWindow):
                     id_customer=self.customerDict[self.cb_orderCustomer.currentIndex()],
                     completed=0,
                     nb_covers=self.currentNbCovers,
-                    on_table=self.current_table if self.current_table else 0,
+                    on_table=self.current_table
+                    if self.current_table is not None
+                    else 0,
                 )
             else:
                 self.currentSell.total = self.calculateTotal()
                 old_order = self.DB.updateOrder(
                     sell=self.currentSell, order_items=self.currentOrder
                 )
-                getTicketDifference(old_order, self.currentOrder)
+                order_show = getTicketDifference(old_order, self.currentOrder)
+                self.DB.updateOrderHistory(
+                    sell=self.currentSell,
+                    order_dif=order_show,
+                    worker=self.currentWorker,
+                )
+
             self.clearCashRegister()
             self.currentOrder = []
             self.notifyClients("TABLES")
@@ -3235,6 +3269,20 @@ class PatusMainUI(QMainWindow):
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Warning)
             msg.setText("Not a valide sell")
+            msg.setDetailedText(str(e))
+            msg.setWindowTitle("Warning message")
+            msg.exec_()
+
+    def showOrderHistory(self):
+        try:
+            assert isinstance(self.current, Sell)
+            sell_history = SellHistory(self.current.id, self)
+            sell_history.show()
+            sell_history.exec_()
+        except Exception as e:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Loading sell history failed")
             msg.setDetailedText(str(e))
             msg.setWindowTitle("Warning message")
             msg.exec_()
@@ -3691,7 +3739,9 @@ class PatusMainUI(QMainWindow):
                     id_customer=self.customerDict[self.cb_orderCustomer.currentIndex()],
                     completed=0,
                     nb_covers=self.currentNbCovers,
-                    on_table=self.current_table if self.current_table else 0,
+                    on_table=self.current_table
+                    if self.current_table is not None
+                    else 0,
                 )
                 self.currentSell = self.DB.getSellById(sell_id)
 
@@ -3702,12 +3752,22 @@ class PatusMainUI(QMainWindow):
                     sell=self.currentSell, order_items=self.currentOrder
                 )
                 order_show = getTicketDifference(old_order, self.currentOrder)
+                self.DB.updateOrderHistory(
+                    sell=self.currentSell,
+                    order_dif=order_show,
+                    worker=self.currentWorker,
+                )
                 if len(order_show) == 0 and place == "Kitchen":
-                    confirmDeletingOrder = ConfirmFullTicket()
-                    confirmDeletingOrder.show()
-                    rsp = confirmDeletingOrder.exec_()
-                    if rsp:
+                    rsp = QMessageBox.question(
+                        self,
+                        "Send full ticket",
+                        "this ticket is already printed do you really want to send the full old ticket again ?",
+                        QMessageBox.Yes | QMessageBox.No,
+                    )
+                    if rsp == QMessageBox.Yes:
                         order_show = self.currentOrder
+                    else:
+                        return
 
                 old = True
 

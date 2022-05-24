@@ -1,14 +1,11 @@
-2022-05-23 10:10:17,422 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-23 10:10:51,006 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-23 10:12:57,598 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-23 10:23:46,742 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-23 10:25:31,926 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-23 10:28:30,167 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-23 10:31:32,785 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-23 10:37:01,017 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-23 10:37:29,308 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-23 10:47:34,079 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-23 10:49:41,290 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-23 10:50:21,589 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-23 10:53:29,282 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
-2022-05-23 10:54:45,254 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-24 13:17:12,564 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-24 13:17:12,565 ERROR: [192.168.2.4] string index out of range
+2022-05-24 13:18:39,838 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-24 13:18:39,839 ERROR: [192.168.2.4] string index out of range
+2022-05-24 13:21:01,851 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-24 13:21:01,852 ERROR: [192.168.2.4] string index out of range
+2022-05-24 13:21:42,524 ERROR: [PRINTER THREAD] Cashier (192.168.1.202) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-05-24 13:22:03,692 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-24 13:22:03,693 ERROR: [192.168.2.4] string index out of range
+2022-05-24 13:29:57,797 ERROR: [SERVER] [WinError 10038] An operation was attempted on something that is not a socket
+2022-05-24 13:29:57,798 ERROR: [192.168.2.4] string index out of range

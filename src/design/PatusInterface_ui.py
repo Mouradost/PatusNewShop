@@ -5213,6 +5213,16 @@ class Ui_PatusMainWindow(object):
 
         self.horizontalLayout_21.addWidget(self.btn_sellLoad)
 
+        self.btn_sellHistory = QPushButton(self.f_sellDbBtn)
+        self.btn_sellHistory.setObjectName(u"btn_sellHistory")
+        self.btn_sellHistory.setEnabled(False)
+        icon53 = QIcon()
+        icon53.addFile(u":/Simple icons/simple_icons/fi-rr-incognito.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_sellHistory.setIcon(icon53)
+        self.btn_sellHistory.setIconSize(QSize(32, 32))
+
+        self.horizontalLayout_21.addWidget(self.btn_sellHistory)
+
 
         self.verticalLayout_39.addWidget(self.f_sellDbBtn)
 
@@ -6012,9 +6022,9 @@ class Ui_PatusMainWindow(object):
 
         self.horizontalLayout_67.addWidget(self.f_tableOwnershipDb)
 
-        icon53 = QIcon()
-        icon53.addFile(u":/Simple icons/simple_icons/fi-rr-package.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_database.addTab(self.tab_tableOwnership, icon53, "")
+        icon54 = QIcon()
+        icon54.addFile(u":/Simple icons/simple_icons/fi-rr-package.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_database.addTab(self.tab_tableOwnership, icon54, "")
         self.tab_payement = QWidget()
         self.tab_payement.setObjectName(u"tab_payement")
         self.horizontalLayout_78 = QHBoxLayout(self.tab_payement)
@@ -6091,7 +6101,7 @@ class Ui_PatusMainWindow(object):
         self.de_payment_date = QDateEdit(self.gb_payment)
         self.de_payment_date.setObjectName(u"de_payment_date")
         self.de_payment_date.setFont(font5)
-        self.de_payment_date.setDateTime(QDateTime(QDate(2022, 5, 21), QTime(0, 0, 0)))
+        self.de_payment_date.setDateTime(QDateTime(QDate(2022, 5, 20), QTime(0, 0, 0)))
         self.de_payment_date.setCurrentSection(QDateTimeEdit.YearSection)
         self.de_payment_date.setCalendarPopup(True)
 
@@ -6175,9 +6185,9 @@ class Ui_PatusMainWindow(object):
 
         self.horizontalLayout_78.addWidget(self.f_paymentDb)
 
-        icon54 = QIcon()
-        icon54.addFile(u":/Simple icons/simple_icons/fi-rr-hand-holding-heart.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_database.addTab(self.tab_payement, icon54, "")
+        icon55 = QIcon()
+        icon55.addFile(u":/Simple icons/simple_icons/fi-rr-hand-holding-heart.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_database.addTab(self.tab_payement, icon55, "")
 
         self.gridLayout_9.addWidget(self.tw_database, 0, 0, 1, 1)
 
@@ -6246,7 +6256,7 @@ class Ui_PatusMainWindow(object):
         self.sa_workerStatus.setWidgetResizable(True)
         self.w_workerStats = QWidget()
         self.w_workerStats.setObjectName(u"w_workerStats")
-        self.w_workerStats.setGeometry(QRect(0, 0, 411, 175))
+        self.w_workerStats.setGeometry(QRect(0, 0, 569, 714))
         self.gridLayout_21 = QGridLayout(self.w_workerStats)
         self.gridLayout_21.setObjectName(u"gridLayout_21")
         self.frame_13 = QFrame(self.w_workerStats)
@@ -6462,9 +6472,9 @@ class Ui_PatusMainWindow(object):
         sizePolicy4.setHeightForWidth(self.btn_logs.sizePolicy().hasHeightForWidth())
         self.btn_logs.setSizePolicy(sizePolicy4)
         self.btn_logs.setMaximumSize(QSize(20, 16777215))
-        icon55 = QIcon()
-        icon55.addFile(u":/Simple icons/simple_icons/fi-rr-shield-interrogation.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_logs.setIcon(icon55)
+        icon56 = QIcon()
+        icon56.addFile(u":/Simple icons/simple_icons/fi-rr-shield-interrogation.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_logs.setIcon(icon56)
         self.btn_logs.setIconSize(QSize(16, 16))
 
         self.horizontalLayout_2.addWidget(self.btn_logs)
@@ -6883,6 +6893,7 @@ class Ui_PatusMainWindow(object):
         self.btn_sellClear.setText("")
         self.btn_sellShow.setText("")
         self.btn_sellLoad.setText("")
+        self.btn_sellHistory.setText("")
         self.tw_database.setTabText(self.tw_database.indexOf(self.tab_sell), "")
         self.gb_expense_6.setTitle(QCoreApplication.translate("PatusMainWindow", u"Table", None))
         self.le_tableName.setText("")
