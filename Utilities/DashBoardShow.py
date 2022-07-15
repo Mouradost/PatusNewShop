@@ -9,7 +9,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5 import uic
 
-import datetime
+from datetime import datetime, timedelta
 import os
 
 
@@ -18,12 +18,11 @@ class DashBoard(QWidget):
         super(DashBoard, self).__init__(objectName="w_reportDashBoard", **kwargs)
         uic.loadUi(os.path.join(os.getcwd(), "uis", "DashBoard.ui"), self)
         self.DB = DBHelper()
-        # Dataframes
-        # self.df_pointer = pd.DataFrame()
-        self.start_date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-        self.end_date = (
-            datetime.datetime.now() + datetime.timedelta(hours=24)
-        ).strftime("%Y-%m-%d %H:%M")
+
+        self.start_date = datetime.now().strftime("%Y-%m-%d %H:%M")
+        self.end_date = (datetime.now() + timedelta(hours=24)).strftime(
+            "%Y-%m-%d %H:%M"
+        )
         # Setting up the dates
         self.de_dashboard_date_start.setDateTime(
             QDateTime.fromString(self.start_date, "yyyy-MM-dd HH:mm")
@@ -64,8 +63,8 @@ class DashBoard(QWidget):
         # Prepare
         ranking = []
         for name, date_start, date_end in data:
-            date_start = datetime.datetime.strptime(date_start, "%Y-%m-%d %H:%M:%S")
-            date_end = datetime.datetime.strptime(date_end, "%Y-%m-%d %H:%M:%S")
+            date_start = datetime.strptime(date_start, "%Y-%m-%d %H:%M:%S")
+            date_end = datetime.strptime(date_end, "%Y-%m-%d %H:%M:%S")
             ranking.append((name, date_end - date_start))
 
         # Aggregate results
@@ -73,7 +72,7 @@ class DashBoard(QWidget):
         for key, group in itertools.groupby(ranking, lambda x: x[0]):
             if key is not None:
                 if key not in ranking_dict:
-                    ranking_dict[key] = datetime.timedelta(0, 0, 0)
+                    ranking_dict[key] = timedelta(0, 0, 0)
                 for _, y in group:
                     ranking_dict[key] += y
         show_dynamic(
@@ -97,25 +96,6 @@ class DashBoard(QWidget):
             ["Total amount", "Remaining amount", "Salary"],
             to_money,
         )
-
-    # def prepare_dataframes(self) -> None:
-    #     self.df_pointer = pd.read_sql_query(
-    #         """
-    #         SELECT Pointer.date_start, Pointer.date_end, Workers.name, Workers.id_category, Workers.score  FROM Pointer
-    #         LEFT JOIN Workers ON
-    #         Pointer.id_worker = Workers._id
-    #         """, self.DB.conn)
-    #     self.df_pointer.date_start = pd.to_datetime(self.df_pointer.date_start)
-    #     self.df_pointer.date_end = pd.to_datetime(self.df_pointer.date_end)
-    #     self.df_pointer['duration'] = self.df_pointer.date_end - \
-    #         self.df_pointer.date_start
-
-    #     self.df_sells = pd.read_sql_query(
-    #         """
-    #         SELECT Pointer.date_start, Pointer.date_end, Workers.name, Workers.id_category, Workers.score  FROM Pointer
-    #         LEFT JOIN Workers ON
-    #         Pointer.id_worker = Workers._id
-    #         """, self.DB.conn)
 
     def show_totals(self) -> None:
         # Retreive the data
@@ -159,26 +139,6 @@ class DashBoard(QWidget):
             ["Total sells"],
             to_money,
         )
-
-    # def show_worker_hours_ranking(self) -> None:
-    #     ranking = self.df_pointer[["name", "duration"]].groupby(['name']).sum()
-
-    #     ranking_score = self.df_pointer[[
-    #         "name", 'score']].groupby(['name']).sum()
-    #     all_ranking = []
-    #     for m, t, s in zip(ranking.index, ranking['duration'], ranking_score['score']):
-    #         all_ranking.append([
-    #             m,
-    #             f"days: {t.components.days}\nhours: {t.components.hours}\nminutes: {t.components.minutes}",
-    #             f"{s/t.value:.2%}"])
-    #     show_dynamic(
-    #         self.f_dashboard_worker_attendance_ranking,
-    #         "Employee Attendance",
-    #         ["Name", "Duration", "Efficiency"],
-    #         all_ranking,
-    #         "",
-    #         None
-    #     )
 
     def show_best_selling_products(self) -> None:
         ranking = self.DB.getBestSellingProductByDateRange(

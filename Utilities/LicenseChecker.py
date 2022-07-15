@@ -7,14 +7,22 @@ import sys
 
 
 def check_license(license: str) -> None:
-    pc_mac_address = ':'.join(['{:02x}'.format(
-        (uuid.getnode() >> elements) & 0xff) for elements in range(0, 2*6, 2)][::-1])
+    pc_mac_address = ":".join(
+        [
+            "{:02x}".format((uuid.getnode() >> elements) & 0xFF)
+            for elements in range(0, 2 * 6, 2)
+        ][::-1]
+    )
     return license_generator(pc_mac_address) == license
 
 
 def get_mac() -> str:
-    pc_mac_address = ':'.join(['{:02x}'.format(
-        (uuid.getnode() >> elements) & 0xff) for elements in range(0, 2*6, 2)][::-1])
+    pc_mac_address = ":".join(
+        [
+            "{:02x}".format((uuid.getnode() >> elements) & 0xFF)
+            for elements in range(0, 2 * 6, 2)
+        ][::-1]
+    )
     return pc_mac_address
 
 
@@ -44,7 +52,7 @@ def load_current_license() -> str:
 
 
 def save_current_license(license: str) -> None:
-    with open(os.path.join(os.getcwd(), "Setting", "license.json"), 'w') as f:
+    with open(os.path.join(os.getcwd(), "Setting", "license.json"), "w") as f:
         json.dump({"license": license}, f)
 
 

@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5 import uic
-import datetime
+from datetime import datetime
 import os
 from DB.DBHandler import DBHelper
 from DB.DbTables import *
@@ -49,6 +49,32 @@ def handlePrint(
     printer.close()
 
 
+def handleCustomPrint(
+    ip_address: str, text: str, qr_code: str, image: str, height: int = 1
+) -> None:
+    printer = Network(ip_address, timeout=5)
+    printer.set(
+        align="center",
+        font="a",
+        text_type="normal",
+        width=1,
+        height=height,
+        density=9,
+        invert=False,
+        smooth=False,
+        flip=False,
+    )
+    if qr_code is not None:
+        printer.qr(qr_code)
+    if image is not None:
+        printer.image(image)
+    if text is not None:
+        printer.charcode("MULTILINGUAL")
+        printer.text(text)
+    printer.cut()
+    printer.close()
+
+
 class Pay(QDialog):
     def __init__(
         self,
@@ -61,8 +87,9 @@ class Pay(QDialog):
         ticket_number: int,
         total: float,
         printerThread,
+        parent=None,
     ):
-        super(Pay, self).__init__()
+        super(Pay, self).__init__(parent=parent)
         uic.loadUi(os.path.join(os.getcwd(), "uis", "pay.ui"), self)
         self.lcdN_total.setProperty("value", total)
         self.le_givenAmount.setValidator(QDoubleValidator())
@@ -149,8 +176,8 @@ class Pay(QDialog):
 
 
 class CheckerL(QDialog):
-    def __init__(self):
-        super(CheckerL, self).__init__()
+    def __init__(self, parent=None):
+        super(CheckerL, self).__init__(parent=parent)
         uic.loadUi(os.path.join(os.getcwd(), "uis", "LicenseProblem.ui"), self)
         self.l_adressMac.setText(LicenseChecker.get_mac())
         self.tb_copyMac.clicked.connect(self.copyMac)
@@ -169,8 +196,8 @@ class CheckerL(QDialog):
 
 
 class Reducer(QDialog):
-    def __init__(self):
-        super(Reducer, self).__init__()
+    def __init__(self, parent=None):
+        super(Reducer, self).__init__(parent=parent)
         uic.loadUi(os.path.join(os.getcwd(), "uis", "reducer.ui"), self)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
@@ -179,8 +206,8 @@ class Reducer(QDialog):
 
 
 class LogPreviewer(QDialog):
-    def __init__(self, logPath: str) -> None:
-        super(LogPreviewer, self).__init__()
+    def __init__(self, logPath: str, parent=None) -> None:
+        super(LogPreviewer, self).__init__(parent=parent)
         uic.loadUi(os.path.join(os.getcwd(), "uis", "LogPreview.ui"), self)
         self.logPath = logPath
         self.btn_clear_logs.clicked.connect(self.clearLogs)
@@ -201,8 +228,8 @@ class LogPreviewer(QDialog):
 
 
 class BlockNote(QDialog):
-    def __init__(self, db=None) -> None:
-        super(BlockNote, self).__init__()
+    def __init__(self, db=None, parent=None) -> None:
+        super(BlockNote, self).__init__(parent=parent)
         uic.loadUi(os.path.join(os.getcwd(), "uis", "BlockNote.ui"), self)
         self.db = db
         self.btn_clear.clicked.connect(self.clearNote)
@@ -220,7 +247,7 @@ class BlockNote(QDialog):
             )
             fileDoc = FileDoc(
                 name="Block_Note",
-                date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                date=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 comment="AUTO_GENERATED",
                 file=description_json,
             )
@@ -231,24 +258,68 @@ class BlockNote(QDialog):
 
 
 class ConfirmDeletingOrder(QDialog):
-    def __init__(self):
-        super(ConfirmDeletingOrder, self).__init__()
+    def __init__(self, parent=None):
+        super(ConfirmDeletingOrder, self).__init__(parent=parent)
         uic.loadUi(os.path.join(os.getcwd(), "uis", "ConfirmDeleteOrder.ui"), self)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
 
 
-class ConfirmFullTicket(QDialog):
-    def __init__(self):
-        super(ConfirmFullTicket, self).__init__()
-        uic.loadUi(os.path.join(os.getcwd(), "uis", "ConfirmFullTicket.ui"), self)
-        self.buttonBox.accepted.connect(self.accept)
-        self.buttonBox.rejected.connect(self.reject)
+class CustomTicket(QDialog):
+    def __init__(self, worker, parent=None):
+        super(CustomTicket, self).__init__(parent=parent)
+        uic.loadUi(os.path.join(os.getcwd(), "uis", "CustomTicket.ui"), self)
+        self.worker_name = worker.name if worker is not None else ""
+        self.clearAll()
+        self.setting = ServerSetting()
+        self.setting.load()
+        self.btn_open_image.clicked.connect(self.openImage)
+        self.btn_print.clicked.connect(self.printTicket)
+        self.btn_clear_all.clicked.connect(self.clearAll)
+
+    def clearAll(self):
+        self.te_text.clear()
+        self.le_qr_code.clear()
+        self.le_image.clear()
+
+    def openImage(self):
+        try:
+            file_name = QFileDialog.getOpenFileName(
+                self,
+                "Choose a picture",
+                os.getcwd(),
+                "JPG Files (*.jpg);;"
+                "PNG Files (*.png);;JPEG Files (*.jpeg);;SVG Files (*.svg)",
+            )[0]
+            if os.path.isfile(file_name):
+                self.le_image.setText(file_name)
+        except Exception as e:
+            QMessageBox.warning(self, "Image loading error", f"{e}")
+
+    def printTicket(self):
+        try:
+            logging.info(
+                f"[Custom Print] {self.worker_name}: {self.te_text.text()}{self.le_qr_code.text()}{self.le_image.text()}"
+            )
+            handleCustomPrint(
+                ip_address=self.setting.CASHIER_IP,
+                text=pretty_string(self.te_text.text(), 44, "full")
+                if len(self.te_text.text()) > 0
+                else None,
+                qr_code=self.le_qr_code.text()
+                if len(self.le_qr_code.text()) > 0
+                else None,
+                image=self.le_image.text() if len(self.le_image.text()) > 0 else None,
+            )
+            self.done(0)
+        except Exception as e:
+            logging.error(f"[Custom Print] {e}")
+            QMessageBox.warning(self, "Printing error", f"{e}")
 
 
 class NbCoversChooser(QDialog):
-    def __init__(self):
-        super(NbCoversChooser, self).__init__()
+    def __init__(self, parent=None):
+        super(NbCoversChooser, self).__init__(parent=parent)
         uic.loadUi(os.path.join(os.getcwd(), "uis", "NbCovers.ui"), self)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
@@ -257,8 +328,8 @@ class NbCoversChooser(QDialog):
 
 
 class EditOrderOnFly(QDialog):
-    def __init__(self, quantity):
-        super(EditOrderOnFly, self).__init__()
+    def __init__(self, quantity, parent=None):
+        super(EditOrderOnFly, self).__init__(parent=parent)
         uic.loadUi(os.path.join(os.getcwd(), "uis", "EditOrderOnFly.ui"), self)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
@@ -268,8 +339,8 @@ class EditOrderOnFly(QDialog):
 
 
 class Holder(QDialog):
-    def __init__(self):
-        super(Holder, self).__init__()
+    def __init__(self, parent=None):
+        super(Holder, self).__init__(parent=parent)
         uic.loadUi(os.path.join(os.getcwd(), "uis", "holder.ui"), self)
         self.buttonBox.accepted.connect(self.validate_click)
         self.buttonBox.rejected.connect(self.reject)
@@ -307,17 +378,55 @@ class SellHistory(QDialog):
         displayDbData(self.tw_sellHistory, self.history)
 
 
+class SellHistoryBrowser(QDialog):
+    def __init__(self, parent: QWidget = None) -> None:
+        super(SellHistoryBrowser, self).__init__(parent=parent)
+        uic.loadUi(os.path.join(os.getcwd(), "uis", "SellHistoryBrowser.ui"), self)
+        self.DB = DBHelper()
+        self.setup_ui()
+        self.tb_search.clicked.connect(self.search)
+
+    def setup_ui(self) -> None:
+        self.dte_sellHistory_dateStart.setDateTime(QDateTime(datetime.now()))
+        self.dte_sellHistory_dateEnd.setDateTime(QDateTime(datetime.now()))
+        for i, worker in enumerate(self.DB.getAllWorkers()):
+            self.cb_sellHistory_workerName.insertItem(i, worker.name)
+        self.tw_sellHistory.clear()
+        self.history = self.DB.getAllDifferenceHistory()
+        displayDbData(self.tw_sellHistory, self.history)
+
+    def search(self) -> None:
+        worker_name = self.cb_sellHistory_workerName.currentText()
+        date_start = self.dte_sellHistory_dateStart.dateTime().toString(
+            "yyyy-MM-dd HH:mm:ss"
+        )
+        date_end = self.dte_sellHistory_dateEnd.dateTime().toString(
+            "yyyy-MM-dd HH:mm:ss"
+        )
+        if (
+            self.cb_sellHistory_worker.isChecked()
+            and self.cb_sellHistory_DateTime.isChecked()
+        ):
+            self.history = self.DB.getDifferenceHistoryByWorkerNameDateRange(
+                worker_name, date_start, date_end
+            )
+        elif self.cb_sellHistory_worker.isChecked():
+            self.history = self.DB.getDifferenceHistoryByWorkerName(worker_name)
+        elif self.cb_sellHistory_DateTime.isChecked():
+            self.history = self.DB.getDifferenceHistoryByDateRange(date_start, date_end)
+        else:
+            self.history = self.DB.getAllDifferenceHistory()
+        displayDbData(self.tw_sellHistory, self.history)
+
+
 class TableChanger(QDialog):
-    def __init__(self, free_tables):
-        super(TableChanger, self).__init__()
+    def __init__(self, free_tables, parent=None) -> None:
+        super(TableChanger, self).__init__(parent=parent)
         uic.loadUi(os.path.join(os.getcwd(), "uis", "TableChanger.ui"), self)
         self.buttonBox.accepted.connect(self.validate_click)
         self.buttonBox.rejected.connect(self.reject)
         self.tw_freeTables.clear()
         self.free_tables = free_tables
-        print("-" * 100)
-        print(self.free_tables)
-        print("-" * 100)
         displayDbData(self.tw_freeTables, self.free_tables)
 
     def validate_click(self):
@@ -334,8 +443,8 @@ class TableChanger(QDialog):
 
 
 class SettingUI(QDialog):
-    def __init__(self):
-        super(SettingUI, self).__init__()
+    def __init__(self, parent=None) -> None:
+        super(SettingUI, self).__init__(parent=parent)
         uic.loadUi(os.path.join(os.getcwd(), "uis", "Setting.ui"), self)
         self.dict_pin_index = {2: 0, 5: 1}
         self.buttonBox.accepted.connect(self.validate_click)
@@ -412,8 +521,8 @@ class SettingUI(QDialog):
 
 
 class PrinterProblem(QDialog):
-    def __init__(self, tickets: list, places: list):
-        super(PrinterProblem, self).__init__()
+    def __init__(self, tickets: list, places: list, parent=None):
+        super(PrinterProblem, self).__init__(parent=parent)
         uic.loadUi(os.path.join(os.getcwd(), "uis", "PrinterProblem.ui"), self)
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
@@ -574,10 +683,10 @@ def createProductContainer(parent, db, product: MenuItem, table_id, fc):
     )
 
     add_button_s.clicked.connect(
-        partial(custom_quantity, fc, order_item_s, supp_list, comboBox)
+        partial(custom_quantity, fc, order_item_s, supp_list, comboBox, parent)
     )
     remove_button_s.clicked.connect(
-        partial(custom_quantity, fc, order_item__s, supp_list, comboBox)
+        partial(custom_quantity, fc, order_item__s, supp_list, comboBox, parent)
     )
 
     btn_layout.layout().addWidget(add_button_s)
@@ -590,8 +699,8 @@ def createProductContainer(parent, db, product: MenuItem, table_id, fc):
     return frame
 
 
-def custom_quantity(fc, order_item, supp_list, comboBox):
-    custom_quantity = CustomQuantity(fc, order_item, supp_list, comboBox)
+def custom_quantity(fc, order_item, supp_list, comboBox, parent=None):
+    custom_quantity = CustomQuantity(fc, order_item, supp_list, comboBox, parent=parent)
     custom_quantity.show()
     custom_quantity.exec_()
 
@@ -656,7 +765,7 @@ def prepareTicketForReceipt(
     ticket_txt += f"Ticket Number : {ticket_number:>30}\n"
     ticket_txt += f"Worker Name : {worker_name:>32}\n"
     ticket_txt += (
-        f'Date and time : {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"):>30}\n'
+        f'Date and time : {datetime.now().strftime("%Y-%m-%d %H:%M:%S"):>30}\n'
     )
     ticket_txt += "-" * 46 + " \n"
     if order_items[0].tableId is not None:
@@ -709,7 +818,7 @@ def prepareTicketForCashier(
     comment: str,
     ticket_number: int,
     given: float,
-    time_date: datetime.datetime = None,
+    time_date: datetime = None,
 ):
     total = 0
     ticket_txt = ""
@@ -717,7 +826,9 @@ def prepareTicketForCashier(
     ticket_txt += f"Ticket Number : {ticket_number:>30}\n"
     ticket_txt += f"Worker Name : {worker_name:>32}\n"
     if time_date is None:
-        ticket_txt += f'Date and time : {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"):>30}\n'
+        ticket_txt += (
+            f'Date and time : {datetime.now().strftime("%Y-%m-%d %H:%M:%S"):>30}\n'
+        )
     else:
         ticket_txt += f"Date and time : {time_date:>30}\n"
     ticket_txt += "-" * 46 + " \n"
@@ -762,10 +873,20 @@ def prepareTicketForCashier(
     ticket_txt += f"{'TOTAL TO PAY':<33}{to_money(total - tax):^13}\n"
     ticket_txt += "=" * 46 + " \n"
     ticket_txt += f"{'RECEIVED':<33}{to_money(given):^13}\n"
-    ticket_txt += f"{'RETURNED':<33}{to_money(given - total):^13}\n"
+    ticket_txt += f"{'RETURNED':<33}{to_money(given - (total - tax)):^13}\n"
     ticket_txt += "=" * 46 + " \n"
     ticket_txt += f"{'PATUS vous remercie pour votre visite':^46}\n"
     ticket_txt += "=" * 46 + " \n"
+    t = "          Hai Es-Sédikia, Oran, Algérie"
+    ticket_txt += (
+        "Adresse : "
+        + f"{'60 Rue Houari Boualouane,':<36}\n"
+        + f"{t:<46}\n"
+        + "Fix : "
+        + f"{'    041-82-57-38':<40}\n"
+        + "=" * 46
+        + " \n"
+    )
 
     return ticket_txt
 
@@ -787,7 +908,7 @@ def prepareTicketForOrder(
     ticket_pizza_txt = ""
     ticket_bar_txt = ""
 
-    now = datetime.datetime.now()
+    now = datetime.now()
     if old:
         ticket_kitchen_txt += "=" * 46 + " \n"
         ticket_pizza_txt += "=" * 46 + " \n"
@@ -977,8 +1098,15 @@ class CustomTablesWidget(QWidget):
 
 
 class CustomQuantity(QDialog):
-    def __init__(self, fc, order_item: OrderItem, supp_list: list, comboBox: QComboBox):
-        super(CustomQuantity, self).__init__()
+    def __init__(
+        self,
+        fc,
+        order_item: OrderItem,
+        supp_list: list,
+        comboBox: QComboBox,
+        parent=None,
+    ):
+        super(CustomQuantity, self).__init__(parent=parent)
         uic.loadUi(os.path.join(os.getcwd(), "uis", "customQuantity.ui"), self)
         self.le_quantity.setPlaceholderText(f"Quantity ({order_item.productUnit})")
         self.le_quantity.setValidator(QDoubleValidator())
@@ -1036,7 +1164,7 @@ def addNewNotification(parent: QWidget, message: str) -> None:
     frame.setSizePolicy(QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Maximum))
 
     label = QLabel()
-    label.setText(datetime.datetime.now().strftime("%H:%M:%S"))
+    label.setText(datetime.now().strftime("%H:%M:%S"))
     label.setAlignment(Qt.AlignHCenter)
     frame.layout().addWidget(label)
 

@@ -21,7 +21,8 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QComb
     QLabel, QLayout, QLineEdit, QMainWindow,
     QPushButton, QRadioButton, QScrollArea, QSizePolicy,
     QSpacerItem, QStackedWidget, QTabWidget, QTableWidget,
-    QTableWidgetItem, QTextEdit, QVBoxLayout, QWidget)
+    QTableWidgetItem, QTextEdit, QToolButton, QVBoxLayout,
+    QWidget)
 import resource_rc
 
 class Ui_PatusMainWindow(object):
@@ -59,6 +60,30 @@ class Ui_PatusMainWindow(object):
 "	border-style: inset;\n"
 "}\n"
 "\n"
+"QToolButton\n"
+"{ \n"
+"	alternate-background-color: rgb(255, 255, 255);\n"
+"	background: rgba(225, 225, 225, 100);\n"
+"	border-width: 2px;\n"
+"    border-radius: 10px;\n"
+"	qproperty-iconSize: 32px 32px;\n"
+"	border-style: dashed;\n"
+" }\n"
+"\n"
+"QToolButton:hover\n"
+"{\n"
+"	background: rgba(225, 225, 225, 180);\n"
+"	border-style: dashed;\n"
+"}\n"
+"\n"
+"QToolButton:pressed\n"
+"{\n"
+"	background: rgba(75, 75, 75, 180);\n"
+"	border-style: inset;\n"
+""
+                        "}\n"
+"\n"
+"\n"
 "QLineEdit\n"
 "{\n"
 "	background: transparent;\n"
@@ -82,8 +107,7 @@ class Ui_PatusMainWindow(object):
 "{\n"
 "	background: transparent;\n"
 "	color: rgb(88, 88, 88);\n"
-""
-                        "	border: none;\n"
+"	border: none;\n"
 "	border-bottom: 1px solid #717072;\n"
 "	font: 14pt \"MS Shell Dlg 2\";\n"
 "}\n"
@@ -106,12 +130,15 @@ class Ui_PatusMainWindow(object):
 "}\n"
 "QFrame\n"
 "{\n"
-"	background-color: rgb(192, 192, 192)\n"
+""
+                        "	background-color: rgb(192, 192, 192)\n"
 "}\n"
 "QWidget\n"
 "{\n"
 "	background-color: rgb(192, 192, 192)\n"
-"}")
+"}\n"
+"\n"
+"QTabBar::scroller {width: 80px;}")
         self.w_background = QWidget(PatusMainWindow)
         self.w_background.setObjectName(u"w_background")
         self.verticalLayout = QVBoxLayout(self.w_background)
@@ -465,8 +492,8 @@ class Ui_PatusMainWindow(object):
         self.f_btn_fullScreen.setObjectName(u"f_btn_fullScreen")
         sizePolicy2.setHeightForWidth(self.f_btn_fullScreen.sizePolicy().hasHeightForWidth())
         self.f_btn_fullScreen.setSizePolicy(sizePolicy2)
-        self.f_btn_fullScreen.setMinimumSize(QSize(150, 50))
-        self.f_btn_fullScreen.setMaximumSize(QSize(200, 50))
+        self.f_btn_fullScreen.setMinimumSize(QSize(180, 50))
+        self.f_btn_fullScreen.setMaximumSize(QSize(250, 50))
         self.f_btn_fullScreen.setTabletTracking(False)
         self.f_btn_fullScreen.setStyleSheet(u"QFrame\n"
 "{\n"
@@ -498,15 +525,39 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_5.setSpacing(0)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.btn_couponGenerator = QPushButton(self.f_btn_fullScreen)
+        self.btn_couponGenerator.setObjectName(u"btn_couponGenerator")
+        self.btn_couponGenerator.setEnabled(False)
+        sizePolicy3.setHeightForWidth(self.btn_couponGenerator.sizePolicy().hasHeightForWidth())
+        self.btn_couponGenerator.setSizePolicy(sizePolicy3)
+        self.btn_couponGenerator.setTabletTracking(False)
+        icon13 = QIcon()
+        icon13.addFile(u":/Simple icons/simple_icons/fi-rr-ticket.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_couponGenerator.setIcon(icon13)
+
+        self.horizontalLayout_5.addWidget(self.btn_couponGenerator)
+
+        self.btn_customPrint = QPushButton(self.f_btn_fullScreen)
+        self.btn_customPrint.setObjectName(u"btn_customPrint")
+        self.btn_customPrint.setEnabled(False)
+        sizePolicy3.setHeightForWidth(self.btn_customPrint.sizePolicy().hasHeightForWidth())
+        self.btn_customPrint.setSizePolicy(sizePolicy3)
+        self.btn_customPrint.setTabletTracking(False)
+        icon14 = QIcon()
+        icon14.addFile(u":/Simple icons/simple_icons/fi-rr-print.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_customPrint.setIcon(icon14)
+
+        self.horizontalLayout_5.addWidget(self.btn_customPrint)
+
         self.btn_blockNote = QPushButton(self.f_btn_fullScreen)
         self.btn_blockNote.setObjectName(u"btn_blockNote")
         self.btn_blockNote.setEnabled(True)
         sizePolicy3.setHeightForWidth(self.btn_blockNote.sizePolicy().hasHeightForWidth())
         self.btn_blockNote.setSizePolicy(sizePolicy3)
         self.btn_blockNote.setTabletTracking(False)
-        icon13 = QIcon()
-        icon13.addFile(u":/Simple icons/simple_icons/fi-rr-call-incoming.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_blockNote.setIcon(icon13)
+        icon15 = QIcon()
+        icon15.addFile(u":/Simple icons/simple_icons/fi-rr-call-incoming.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_blockNote.setIcon(icon15)
 
         self.horizontalLayout_5.addWidget(self.btn_blockNote)
 
@@ -516,9 +567,9 @@ class Ui_PatusMainWindow(object):
         sizePolicy3.setHeightForWidth(self.btn_notification.sizePolicy().hasHeightForWidth())
         self.btn_notification.setSizePolicy(sizePolicy3)
         self.btn_notification.setTabletTracking(False)
-        icon14 = QIcon()
-        icon14.addFile(u":/Simple icons/simple_icons/fi-rr-envelope-marker.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_notification.setIcon(icon14)
+        icon16 = QIcon()
+        icon16.addFile(u":/Simple icons/simple_icons/fi-rr-envelope-marker.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_notification.setIcon(icon16)
 
         self.horizontalLayout_5.addWidget(self.btn_notification)
 
@@ -527,9 +578,9 @@ class Ui_PatusMainWindow(object):
         sizePolicy3.setHeightForWidth(self.btn_setting.sizePolicy().hasHeightForWidth())
         self.btn_setting.setSizePolicy(sizePolicy3)
         self.btn_setting.setTabletTracking(False)
-        icon15 = QIcon()
-        icon15.addFile(u":/Simple icons/simple_icons/fi-rr-settings.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_setting.setIcon(icon15)
+        icon17 = QIcon()
+        icon17.addFile(u":/Simple icons/simple_icons/fi-rr-settings.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_setting.setIcon(icon17)
 
         self.horizontalLayout_5.addWidget(self.btn_setting)
 
@@ -538,9 +589,9 @@ class Ui_PatusMainWindow(object):
         sizePolicy3.setHeightForWidth(self.btn_fullScreen.sizePolicy().hasHeightForWidth())
         self.btn_fullScreen.setSizePolicy(sizePolicy3)
         self.btn_fullScreen.setTabletTracking(False)
-        icon16 = QIcon()
-        icon16.addFile(u":/Simple icons/simple_icons/fi-rr-compress.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_fullScreen.setIcon(icon16)
+        icon18 = QIcon()
+        icon18.addFile(u":/Simple icons/simple_icons/fi-rr-compress.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_fullScreen.setIcon(icon18)
 
         self.horizontalLayout_5.addWidget(self.btn_fullScreen)
 
@@ -717,9 +768,9 @@ class Ui_PatusMainWindow(object):
         self.btn_biometric.setMinimumSize(QSize(200, 200))
         self.btn_biometric.setMaximumSize(QSize(400, 400))
         self.btn_biometric.setLayoutDirection(Qt.LeftToRight)
-        icon17 = QIcon()
-        icon17.addFile(u":/Simple icons/simple_icons/fi-rr-fingerprint.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_biometric.setIcon(icon17)
+        icon19 = QIcon()
+        icon19.addFile(u":/Simple icons/simple_icons/fi-rr-fingerprint.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_biometric.setIcon(icon19)
 
         self.verticalLayout_5.addWidget(self.btn_biometric)
 
@@ -925,9 +976,9 @@ class Ui_PatusMainWindow(object):
         self.btn_cashRegisterChangeTable.setSizePolicy(sizePolicy4)
         self.btn_cashRegisterChangeTable.setMaximumSize(QSize(50, 16777215))
         self.btn_cashRegisterChangeTable.setTabletTracking(False)
-        icon18 = QIcon()
-        icon18.addFile(u":/Simple icons/simple_icons/fi-rr-apps-sort.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_cashRegisterChangeTable.setIcon(icon18)
+        icon20 = QIcon()
+        icon20.addFile(u":/Simple icons/simple_icons/fi-rr-apps-sort.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_cashRegisterChangeTable.setIcon(icon20)
         self.btn_cashRegisterChangeTable.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_32.addWidget(self.btn_cashRegisterChangeTable)
@@ -970,9 +1021,9 @@ class Ui_PatusMainWindow(object):
         self.rb_takeAway.setFont(font1)
         self.rb_takeAway.setMouseTracking(True)
         self.rb_takeAway.setTabletTracking(False)
-        icon19 = QIcon()
-        icon19.addFile(u":/Simple icons/simple_icons/fi-rr-truck-side.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.rb_takeAway.setIcon(icon19)
+        icon21 = QIcon()
+        icon21.addFile(u":/Simple icons/simple_icons/fi-rr-truck-side.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.rb_takeAway.setIcon(icon21)
         self.rb_takeAway.setIconSize(QSize(24, 24))
         self.rb_takeAway.setCheckable(True)
         self.rb_takeAway.setChecked(True)
@@ -1042,9 +1093,9 @@ class Ui_PatusMainWindow(object):
         font3.setItalic(False)
         self.btn_cashRegisterDeleteCurrent.setFont(font3)
         self.btn_cashRegisterDeleteCurrent.setTabletTracking(False)
-        icon20 = QIcon()
-        icon20.addFile(u":/Simple icons/simple_icons/fi-rr-delete.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_cashRegisterDeleteCurrent.setIcon(icon20)
+        icon22 = QIcon()
+        icon22.addFile(u":/Simple icons/simple_icons/fi-rr-delete.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_cashRegisterDeleteCurrent.setIcon(icon22)
         self.btn_cashRegisterDeleteCurrent.setIconSize(QSize(32, 32))
 
         self.verticalLayout_8.addWidget(self.btn_cashRegisterDeleteCurrent)
@@ -1055,9 +1106,9 @@ class Ui_PatusMainWindow(object):
         self.btn_cashRegisterClear.setSizePolicy(sizePolicy7)
         self.btn_cashRegisterClear.setFont(font3)
         self.btn_cashRegisterClear.setTabletTracking(False)
-        icon21 = QIcon()
-        icon21.addFile(u":/Simple icons/simple_icons/fi-rr-broom.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_cashRegisterClear.setIcon(icon21)
+        icon23 = QIcon()
+        icon23.addFile(u":/Simple icons/simple_icons/fi-rr-broom.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_cashRegisterClear.setIcon(icon23)
         self.btn_cashRegisterClear.setIconSize(QSize(32, 32))
 
         self.verticalLayout_8.addWidget(self.btn_cashRegisterClear)
@@ -1068,9 +1119,9 @@ class Ui_PatusMainWindow(object):
         self.btn_cashRegisterResume.setSizePolicy(sizePolicy7)
         self.btn_cashRegisterResume.setFont(font3)
         self.btn_cashRegisterResume.setTabletTracking(False)
-        icon22 = QIcon()
-        icon22.addFile(u":/Simple icons/simple_icons/fi-rr-time-fast.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_cashRegisterResume.setIcon(icon22)
+        icon24 = QIcon()
+        icon24.addFile(u":/Simple icons/simple_icons/fi-rr-time-fast.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_cashRegisterResume.setIcon(icon24)
         self.btn_cashRegisterResume.setIconSize(QSize(32, 32))
 
         self.verticalLayout_8.addWidget(self.btn_cashRegisterResume)
@@ -1081,9 +1132,9 @@ class Ui_PatusMainWindow(object):
         self.btn_cashRegisterHold.setSizePolicy(sizePolicy7)
         self.btn_cashRegisterHold.setFont(font3)
         self.btn_cashRegisterHold.setTabletTracking(False)
-        icon23 = QIcon()
-        icon23.addFile(u":/Simple icons/simple_icons/fi-rr-time-add.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_cashRegisterHold.setIcon(icon23)
+        icon25 = QIcon()
+        icon25.addFile(u":/Simple icons/simple_icons/fi-rr-time-add.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_cashRegisterHold.setIcon(icon25)
         self.btn_cashRegisterHold.setIconSize(QSize(32, 32))
 
         self.verticalLayout_8.addWidget(self.btn_cashRegisterHold)
@@ -1237,9 +1288,9 @@ class Ui_PatusMainWindow(object):
         self.btn_cashRegisterReduce.setSizePolicy(sizePolicy4)
         self.btn_cashRegisterReduce.setMaximumSize(QSize(50, 16777215))
         self.btn_cashRegisterReduce.setTabletTracking(False)
-        icon24 = QIcon()
-        icon24.addFile(u":/Simple icons/simple_icons/fi-rr-smile-wink.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_cashRegisterReduce.setIcon(icon24)
+        icon26 = QIcon()
+        icon26.addFile(u":/Simple icons/simple_icons/fi-rr-smile-wink.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_cashRegisterReduce.setIcon(icon26)
         self.btn_cashRegisterReduce.setIconSize(QSize(32, 32))
 
         self.verticalLayout_15.addWidget(self.btn_cashRegisterReduce)
@@ -1250,9 +1301,9 @@ class Ui_PatusMainWindow(object):
         self.btn_cashRegisterTicketKitchen.setSizePolicy(sizePolicy4)
         self.btn_cashRegisterTicketKitchen.setMaximumSize(QSize(50, 16777215))
         self.btn_cashRegisterTicketKitchen.setTabletTracking(False)
-        icon25 = QIcon()
-        icon25.addFile(u":/Simple icons/simple_icons/fi-rr-room-service.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_cashRegisterTicketKitchen.setIcon(icon25)
+        icon27 = QIcon()
+        icon27.addFile(u":/Simple icons/simple_icons/fi-rr-room-service.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_cashRegisterTicketKitchen.setIcon(icon27)
         self.btn_cashRegisterTicketKitchen.setIconSize(QSize(32, 32))
 
         self.verticalLayout_15.addWidget(self.btn_cashRegisterTicketKitchen)
@@ -1263,9 +1314,7 @@ class Ui_PatusMainWindow(object):
         self.btn_cashRegisterTicket.setSizePolicy(sizePolicy4)
         self.btn_cashRegisterTicket.setMaximumSize(QSize(50, 16777215))
         self.btn_cashRegisterTicket.setTabletTracking(False)
-        icon26 = QIcon()
-        icon26.addFile(u":/Simple icons/simple_icons/fi-rr-print.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_cashRegisterTicket.setIcon(icon26)
+        self.btn_cashRegisterTicket.setIcon(icon14)
         self.btn_cashRegisterTicket.setIconSize(QSize(32, 32))
 
         self.verticalLayout_15.addWidget(self.btn_cashRegisterTicket)
@@ -1276,9 +1325,9 @@ class Ui_PatusMainWindow(object):
         self.btn_cashRegisterPay.setSizePolicy(sizePolicy4)
         self.btn_cashRegisterPay.setMaximumSize(QSize(50, 16777215))
         self.btn_cashRegisterPay.setTabletTracking(False)
-        icon27 = QIcon()
-        icon27.addFile(u":/Simple icons/simple_icons/fi-rr-dollar.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_cashRegisterPay.setIcon(icon27)
+        icon28 = QIcon()
+        icon28.addFile(u":/Simple icons/simple_icons/fi-rr-dollar.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_cashRegisterPay.setIcon(icon28)
         self.btn_cashRegisterPay.setIconSize(QSize(32, 32))
 
         self.verticalLayout_15.addWidget(self.btn_cashRegisterPay)
@@ -1412,9 +1461,10 @@ class Ui_PatusMainWindow(object):
         font7 = QFont()
         font7.setPointSize(16)
         self.tw_foodMenu.setFont(font7)
-        self.tw_foodMenu.setTabletTracking(False)
+        self.tw_foodMenu.setMouseTracking(True)
+        self.tw_foodMenu.setTabletTracking(True)
         self.tw_foodMenu.setStyleSheet(u"")
-        self.tw_foodMenu.setIconSize(QSize(35, 35))
+        self.tw_foodMenu.setIconSize(QSize(64, 64))
         self.tab_salade = QWidget()
         self.tab_salade.setObjectName(u"tab_salade")
         self.gridLayout_12 = QGridLayout(self.tab_salade)
@@ -1425,7 +1475,7 @@ class Ui_PatusMainWindow(object):
         self.sa_salade.setWidgetResizable(True)
         self.w_salade = QWidget()
         self.w_salade.setObjectName(u"w_salade")
-        self.w_salade.setGeometry(QRect(0, 0, 374, 646))
+        self.w_salade.setGeometry(QRect(0, 0, 374, 617))
         self.gridLayout_13 = QGridLayout(self.w_salade)
         self.gridLayout_13.setObjectName(u"gridLayout_13")
         self.frame_7 = QFrame(self.w_salade)
@@ -1588,9 +1638,9 @@ class Ui_PatusMainWindow(object):
 
         self.gridLayout_12.addWidget(self.sa_salade, 0, 0, 1, 1)
 
-        icon28 = QIcon()
-        icon28.addFile(u":/Simple icons/simple_icons/fi-rr-salad.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_foodMenu.addTab(self.tab_salade, icon28, "")
+        icon29 = QIcon()
+        icon29.addFile(u":/Simple icons/simple_icons/fi-rr-salad.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_foodMenu.addTab(self.tab_salade, icon29, "")
         self.tab_meal = QWidget()
         self.tab_meal.setObjectName(u"tab_meal")
         self.verticalLayout_10 = QVBoxLayout(self.tab_meal)
@@ -1600,7 +1650,7 @@ class Ui_PatusMainWindow(object):
         self.sa_meal.setWidgetResizable(True)
         self.w_meal = QWidget()
         self.w_meal.setObjectName(u"w_meal")
-        self.w_meal.setGeometry(QRect(0, 0, 374, 646))
+        self.w_meal.setGeometry(QRect(0, 0, 374, 617))
         self.gridLayout_6 = QGridLayout(self.w_meal)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.frame_18 = QFrame(self.w_meal)
@@ -1745,9 +1795,9 @@ class Ui_PatusMainWindow(object):
 
         self.verticalLayout_10.addWidget(self.sa_meal)
 
-        icon29 = QIcon()
-        icon29.addFile(u":/Simple icons/simple_icons/fi-rr-utensils.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_foodMenu.addTab(self.tab_meal, icon29, "")
+        icon30 = QIcon()
+        icon30.addFile(u":/Simple icons/simple_icons/fi-rr-utensils.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_foodMenu.addTab(self.tab_meal, icon30, "")
         self.tab_pizza = QWidget()
         self.tab_pizza.setObjectName(u"tab_pizza")
         self.verticalLayout_11 = QVBoxLayout(self.tab_pizza)
@@ -1757,7 +1807,7 @@ class Ui_PatusMainWindow(object):
         self.sa_pizza.setWidgetResizable(True)
         self.w_pizza = QWidget()
         self.w_pizza.setObjectName(u"w_pizza")
-        self.w_pizza.setGeometry(QRect(0, 0, 374, 646))
+        self.w_pizza.setGeometry(QRect(0, 0, 374, 617))
         self.gridLayout_7 = QGridLayout(self.w_pizza)
         self.gridLayout_7.setObjectName(u"gridLayout_7")
         self.frame = QFrame(self.w_pizza)
@@ -1902,9 +1952,9 @@ class Ui_PatusMainWindow(object):
 
         self.verticalLayout_11.addWidget(self.sa_pizza)
 
-        icon30 = QIcon()
-        icon30.addFile(u":/Simple icons/simple_icons/fi-rr-pizza-slice.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_foodMenu.addTab(self.tab_pizza, icon30, "")
+        icon31 = QIcon()
+        icon31.addFile(u":/Simple icons/simple_icons/fi-rr-pizza-slice.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_foodMenu.addTab(self.tab_pizza, icon31, "")
         self.tab_coldDrink = QWidget()
         self.tab_coldDrink.setObjectName(u"tab_coldDrink")
         self.verticalLayout_12 = QVBoxLayout(self.tab_coldDrink)
@@ -1914,7 +1964,7 @@ class Ui_PatusMainWindow(object):
         self.sa_coldDrink.setWidgetResizable(True)
         self.w_coldDrink = QWidget()
         self.w_coldDrink.setObjectName(u"w_coldDrink")
-        self.w_coldDrink.setGeometry(QRect(0, 0, 374, 646))
+        self.w_coldDrink.setGeometry(QRect(0, 0, 374, 617))
         self.gridLayout_11 = QGridLayout(self.w_coldDrink)
         self.gridLayout_11.setObjectName(u"gridLayout_11")
         self.frame_24 = QFrame(self.w_coldDrink)
@@ -2059,9 +2109,9 @@ class Ui_PatusMainWindow(object):
 
         self.verticalLayout_12.addWidget(self.sa_coldDrink)
 
-        icon31 = QIcon()
-        icon31.addFile(u":/Simple icons/simple_icons/fi-rr-drink-alt.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_foodMenu.addTab(self.tab_coldDrink, icon31, "")
+        icon32 = QIcon()
+        icon32.addFile(u":/Simple icons/simple_icons/fi-rr-drink-alt.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_foodMenu.addTab(self.tab_coldDrink, icon32, "")
         self.tab_hotDrink = QWidget()
         self.tab_hotDrink.setObjectName(u"tab_hotDrink")
         self.verticalLayout_13 = QVBoxLayout(self.tab_hotDrink)
@@ -2071,7 +2121,7 @@ class Ui_PatusMainWindow(object):
         self.sa_hotDrink.setWidgetResizable(True)
         self.w_hotDrink = QWidget()
         self.w_hotDrink.setObjectName(u"w_hotDrink")
-        self.w_hotDrink.setGeometry(QRect(0, 0, 374, 646))
+        self.w_hotDrink.setGeometry(QRect(0, 0, 374, 617))
         self.gridLayout_16 = QGridLayout(self.w_hotDrink)
         self.gridLayout_16.setObjectName(u"gridLayout_16")
         self.frame_28 = QFrame(self.w_hotDrink)
@@ -2216,9 +2266,9 @@ class Ui_PatusMainWindow(object):
 
         self.verticalLayout_13.addWidget(self.sa_hotDrink)
 
-        icon32 = QIcon()
-        icon32.addFile(u":/Simple icons/simple_icons/fi-rr-coffee.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_foodMenu.addTab(self.tab_hotDrink, icon32, "")
+        icon33 = QIcon()
+        icon33.addFile(u":/Simple icons/simple_icons/fi-rr-coffee.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_foodMenu.addTab(self.tab_hotDrink, icon33, "")
         self.tab_dessert = QWidget()
         self.tab_dessert.setObjectName(u"tab_dessert")
         self.verticalLayout_14 = QVBoxLayout(self.tab_dessert)
@@ -2228,7 +2278,7 @@ class Ui_PatusMainWindow(object):
         self.sa_dessert.setWidgetResizable(True)
         self.w_dessert = QWidget()
         self.w_dessert.setObjectName(u"w_dessert")
-        self.w_dessert.setGeometry(QRect(0, 0, 374, 646))
+        self.w_dessert.setGeometry(QRect(0, 0, 374, 617))
         self.gridLayout_17 = QGridLayout(self.w_dessert)
         self.gridLayout_17.setObjectName(u"gridLayout_17")
         self.frame_36 = QFrame(self.w_dessert)
@@ -2382,9 +2432,9 @@ class Ui_PatusMainWindow(object):
 
         self.verticalLayout_14.addWidget(self.sa_dessert)
 
-        icon33 = QIcon()
-        icon33.addFile(u":/Simple icons/simple_icons/fi-rr-cake-birthday.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_foodMenu.addTab(self.tab_dessert, icon33, "")
+        icon34 = QIcon()
+        icon34.addFile(u":/Simple icons/simple_icons/fi-rr-cake-birthday.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_foodMenu.addTab(self.tab_dessert, icon34, "")
 
         self.verticalLayout_6.addWidget(self.tw_foodMenu)
 
@@ -2501,9 +2551,9 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_50.setContentsMargins(0, 0, 0, 0)
         self.btn_reservationAdd = QPushButton(self.f_expenseDbBtn_5)
         self.btn_reservationAdd.setObjectName(u"btn_reservationAdd")
-        icon34 = QIcon()
-        icon34.addFile(u":/Simple icons/simple_icons/fi-rr-add.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_reservationAdd.setIcon(icon34)
+        icon35 = QIcon()
+        icon35.addFile(u":/Simple icons/simple_icons/fi-rr-add.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_reservationAdd.setIcon(icon35)
         self.btn_reservationAdd.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_50.addWidget(self.btn_reservationAdd)
@@ -2511,9 +2561,9 @@ class Ui_PatusMainWindow(object):
         self.btn_reservationEdit = QPushButton(self.f_expenseDbBtn_5)
         self.btn_reservationEdit.setObjectName(u"btn_reservationEdit")
         self.btn_reservationEdit.setEnabled(False)
-        icon35 = QIcon()
-        icon35.addFile(u":/Simple icons/simple_icons/fi-rr-edit.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_reservationEdit.setIcon(icon35)
+        icon36 = QIcon()
+        icon36.addFile(u":/Simple icons/simple_icons/fi-rr-edit.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_reservationEdit.setIcon(icon36)
         self.btn_reservationEdit.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_50.addWidget(self.btn_reservationEdit)
@@ -2521,7 +2571,7 @@ class Ui_PatusMainWindow(object):
         self.btn_reservationDelete = QPushButton(self.f_expenseDbBtn_5)
         self.btn_reservationDelete.setObjectName(u"btn_reservationDelete")
         self.btn_reservationDelete.setEnabled(False)
-        self.btn_reservationDelete.setIcon(icon20)
+        self.btn_reservationDelete.setIcon(icon22)
         self.btn_reservationDelete.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_50.addWidget(self.btn_reservationDelete)
@@ -2529,7 +2579,7 @@ class Ui_PatusMainWindow(object):
         self.btn_reservationClear = QPushButton(self.f_expenseDbBtn_5)
         self.btn_reservationClear.setObjectName(u"btn_reservationClear")
         self.btn_reservationClear.setEnabled(True)
-        self.btn_reservationClear.setIcon(icon21)
+        self.btn_reservationClear.setIcon(icon23)
         self.btn_reservationClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_50.addWidget(self.btn_reservationClear)
@@ -2585,9 +2635,9 @@ class Ui_PatusMainWindow(object):
 
         self.btn_reservationSearch = QPushButton(self.frame_10)
         self.btn_reservationSearch.setObjectName(u"btn_reservationSearch")
-        icon36 = QIcon()
-        icon36.addFile(u":/Simple icons/simple_icons/fi-rr-search.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_reservationSearch.setIcon(icon36)
+        icon37 = QIcon()
+        icon37.addFile(u":/Simple icons/simple_icons/fi-rr-search.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_reservationSearch.setIcon(icon37)
 
         self.horizontalLayout_52.addWidget(self.btn_reservationSearch)
 
@@ -2729,16 +2779,16 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_30.setObjectName(u"horizontalLayout_30")
         self.btn_wasteStockClear = QPushButton(self.frame_29)
         self.btn_wasteStockClear.setObjectName(u"btn_wasteStockClear")
-        self.btn_wasteStockClear.setIcon(icon21)
+        self.btn_wasteStockClear.setIcon(icon23)
         self.btn_wasteStockClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_30.addWidget(self.btn_wasteStockClear)
 
         self.btn_wasteStockSave = QPushButton(self.frame_29)
         self.btn_wasteStockSave.setObjectName(u"btn_wasteStockSave")
-        icon37 = QIcon()
-        icon37.addFile(u":/Simple icons/simple_icons/fi-rr-pharmacy.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_wasteStockSave.setIcon(icon37)
+        icon38 = QIcon()
+        icon38.addFile(u":/Simple icons/simple_icons/fi-rr-pharmacy.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_wasteStockSave.setIcon(icon38)
         self.btn_wasteStockSave.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_30.addWidget(self.btn_wasteStockSave)
@@ -2788,14 +2838,14 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_29.setObjectName(u"horizontalLayout_29")
         self.btn_wasteCustomClear = QPushButton(self.frame1)
         self.btn_wasteCustomClear.setObjectName(u"btn_wasteCustomClear")
-        self.btn_wasteCustomClear.setIcon(icon21)
+        self.btn_wasteCustomClear.setIcon(icon23)
         self.btn_wasteCustomClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_29.addWidget(self.btn_wasteCustomClear)
 
         self.btn_wasteCustomSave = QPushButton(self.frame1)
         self.btn_wasteCustomSave.setObjectName(u"btn_wasteCustomSave")
-        self.btn_wasteCustomSave.setIcon(icon37)
+        self.btn_wasteCustomSave.setIcon(icon38)
         self.btn_wasteCustomSave.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_29.addWidget(self.btn_wasteCustomSave)
@@ -3048,7 +3098,7 @@ class Ui_PatusMainWindow(object):
         self.gridLayout_15.setObjectName(u"gridLayout_15")
         self.btn_productReceiptAdd = QPushButton(self.frame_8)
         self.btn_productReceiptAdd.setObjectName(u"btn_productReceiptAdd")
-        self.btn_productReceiptAdd.setIcon(icon34)
+        self.btn_productReceiptAdd.setIcon(icon35)
         self.btn_productReceiptAdd.setIconSize(QSize(32, 32))
 
         self.gridLayout_15.addWidget(self.btn_productReceiptAdd, 1, 3, 1, 1)
@@ -3063,9 +3113,9 @@ class Ui_PatusMainWindow(object):
         self.btn_productReceiptRemove = QPushButton(self.frame_8)
         self.btn_productReceiptRemove.setObjectName(u"btn_productReceiptRemove")
         self.btn_productReceiptRemove.setEnabled(False)
-        icon38 = QIcon()
-        icon38.addFile(u":/Simple icons/simple_icons/fi-rr-cross-circle.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_productReceiptRemove.setIcon(icon38)
+        icon39 = QIcon()
+        icon39.addFile(u":/Simple icons/simple_icons/fi-rr-cross-circle.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_productReceiptRemove.setIcon(icon39)
         self.btn_productReceiptRemove.setIconSize(QSize(32, 32))
 
         self.gridLayout_15.addWidget(self.btn_productReceiptRemove, 1, 5, 1, 1)
@@ -3082,7 +3132,7 @@ class Ui_PatusMainWindow(object):
         self.btn_productReceiptEdit = QPushButton(self.frame_8)
         self.btn_productReceiptEdit.setObjectName(u"btn_productReceiptEdit")
         self.btn_productReceiptEdit.setEnabled(False)
-        self.btn_productReceiptEdit.setIcon(icon35)
+        self.btn_productReceiptEdit.setIcon(icon36)
         self.btn_productReceiptEdit.setIconSize(QSize(32, 32))
 
         self.gridLayout_15.addWidget(self.btn_productReceiptEdit, 1, 4, 1, 1)
@@ -3100,7 +3150,7 @@ class Ui_PatusMainWindow(object):
         self.btn_productReceiptClear = QPushButton(self.frame_8)
         self.btn_productReceiptClear.setObjectName(u"btn_productReceiptClear")
         self.btn_productReceiptClear.setEnabled(True)
-        self.btn_productReceiptClear.setIcon(icon21)
+        self.btn_productReceiptClear.setIcon(icon23)
         self.btn_productReceiptClear.setIconSize(QSize(32, 32))
 
         self.gridLayout_15.addWidget(self.btn_productReceiptClear, 1, 6, 1, 1)
@@ -3199,6 +3249,7 @@ class Ui_PatusMainWindow(object):
         font14 = QFont()
         font14.setPointSize(18)
         self.tw_database.setFont(font14)
+        self.tw_database.setStyleSheet(u"")
         self.tw_database.setIconSize(QSize(35, 35))
         self.tab_menu = QWidget()
         self.tab_menu.setObjectName(u"tab_menu")
@@ -3319,9 +3370,9 @@ class Ui_PatusMainWindow(object):
         self.btn_menuItemPicture.setObjectName(u"btn_menuItemPicture")
         sizePolicy12.setHeightForWidth(self.btn_menuItemPicture.sizePolicy().hasHeightForWidth())
         self.btn_menuItemPicture.setSizePolicy(sizePolicy12)
-        icon39 = QIcon()
-        icon39.addFile(u":/Simple icons/simple_icons/fi-rr-picture.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_menuItemPicture.setIcon(icon39)
+        icon40 = QIcon()
+        icon40.addFile(u":/Simple icons/simple_icons/fi-rr-picture.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_menuItemPicture.setIcon(icon40)
         self.btn_menuItemPicture.setIconSize(QSize(32, 32))
 
         self.verticalLayout_41.addWidget(self.btn_menuItemPicture)
@@ -3330,7 +3381,7 @@ class Ui_PatusMainWindow(object):
         self.btn_menuItemPictureClear.setObjectName(u"btn_menuItemPictureClear")
         sizePolicy12.setHeightForWidth(self.btn_menuItemPictureClear.sizePolicy().hasHeightForWidth())
         self.btn_menuItemPictureClear.setSizePolicy(sizePolicy12)
-        self.btn_menuItemPictureClear.setIcon(icon21)
+        self.btn_menuItemPictureClear.setIcon(icon23)
         self.btn_menuItemPictureClear.setIconSize(QSize(32, 32))
 
         self.verticalLayout_41.addWidget(self.btn_menuItemPictureClear)
@@ -3399,7 +3450,7 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_16.setContentsMargins(0, 0, 0, 0)
         self.btn_menuItemAdd = QPushButton(self.f_menuItemDbBtn)
         self.btn_menuItemAdd.setObjectName(u"btn_menuItemAdd")
-        self.btn_menuItemAdd.setIcon(icon34)
+        self.btn_menuItemAdd.setIcon(icon35)
         self.btn_menuItemAdd.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_16.addWidget(self.btn_menuItemAdd)
@@ -3407,7 +3458,7 @@ class Ui_PatusMainWindow(object):
         self.btn_menuItemEdit = QPushButton(self.f_menuItemDbBtn)
         self.btn_menuItemEdit.setObjectName(u"btn_menuItemEdit")
         self.btn_menuItemEdit.setEnabled(False)
-        self.btn_menuItemEdit.setIcon(icon35)
+        self.btn_menuItemEdit.setIcon(icon36)
         self.btn_menuItemEdit.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_16.addWidget(self.btn_menuItemEdit)
@@ -3415,7 +3466,7 @@ class Ui_PatusMainWindow(object):
         self.btn_menuItemDelete = QPushButton(self.f_menuItemDbBtn)
         self.btn_menuItemDelete.setObjectName(u"btn_menuItemDelete")
         self.btn_menuItemDelete.setEnabled(False)
-        self.btn_menuItemDelete.setIcon(icon20)
+        self.btn_menuItemDelete.setIcon(icon22)
         self.btn_menuItemDelete.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_16.addWidget(self.btn_menuItemDelete)
@@ -3423,7 +3474,7 @@ class Ui_PatusMainWindow(object):
         self.btn_menuItemClear = QPushButton(self.f_menuItemDbBtn)
         self.btn_menuItemClear.setObjectName(u"btn_menuItemClear")
         self.btn_menuItemClear.setEnabled(True)
-        self.btn_menuItemClear.setIcon(icon21)
+        self.btn_menuItemClear.setIcon(icon23)
         self.btn_menuItemClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_16.addWidget(self.btn_menuItemClear)
@@ -3457,9 +3508,9 @@ class Ui_PatusMainWindow(object):
 
         self.horizontalLayout_8.addWidget(self.f_menuItemDb)
 
-        icon40 = QIcon()
-        icon40.addFile(u":/Simple icons/simple_icons/fi-rr-hamburger.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_database.addTab(self.tab_menu, icon40, "")
+        icon41 = QIcon()
+        icon41.addFile(u":/Simple icons/simple_icons/fi-rr-hamburger.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_database.addTab(self.tab_menu, icon41, "")
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
         self.gridLayout_19 = QGridLayout(self.tab)
@@ -3571,7 +3622,7 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_54.setContentsMargins(0, 0, 0, 0)
         self.btn_menuCategoryCustomAdd = QPushButton(self.f_menuCategoryCustomDbBtn)
         self.btn_menuCategoryCustomAdd.setObjectName(u"btn_menuCategoryCustomAdd")
-        self.btn_menuCategoryCustomAdd.setIcon(icon34)
+        self.btn_menuCategoryCustomAdd.setIcon(icon35)
         self.btn_menuCategoryCustomAdd.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_54.addWidget(self.btn_menuCategoryCustomAdd)
@@ -3579,7 +3630,7 @@ class Ui_PatusMainWindow(object):
         self.btn_menuCategoryCustomEdit = QPushButton(self.f_menuCategoryCustomDbBtn)
         self.btn_menuCategoryCustomEdit.setObjectName(u"btn_menuCategoryCustomEdit")
         self.btn_menuCategoryCustomEdit.setEnabled(False)
-        self.btn_menuCategoryCustomEdit.setIcon(icon35)
+        self.btn_menuCategoryCustomEdit.setIcon(icon36)
         self.btn_menuCategoryCustomEdit.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_54.addWidget(self.btn_menuCategoryCustomEdit)
@@ -3587,7 +3638,7 @@ class Ui_PatusMainWindow(object):
         self.btn_menuCategoryCustomDelete = QPushButton(self.f_menuCategoryCustomDbBtn)
         self.btn_menuCategoryCustomDelete.setObjectName(u"btn_menuCategoryCustomDelete")
         self.btn_menuCategoryCustomDelete.setEnabled(False)
-        self.btn_menuCategoryCustomDelete.setIcon(icon20)
+        self.btn_menuCategoryCustomDelete.setIcon(icon22)
         self.btn_menuCategoryCustomDelete.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_54.addWidget(self.btn_menuCategoryCustomDelete)
@@ -3595,7 +3646,7 @@ class Ui_PatusMainWindow(object):
         self.btn_menuCategoryCustomClear = QPushButton(self.f_menuCategoryCustomDbBtn)
         self.btn_menuCategoryCustomClear.setObjectName(u"btn_menuCategoryCustomClear")
         self.btn_menuCategoryCustomClear.setEnabled(True)
-        self.btn_menuCategoryCustomClear.setIcon(icon21)
+        self.btn_menuCategoryCustomClear.setIcon(icon23)
         self.btn_menuCategoryCustomClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_54.addWidget(self.btn_menuCategoryCustomClear)
@@ -3606,9 +3657,9 @@ class Ui_PatusMainWindow(object):
 
         self.gridLayout_19.addWidget(self.f_menuCategoryCustom, 0, 0, 1, 1)
 
-        icon41 = QIcon()
-        icon41.addFile(u":/Simple icons/simple_icons/fi-rr-book-alt.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_database.addTab(self.tab, icon41, "")
+        icon42 = QIcon()
+        icon42.addFile(u":/Simple icons/simple_icons/fi-rr-book-alt.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_database.addTab(self.tab, icon42, "")
         self.tab_supplement = QWidget()
         self.tab_supplement.setObjectName(u"tab_supplement")
         self.horizontalLayout_49 = QHBoxLayout(self.tab_supplement)
@@ -3716,7 +3767,7 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_48.setContentsMargins(0, 0, 0, 0)
         self.btn_supplementAdd = QPushButton(self.f_expenseDbBtn_4)
         self.btn_supplementAdd.setObjectName(u"btn_supplementAdd")
-        self.btn_supplementAdd.setIcon(icon34)
+        self.btn_supplementAdd.setIcon(icon35)
         self.btn_supplementAdd.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_48.addWidget(self.btn_supplementAdd)
@@ -3724,7 +3775,7 @@ class Ui_PatusMainWindow(object):
         self.btn_supplementEdit = QPushButton(self.f_expenseDbBtn_4)
         self.btn_supplementEdit.setObjectName(u"btn_supplementEdit")
         self.btn_supplementEdit.setEnabled(False)
-        self.btn_supplementEdit.setIcon(icon35)
+        self.btn_supplementEdit.setIcon(icon36)
         self.btn_supplementEdit.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_48.addWidget(self.btn_supplementEdit)
@@ -3732,7 +3783,7 @@ class Ui_PatusMainWindow(object):
         self.btn_supplementDelete = QPushButton(self.f_expenseDbBtn_4)
         self.btn_supplementDelete.setObjectName(u"btn_supplementDelete")
         self.btn_supplementDelete.setEnabled(False)
-        self.btn_supplementDelete.setIcon(icon20)
+        self.btn_supplementDelete.setIcon(icon22)
         self.btn_supplementDelete.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_48.addWidget(self.btn_supplementDelete)
@@ -3740,7 +3791,7 @@ class Ui_PatusMainWindow(object):
         self.btn_supplementClear = QPushButton(self.f_expenseDbBtn_4)
         self.btn_supplementClear.setObjectName(u"btn_supplementClear")
         self.btn_supplementClear.setEnabled(True)
-        self.btn_supplementClear.setIcon(icon21)
+        self.btn_supplementClear.setIcon(icon23)
         self.btn_supplementClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_48.addWidget(self.btn_supplementClear)
@@ -3772,9 +3823,9 @@ class Ui_PatusMainWindow(object):
 
         self.horizontalLayout_49.addWidget(self.f_supplementDb)
 
-        icon42 = QIcon()
-        icon42.addFile(u":/Simple icons/simple_icons/fi-rr-confetti.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_database.addTab(self.tab_supplement, icon42, "")
+        icon43 = QIcon()
+        icon43.addFile(u":/Simple icons/simple_icons/fi-rr-confetti.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_database.addTab(self.tab_supplement, icon43, "")
         self.tab_expense = QWidget()
         self.tab_expense.setObjectName(u"tab_expense")
         self.horizontalLayout_9 = QHBoxLayout(self.tab_expense)
@@ -3884,7 +3935,7 @@ class Ui_PatusMainWindow(object):
         self.cb_expensePayed.setObjectName(u"cb_expensePayed")
         self.cb_expensePayed.setFont(font3)
         self.cb_expensePayed.setLayoutDirection(Qt.LeftToRight)
-        self.cb_expensePayed.setIcon(icon27)
+        self.cb_expensePayed.setIcon(icon28)
         self.cb_expensePayed.setIconSize(QSize(32, 32))
         self.cb_expensePayed.setChecked(True)
 
@@ -3905,7 +3956,7 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_18.setContentsMargins(0, 0, 0, 0)
         self.btn_expenseAdd = QPushButton(self.f_expenseDbBtn)
         self.btn_expenseAdd.setObjectName(u"btn_expenseAdd")
-        self.btn_expenseAdd.setIcon(icon34)
+        self.btn_expenseAdd.setIcon(icon35)
         self.btn_expenseAdd.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_18.addWidget(self.btn_expenseAdd)
@@ -3913,7 +3964,7 @@ class Ui_PatusMainWindow(object):
         self.btn_expenseEdit = QPushButton(self.f_expenseDbBtn)
         self.btn_expenseEdit.setObjectName(u"btn_expenseEdit")
         self.btn_expenseEdit.setEnabled(False)
-        self.btn_expenseEdit.setIcon(icon35)
+        self.btn_expenseEdit.setIcon(icon36)
         self.btn_expenseEdit.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_18.addWidget(self.btn_expenseEdit)
@@ -3921,7 +3972,7 @@ class Ui_PatusMainWindow(object):
         self.btn_expenseDelete = QPushButton(self.f_expenseDbBtn)
         self.btn_expenseDelete.setObjectName(u"btn_expenseDelete")
         self.btn_expenseDelete.setEnabled(False)
-        self.btn_expenseDelete.setIcon(icon20)
+        self.btn_expenseDelete.setIcon(icon22)
         self.btn_expenseDelete.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_18.addWidget(self.btn_expenseDelete)
@@ -3929,7 +3980,7 @@ class Ui_PatusMainWindow(object):
         self.btn_expenseClear = QPushButton(self.f_expenseDbBtn)
         self.btn_expenseClear.setObjectName(u"btn_expenseClear")
         self.btn_expenseClear.setEnabled(True)
-        self.btn_expenseClear.setIcon(icon21)
+        self.btn_expenseClear.setIcon(icon23)
         self.btn_expenseClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_18.addWidget(self.btn_expenseClear)
@@ -3961,9 +4012,9 @@ class Ui_PatusMainWindow(object):
 
         self.horizontalLayout_9.addWidget(self.f_expenseDb)
 
-        icon43 = QIcon()
-        icon43.addFile(u":/Simple icons/simple_icons/fi-rr-shopping-cart-add.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_database.addTab(self.tab_expense, icon43, "")
+        icon44 = QIcon()
+        icon44.addFile(u":/Simple icons/simple_icons/fi-rr-shopping-cart-add.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_database.addTab(self.tab_expense, icon44, "")
         self.tab_expenseCategory = QWidget()
         self.tab_expenseCategory.setObjectName(u"tab_expenseCategory")
         self.horizontalLayout_42 = QHBoxLayout(self.tab_expenseCategory)
@@ -4050,9 +4101,9 @@ class Ui_PatusMainWindow(object):
         self.cb_expenseCategorySaveToStock.setObjectName(u"cb_expenseCategorySaveToStock")
         self.cb_expenseCategorySaveToStock.setFont(font3)
         self.cb_expenseCategorySaveToStock.setLayoutDirection(Qt.LeftToRight)
-        icon44 = QIcon()
-        icon44.addFile(u":/Simple icons/simple_icons/fi-rr-cursor-plus.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.cb_expenseCategorySaveToStock.setIcon(icon44)
+        icon45 = QIcon()
+        icon45.addFile(u":/Simple icons/simple_icons/fi-rr-cursor-plus.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.cb_expenseCategorySaveToStock.setIcon(icon45)
         self.cb_expenseCategorySaveToStock.setIconSize(QSize(32, 32))
         self.cb_expenseCategorySaveToStock.setChecked(True)
 
@@ -4062,7 +4113,7 @@ class Ui_PatusMainWindow(object):
         self.cb_expenseCategoryIsIngredient.setObjectName(u"cb_expenseCategoryIsIngredient")
         self.cb_expenseCategoryIsIngredient.setFont(font3)
         self.cb_expenseCategoryIsIngredient.setLayoutDirection(Qt.LeftToRight)
-        self.cb_expenseCategoryIsIngredient.setIcon(icon44)
+        self.cb_expenseCategoryIsIngredient.setIcon(icon45)
         self.cb_expenseCategoryIsIngredient.setIconSize(QSize(32, 32))
         self.cb_expenseCategoryIsIngredient.setChecked(True)
 
@@ -4083,7 +4134,7 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_41.setContentsMargins(0, 0, 0, 0)
         self.btn_expenseCategoryAdd = QPushButton(self.f_expenseCategoryDbBtn)
         self.btn_expenseCategoryAdd.setObjectName(u"btn_expenseCategoryAdd")
-        self.btn_expenseCategoryAdd.setIcon(icon34)
+        self.btn_expenseCategoryAdd.setIcon(icon35)
         self.btn_expenseCategoryAdd.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_41.addWidget(self.btn_expenseCategoryAdd)
@@ -4091,7 +4142,7 @@ class Ui_PatusMainWindow(object):
         self.btn_expenseCategoryEdit = QPushButton(self.f_expenseCategoryDbBtn)
         self.btn_expenseCategoryEdit.setObjectName(u"btn_expenseCategoryEdit")
         self.btn_expenseCategoryEdit.setEnabled(False)
-        self.btn_expenseCategoryEdit.setIcon(icon35)
+        self.btn_expenseCategoryEdit.setIcon(icon36)
         self.btn_expenseCategoryEdit.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_41.addWidget(self.btn_expenseCategoryEdit)
@@ -4099,7 +4150,7 @@ class Ui_PatusMainWindow(object):
         self.btn_expenseCategoryDelete = QPushButton(self.f_expenseCategoryDbBtn)
         self.btn_expenseCategoryDelete.setObjectName(u"btn_expenseCategoryDelete")
         self.btn_expenseCategoryDelete.setEnabled(False)
-        self.btn_expenseCategoryDelete.setIcon(icon20)
+        self.btn_expenseCategoryDelete.setIcon(icon22)
         self.btn_expenseCategoryDelete.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_41.addWidget(self.btn_expenseCategoryDelete)
@@ -4107,7 +4158,7 @@ class Ui_PatusMainWindow(object):
         self.btn_expenseCategoryClear = QPushButton(self.f_expenseCategoryDbBtn)
         self.btn_expenseCategoryClear.setObjectName(u"btn_expenseCategoryClear")
         self.btn_expenseCategoryClear.setEnabled(True)
-        self.btn_expenseCategoryClear.setIcon(icon21)
+        self.btn_expenseCategoryClear.setIcon(icon23)
         self.btn_expenseCategoryClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_41.addWidget(self.btn_expenseCategoryClear)
@@ -4139,9 +4190,9 @@ class Ui_PatusMainWindow(object):
 
         self.horizontalLayout_42.addWidget(self.f_expenseCategoryDb)
 
-        icon45 = QIcon()
-        icon45.addFile(u":/Simple icons/simple_icons/fi-rr-shopping-cart-check.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_database.addTab(self.tab_expenseCategory, icon45, "")
+        icon46 = QIcon()
+        icon46.addFile(u":/Simple icons/simple_icons/fi-rr-shopping-cart-check.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_database.addTab(self.tab_expenseCategory, icon46, "")
         self.tab_supplier = QWidget()
         self.tab_supplier.setObjectName(u"tab_supplier")
         self.horizontalLayout_47 = QHBoxLayout(self.tab_supplier)
@@ -4251,7 +4302,7 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_43.setContentsMargins(0, 0, 0, 0)
         self.btn_supplierAdd = QPushButton(self.f_expenseDbBtn_3)
         self.btn_supplierAdd.setObjectName(u"btn_supplierAdd")
-        self.btn_supplierAdd.setIcon(icon34)
+        self.btn_supplierAdd.setIcon(icon35)
         self.btn_supplierAdd.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_43.addWidget(self.btn_supplierAdd)
@@ -4259,7 +4310,7 @@ class Ui_PatusMainWindow(object):
         self.btn_supplierEdit = QPushButton(self.f_expenseDbBtn_3)
         self.btn_supplierEdit.setObjectName(u"btn_supplierEdit")
         self.btn_supplierEdit.setEnabled(False)
-        self.btn_supplierEdit.setIcon(icon35)
+        self.btn_supplierEdit.setIcon(icon36)
         self.btn_supplierEdit.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_43.addWidget(self.btn_supplierEdit)
@@ -4267,7 +4318,7 @@ class Ui_PatusMainWindow(object):
         self.btn_supplierDelete = QPushButton(self.f_expenseDbBtn_3)
         self.btn_supplierDelete.setObjectName(u"btn_supplierDelete")
         self.btn_supplierDelete.setEnabled(False)
-        self.btn_supplierDelete.setIcon(icon20)
+        self.btn_supplierDelete.setIcon(icon22)
         self.btn_supplierDelete.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_43.addWidget(self.btn_supplierDelete)
@@ -4275,7 +4326,7 @@ class Ui_PatusMainWindow(object):
         self.btn_supplierClear = QPushButton(self.f_expenseDbBtn_3)
         self.btn_supplierClear.setObjectName(u"btn_supplierClear")
         self.btn_supplierClear.setEnabled(True)
-        self.btn_supplierClear.setIcon(icon21)
+        self.btn_supplierClear.setIcon(icon23)
         self.btn_supplierClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_43.addWidget(self.btn_supplierClear)
@@ -4307,7 +4358,7 @@ class Ui_PatusMainWindow(object):
 
         self.horizontalLayout_47.addWidget(self.f_supplierDb)
 
-        self.tw_database.addTab(self.tab_supplier, icon19, "")
+        self.tw_database.addTab(self.tab_supplier, icon21, "")
         self.tab_customer = QWidget()
         self.tab_customer.setObjectName(u"tab_customer")
         self.horizontalLayout_10 = QHBoxLayout(self.tab_customer)
@@ -4409,7 +4460,7 @@ class Ui_PatusMainWindow(object):
         self.btn_customerPicture.setObjectName(u"btn_customerPicture")
         sizePolicy12.setHeightForWidth(self.btn_customerPicture.sizePolicy().hasHeightForWidth())
         self.btn_customerPicture.setSizePolicy(sizePolicy12)
-        self.btn_customerPicture.setIcon(icon39)
+        self.btn_customerPicture.setIcon(icon40)
         self.btn_customerPicture.setIconSize(QSize(32, 32))
 
         self.verticalLayout_45.addWidget(self.btn_customerPicture)
@@ -4418,7 +4469,7 @@ class Ui_PatusMainWindow(object):
         self.btn_customerPictureClear.setObjectName(u"btn_customerPictureClear")
         sizePolicy12.setHeightForWidth(self.btn_customerPictureClear.sizePolicy().hasHeightForWidth())
         self.btn_customerPictureClear.setSizePolicy(sizePolicy12)
-        self.btn_customerPictureClear.setIcon(icon21)
+        self.btn_customerPictureClear.setIcon(icon23)
         self.btn_customerPictureClear.setIconSize(QSize(32, 32))
 
         self.verticalLayout_45.addWidget(self.btn_customerPictureClear)
@@ -4475,7 +4526,7 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_19.setContentsMargins(0, 0, 0, 0)
         self.btn_customerAdd = QPushButton(self.f_customerDbBtn)
         self.btn_customerAdd.setObjectName(u"btn_customerAdd")
-        self.btn_customerAdd.setIcon(icon34)
+        self.btn_customerAdd.setIcon(icon35)
         self.btn_customerAdd.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_19.addWidget(self.btn_customerAdd)
@@ -4483,7 +4534,7 @@ class Ui_PatusMainWindow(object):
         self.btn_customerEdit = QPushButton(self.f_customerDbBtn)
         self.btn_customerEdit.setObjectName(u"btn_customerEdit")
         self.btn_customerEdit.setEnabled(False)
-        self.btn_customerEdit.setIcon(icon35)
+        self.btn_customerEdit.setIcon(icon36)
         self.btn_customerEdit.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_19.addWidget(self.btn_customerEdit)
@@ -4491,7 +4542,7 @@ class Ui_PatusMainWindow(object):
         self.btn_customerDelete = QPushButton(self.f_customerDbBtn)
         self.btn_customerDelete.setObjectName(u"btn_customerDelete")
         self.btn_customerDelete.setEnabled(False)
-        self.btn_customerDelete.setIcon(icon20)
+        self.btn_customerDelete.setIcon(icon22)
         self.btn_customerDelete.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_19.addWidget(self.btn_customerDelete)
@@ -4499,7 +4550,7 @@ class Ui_PatusMainWindow(object):
         self.btn_customerClear = QPushButton(self.f_customerDbBtn)
         self.btn_customerClear.setObjectName(u"btn_customerClear")
         self.btn_customerClear.setEnabled(True)
-        self.btn_customerClear.setIcon(icon21)
+        self.btn_customerClear.setIcon(icon23)
         self.btn_customerClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_19.addWidget(self.btn_customerClear)
@@ -4531,9 +4582,9 @@ class Ui_PatusMainWindow(object):
 
         self.horizontalLayout_10.addWidget(self.f_cutosmerDb)
 
-        icon46 = QIcon()
-        icon46.addFile(u":/Simple icons/simple_icons/fi-rr-comment-user.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_database.addTab(self.tab_customer, icon46, "")
+        icon47 = QIcon()
+        icon47.addFile(u":/Simple icons/simple_icons/fi-rr-comment-user.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_database.addTab(self.tab_customer, icon47, "")
         self.tab_worker = QWidget()
         self.tab_worker.setObjectName(u"tab_worker")
         self.horizontalLayout_11 = QHBoxLayout(self.tab_worker)
@@ -4635,7 +4686,7 @@ class Ui_PatusMainWindow(object):
         self.btn_workerPicture.setObjectName(u"btn_workerPicture")
         sizePolicy12.setHeightForWidth(self.btn_workerPicture.sizePolicy().hasHeightForWidth())
         self.btn_workerPicture.setSizePolicy(sizePolicy12)
-        self.btn_workerPicture.setIcon(icon39)
+        self.btn_workerPicture.setIcon(icon40)
         self.btn_workerPicture.setIconSize(QSize(32, 32))
 
         self.verticalLayout_46.addWidget(self.btn_workerPicture)
@@ -4644,7 +4695,7 @@ class Ui_PatusMainWindow(object):
         self.btn_workerPictureClear.setObjectName(u"btn_workerPictureClear")
         sizePolicy12.setHeightForWidth(self.btn_workerPictureClear.sizePolicy().hasHeightForWidth())
         self.btn_workerPictureClear.setSizePolicy(sizePolicy12)
-        self.btn_workerPictureClear.setIcon(icon21)
+        self.btn_workerPictureClear.setIcon(icon23)
         self.btn_workerPictureClear.setIconSize(QSize(32, 32))
 
         self.verticalLayout_46.addWidget(self.btn_workerPictureClear)
@@ -4729,9 +4780,9 @@ class Ui_PatusMainWindow(object):
         self.btn_workerAddCv.setObjectName(u"btn_workerAddCv")
         sizePolicy12.setHeightForWidth(self.btn_workerAddCv.sizePolicy().hasHeightForWidth())
         self.btn_workerAddCv.setSizePolicy(sizePolicy12)
-        icon47 = QIcon()
-        icon47.addFile(u":/Simple icons/simple_icons/fi-rr-file-add.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_workerAddCv.setIcon(icon47)
+        icon48 = QIcon()
+        icon48.addFile(u":/Simple icons/simple_icons/fi-rr-file-add.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_workerAddCv.setIcon(icon48)
         self.btn_workerAddCv.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_58.addWidget(self.btn_workerAddCv)
@@ -4740,9 +4791,9 @@ class Ui_PatusMainWindow(object):
         self.btn_workerOpenCv.setObjectName(u"btn_workerOpenCv")
         sizePolicy12.setHeightForWidth(self.btn_workerOpenCv.sizePolicy().hasHeightForWidth())
         self.btn_workerOpenCv.setSizePolicy(sizePolicy12)
-        icon48 = QIcon()
-        icon48.addFile(u":/Simple icons/simple_icons/fi-rr-search-alt.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_workerOpenCv.setIcon(icon48)
+        icon49 = QIcon()
+        icon49.addFile(u":/Simple icons/simple_icons/fi-rr-search-alt.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_workerOpenCv.setIcon(icon49)
         self.btn_workerOpenCv.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_58.addWidget(self.btn_workerOpenCv)
@@ -4751,7 +4802,7 @@ class Ui_PatusMainWindow(object):
         self.btn_workerClearCv.setObjectName(u"btn_workerClearCv")
         sizePolicy12.setHeightForWidth(self.btn_workerClearCv.sizePolicy().hasHeightForWidth())
         self.btn_workerClearCv.setSizePolicy(sizePolicy12)
-        self.btn_workerClearCv.setIcon(icon21)
+        self.btn_workerClearCv.setIcon(icon23)
         self.btn_workerClearCv.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_58.addWidget(self.btn_workerClearCv)
@@ -4774,7 +4825,7 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_20.setContentsMargins(0, 0, 0, 0)
         self.btn_workerAdd = QPushButton(self.f_workerDbBtn)
         self.btn_workerAdd.setObjectName(u"btn_workerAdd")
-        self.btn_workerAdd.setIcon(icon34)
+        self.btn_workerAdd.setIcon(icon35)
         self.btn_workerAdd.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_20.addWidget(self.btn_workerAdd)
@@ -4782,7 +4833,7 @@ class Ui_PatusMainWindow(object):
         self.btn_workerEdit = QPushButton(self.f_workerDbBtn)
         self.btn_workerEdit.setObjectName(u"btn_workerEdit")
         self.btn_workerEdit.setEnabled(False)
-        self.btn_workerEdit.setIcon(icon35)
+        self.btn_workerEdit.setIcon(icon36)
         self.btn_workerEdit.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_20.addWidget(self.btn_workerEdit)
@@ -4790,7 +4841,7 @@ class Ui_PatusMainWindow(object):
         self.btn_workerDelete = QPushButton(self.f_workerDbBtn)
         self.btn_workerDelete.setObjectName(u"btn_workerDelete")
         self.btn_workerDelete.setEnabled(False)
-        self.btn_workerDelete.setIcon(icon20)
+        self.btn_workerDelete.setIcon(icon22)
         self.btn_workerDelete.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_20.addWidget(self.btn_workerDelete)
@@ -4798,7 +4849,7 @@ class Ui_PatusMainWindow(object):
         self.btn_workerClear = QPushButton(self.f_workerDbBtn)
         self.btn_workerClear.setObjectName(u"btn_workerClear")
         self.btn_workerClear.setEnabled(True)
-        self.btn_workerClear.setIcon(icon21)
+        self.btn_workerClear.setIcon(icon23)
         self.btn_workerClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_20.addWidget(self.btn_workerClear)
@@ -4830,9 +4881,9 @@ class Ui_PatusMainWindow(object):
 
         self.horizontalLayout_11.addWidget(self.f_workerDb)
 
-        icon49 = QIcon()
-        icon49.addFile(u":/Simple icons/simple_icons/fi-rr-id-badge.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_database.addTab(self.tab_worker, icon49, "")
+        icon50 = QIcon()
+        icon50.addFile(u":/Simple icons/simple_icons/fi-rr-id-badge.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_database.addTab(self.tab_worker, icon50, "")
         self.tab_category = QWidget()
         self.tab_category.setObjectName(u"tab_category")
         self.horizontalLayout_14 = QHBoxLayout(self.tab_category)
@@ -4935,7 +4986,7 @@ class Ui_PatusMainWindow(object):
 
         self.cb_categoryLevelStock = QCheckBox(self.frame_32)
         self.cb_categoryLevelStock.setObjectName(u"cb_categoryLevelStock")
-        self.cb_categoryLevelStock.setIcon(icon48)
+        self.cb_categoryLevelStock.setIcon(icon49)
         self.cb_categoryLevelStock.setIconSize(QSize(32, 32))
 
         self.gridLayout_24.addWidget(self.cb_categoryLevelStock, 2, 0, 1, 1)
@@ -4993,7 +5044,7 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_23.setContentsMargins(0, 0, 0, 0)
         self.btn_categoryAdd = QPushButton(self.f_categoryDbBtn)
         self.btn_categoryAdd.setObjectName(u"btn_categoryAdd")
-        self.btn_categoryAdd.setIcon(icon34)
+        self.btn_categoryAdd.setIcon(icon35)
         self.btn_categoryAdd.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_23.addWidget(self.btn_categoryAdd)
@@ -5001,7 +5052,7 @@ class Ui_PatusMainWindow(object):
         self.btn_categoryEdit = QPushButton(self.f_categoryDbBtn)
         self.btn_categoryEdit.setObjectName(u"btn_categoryEdit")
         self.btn_categoryEdit.setEnabled(False)
-        self.btn_categoryEdit.setIcon(icon35)
+        self.btn_categoryEdit.setIcon(icon36)
         self.btn_categoryEdit.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_23.addWidget(self.btn_categoryEdit)
@@ -5009,7 +5060,7 @@ class Ui_PatusMainWindow(object):
         self.btn_categoryDelete = QPushButton(self.f_categoryDbBtn)
         self.btn_categoryDelete.setObjectName(u"btn_categoryDelete")
         self.btn_categoryDelete.setEnabled(False)
-        self.btn_categoryDelete.setIcon(icon20)
+        self.btn_categoryDelete.setIcon(icon22)
         self.btn_categoryDelete.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_23.addWidget(self.btn_categoryDelete)
@@ -5017,7 +5068,7 @@ class Ui_PatusMainWindow(object):
         self.btn_categoryClear = QPushButton(self.f_categoryDbBtn)
         self.btn_categoryClear.setObjectName(u"btn_categoryClear")
         self.btn_categoryClear.setEnabled(True)
-        self.btn_categoryClear.setIcon(icon21)
+        self.btn_categoryClear.setIcon(icon23)
         self.btn_categoryClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_23.addWidget(self.btn_categoryClear)
@@ -5049,9 +5100,9 @@ class Ui_PatusMainWindow(object):
 
         self.horizontalLayout_14.addWidget(self.f_categoryDb)
 
-        icon50 = QIcon()
-        icon50.addFile(u":/Simple icons/simple_icons/fi-rr-diploma.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_database.addTab(self.tab_category, icon50, "")
+        icon51 = QIcon()
+        icon51.addFile(u":/Simple icons/simple_icons/fi-rr-diploma.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_database.addTab(self.tab_category, icon51, "")
         self.tab_sell = QWidget()
         self.tab_sell.setObjectName(u"tab_sell")
         self.horizontalLayout_12 = QHBoxLayout(self.tab_sell)
@@ -5164,7 +5215,7 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_21.setContentsMargins(0, 0, 0, 0)
         self.btn_sellAdd = QPushButton(self.f_sellDbBtn)
         self.btn_sellAdd.setObjectName(u"btn_sellAdd")
-        self.btn_sellAdd.setIcon(icon34)
+        self.btn_sellAdd.setIcon(icon35)
         self.btn_sellAdd.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_21.addWidget(self.btn_sellAdd)
@@ -5172,7 +5223,7 @@ class Ui_PatusMainWindow(object):
         self.btn_sellEdit = QPushButton(self.f_sellDbBtn)
         self.btn_sellEdit.setObjectName(u"btn_sellEdit")
         self.btn_sellEdit.setEnabled(False)
-        self.btn_sellEdit.setIcon(icon35)
+        self.btn_sellEdit.setIcon(icon36)
         self.btn_sellEdit.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_21.addWidget(self.btn_sellEdit)
@@ -5180,7 +5231,7 @@ class Ui_PatusMainWindow(object):
         self.btn_sellDelete = QPushButton(self.f_sellDbBtn)
         self.btn_sellDelete.setObjectName(u"btn_sellDelete")
         self.btn_sellDelete.setEnabled(False)
-        self.btn_sellDelete.setIcon(icon20)
+        self.btn_sellDelete.setIcon(icon22)
         self.btn_sellDelete.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_21.addWidget(self.btn_sellDelete)
@@ -5188,7 +5239,7 @@ class Ui_PatusMainWindow(object):
         self.btn_sellClear = QPushButton(self.f_sellDbBtn)
         self.btn_sellClear.setObjectName(u"btn_sellClear")
         self.btn_sellClear.setEnabled(True)
-        self.btn_sellClear.setIcon(icon21)
+        self.btn_sellClear.setIcon(icon23)
         self.btn_sellClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_21.addWidget(self.btn_sellClear)
@@ -5196,9 +5247,9 @@ class Ui_PatusMainWindow(object):
         self.btn_sellShow = QPushButton(self.f_sellDbBtn)
         self.btn_sellShow.setObjectName(u"btn_sellShow")
         self.btn_sellShow.setEnabled(False)
-        icon51 = QIcon()
-        icon51.addFile(u":/Simple icons/simple_icons/fi-rr-upload.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_sellShow.setIcon(icon51)
+        icon52 = QIcon()
+        icon52.addFile(u":/Simple icons/simple_icons/fi-rr-upload.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_sellShow.setIcon(icon52)
         self.btn_sellShow.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_21.addWidget(self.btn_sellShow)
@@ -5206,9 +5257,9 @@ class Ui_PatusMainWindow(object):
         self.btn_sellLoad = QPushButton(self.f_sellDbBtn)
         self.btn_sellLoad.setObjectName(u"btn_sellLoad")
         self.btn_sellLoad.setEnabled(False)
-        icon52 = QIcon()
-        icon52.addFile(u":/Simple icons/simple_icons/fi-rr-calculator.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_sellLoad.setIcon(icon52)
+        icon53 = QIcon()
+        icon53.addFile(u":/Simple icons/simple_icons/fi-rr-calculator.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_sellLoad.setIcon(icon53)
         self.btn_sellLoad.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_21.addWidget(self.btn_sellLoad)
@@ -5216,9 +5267,9 @@ class Ui_PatusMainWindow(object):
         self.btn_sellHistory = QPushButton(self.f_sellDbBtn)
         self.btn_sellHistory.setObjectName(u"btn_sellHistory")
         self.btn_sellHistory.setEnabled(False)
-        icon53 = QIcon()
-        icon53.addFile(u":/Simple icons/simple_icons/fi-rr-incognito.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_sellHistory.setIcon(icon53)
+        icon54 = QIcon()
+        icon54.addFile(u":/Simple icons/simple_icons/fi-rr-incognito.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_sellHistory.setIcon(icon54)
         self.btn_sellHistory.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_21.addWidget(self.btn_sellHistory)
@@ -5236,6 +5287,16 @@ class Ui_PatusMainWindow(object):
         self.f_sellDb.setFrameShadow(QFrame.Raised)
         self.verticalLayout_31 = QVBoxLayout(self.f_sellDb)
         self.verticalLayout_31.setObjectName(u"verticalLayout_31")
+        self.tb_sellOpenBrowser = QToolButton(self.f_sellDb)
+        self.tb_sellOpenBrowser.setObjectName(u"tb_sellOpenBrowser")
+        sizePolicy.setHeightForWidth(self.tb_sellOpenBrowser.sizePolicy().hasHeightForWidth())
+        self.tb_sellOpenBrowser.setSizePolicy(sizePolicy)
+        self.tb_sellOpenBrowser.setIcon(icon54)
+        self.tb_sellOpenBrowser.setIconSize(QSize(32, 32))
+        self.tb_sellOpenBrowser.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
+
+        self.verticalLayout_31.addWidget(self.tb_sellOpenBrowser)
+
         self.tw_sell = QTableWidget(self.f_sellDb)
         self.tw_sell.setObjectName(u"tw_sell")
         self.tw_sell.setFont(font9)
@@ -5251,7 +5312,7 @@ class Ui_PatusMainWindow(object):
 
         self.horizontalLayout_12.addWidget(self.f_sellDb)
 
-        self.tw_database.addTab(self.tab_sell, icon27, "")
+        self.tw_database.addTab(self.tab_sell, icon28, "")
         self.tab_table = QWidget()
         self.tab_table.setObjectName(u"tab_table")
         self.horizontalLayout_13 = QHBoxLayout(self.tab_table)
@@ -5352,7 +5413,7 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_22.setContentsMargins(0, 0, 0, 0)
         self.btn_tableAdd = QPushButton(self.f_tableDbBtn)
         self.btn_tableAdd.setObjectName(u"btn_tableAdd")
-        self.btn_tableAdd.setIcon(icon34)
+        self.btn_tableAdd.setIcon(icon35)
         self.btn_tableAdd.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_22.addWidget(self.btn_tableAdd)
@@ -5360,7 +5421,7 @@ class Ui_PatusMainWindow(object):
         self.btn_tableEdit = QPushButton(self.f_tableDbBtn)
         self.btn_tableEdit.setObjectName(u"btn_tableEdit")
         self.btn_tableEdit.setEnabled(False)
-        self.btn_tableEdit.setIcon(icon35)
+        self.btn_tableEdit.setIcon(icon36)
         self.btn_tableEdit.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_22.addWidget(self.btn_tableEdit)
@@ -5368,7 +5429,7 @@ class Ui_PatusMainWindow(object):
         self.btn_tableDelete = QPushButton(self.f_tableDbBtn)
         self.btn_tableDelete.setObjectName(u"btn_tableDelete")
         self.btn_tableDelete.setEnabled(False)
-        self.btn_tableDelete.setIcon(icon20)
+        self.btn_tableDelete.setIcon(icon22)
         self.btn_tableDelete.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_22.addWidget(self.btn_tableDelete)
@@ -5376,7 +5437,7 @@ class Ui_PatusMainWindow(object):
         self.btn_tableClear = QPushButton(self.f_tableDbBtn)
         self.btn_tableClear.setObjectName(u"btn_tableClear")
         self.btn_tableClear.setEnabled(True)
-        self.btn_tableClear.setIcon(icon21)
+        self.btn_tableClear.setIcon(icon23)
         self.btn_tableClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_22.addWidget(self.btn_tableClear)
@@ -5484,7 +5545,7 @@ class Ui_PatusMainWindow(object):
 
         self.horizontalLayout_15.addWidget(self.f_pointerDb)
 
-        self.tw_database.addTab(self.tab_pointer, icon48, "")
+        self.tw_database.addTab(self.tab_pointer, icon49, "")
         self.tab_stock = QWidget()
         self.tab_stock.setObjectName(u"tab_stock")
         self.horizontalLayout_60 = QHBoxLayout(self.tab_stock)
@@ -5582,7 +5643,7 @@ class Ui_PatusMainWindow(object):
         self.cb_stockIsIngredient.setObjectName(u"cb_stockIsIngredient")
         self.cb_stockIsIngredient.setFont(font3)
         self.cb_stockIsIngredient.setLayoutDirection(Qt.LeftToRight)
-        self.cb_stockIsIngredient.setIcon(icon44)
+        self.cb_stockIsIngredient.setIcon(icon45)
         self.cb_stockIsIngredient.setIconSize(QSize(32, 32))
         self.cb_stockIsIngredient.setChecked(True)
 
@@ -5603,7 +5664,7 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_59.setContentsMargins(0, 0, 0, 0)
         self.btn_stockAdd = QPushButton(self.f_tableDbBtn_2)
         self.btn_stockAdd.setObjectName(u"btn_stockAdd")
-        self.btn_stockAdd.setIcon(icon34)
+        self.btn_stockAdd.setIcon(icon35)
         self.btn_stockAdd.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_59.addWidget(self.btn_stockAdd)
@@ -5611,7 +5672,7 @@ class Ui_PatusMainWindow(object):
         self.btn_stockEdit = QPushButton(self.f_tableDbBtn_2)
         self.btn_stockEdit.setObjectName(u"btn_stockEdit")
         self.btn_stockEdit.setEnabled(False)
-        self.btn_stockEdit.setIcon(icon35)
+        self.btn_stockEdit.setIcon(icon36)
         self.btn_stockEdit.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_59.addWidget(self.btn_stockEdit)
@@ -5619,7 +5680,7 @@ class Ui_PatusMainWindow(object):
         self.btn_stockDelete = QPushButton(self.f_tableDbBtn_2)
         self.btn_stockDelete.setObjectName(u"btn_stockDelete")
         self.btn_stockDelete.setEnabled(False)
-        self.btn_stockDelete.setIcon(icon20)
+        self.btn_stockDelete.setIcon(icon22)
         self.btn_stockDelete.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_59.addWidget(self.btn_stockDelete)
@@ -5627,7 +5688,7 @@ class Ui_PatusMainWindow(object):
         self.btn_stockClear = QPushButton(self.f_tableDbBtn_2)
         self.btn_stockClear.setObjectName(u"btn_stockClear")
         self.btn_stockClear.setEnabled(True)
-        self.btn_stockClear.setIcon(icon21)
+        self.btn_stockClear.setIcon(icon23)
         self.btn_stockClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_59.addWidget(self.btn_stockClear)
@@ -5767,7 +5828,7 @@ class Ui_PatusMainWindow(object):
         self.btn_docAddFile.setObjectName(u"btn_docAddFile")
         sizePolicy12.setHeightForWidth(self.btn_docAddFile.sizePolicy().hasHeightForWidth())
         self.btn_docAddFile.setSizePolicy(sizePolicy12)
-        self.btn_docAddFile.setIcon(icon47)
+        self.btn_docAddFile.setIcon(icon48)
         self.btn_docAddFile.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_64.addWidget(self.btn_docAddFile)
@@ -5776,7 +5837,7 @@ class Ui_PatusMainWindow(object):
         self.btn_docOpenFile.setObjectName(u"btn_docOpenFile")
         sizePolicy12.setHeightForWidth(self.btn_docOpenFile.sizePolicy().hasHeightForWidth())
         self.btn_docOpenFile.setSizePolicy(sizePolicy12)
-        self.btn_docOpenFile.setIcon(icon48)
+        self.btn_docOpenFile.setIcon(icon49)
         self.btn_docOpenFile.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_64.addWidget(self.btn_docOpenFile)
@@ -5785,7 +5846,7 @@ class Ui_PatusMainWindow(object):
         self.btn_docClearFile.setObjectName(u"btn_docClearFile")
         sizePolicy12.setHeightForWidth(self.btn_docClearFile.sizePolicy().hasHeightForWidth())
         self.btn_docClearFile.setSizePolicy(sizePolicy12)
-        self.btn_docClearFile.setIcon(icon21)
+        self.btn_docClearFile.setIcon(icon23)
         self.btn_docClearFile.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_64.addWidget(self.btn_docClearFile)
@@ -5808,7 +5869,7 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_61.setContentsMargins(0, 0, 0, 0)
         self.btn_docAdd = QPushButton(self.f_tableDbBtn_3)
         self.btn_docAdd.setObjectName(u"btn_docAdd")
-        self.btn_docAdd.setIcon(icon34)
+        self.btn_docAdd.setIcon(icon35)
         self.btn_docAdd.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_61.addWidget(self.btn_docAdd)
@@ -5816,7 +5877,7 @@ class Ui_PatusMainWindow(object):
         self.btn_docEdit = QPushButton(self.f_tableDbBtn_3)
         self.btn_docEdit.setObjectName(u"btn_docEdit")
         self.btn_docEdit.setEnabled(False)
-        self.btn_docEdit.setIcon(icon35)
+        self.btn_docEdit.setIcon(icon36)
         self.btn_docEdit.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_61.addWidget(self.btn_docEdit)
@@ -5824,7 +5885,7 @@ class Ui_PatusMainWindow(object):
         self.btn_docDelete = QPushButton(self.f_tableDbBtn_3)
         self.btn_docDelete.setObjectName(u"btn_docDelete")
         self.btn_docDelete.setEnabled(False)
-        self.btn_docDelete.setIcon(icon20)
+        self.btn_docDelete.setIcon(icon22)
         self.btn_docDelete.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_61.addWidget(self.btn_docDelete)
@@ -5832,7 +5893,7 @@ class Ui_PatusMainWindow(object):
         self.btn_docClear = QPushButton(self.f_tableDbBtn_3)
         self.btn_docClear.setObjectName(u"btn_docClear")
         self.btn_docClear.setEnabled(True)
-        self.btn_docClear.setIcon(icon21)
+        self.btn_docClear.setIcon(icon23)
         self.btn_docClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_61.addWidget(self.btn_docClear)
@@ -5864,7 +5925,7 @@ class Ui_PatusMainWindow(object):
 
         self.horizontalLayout_62.addWidget(self.f_stockDb_2)
 
-        self.tw_database.addTab(self.tab_uploader, icon51, "")
+        self.tw_database.addTab(self.tab_uploader, icon52, "")
         self.tab_tableOwnership = QWidget()
         self.tab_tableOwnership.setObjectName(u"tab_tableOwnership")
         self.horizontalLayout_67 = QHBoxLayout(self.tab_tableOwnership)
@@ -5961,7 +6022,7 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_66.setContentsMargins(0, 0, 0, 0)
         self.btn_tableOwnershipAdd = QPushButton(self.f_tableDbBtn_4)
         self.btn_tableOwnershipAdd.setObjectName(u"btn_tableOwnershipAdd")
-        self.btn_tableOwnershipAdd.setIcon(icon34)
+        self.btn_tableOwnershipAdd.setIcon(icon35)
         self.btn_tableOwnershipAdd.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_66.addWidget(self.btn_tableOwnershipAdd)
@@ -5969,7 +6030,7 @@ class Ui_PatusMainWindow(object):
         self.btn_tableOwnershipEdit = QPushButton(self.f_tableDbBtn_4)
         self.btn_tableOwnershipEdit.setObjectName(u"btn_tableOwnershipEdit")
         self.btn_tableOwnershipEdit.setEnabled(False)
-        self.btn_tableOwnershipEdit.setIcon(icon35)
+        self.btn_tableOwnershipEdit.setIcon(icon36)
         self.btn_tableOwnershipEdit.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_66.addWidget(self.btn_tableOwnershipEdit)
@@ -5977,7 +6038,7 @@ class Ui_PatusMainWindow(object):
         self.btn_tableOwnershipDelete = QPushButton(self.f_tableDbBtn_4)
         self.btn_tableOwnershipDelete.setObjectName(u"btn_tableOwnershipDelete")
         self.btn_tableOwnershipDelete.setEnabled(False)
-        self.btn_tableOwnershipDelete.setIcon(icon20)
+        self.btn_tableOwnershipDelete.setIcon(icon22)
         self.btn_tableOwnershipDelete.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_66.addWidget(self.btn_tableOwnershipDelete)
@@ -5985,7 +6046,7 @@ class Ui_PatusMainWindow(object):
         self.btn_tableOwnershipClear = QPushButton(self.f_tableDbBtn_4)
         self.btn_tableOwnershipClear.setObjectName(u"btn_tableOwnershipClear")
         self.btn_tableOwnershipClear.setEnabled(True)
-        self.btn_tableOwnershipClear.setIcon(icon21)
+        self.btn_tableOwnershipClear.setIcon(icon23)
         self.btn_tableOwnershipClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_66.addWidget(self.btn_tableOwnershipClear)
@@ -6022,9 +6083,9 @@ class Ui_PatusMainWindow(object):
 
         self.horizontalLayout_67.addWidget(self.f_tableOwnershipDb)
 
-        icon54 = QIcon()
-        icon54.addFile(u":/Simple icons/simple_icons/fi-rr-package.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_database.addTab(self.tab_tableOwnership, icon54, "")
+        icon55 = QIcon()
+        icon55.addFile(u":/Simple icons/simple_icons/fi-rr-package.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_database.addTab(self.tab_tableOwnership, icon55, "")
         self.tab_payement = QWidget()
         self.tab_payement.setObjectName(u"tab_payement")
         self.horizontalLayout_78 = QHBoxLayout(self.tab_payement)
@@ -6101,7 +6162,7 @@ class Ui_PatusMainWindow(object):
         self.de_payment_date = QDateEdit(self.gb_payment)
         self.de_payment_date.setObjectName(u"de_payment_date")
         self.de_payment_date.setFont(font5)
-        self.de_payment_date.setDateTime(QDateTime(QDate(2022, 5, 20), QTime(0, 0, 0)))
+        self.de_payment_date.setDateTime(QDateTime(QDate(2022, 5, 13), QTime(0, 0, 0)))
         self.de_payment_date.setCurrentSection(QDateTimeEdit.YearSection)
         self.de_payment_date.setCalendarPopup(True)
 
@@ -6127,7 +6188,7 @@ class Ui_PatusMainWindow(object):
         self.horizontalLayout_75.setContentsMargins(0, 0, 0, 0)
         self.btn_paymentAdd = QPushButton(self.f_paymentDbBtn)
         self.btn_paymentAdd.setObjectName(u"btn_paymentAdd")
-        self.btn_paymentAdd.setIcon(icon34)
+        self.btn_paymentAdd.setIcon(icon35)
         self.btn_paymentAdd.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_75.addWidget(self.btn_paymentAdd)
@@ -6135,7 +6196,7 @@ class Ui_PatusMainWindow(object):
         self.btn_paymentEdit = QPushButton(self.f_paymentDbBtn)
         self.btn_paymentEdit.setObjectName(u"btn_paymentEdit")
         self.btn_paymentEdit.setEnabled(False)
-        self.btn_paymentEdit.setIcon(icon35)
+        self.btn_paymentEdit.setIcon(icon36)
         self.btn_paymentEdit.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_75.addWidget(self.btn_paymentEdit)
@@ -6143,7 +6204,7 @@ class Ui_PatusMainWindow(object):
         self.btn_paymentDelete = QPushButton(self.f_paymentDbBtn)
         self.btn_paymentDelete.setObjectName(u"btn_paymentDelete")
         self.btn_paymentDelete.setEnabled(False)
-        self.btn_paymentDelete.setIcon(icon20)
+        self.btn_paymentDelete.setIcon(icon22)
         self.btn_paymentDelete.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_75.addWidget(self.btn_paymentDelete)
@@ -6151,7 +6212,7 @@ class Ui_PatusMainWindow(object):
         self.btn_paymentClear = QPushButton(self.f_paymentDbBtn)
         self.btn_paymentClear.setObjectName(u"btn_paymentClear")
         self.btn_paymentClear.setEnabled(True)
-        self.btn_paymentClear.setIcon(icon21)
+        self.btn_paymentClear.setIcon(icon23)
         self.btn_paymentClear.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_75.addWidget(self.btn_paymentClear)
@@ -6185,9 +6246,9 @@ class Ui_PatusMainWindow(object):
 
         self.horizontalLayout_78.addWidget(self.f_paymentDb)
 
-        icon55 = QIcon()
-        icon55.addFile(u":/Simple icons/simple_icons/fi-rr-hand-holding-heart.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tw_database.addTab(self.tab_payement, icon55, "")
+        icon56 = QIcon()
+        icon56.addFile(u":/Simple icons/simple_icons/fi-rr-hand-holding-heart.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tw_database.addTab(self.tab_payement, icon56, "")
 
         self.gridLayout_9.addWidget(self.tw_database, 0, 0, 1, 1)
 
@@ -6256,7 +6317,7 @@ class Ui_PatusMainWindow(object):
         self.sa_workerStatus.setWidgetResizable(True)
         self.w_workerStats = QWidget()
         self.w_workerStats.setObjectName(u"w_workerStats")
-        self.w_workerStats.setGeometry(QRect(0, 0, 569, 714))
+        self.w_workerStats.setGeometry(QRect(0, 0, 411, 175))
         self.gridLayout_21 = QGridLayout(self.w_workerStats)
         self.gridLayout_21.setObjectName(u"gridLayout_21")
         self.frame_13 = QFrame(self.w_workerStats)
@@ -6472,9 +6533,9 @@ class Ui_PatusMainWindow(object):
         sizePolicy4.setHeightForWidth(self.btn_logs.sizePolicy().hasHeightForWidth())
         self.btn_logs.setSizePolicy(sizePolicy4)
         self.btn_logs.setMaximumSize(QSize(20, 16777215))
-        icon56 = QIcon()
-        icon56.addFile(u":/Simple icons/simple_icons/fi-rr-shield-interrogation.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_logs.setIcon(icon56)
+        icon57 = QIcon()
+        icon57.addFile(u":/Simple icons/simple_icons/fi-rr-shield-interrogation.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_logs.setIcon(icon57)
         self.btn_logs.setIconSize(QSize(16, 16))
 
         self.horizontalLayout_2.addWidget(self.btn_logs)
@@ -6522,7 +6583,7 @@ class Ui_PatusMainWindow(object):
         self.btn_notification_clear = QPushButton(self.f_notification)
         self.btn_notification_clear.setObjectName(u"btn_notification_clear")
         self.btn_notification_clear.setFont(font5)
-        self.btn_notification_clear.setIcon(icon21)
+        self.btn_notification_clear.setIcon(icon23)
 
         self.verticalLayout_84.addWidget(self.btn_notification_clear)
 
@@ -6565,6 +6626,8 @@ class Ui_PatusMainWindow(object):
         self.l_busyTables.setText(QCoreApplication.translate("PatusMainWindow", u"Busy tables: 8", None))
         self.l_freeTables.setText(QCoreApplication.translate("PatusMainWindow", u"Free tables: 12", None))
         self.l_daySells.setText(QCoreApplication.translate("PatusMainWindow", u"Total month sells: 0", None))
+        self.btn_couponGenerator.setText("")
+        self.btn_customPrint.setText("")
         self.btn_blockNote.setText("")
         self.btn_notification.setText("")
         self.btn_setting.setText("")
@@ -6894,6 +6957,7 @@ class Ui_PatusMainWindow(object):
         self.btn_sellShow.setText("")
         self.btn_sellLoad.setText("")
         self.btn_sellHistory.setText("")
+        self.tb_sellOpenBrowser.setText(QCoreApplication.translate("PatusMainWindow", u"Ticket History Browser", None))
         self.tw_database.setTabText(self.tw_database.indexOf(self.tab_sell), "")
         self.gb_expense_6.setTitle(QCoreApplication.translate("PatusMainWindow", u"Table", None))
         self.le_tableName.setText("")

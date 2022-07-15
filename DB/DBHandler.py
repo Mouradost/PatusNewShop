@@ -6,7 +6,7 @@ from typing import List
 from DB.ShopDbInfo import *
 from dataclasses import astuple
 from DB.DbTables import *
-import datetime
+from datetime import datetime
 import hashlib
 import os
 from Utilities import Utility
@@ -345,6 +345,18 @@ class DBHelper(object):
             )"""
             self.c.execute(sql_command)
 
+            sql_command = f"""
+            CREATE TABLE IF NOT EXISTS {CouponTable.TABLE_NAME} ( 
+            {CouponTable.COLUMN_ID} INTEGER PRIMARY KEY AUTOINCREMENT,   
+            {CouponTable.COLUMN_DATE_START} DATE,  
+            {CouponTable.COLUMN_DATE_END} DATE,  
+            {CouponTable.COLUMN_DATE_CREATED} DATE NOT NULL,  
+            {CouponTable.COLUMN_AMOUNT} REAL NOT NULL,  
+            {CouponTable.COLUMN_IS_USED} BOOL NOT NULL,  
+            {CouponTable.COLUMN_HASH} BLOB
+            )"""
+            self.c.execute(sql_command)
+
     # Insertions
     def insertMenuItem(self, x: MenuItem):
         with self.lock:
@@ -645,6 +657,23 @@ class DBHelper(object):
                 self.c.execute(sql_command, astuple(x)[:-1])
         # self.lock.unlock()
 
+    def insertCoupons(self, coupons: List[Coupon]) -> None:
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                sql_command = f"""
+                INSERT INTO {CouponTable.TABLE_NAME} (
+                    {CouponTable.COLUMN_DATE_START}, 
+                    {CouponTable.COLUMN_DATE_END}, 
+                    {CouponTable.COLUMN_DATE_CREATED}, 
+                    {CouponTable.COLUMN_AMOUNT}, 
+                    {CouponTable.COLUMN_IS_USED}, 
+                    {CouponTable.COLUMN_HASH}) 
+                    VALUES (?, ?, ?, ?, ?, ?)"""
+                for x in coupons:
+                    self.c.execute(sql_command, astuple(x)[:-1])
+        # self.lock.unlock()
+
     # Delete one
     def deleteExpense(self, _id: int):
         with self.lock:
@@ -854,6 +883,16 @@ class DBHelper(object):
                 )
         # self.lock.unlock()
 
+    def deleteCoupon(self, _id: int):
+        with self.lock:
+            # self.lock.lock()
+            with self.conn:
+                self.c.execute(
+                    f"DELETE FROM {CouponTable.TABLE_NAME} WHERE {CouponTable.COLUMN_ID}=?",
+                    (_id,),
+                )
+        # self.lock.unlock()
+
     # Delete all
 
     def deleteAllExpenses(self):
@@ -938,6 +977,10 @@ class DBHelper(object):
     def deleteAllFileDoc(self):
         with self.conn:
             self.c.execute(f"DELETE FROM {FileDocTable.TABLE_NAME}")
+
+    def deleteAllCoupons(self):
+        with self.conn:
+            self.c.execute(f"DELETE FROM {CouponTable.TABLE_NAME}")
 
     # Get all
 
@@ -1393,6 +1436,30 @@ class DBHelper(object):
                     results.append(FileDoc(name=x[1], date=x[2], comment=x[3], id=x[0]))
             return results
 
+    def getAllCoupons(self, sorted: bool = False) -> List[Coupon]:
+        with self.conn:
+            if sorted:
+                self.c.execute(
+                    f"SELECT * FROM {CouponTable.TABLE_NAME} ORDER BY {CouponTable.COLUMN_DATE_CREATED}"
+                )
+            else:
+                self.c.execute(f"SELECT * FROM {CouponTable.TABLE_NAME}")
+            all_x = self.c.fetchall()
+            results = []
+            if all_x is not None:
+                for x in all_x:
+                    results.append(
+                        Coupon(
+                            date_start=x[1],
+                            date_end=x[2],
+                            date_creation=x[3],
+                            amount=x[4],
+                            is_used=x[5],
+                            id=x[0],
+                        )
+                    )
+            return results
+
     # Get by id
 
     def getExpenseById(self, _id: int):
@@ -1742,6 +1809,25 @@ class DBHelper(object):
             else:
                 return x
 
+    def getCouponById(self, _id: int) -> Coupon:
+        with self.conn:
+            self.c.execute(
+                f"SELECT * FROM {CouponTable.TABLE_NAME} WHERE {CouponTable.COLUMN_ID}=?",
+                (_id,),
+            )
+            x = self.c.fetchone()
+            if x is not None:
+                return Coupon(
+                    date_start=x[1],
+                    date_end=x[2],
+                    date_creation=x[3],
+                    amount=x[4],
+                    is_used=x[5],
+                    id=x[0],
+                )
+            else:
+                return x
+
     # Update one
 
     def updateExpense(self, x: Expense):
@@ -1973,6 +2059,19 @@ class DBHelper(object):
             WHERE {FileDocTable.COLUMN_ID}=? """
             self.c.execute(sql_command, astuple(x))
 
+    def updateCoupon(self, x: Coupon):
+        with self.conn:
+            sql_command = f"""
+            UPDATE {CouponTable.TABLE_NAME} SET
+            {CouponTable.COLUMN_DATE_START}=?,
+            {CouponTable.COLUMN_DATE_END}=?,
+            {CouponTable.COLUMN_DATE_CREATED}=?,
+            {CouponTable.COLUMN_AMOUNT}=?,
+            {CouponTable.COLUMN_IS_USED}=?,
+            {CouponTable.COLUMN_HASH}=?
+            WHERE {CouponTable.COLUMN_ID}=? """
+            self.c.execute(sql_command, astuple(x))
+
     # Special Calls
     def getTableContent(self, _id: int):
         sql_command = f"""
@@ -2134,14 +2233,14 @@ class DBHelper(object):
         id_customer: int,
         completed: int = 0,
         nb_covers: int = 1,
-        on_table: bool = False,
+        on_table: int = 0,
     ):
 
         sell_id = self.insertSell(
             Sell(
                 id_worker=id_worker,
                 id_customer=id_customer,
-                date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                date=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 total=total,
                 completed=completed,
                 nb_covers=nb_covers,
@@ -2184,7 +2283,7 @@ class DBHelper(object):
         self.deleteSellContent(sell.id)
 
     def updateOrder(
-        self, sell: Sell, order_items: list, completed: int = 0
+        self, sell: Sell, order_items: List[OrderItem], completed: int = 0
     ) -> List[OrderItem]:
 
         old_order = self.getOrderBySellId(sell.id)
@@ -2355,10 +2454,9 @@ class DBHelper(object):
         self, date_start: str, date_end: str
     ) -> List[DifferenceHistory]:
         with self.conn:
-            worker_name = f"%{worker_name}%"
             self.c.execute(
                 f"SELECT * FROM {DifferenceHistoryTable.TABLE_NAME} WHERE {DifferenceHistoryTable.COLUMN_DATE} BETWEEN ? AND ?",
-                (worker_name, date_start, date_end),
+                (date_start, date_end),
             )
             all_x = self.c.fetchall()
             results = []
@@ -2398,7 +2496,7 @@ class DBHelper(object):
                     total=o_d.orderItemTotal,
                     is_ready=o_d.ready,
                     is_served=o_d.served,
-                    date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    date=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 )
             )
 
@@ -2712,6 +2810,31 @@ class DBHelper(object):
                     )
             return results
 
+    def getUnpaidExpenses(self) -> List[Expense]:
+        with self.conn:
+            self.c.execute(
+                f"SELECT * FROM {ExpenseTable.TABLE_NAME} WHERE {ExpenseTable.COLUMN_PAYED}=?",
+                (0,),
+            )
+            all_x = self.c.fetchall()
+            results = []
+            if all_x is not None:
+                for x in all_x:
+                    results.append(
+                        Expense(
+                            name=x[1],
+                            category=x[2],
+                            unit=x[3],
+                            quantity=x[4],
+                            price=x[5],
+                            supplier_id=x[6],
+                            date=x[7],
+                            payed=x[8],
+                            id=x[0],
+                        )
+                    )
+            return results
+
     def getFreeTables(self):
         with self.conn:
             self.c.execute(
@@ -2882,7 +3005,17 @@ class DBHelper(object):
                 (start_date, end_date),
             )
             (result,) = self.c.fetchone()
-            if result is not None:
+
+            self.c.execute(
+                f"SELECT sum({PaymentTable.COLUMN_AMOUNT}) FROM {PaymentTable.TABLE_NAME} WHERE {PaymentTable.COLUMN_DATE} BETWEEN ? AND ?",
+                (start_date, end_date),
+            )
+            (result_payment,) = self.c.fetchone()
+            if result is not None and result_payment is not None:
+                return result + result_payment
+            elif result is None and result_payment is not None:
+                return result_payment
+            elif result is not None and result_payment is None:
                 return result
             else:
                 return 0
@@ -3088,3 +3221,14 @@ class DBHelper(object):
                 )
             )
         return results
+
+    def getLastIdByTableName(self, table_name: str) -> int:
+        with self.conn:
+            self.c.execute(
+                f"SELECT seq FROM sqlite_sequence WHERE name=?", (table_name,)
+            )
+            result = self.c.fetchone()
+        if result is None:
+            return 0
+        else:
+            return result[0]

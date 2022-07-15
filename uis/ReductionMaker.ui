@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DialogReduce</class>
+ <widget class="QDialog" name="DialogReduce">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>890</width>
+    <height>587</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Reduction</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">*
+{
+	
+	font: 26pt &quot;MS Shell Dlg 2&quot;;
+	
+	color: rgb(79, 79, 79);
+	background-color:  rgba(223, 223, 223, 200);
+}
+
+
+QPushButton
+{ 
+	alternate-background-color: rgb(255, 255, 255);
+	
+	background-color: rgb(185, 185, 185);
+	border-width: 2px;
+    border-radius: 10px;
+	position: center;
+ }
+
+QPushButton:hover
+{
+	background: rgba(225, 225, 225, 180);
+	border-style: dashed;
+}
+
+QPushButton:pressed
+{
+	
+	background-color: rgb(136, 136, 136);
+	border-width: 2px;
+    border-radius: 10px;
+}
+
+QToolButton
+{ 
+	alternate-background-color: rgb(255, 255, 255);
+	
+	background-color: rgb(185, 185, 185);
+	border-width: 2px;
+    border-radius: 10px;
+	position: center;
+ }
+
+QToolButton:hover
+{
+	background: rgba(225, 225, 225, 180);
+	border-style: dashed;
+}
+
+QToolButton:pressed
+{
+	
+	background-color: rgb(136, 136, 136);
+	border-width: 2px;
+    border-radius: 10px;
+}
+
+QLineEdit
+{
+	background: transparent;
+	color: rgb(121, 121, 121);
+	border: none;
+	border-bottom: 1px solid #717072
+}
+</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <widget class="QFrame" name="f_content">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QToolButton" name="tb_coupon_reduce">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Coupon</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resource/resource.qrc">
+          <normaloff>:/Simple icons/simple_icons/fi-rr-ticket.svg</normaloff>:/Simple icons/simple_icons/fi-rr-ticket.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonTextUnderIcon</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="tb_manual_reduce">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Reduce</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resource/resource.qrc">
+          <normaloff>:/Simple icons/simple_icons/fi-rr-smile-wink.svg</normaloff>:/Simple icons/simple_icons/fi-rr-smile-wink.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+        <property name="popupMode">
+         <enum>QToolButton::DelayedPopup</enum>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonTextUnderIcon</enum>
+        </property>
+        <property name="arrowType">
+         <enum>Qt::NoArrow</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../resource/resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -50,6 +50,29 @@ QPushButton:pressed
 	border-style: inset;
 }
 
+QToolButton
+{ 
+	alternate-background-color: rgb(255, 255, 255);
+	background: rgba(225, 225, 225, 100);
+	border-width: 2px;
+    border-radius: 10px;
+	qproperty-iconSize: 32px 32px;
+	border-style: dashed;
+ }
+
+QToolButton:hover
+{
+	background: rgba(225, 225, 225, 180);
+	border-style: dashed;
+}
+
+QToolButton:pressed
+{
+	background: rgba(75, 75, 75, 180);
+	border-style: inset;
+}
+
+
 QLineEdit
 {
 	background: transparent;
@@ -101,7 +124,9 @@ QFrame
 QWidget
 {
 	background-color: rgb(192, 192, 192)
-}</string>
+}
+
+QTabBar::scroller {width: 80px;}</string>
   </property>
   <widget class="QWidget" name="w_background">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -839,13 +864,13 @@ QLabel
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>150</width>
+                 <width>180</width>
                  <height>50</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>200</width>
+                 <width>250</width>
                  <height>50</height>
                 </size>
                </property>
@@ -900,6 +925,52 @@ QPushButton:pressed
                 <property name="bottomMargin">
                  <number>0</number>
                 </property>
+                <item>
+                 <widget class="QPushButton" name="btn_couponGenerator">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="tabletTracking">
+                   <bool>false</bool>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../resource/resource.qrc">
+                    <normaloff>:/Simple icons/simple_icons/fi-rr-ticket.svg</normaloff>:/Simple icons/simple_icons/fi-rr-ticket.svg</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="btn_customPrint">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="tabletTracking">
+                   <bool>false</bool>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../resource/resource.qrc">
+                    <normaloff>:/Simple icons/simple_icons/fi-rr-print.svg</normaloff>:/Simple icons/simple_icons/fi-rr-print.svg</iconset>
+                  </property>
+                 </widget>
+                </item>
                 <item>
                  <widget class="QPushButton" name="btn_blockNote">
                   <property name="enabled">
@@ -2780,8 +2851,11 @@ QRadioButton::indicator::unChecked
                         <pointsize>16</pointsize>
                        </font>
                       </property>
+                      <property name="mouseTracking">
+                       <bool>true</bool>
+                      </property>
                       <property name="tabletTracking">
-                       <bool>false</bool>
+                       <bool>true</bool>
                       </property>
                       <property name="styleSheet">
                        <string notr="true"/>
@@ -2791,8 +2865,8 @@ QRadioButton::indicator::unChecked
                       </property>
                       <property name="iconSize">
                        <size>
-                        <width>35</width>
-                        <height>35</height>
+                        <width>64</width>
+                        <height>64</height>
                        </size>
                       </property>
                       <widget class="QWidget" name="tab_salade">
@@ -2818,7 +2892,7 @@ QRadioButton::indicator::unChecked
                              <x>0</x>
                              <y>0</y>
                              <width>374</width>
-                             <height>646</height>
+                             <height>617</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_13">
@@ -3184,7 +3258,7 @@ QRadioButton::indicator::unChecked
                              <x>0</x>
                              <y>0</y>
                              <width>374</width>
-                             <height>646</height>
+                             <height>617</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_6">
@@ -3496,7 +3570,7 @@ QRadioButton::indicator::unChecked
                              <x>0</x>
                              <y>0</y>
                              <width>374</width>
-                             <height>646</height>
+                             <height>617</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_7">
@@ -3808,7 +3882,7 @@ QRadioButton::indicator::unChecked
                              <x>0</x>
                              <y>0</y>
                              <width>374</width>
-                             <height>646</height>
+                             <height>617</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_11">
@@ -4120,7 +4194,7 @@ QRadioButton::indicator::unChecked
                              <x>0</x>
                              <y>0</y>
                              <width>374</width>
-                             <height>646</height>
+                             <height>617</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_16">
@@ -4432,7 +4506,7 @@ QRadioButton::indicator::unChecked
                              <x>0</x>
                              <y>0</y>
                              <width>374</width>
-                             <height>646</height>
+                             <height>617</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_17">
@@ -6079,6 +6153,9 @@ QComboBox
                     <font>
                      <pointsize>18</pointsize>
                     </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true"/>
                    </property>
                    <property name="currentIndex">
                     <number>0</number>
@@ -10037,6 +10114,32 @@ QComboBox
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_31">
                         <item>
+                         <widget class="QToolButton" name="tb_sellOpenBrowser">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <property name="text">
+                           <string>Ticket History Browser</string>
+                          </property>
+                          <property name="icon">
+                           <iconset resource="../resource/resource.qrc">
+                            <normaloff>:/Simple icons/simple_icons/fi-rr-incognito.svg</normaloff>:/Simple icons/simple_icons/fi-rr-incognito.svg</iconset>
+                          </property>
+                          <property name="iconSize">
+                           <size>
+                            <width>32</width>
+                            <height>32</height>
+                           </size>
+                          </property>
+                          <property name="toolButtonStyle">
+                           <enum>Qt::ToolButtonTextUnderIcon</enum>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
                          <widget class="QTableWidget" name="tw_sell">
                           <property name="font">
                            <font>
@@ -11558,7 +11661,7 @@ QComboBox
                                <second>0</second>
                                <year>2022</year>
                                <month>5</month>
-                               <day>20</day>
+                               <day>13</day>
                               </datetime>
                              </property>
                              <property name="currentSection">
@@ -11818,8 +11921,8 @@ QComboBox
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>569</width>
-                      <height>714</height>
+                      <width>411</width>
+                      <height>175</height>
                      </rect>
                     </property>
                     <layout class="QGridLayout" name="gridLayout_21">

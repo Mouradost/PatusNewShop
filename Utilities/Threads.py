@@ -1,4 +1,3 @@
-from PyQt5 import QtCore
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -12,62 +11,63 @@ from Utilities.UiUtilities import (
     handlePrint,
 )
 from DB.DbTables import *
-import datetime
+from datetime import datetime, timedelta
 import hashlib
 import socket
 import json
 from typing import List
-import logging
+from requests import get
 
 
-class InfoThread(QtCore.QThread):
+class InfoThread(QObject):
     UpdateInfo = pyqtSignal(int, int, int, int)
     logUpdater = pyqtSignal(str, bool)
     UpdateTables = pyqtSignal()
+    finished = pyqtSignal()
 
     def __init__(self, parent=None):
         super(InfoThread, self).__init__(parent)
         self.DB = DBHelper()
-        self.active = True
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.update_all)
 
-    def run(self):
+    def start(self):
         self.logUpdater.emit(f"[INFO THREAD] Started", False)
+        self.timer.start(60000)
+
+    def update_all(self):
         try:
-            while self.active:
-                self.logUpdater.emit(f"[INFO THREAD] Updating", False)
-                (
-                    nb_free_tables,
-                    nb_busy_tables,
-                    nb_month_sells,
-                    nb_day_sells,
-                ) = self.DB.getHomeScreenInfo(
-                    datetime.datetime.now().strftime("%Y-%m"),
-                    datetime.datetime.now().strftime("%Y-%m-%d"),
-                )
-                self.UpdateInfo.emit(
-                    nb_free_tables[0],
-                    nb_busy_tables[0],
-                    nb_month_sells[0],
-                    nb_day_sells[0],
-                )
-                # Check for any reservation in 1h range
-                self.check_tables()
-                # sleep for a minute
-                self.sleep(60)
+            self.logUpdater.emit(f"[INFO THREAD] Updating", False)
+            (
+                nb_free_tables,
+                nb_busy_tables,
+                nb_month_sells,
+                nb_day_sells,
+            ) = self.DB.getHomeScreenInfo(
+                datetime.now().strftime("%Y-%m"),
+                datetime.now().strftime("%Y-%m-%d"),
+            )
+            self.UpdateInfo.emit(
+                nb_free_tables[0],
+                nb_busy_tables[0],
+                nb_month_sells[0],
+                nb_day_sells[0],
+            )
+            # Check for any reservation in 1h range
+            self.check_tables()
         except Exception as e:
             self.logUpdater.emit(f"[INFO THREAD ERROR] {e}", True)
-            self.active = False
-            self.terminate()
+            self.stop()
 
     def check_tables(self):
         # Active reservation
         reservations = self.DB.getReservationByDateRange(
-            start_date=(
-                datetime.datetime.now() - datetime.timedelta(minutes=30)
-            ).strftime("%Y-%m-%d %H:%M"),
-            end_date=(
-                datetime.datetime.now() + datetime.timedelta(minutes=30)
-            ).strftime("%Y-%m-%d %H:%M"),
+            start_date=(datetime.now() - timedelta(minutes=30)).strftime(
+                "%Y-%m-%d %H:%M"
+            ),
+            end_date=(datetime.now() + timedelta(minutes=30)).strftime(
+                "%Y-%m-%d %H:%M"
+            ),
         )
         count = 0
         active_reserved_tables = []
@@ -90,8 +90,8 @@ class InfoThread(QtCore.QThread):
 
     def stop(self):
         self.logUpdater.emit(f"[INFO THREAD] Stopped", False)
-        self.active = False
-        self.exit()
+        self.timer.stop()
+        self.finished.emit()
 
 
 @dataclass
@@ -112,72 +112,115 @@ class ServerThread(QThread):
     SIZE = 1024
     FORMAT = "utf-8"
 
-    def __init__(self):
-        super(ServerThread, self).__init__()
+    def __init__(self, parent=None):
+        super(ServerThread, self).__init__(parent=parent)
         self.SETTINGS = ServerSetting()
         self.socket = None
         self.count = 0
         self.active = False
+        self.restarting = False
+        self.default_tried = False
         self.clients = []
 
     def run(self):
         try:
+            self.updateServerStatus.emit(f"Server starting...")
             self.bindServer()
-            self.logUpdater.emit("[SERVER] Server is configured", False)
             self.active = True
-            self.socket.listen(self.SETTINGS.MAX_CLIENTS)
-            self.logUpdater.emit(
-                f"[SERVER] Server is listening on {self.SETTINGS.IP}:{self.SETTINGS.PORT}",
-                False,
-            )
             while self.active:
-                client_socket, client_address = self.socket.accept()
-                client_socket.settimeout(2000)
-                clientHandler = ClientHandler(
-                    client=Client(socket=client_socket, address=client_address[0]),
-                    addClient=self.addClient,
-                    logUpdater=self.logUpdater,
-                    removeClient=self.removeClient,
-                    tablesUpdated=self.tablesUpdated,
-                    printerCall=self.printerCall,
-                )
-                clientHandler.signalFinish.connect(self.removeClientHandler)
-                clientHandler.signalKitchen.connect(self.sendToKitchen)
-                clientHandler.signalFromKitchen.connect(self.notifyTheClient)
-                self.clients.append(clientHandler)
-                clientHandler.start()
-                self.logUpdater.emit(
-                    f"[SERVER] Active connection: {len(self.clients)}", False
-                )
+                try:
+                    client_socket, client_address = self.socket.accept()
+                    client_socket.settimeout(1200)  # 20mn
+                    clientHandler = ClientHandler(
+                        id=f"{client_socket}",
+                        client=Client(socket=client_socket, address=client_address[0]),
+                        addClient=self.addClient,
+                        logUpdater=self.logUpdater,
+                        removeClient=self.removeClient,
+                        tablesUpdated=self.tablesUpdated,
+                        printerCall=self.printerCall,
+                    )
+                    clientHandler.signalFinish.connect(self.removeClientHandler)
+                    clientHandler.finished.connect(clientHandler.deleteLater)
+                    clientHandler.signalKitchen.connect(self.sendToKitchen)
+                    clientHandler.signalFromKitchen.connect(self.notifyTheClient)
+                    self.clients.append(clientHandler)
+                    clientHandler.start()
+                    self.logUpdater.emit(
+                        f"[SERVER] Active connection: {len(self.clients)}", False
+                    )
+                except Exception as e:
+                    if self.active and not self.restarting:
+                        self.logUpdater.emit(f"[SERVER] {e}", True)
+                        self.stop()
+                    elif self.active and self.restarting:
+                        self.bindServer()
         except Exception as e:
             self.logUpdater.emit(f"[SERVER] {e}", True)
             self.stop()
 
     def bindServer(self):
+        # self.bindServer() Need to implement a reconnect method
         try:
+            if self.socket is not None:
+                self.socket.close()
             self.SETTINGS.load()
             self.logUpdater.emit(f"[SERVER] Load setting: {self.SETTINGS}", False)
             self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.socket.bind((self.SETTINGS.IP, self.SETTINGS.PORT))
             self.updateServerStatus.emit(
-                f"Server started on {self.SETTINGS.IP}:{self.SETTINGS.PORT}"
+                f"Server started on {self.SETTINGS.IP}:{self.SETTINGS.PORT} WAN: {self.update_dns()}"
             )
+            self.socket.listen(self.SETTINGS.MAX_CLIENTS)
+            self.logUpdater.emit(
+                f"[SERVER] Server is listening on {self.SETTINGS.IP}:{self.SETTINGS.PORT}",
+                False,
+            )
+            self.restarting = False
         except Exception as e:
+            if self.default_tried:
+                self.logUpdater.emit(
+                    f"[SERVER RESTART WITH DEFAULT SETTINGS] {e}", True
+                )
+                self.updateServerStatus.emit(f"Server error !")
+                self.restarting = False
+                self.sleep(30)
+            else:
+                self.updateServerStatus.emit(
+                    f"Server bad settings, trying default setting after 10s..."
+                )
+                self.default_tried = True
+                self.logUpdater.emit(f"[SERVER RESTART] {e}", True)
+                self.sleep(10)
+                self.SETTINGS = ServerSetting()
+                self.logUpdater.emit(
+                    f"[SERVER RESTART] Trying default settings \n {self.SETTINGS}",
+                    False,
+                )
 
-            self.logUpdater.emit(f"[SERVER] {e}", True)
-            self.sleep(10)
-            self.SETTINGS = ServerSetting()
-            self.logUpdater.emit(
-                f"[SERVER] Trying default setting \n {self.SETTINGS}", False
-            )
-            # self.bindServer() Need to implement a reconnect method
-
-    def removeClientHandler(self, clientHandler):
+    def update_dns(self) -> str:
+        token = "1feec1b7-2c7a-4118-9588-61ce45682256"
+        domain = "patus"
+        # domain = "mouradost"
+        url = f"https://www.duckdns.org/update?domains={domain}&token={token}&verbose=true"
         try:
-            self.clients.remove(clientHandler)
+            return get(url).content.decode("utf8").split("\n")[1]
+        except Exception as e:
             self.logUpdater.emit(
-                f"[SERVER] Client list size: {len(self.clients)}", False
+                f"[SERVER WAN] Could not update wan ip \n {e}",
+                True,
             )
+            return ""
+
+    @pyqtSlot(str)
+    def removeClientHandler(self, id):
+        try:
+            for client in self.clients:
+                if id == client.id:
+                    self.clients.remove(client)
+                    self.logUpdater.emit(
+                        f"[SERVER] Client list size: {len(self.clients)}", False
+                    )
         except Exception as e:
             self.logUpdater.emit(f"[SERVER ERROR] Client removed error: {e}", True)
 
@@ -222,33 +265,44 @@ class ServerThread(QThread):
             client.sendOrderUpdate(ticket)
 
     def restart(self) -> None:
+        self.restarting = True
+        self.updateServerStatus.emit(f"Server restarting...")
+        if self.socket is not None:
+            self.socket.close()
         for client in self.clients:
             client.stop()
-        self.socket.close()
-        self.bindServer()
 
     def stop(self):
-        self.socket.close()
+        self.active = False
+        if self.socket is not None:
+            self.socket.close()
         for client in self.clients:
             client.sendDisconnect("Server down")
-            client.wait()
+            client.wait(1000)
         self.logUpdater.emit("[SERVER] Server is stopped", False)
         self.updateServerStatus.emit(f"Server closed")
-        self.active = False
         self.exit()
 
 
 class ClientHandler(QThread):
     SIZE = 1024
     FORMAT = "utf-8"
-    signalFinish = pyqtSignal(QThread)
+    signalFinish = pyqtSignal(str)
     signalKitchen = pyqtSignal(Ticket)
     signalFromKitchen = pyqtSignal(Ticket)
 
     def __init__(
-        self, client, addClient, logUpdater, removeClient, tablesUpdated, printerCall
+        self,
+        client,
+        addClient,
+        logUpdater,
+        removeClient,
+        tablesUpdated,
+        printerCall,
+        id=None,
     ):
         super(ClientHandler, self).__init__()
+        self.id = id
         self.SETTINGS = ServerSetting()
         self.client = client
         self.addClient = addClient
@@ -259,6 +313,7 @@ class ClientHandler(QThread):
         self.start_time = ""
         self.end_time = ""
         self.is_kitchen = False
+        self.is_super_user = False
 
         self.connected = True
         self.worker = None
@@ -274,9 +329,16 @@ class ClientHandler(QThread):
                 receiving = True
                 while receiving and self.connected:
                     msg += self.client.socket.recv(self.SIZE).decode(self.FORMAT)
-                    if msg[-1] == "&":
-                        receiving = False
-                        msg = msg[:-1]
+                    self.logUpdater.emit(
+                        f"[{self.client.address}] {msg} {len(msg)}", False
+                    )
+                    if len(msg) > 0:
+                        if msg[-1] == "&":
+                            receiving = False
+                            msg = msg[:-1]
+                    else:
+                        self.connected = False
+                        break
                 self.logUpdater.emit(f"[{self.client.address}] {msg}", False)
                 if msg == "":
                     self.logUpdater.emit(f"[{self.client.address}] {msg}", False)
@@ -287,16 +349,19 @@ class ClientHandler(QThread):
                         if data[-1] == "AUTH":
                             self.authenticate(data)
                         else:
-                            if self.is_kitchen:
-                                self.kitchen_handler(data=data, msg=msg)
+                            if self.is_super_user:
+                                self.super_handler(data=data, msg=msg)
                             else:
-                                self.serving_handler(data=data, msg=msg)
+                                if self.is_kitchen:
+                                    self.kitchen_handler(data=data, msg=msg)
+                                else:
+                                    self.serving_handler(data=data, msg=msg)
                     else:
                         self.logUpdater.emit(f"[{self.client.address}] {msg}", False)
             except Exception as e:
-                self.logUpdater.emit(f"[{self.client.address}] {e}", True)
-                self.connected = False
-
+                if self.connected:
+                    self.logUpdater.emit(f"[{self.client.address}] {e}", True)
+                    self.connected = False
         self.stop()
 
     def ring(self):
@@ -313,13 +378,16 @@ class ClientHandler(QThread):
 
     def constructOrder(self, data) -> List[OrderItem]:
         current_order = []
+        table_id = 0
         for orderItem in data:
+            if table_id != orderItem["tableId"]:
+                table_id = orderItem["tableId"]
             if orderItem["orderItemSupplements"] != []:
                 orderItem["orderItemSupplements"] = [
                     Supplement(**x) for x in orderItem["orderItemSupplements"]
                 ]
             current_order.append(OrderItem(**orderItem))
-        return current_order
+        return current_order, table_id
 
     def constructTicket(self, data) -> Ticket:
         data["orders"] = self.constructOrder(data["orders"])
@@ -361,22 +429,93 @@ class ClientHandler(QThread):
             self.client.name = username
             self.addClient.emit(self.client)
             return
+        elif username.split("|")[0] == "SuperUSER":
+            self.is_kitchen = False
+            self.is_super_user = True
+            username = username.split("|")[1]
         else:
             self.is_kitchen = False
+            self.is_super_user = False
 
         worker = self.db.getWorkerByUsername(username)
-        if (
-            isinstance(worker, Worker)
-            and hashlib.sha3_512(password.encode()).hexdigest() == worker.password
-            and isinstance(worker.id_category, int)
-        ):
-            self.client.socket.send("ok!AUTH\n".encode(self.FORMAT))
-            self.start_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            self.worker = worker
-            self.client.name = username
-            self.addClient.emit(self.client)
+        if isinstance(worker, Worker):
+            if (
+                self.db.getCategoryById(worker.id_category).name != "Administrator"
+                and self.is_super_user
+            ):
+                self.client.socket.send("no!AUTH\n".encode(self.FORMAT))
+                return
+
+            if hashlib.sha3_512(
+                password.encode()
+            ).hexdigest() == worker.password and isinstance(worker.id_category, int):
+                self.client.socket.send("ok!AUTH\n".encode(self.FORMAT))
+                self.start_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                self.worker = worker
+                self.client.name = username
+                if not self.is_super_user:
+                    self.addClient.emit(self.client)
+            else:
+                self.client.socket.send("no!AUTH\n".encode(self.FORMAT))
         else:
             self.client.socket.send("no!AUTH\n".encode(self.FORMAT))
+
+    def super_handler(self, data: List[str], msg: str) -> None:
+        # print("super_handler", data, msg)
+        if data[-1] == "SUMMARY":
+            self.logUpdater.emit(f"[{self.client.address}] {msg}", False)
+            start_date, end_date = msg.split(";")
+            total_expenses = self.db.getExpensesTotalPriceByDateRange(
+                start_date, end_date
+            )
+
+            total_sells = self.db.getSellsTotalPriceByDateRange(start_date, end_date)
+
+            (
+                nb_free_tables,
+                nb_busy_tables,
+                nb_month_sells,
+                nb_day_sells,
+            ) = self.db.getHomeScreenInfo(
+                datetime.now().strftime("%Y-%m"),
+                datetime.now().strftime("%Y-%m-%d"),
+            )
+
+            self.client.socket.send(
+                (
+                    f"{total_expenses};{total_sells};{nb_free_tables[0]};{nb_busy_tables[0]};{nb_month_sells[0]};{nb_day_sells[0]}!SUMMARY\n"
+                ).encode(self.FORMAT)
+            )
+        elif data[-1] == "EXPENSECATEGORY":
+            self.client.socket.send(
+                (
+                    json.dumps([x.__dict__ for x in self.db.getAllExpenseCategories()])
+                    + "!EXPENSECATEGORY\n"
+                ).encode(self.FORMAT)
+            )
+        elif data[-1] == "SUPPLIER":
+            self.client.socket.send(
+                (
+                    json.dumps([x.__dict__ for x in self.db.getAllSuppliers()])
+                    + "!SUPPLIER\n"
+                ).encode(self.FORMAT)
+            )
+        elif data[-1] == "EXPENSE":
+            try:
+                self.db.insertExpense(Expense(**json.loads(data[0])))
+                self.client.socket.send(("ok!EXPENSE\n").encode(self.FORMAT))
+            except Exception as e:
+                self.client.socket.send(("no!EXPENSE\n").encode(self.FORMAT))
+                self.logUpdater.emit(
+                    f"[{self.client.address} ERROR EXPENSE] {e} ", True
+                )
+        elif data[-1] == "UNPAIDEXPENSE":
+            self.client.socket.send(
+                (
+                    json.dumps([x.__dict__ for x in self.db.getUnpaidExpenses()])
+                    + "!UNPAIDEXPENSE\n"
+                ).encode(self.FORMAT)
+            )
 
     def serving_handler(self, data: List[str], msg: str) -> None:
         if data[-1] == "MENUCATEGORY":
@@ -434,7 +573,7 @@ class ClientHandler(QThread):
         elif data[-1] == "ORDER":
             self.logUpdater.emit(f"[{self.client.address}] {msg}", False)
             orders, sell_id, total, comment, nb_covers = data[0].split(";")
-            orders = self.constructOrder(json.loads(orders))
+            orders, table_id = self.constructOrder(json.loads(orders))
             order_show = orders
             old = False
             if sell_id == "":
@@ -445,7 +584,7 @@ class ClientHandler(QThread):
                     id_customer=1,
                     completed=0,
                     nb_covers=nb_covers,
-                    on_table=True,
+                    on_table=table_id,
                 )
 
             else:
@@ -530,19 +669,21 @@ class ClientHandler(QThread):
 
     def sendDisconnect(self, msg) -> None:
         self.client.socket.send("ok!DISCONNECT\n".encode(self.FORMAT))
-        self.end_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.end_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.logUpdater.emit(f"[{self.client.address}] {msg}", False)
         self.connected = False
 
     def stop(self):
         try:
-            if self.connected:
+            self.signalFinish.emit(self.id)
+            if self.connected and self.client.socket is not None:
                 self.client.socket.send(("!DISCONNECT\n").encode(self.FORMAT))
+            self.connected = False
+            if self.client.socket is not None:
+                self.client.socket.close()
             if self.worker is not None:
                 if self.end_time == "":
-                    self.end_time = datetime.datetime.now().strftime(
-                        "%Y-%m-%d %H:%M:%S"
-                    )
+                    self.end_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 self.db.insertPointer(
                     Pointer(
                         date_start=self.start_time,
@@ -551,14 +692,10 @@ class ClientHandler(QThread):
                     )
                 )
             self.removeClient.emit(self.client.address)
-            self.signalFinish.emit(self)
             self.logUpdater.emit(
                 f"[SERVER] Server is not connected anymore to {self.client.address}",
                 False,
             )
-
-            self.client.socket.close()
-            self.connected = False
             self.exit()
         except Exception as e:
             self.logUpdater.emit(f"[{self.client.address} ERROR] {e} ", True)
@@ -583,9 +720,10 @@ class PrinterThread(QThread):
         calling_thread: QThread = None,
         cancel: bool = False,
         errors_dictionary: dict = None,
+        parent=None,
     ):
 
-        super(PrinterThread, self).__init__()
+        super(PrinterThread, self).__init__(parent=parent)
         self.which_printer = which_printer
         self.worker_name = worker_name
         self.order_items = order_items

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-import datetime
-from typing import List
+from datetime import datetime
+from typing import List, Union, Optional
 
 
 @dataclass
@@ -21,7 +21,7 @@ class Expense:
     quantity: float = 0
     price: float = 0
     supplier_id: int = None
-    date: str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    date: str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     payed: bool = True
     id: int = None
 
@@ -53,7 +53,6 @@ class MenuItemPhone:
     id: int = None
 
     def toJson(self):
-        print(self)
         if self.supplements is None:
             self.supplements = []
 
@@ -80,7 +79,6 @@ class Supplement:
     id: int = None
 
     def toJson(self):
-        print(self)
         return {
             "name": self.name,
             "related_item_id": self.related_item_id,
@@ -149,7 +147,7 @@ class Waste:
     category: str = None
     quantity: float = None
     price: float = None
-    date: str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    date: str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     id: int = None
 
 
@@ -405,3 +403,85 @@ class DifferenceHistory:
     is_served: bool
     date: str
     id: int = None
+
+
+@dataclass
+class Coupon:
+    date_start: Union[datetime, str]
+    date_end: Union[datetime, str]
+    date_creation: Union[datetime, str]
+    amount: float
+    is_used: bool = False
+    hash: object = None
+    id: int = None
+
+    def to_qr_code(self):
+        date_start_str = (
+            self.date_start.strftime("%Y-%m-%d %H:%M:%S")
+            if isinstance(self.date_start, datetime)
+            else self.date_start
+        )
+        date_end_str = (
+            self.date_end.strftime("%Y-%m-%d %H:%M:%S")
+            if isinstance(self.date_end, datetime)
+            else self.date_end
+        )
+        date_creation_str = (
+            self.date_creation.strftime("%Y-%m-%d %H:%M:%S")
+            if isinstance(self.date_creation, datetime)
+            else self.date_creation
+        )
+        return f"""
+        Number: {self.id:05},\n
+        Start: {date_start_str},\n
+        End: {date_end_str},\n
+        Creation: {date_creation_str},\n
+        Amount: {self.amount:,.2f} DA
+    """
+
+    def for_db(self):
+        self.date_start = (
+            self.date_start.strftime("%Y-%m-%d %H:%M:%S")
+            if isinstance(self.date_start, datetime)
+            else self.date_start
+        )
+        self.date_end = (
+            self.date_end.strftime("%Y-%m-%d %H:%M:%S")
+            if isinstance(self.date_end, datetime)
+            else self.date_end
+        )
+        self.date_creation = (
+            self.date_creation.strftime("%Y-%m-%d %H:%M:%S")
+            if isinstance(self.date_creation, datetime)
+            else self.date_creation
+        )
+        return self
+
+    def from_db(self):
+        self.date_start = (
+            self.date_start
+            if isinstance(self.date_start, datetime)
+            else datetime.strptime(self.date_start.split(".")[0], "%Y-%m-%d %H:%M:%S")
+        )
+        self.date_end = (
+            self.date_end
+            if isinstance(self.date_end, datetime)
+            else datetime.strptime(self.date_end.split(".")[0], "%Y-%m-%d %H:%M:%S")
+        )
+        self.date_creation = (
+            self.date_creation
+            if isinstance(self.date_creation, datetime)
+            else datetime.strptime(
+                self.date_creation.split(".")[0], "%Y-%m-%d %H:%M:%S"
+            )
+        )
+        return self
+
+    def to_str(self):
+        return f"""
+Number: {self.id:05},
+Start: {self.date_start},
+End: {self.date_end},
+Creation: {self.date_creation},
+Amount: {self.amount:,.2f} DA
+{"Used" if self.is_used else "Valid"}"""

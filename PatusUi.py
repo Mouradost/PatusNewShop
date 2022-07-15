@@ -1,5 +1,22 @@
 import logging
 
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+
+from functools import partial
+from PyQt5 import uic
+import threading
+from datetime import datetime, timedelta
+import hashlib
+import time
+import copy
+import glob
+import sys
+import os
+
+from Utilities.CouponMaker import CouponMakerUi
+from Utilities.ReductionMaker import ReductionMaker
 from Utilities.UiUtilities import *
 from DB.DBHandler import DBHelper
 from Utilities import Utility
@@ -8,21 +25,6 @@ from Utilities.Threads import *
 from Utilities.LicenseChecker import *
 from Utilities.DashBoardShow import DashBoard
 from resource import resource_rc
-from Utilities import Threads
-
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-
-from functools import partial
-from PyQt5 import uic
-import threading
-import datetime
-import hashlib
-import time
-import copy
-import sys
-import os
 
 
 class PatusMainUI(QMainWindow):
@@ -69,11 +71,11 @@ class PatusMainUI(QMainWindow):
             self.tableDictId,
         ) = ({}, {}, {}, {}, {}, {}, {}, {}, {})
         self.prepareLogFile()
-        self.check_me(load_current_license())
+        # self.check_me(load_current_license())
 
-        self.infoThread = InfoThread()
+        self.infoThread = InfoThread(parent=self)
         try:
-            self.serverThread = ServerThread()
+            self.serverThread = ServerThread(parent=self)
             self.serverThread.addClient.connect(self.addClientDashboard)
             self.serverThread.removeClient.connect(self.removeClientDashboard)
             self.serverThread.logUpdater.connect(self.callLog)
@@ -82,6 +84,7 @@ class PatusMainUI(QMainWindow):
             self.serverThread.updateServerStatus.connect(self.updateServerStatus)
             self.serverThread.printerCall.connect(self.printerCall)
             self.serverThread.notificationCall.connect(self.notifySelf)
+            self.serverThread.finished.connect(self.deleteServerThread)
         except Exception as e:
             logging.error(f"Server not running --> {e}")
             self.serverThread = None
@@ -382,6 +385,7 @@ class PatusMainUI(QMainWindow):
         self.btn_sellShow.clicked.connect(self.showSell)
         self.btn_sellLoad.clicked.connect(self.loadOrder)
         self.btn_sellHistory.clicked.connect(self.showOrderHistory)
+        self.tb_sellOpenBrowser.clicked.connect(self.showOrderHistoryBrowser)
         self.btn_sellClear.clicked.connect(lambda: self.btn_sellShow.setEnabled(False))
         self.btn_sellClear.clicked.connect(lambda: self.btn_sellLoad.setEnabled(False))
         self.btn_sellClear.clicked.connect(
@@ -401,7 +405,7 @@ class PatusMainUI(QMainWindow):
             lambda: self.cb_sellIdCustomer.setCurrentIndex(0)
         )
         self.btn_sellClear.clicked.connect(
-            lambda: self.dte_sellDate.setDateTime(QDateTime(datetime.datetime.now()))
+            lambda: self.dte_sellDate.setDateTime(QDateTime(datetime.now()))
         )
         self.tw_sell.doubleClicked.connect(self.loadSell)
         self.le_sellTotal.setValidator(QDoubleValidator())
@@ -486,6 +490,7 @@ class PatusMainUI(QMainWindow):
         )
         # self.btn_wasteStockClear.clicked.connect(
         #     lambda: self.tw_wasteStock.setCurrentRow(0))
+        self.tw_waste.doubleClicked.connect(self.editWaste)
         self.le_wasteStockQuantity.setValidator(QDoubleValidator())
         # Waste Custom
         self.btn_wasteCustomSave.clicked.connect(self.addWasteCustom)
@@ -532,7 +537,7 @@ class PatusMainUI(QMainWindow):
         )
         self.btn_reservationClear.clicked.connect(self.showReservation)
         self.btn_reservationClear.clicked.connect(
-            lambda: self.dte_reservation.setDateTime(QDateTime(datetime.datetime.now()))
+            lambda: self.dte_reservation.setDateTime(QDateTime(datetime.now()))
         )
         self.cb_reservationDate.clicked.connect(self.searchReservation)
         self.de_reservationSearchDate.dateTimeChanged.connect(self.searchReservation)
@@ -606,6 +611,8 @@ class PatusMainUI(QMainWindow):
         self.homeScreen()
         self.infoThread.UpdateInfo.connect(self.updateInfo)
         self.infoThread.UpdateTables.connect(self.updateTables)
+        self.infoThread.logUpdater.connect(self.callLog)
+        self.infoThread.finished.connect(self.deleteInfoThread)
         self.infoThread.start()
         if self.serverThread is not None:
             self.serverThread.start()
@@ -619,17 +626,85 @@ class PatusMainUI(QMainWindow):
 
         # Block Note show
         self.btn_blockNote.clicked.connect(self.showBlockNote)
+        # Custom print show
+        self.btn_customPrint.clicked.connect(self.showCustomPrint)
+        # Coupon generator
+        self.btn_couponGenerator.clicked.connect(self.showCouponGenerator)
 
         # Set dates
-        self.dte_docDate.setDateTime(QDateTime(datetime.datetime.now()))
-        self.dte_sellDate.setDateTime(QDateTime(datetime.datetime.now()))
-        self.dte_reservation.setDateTime(QDateTime(datetime.datetime.now()))
+        self.dte_docDate.setDateTime(QDateTime(datetime.now()))
+        self.dte_sellDate.setDateTime(QDateTime(datetime.now()))
+        self.dte_reservation.setDateTime(QDateTime(datetime.now()))
+
+        # Tray setup
+        self.tray = QSystemTrayIcon(QIcon(":/Simple icons/patus_logo.svg"), self)
+        self.create_tray()
+
+    """Creating the tray"""
+
+    def create_tray(self):
+        self.menuTray = QMenu(self)
+
+        self.actionShow = QAction(self.tr("Show the application"))
+        self.actionShow.triggered.connect(self.show)
+        self.menuTray.addAction(self.actionShow)
+
+        self.menuTray.addSeparator()
+
+        self.actionShowBlockNote = QAction(self.tr("Block Note"))
+        self.actionShowBlockNote.triggered.connect(self.showBlockNote)
+        self.menuTray.addAction(self.actionShowBlockNote)
+
+        self.menuTray.addSeparator()
+
+        self.actionShowLogs = QAction(self.tr("Logs"))
+        self.actionShowLogs.triggered.connect(self.showLogs)
+        self.menuTray.addAction(self.actionShowLogs)
+
+        self.actionShowSettings = QAction(self.tr("Settings"))
+        self.actionShowSettings.triggered.connect(self.changeSettings)
+        self.menuTray.addAction(self.actionShowSettings)
+
+        self.menuTray.addSeparator()
+
+        self.actionAbout = QAction(self.tr("About Patus"))
+        self.actionAbout.triggered.connect(
+            lambda: QMessageBox.about(
+                self,
+                self.tr("About Patus"),
+                self.tr("Patus was created by Lablack Mourad"),
+            )
+        )
+        self.menuTray.addAction(self.actionAbout)
+
+        self.actionAboutQt = QAction(self.tr("About Qt"))
+        self.actionAboutQt.triggered.connect(
+            lambda: QMessageBox.aboutQt(self, self.tr("About Qt"))
+        )
+        self.menuTray.addAction(self.actionAboutQt)
+
+        self.menuTray.addSeparator()
+
+        self.actionQuit = QAction(self.tr("Quit"))
+        self.actionQuit.triggered.connect(self.closePatus)
+        self.menuTray.addAction(self.actionQuit)
+
+        self.tray.setContextMenu(self.menuTray)
+        self.tray.setToolTip(self.tr("Patus 1.0.1 Made by Lablack Mourad"))
+        self.tray.show()
+
+        self.tray.messageClicked.connect(self.show_notification_tray)
+        self.tray.messageClicked.connect(self.show)
+
+    def show_notification_tray(self):
+        if self.btn_notification.isEnabled():
+            self.f_notification.setVisible(True)
 
     """License verification"""
 
     def check_me(self, license=""):
         if not check_license(license):
-            check_dialog = CheckerL()
+            check_dialog = CheckerL(parent=self)
             check_dialog.show()
             rsp = check_dialog.exec_()
             if rsp != 1:
@@ -640,6 +715,12 @@ class PatusMainUI(QMainWindow):
 
     @staticmethod
     def prepareLogFile(level: int = logging.ERROR):
+        # level = logging.DEBUG
+        # logging.basicConfig(
+        #     level=level,
+        #     format="%(asctime)s %(levelname)s: %(message)s",
+        # )
+
         logFilePath = os.path.join(os.getcwd(), "tmp", "PatusLog.log")
         os.makedirs(os.path.join(os.getcwd(), "tmp"), exist_ok=True)
         logging.basicConfig(
@@ -653,7 +734,7 @@ class PatusMainUI(QMainWindow):
     def startServer(self):
         try:
             if self.serverThread is None:
-                self.serverThread = Threads.ServerThread()
+                self.serverThread = ServerThread(parent=self)
                 self.serverThread.addClient.connect(self.addClientDashboard)
                 self.serverThread.removeClient.connect(self.removeClientDashboard)
                 self.serverThread.logUpdater.connect(self.callLog)
@@ -662,29 +743,52 @@ class PatusMainUI(QMainWindow):
                 self.serverThread.updateServerStatus.connect(self.updateServerStatus)
                 self.serverThread.printerCall.connect(self.printerCall)
                 self.serverThread.notificationCall.connect(self.notifySelf)
-                self.serverThread.finished.connect(self.stoppedServerThread)
+                self.serverThread.finished.connect(self.deleteServerThread)
                 self.serverThread.start()
             else:
-                self.serverThread.stop()
-                self.serverThread.wait(1000)
+                self.stoppedServerThread()
         except Exception as e:
             logging.error(f"[MAIN UI] Start server thread: {e}")
 
     def stoppedServerThread(self):
+        self.serverThread.stop()
+        self.serverThread.wait(1000)
+
+    def stoppedInfoThread(self):
+        self.infoThread.stop()
+
+    def deleteInfoThread(self):
+        self.infoThread.deleteLater()
+        logging.info("[MAIN UI] Info thread deleted and stopped")
+        self.infoThread = None
+
+    def deleteServerThread(self):
+        self.serverThread.deleteLater()
+        logging.info("[MAIN UI] Server deleted and stopped")
         self.serverThread = None
 
     """BottumBarMenu"""
 
     def showLogs(self):
         logFilePath = os.path.join(os.getcwd(), "tmp", "PatusLog.log")
-        log_previewer = LogPreviewer(logFilePath)
+        log_previewer = LogPreviewer(logFilePath, parent=self)
         log_previewer.show()
         log_previewer.exec_()
 
     def showBlockNote(self):
-        block_note = BlockNote(self.DB)
+        block_note = BlockNote(self.DB, parent=self)
         block_note.show()
         block_note.exec_()
+
+    def showCustomPrint(self):
+        custom_ticket = CustomTicket(self.currentWorker, parent=self)
+        custom_ticket.show()
+        custom_ticket.exec_()
+
+    def showCouponGenerator(self):
+        coupon_maker_ui = CouponMakerUi(parent=self)
+        coupon_maker_ui.show()
+        coupon_maker_ui.exec_()
 
     """SideBarMenu"""
 
@@ -709,13 +813,20 @@ class PatusMainUI(QMainWindow):
     @pyqtSlot(str)
     def notifySelf(self, msg: str):
         addNewNotification(parent=self.w_notification, message=msg)
+        if self.tray.isVisible() and self.tray.supportsMessages():
+            self.tray.showMessage(
+                self.tr("Order ready"),
+                self.tr(msg),
+                QIcon(":/Simple icons/simple_icons/fi-rr-utensils.svg"),
+                10000,
+            )
 
     """Home screen"""
 
     def homeScreen(self):
         def homeThread():
             while self.sw_content.currentIndex() == 0 and self:
-                current_datetime = datetime.datetime.now()
+                current_datetime = datetime.now()
                 self.l_time.setText(
                     f"{current_datetime.hour:02d}:{current_datetime.minute:02d}:{current_datetime.second:02d}"
                 )
@@ -1907,7 +2018,9 @@ class PatusMainUI(QMainWindow):
                 given=self.current.total,
                 time_date=self.current.date,
             )
-            printerUi = PrinterProblem(tickets=[ticket], places=["Preview"])
+            printerUi = PrinterProblem(
+                tickets=[ticket], places=["Preview"], parent=self
+            )
             printerUi.setWindowTitle("Ticket preview")
             printerUi.buttonBox.setVisible(False)
             printerUi.show()
@@ -2258,9 +2371,9 @@ class PatusMainUI(QMainWindow):
         self.le_stockUnit.setText(self.current.unit)
         self.le_stockQuantity.setText(str(self.current.quantity))
         self.cb_stockIsIngredient.setChecked(self.current.is_ingredient)
-        self.btn_categoryAdd.setEnabled(False)
-        self.btn_categoryEdit.setEnabled(True)
-        self.btn_categoryDelete.setEnabled(True)
+        self.btn_stockAdd.setEnabled(False)
+        self.btn_stockEdit.setEnabled(True)
+        self.btn_stockDelete.setEnabled(True)
 
     def addStockDB(self):
 
@@ -2434,7 +2547,7 @@ class PatusMainUI(QMainWindow):
         self.le_docName.clear()
         self.le_docComment.clear()
         self.le_docPath.clear()
-        self.dte_docDate.setDateTime(QDateTime(datetime.datetime.now()))
+        self.dte_docDate.setDateTime(QDateTime(datetime.now()))
         self.btn_docAdd.setEnabled(True)
         self.btn_docEdit.setEnabled(False)
         self.btn_docDelete.setEnabled(False)
@@ -2546,7 +2659,7 @@ class PatusMainUI(QMainWindow):
     def clearPaymentDb(self):
         self.cb_payment_worker.setCurrentIndex(0)
         self.le_payment_amount.clear()
-        self.de_payment_date.setDateTime(QDateTime(datetime.datetime.now()))
+        self.de_payment_date.setDateTime(QDateTime(datetime.now()))
         self.btn_paymentAdd.setEnabled(True)
         self.btn_paymentEdit.setEnabled(False)
         self.btn_paymentDelete.setEnabled(False)
@@ -2749,6 +2862,9 @@ class PatusMainUI(QMainWindow):
             msg.exec_()
 
     def editOnFly(self):
+        # self.le_cashRegisterComment.setFocus()
+        # self.le_reservationName.show()
+        # print(self.le_reservationName.isVisible())
         return
         # print(self.tw_orderList.item(
         #     self.tw_orderList.currentRow(), 0).text())
@@ -2779,7 +2895,7 @@ class PatusMainUI(QMainWindow):
         try:
             free_tables = self.DB.getFreeTables()
             current_table = self.DB.getTableById(self.current_table)
-            table_changer_dialog = TableChanger(free_tables=free_tables)
+            table_changer_dialog = TableChanger(free_tables=free_tables, parent=self)
             table_changer_dialog.show()
             rsp = table_changer_dialog.exec_()
             if rsp and rsp != -1:
@@ -2790,6 +2906,8 @@ class PatusMainUI(QMainWindow):
                 self.DB.updateTable(current_table)
                 self.current_table = int(current_table.id)
                 self.l_cashRegisterTableNumber.setText(str(rsp))
+                for order in self.currentOrder:
+                    order.tableId = self.current_table
                 self.notifyClients("TABLES")
         except Exception as e:
             msg = QMessageBox()
@@ -2901,7 +3019,28 @@ class PatusMainUI(QMainWindow):
                         j = 0
                 # self.tw_foodMenu.addTab(scroll_area, menu_category.name)
                 scroll_area.setWidget(widget)
-                self.tw_foodMenu.addTab(tab_widget, menu_category.name)
+                is_icon = (
+                    len(
+                        glob.glob(
+                            os.path.join(
+                                os.getcwd(),
+                                "resource",
+                                "Menu_icons",
+                                f"{menu_category.name}.*",
+                            )
+                        )
+                    )
+                    > 0
+                )
+                self.tw_foodMenu.addTab(
+                    tab_widget,
+                    QIcon(
+                        os.path.join(
+                            os.getcwd(), "resource", "Menu_icons", menu_category.name
+                        )
+                    ),
+                    "" if is_icon else menu_category.name,
+                )
 
     def calculateTotal(self):
         total = 0
@@ -3002,7 +3141,7 @@ class PatusMainUI(QMainWindow):
 
     def deleteCurrent(self):
         try:
-            confirmDeletingOrder = ConfirmDeletingOrder()
+            confirmDeletingOrder = ConfirmDeletingOrder(parent=self)
             confirmDeletingOrder.show()
             rsp = confirmDeletingOrder.exec_()
             if rsp:
@@ -3032,6 +3171,7 @@ class PatusMainUI(QMainWindow):
                 tax=self.tax,
                 mobile=True,
                 cancel=True,
+                parent=self,
             )
             self.printerThread.printStatus.connect(self.printerProblem)
             self.printerThread.logUpdater.connect(self.callLog)
@@ -3085,6 +3225,7 @@ class PatusMainUI(QMainWindow):
                 ticket_number=self.currentSell.id,
                 total=total,
                 printerThread=PrinterThread,
+                parent=self,
             )
             pay_dialog.show()
             rsp = pay_dialog.exec_()
@@ -3187,7 +3328,7 @@ class PatusMainUI(QMainWindow):
 
     def resumeOrder(self):
         try:
-            hold_dialog = Holder()
+            hold_dialog = Holder(parent=self)
             hold_dialog.show()
             rsp = hold_dialog.exec_()
             if rsp:
@@ -3276,13 +3417,28 @@ class PatusMainUI(QMainWindow):
     def showOrderHistory(self):
         try:
             assert isinstance(self.current, Sell)
-            sell_history = SellHistory(self.current.id, self)
+            sell_history = SellHistory(self.current.id, parent=self)
             sell_history.show()
             sell_history.exec_()
         except Exception as e:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Warning)
             msg.setText("Loading sell history failed")
+            msg.setDetailedText(str(e))
+            msg.setWindowTitle("Warning message")
+            msg.exec_()
+
+    @pyqtSlot()
+    def showOrderHistoryBrowser(self):
+        QToolButton
+        try:
+            sell_history = SellHistoryBrowser(parent=self)
+            sell_history.show()
+            sell_history.exec_()
+        except Exception as e:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Loading sell history browser failed")
             msg.setDetailedText(str(e))
             msg.setWindowTitle("Warning message")
             msg.exec_()
@@ -3303,9 +3459,18 @@ class PatusMainUI(QMainWindow):
             expense_item = self.DB.getExpenseByNameCat(
                 name=stock_item.name, category=stock_item.category
             )
-            estimated_price = (expense_item.price / expense_item.quantity) * float(
-                self.le_wasteStockQuantity.text()
-            )
+            if expense_item is None:
+                response = QInputDialog.getDouble(
+                    self, "Estimated price could not be determined", "Estimated price"
+                )
+                if response[1]:
+                    estimated_price = response[0]
+                else:
+                    estimated_price = 0
+            else:
+                estimated_price = (expense_item.price / expense_item.quantity) * float(
+                    self.le_wasteStockQuantity.text()
+                )
             self.DB.insertWaste(
                 Waste(
                     worker_id=self.workerDict[
@@ -3364,6 +3529,29 @@ class PatusMainUI(QMainWindow):
 
         displayDbData(self.tw_waste, all_data)
 
+    def editWaste(self):
+        waste = self.DB.getWasteById(
+            int(
+                self.tw_waste.item(
+                    self.tw_waste.currentRow(),
+                    self.tw_waste.columnCount() - 1,
+                ).text()
+            )
+        )
+        msgBox = QMessageBox(self.w_wasteCustom)
+        msgBox.setStyleSheet('* {font: 14pt "MS Shell Dlg 2";}')
+        msgBox.setBaseSize(600, 450)
+        msgBox.setWindowTitle("Waste deleting...")
+        msgBox.setText("Do you want to delete this waste ?")
+        msgBox.setInformativeText("Click show more to check the waste")
+        msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        msgBox.setDefaultButton(QMessageBox.No)
+        msgBox.setDetailedText(str(waste))
+        ret = msgBox.exec()
+        if ret == QMessageBox.Yes:
+            self.DB.deleteWaste(waste.id)
+            self.showWasteHistory()
+
     """Reservation"""
 
     def showTablesReservation(self):
@@ -3371,18 +3559,16 @@ class PatusMainUI(QMainWindow):
             "yyyy-MM-dd HH:mm"
         )
 
-        requested_time = datetime.datetime.strptime(
-            requested_time_str, "%Y-%m-%d %H:%M"
-        )
+        requested_time = datetime.strptime(requested_time_str, "%Y-%m-%d %H:%M")
 
-        # requested_time = (datetime.datetime.now() +
-        #                   datetime.timedelta(hours=24))
+        # requested_time = (datetime.now() +
+        #                   timedelta(hours=24))
 
         all_data = self.DB.getFreeTablesByDateRange(
-            start_date=(requested_time - datetime.timedelta(minutes=60)).strftime(
+            start_date=(requested_time - timedelta(minutes=60)).strftime(
                 "%Y-%m-%d %H:%M"
             ),
-            end_date=(requested_time + datetime.timedelta(minutes=60)).strftime(
+            end_date=(requested_time + timedelta(minutes=60)).strftime(
                 "%Y-%m-%d %H:%M"
             ),
         )
@@ -3394,7 +3580,7 @@ class PatusMainUI(QMainWindow):
         all_data = self.DB.getAllReservations()
 
         displayDbData(self.tw_reservation, all_data)
-        now_date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        now_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.dte_reservation.setDateTime(
             QDateTime.fromString(now_date, "yyyy-MM-dd HH:mm:ss")
         )
@@ -3514,12 +3700,10 @@ class PatusMainUI(QMainWindow):
             target_date = self.de_reservationSearchDate.dateTime().toString(
                 "yyyy-MM-dd"
             )
-            requested_time = datetime.datetime.strptime(target_date, "%Y-%m-%d")
+            requested_time = datetime.strptime(target_date, "%Y-%m-%d")
             all_data = self.DB.getReservationByDateRange(
                 start_date=requested_time.strftime("%Y-%m-%d"),
-                end_date=(requested_time + datetime.timedelta(hours=24)).strftime(
-                    "%Y-%m-%d"
-                ),
+                end_date=(requested_time + timedelta(hours=24)).strftime("%Y-%m-%d"),
             )
             displayDbData(self.tw_reservation, all_data)
         else:
@@ -3706,18 +3890,18 @@ class PatusMainUI(QMainWindow):
     """Reduction functions"""
 
     def reductionSetup(self):
-        reduction_dialog = Reducer()
+        reduction_dialog = ReductionMaker(parent=self)
         reduction_dialog.show()
         rsp = reduction_dialog.exec_()
         if rsp:
-            self.tax = float(reduction_dialog.le_reduction.text())
+            self.tax = reduction_dialog.reduction
             self.lcdN_tax.setProperty("value", self.tax)
             self.calculateTotal()
 
     """Nb Covers functions"""
 
     def setNbCoversSetup(self):
-        reduction_dialog = NbCoversChooser()
+        reduction_dialog = NbCoversChooser(parent=self)
         reduction_dialog.show()
         rsp = reduction_dialog.exec_()
         if rsp:
@@ -3802,6 +3986,7 @@ class PatusMainUI(QMainWindow):
                         old=old,
                         tax=self.tax,
                         mobile=True,
+                        parent=self,
                     )
                     self.printerThread.printStatus.connect(self.printerProblem)
                     self.printerThread.logUpdater.connect(self.callLog)
@@ -3902,6 +4087,7 @@ class PatusMainUI(QMainWindow):
             tax=tax,
             mobile=True,
             calling_thread=calling_thread,
+            parent=self,
         )
         self.printerThread.printStatus.connect(self.printerProblem)
         self.printerThread.signalCallingThread.connect(self.notifyClient)
@@ -3952,6 +4138,8 @@ class PatusMainUI(QMainWindow):
             self.btn_exit.setEnabled(True)
             self.btn_logs.setEnabled(True)
             self.btn_notification.setEnabled(True)
+            self.btn_customPrint.setEnabled(True)
+            self.btn_couponGenerator.setEnabled(True)
             if worker_category.name != "Administrator":
                 self.btn_cashRegisterDeleteCurrent.setEnabled(False)
             else:
@@ -3979,8 +4167,8 @@ class PatusMainUI(QMainWindow):
             self.currentWorker = worker
             self.currentWorkerCat = worker_category
             self.currentPointer = Pointer(
-                date_start=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                date_end=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                date_start=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                date_end=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 id_worker=self.currentWorker.id,
             )
             self.clearCashRegister()
@@ -4016,10 +4204,10 @@ class PatusMainUI(QMainWindow):
         self.btn_logInOut.setEnabled(True)
         self.btn_logs.setEnabled(False)
         self.btn_notification.setEnabled(False)
+        self.btn_customPrint.setEnabled(False)
+        self.btn_couponGenerator.setEnabled(False)
         if self.currentPointer is not None:
-            self.currentPointer.date_end = datetime.datetime.now().strftime(
-                "%Y-%m-%d %H:%M:%S"
-            )
+            self.currentPointer.date_end = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
             self.DB.insertPointer(self.currentPointer)
         self.currentWorker = None
@@ -4027,26 +4215,28 @@ class PatusMainUI(QMainWindow):
 
     def changeSettings(self):
         try:
-            setting = SettingUI()
+            setting = SettingUI(parent=self)
             setting.show()
             rsp = setting.exec_()
             if rsp:
                 logging.info(f"restart server with new settings...")
                 if self.serverThread is not None:
-                    self.serverThread.stop()
-                    self.serverThread.wait(1000)
-                    # self.serverThread.restart()
-                self.serverThread = ServerThread()
-                self.serverThread.addClient.connect(self.addClientDashboard)
-                self.serverThread.removeClient.connect(self.removeClientDashboard)
-                self.serverThread.logUpdater.connect(self.callLog)
-                # self.serverThread.logUpdater.connect(print)
-                self.serverThread.tablesUpdated.connect(self.populateTables)
-                self.serverThread.printerCall.connect(self.printerCall)
-                self.serverThread.updateServerStatus.connect(self.updateServerStatus)
-                self.serverThread.notificationCall.connect(self.notifySelf)
-                self.serverThread.finished.connect(self.stoppedServerThread)
-                self.serverThread.start()
+                    # self.stoppedServerThread()
+                    self.serverThread.restart()
+                else:
+                    self.serverThread = ServerThread(parent=self)
+                    self.serverThread.addClient.connect(self.addClientDashboard)
+                    self.serverThread.removeClient.connect(self.removeClientDashboard)
+                    self.serverThread.logUpdater.connect(self.callLog)
+                    # self.serverThread.logUpdater.connect(print)
+                    self.serverThread.tablesUpdated.connect(self.populateTables)
+                    self.serverThread.printerCall.connect(self.printerCall)
+                    self.serverThread.updateServerStatus.connect(
+                        self.updateServerStatus
+                    )
+                    self.serverThread.notificationCall.connect(self.notifySelf)
+                    self.serverThread.finished.connect(self.deleteServerThread)
+                    self.serverThread.start()
         except Exception as e:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
@@ -4058,22 +4248,47 @@ class PatusMainUI(QMainWindow):
 
     # On close work
 
-    def closeEvent(self, event):
+    def closePatus(self, is_patus=False):
         self.sw_content.setCurrentIndex(1)
         if self.currentPointer is not None:
-            self.currentPointer.date_end = datetime.datetime.now().strftime(
-                "%Y-%m-%d %H:%M:%S"
-            )
+            self.currentPointer.date_end = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
             self.DB.insertPointer(self.currentPointer)
 
         if self.serverThread is not None:
-            self.serverThread.stop()
+            self.stoppedServerThread()
         if self.infoThread is not None:
-            self.infoThread.stop()
+            self.stoppedInfoThread()
+        if not is_patus:
+            qApp.quit()
+
+    def closeEvent(self, event):
+        if self.tray.isVisible():
+            if (
+                QMessageBox.question(
+                    self,
+                    self.tr("Close Patus"),
+                    self.tr("Do you want to leave Patus run in the background ?"),
+                )
+                == QMessageBox.Yes
+            ):
+                qApp.setQuitOnLastWindowClosed(False)
+                self.logout()
+                self.hide()
+                event.ignore()
+            else:
+                qApp.setQuitOnLastWindowClosed(True)
+                self.closePatus(True)
+                event.accept()
+        else:
+            qApp.setQuitOnLastWindowClosed(True)
+            self.closePatus(True)
+            event.accept()
 
 
 if __name__ == "__main__":
+    # print(QStyleFactory.keys())
     app = QApplication(sys.argv)
+    # app.setStyle("Fusion")
     window = PatusMainUI()
     sys.exit(app.exec_())

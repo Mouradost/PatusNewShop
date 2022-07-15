@@ -237,7 +237,7 @@ class PaymentTable:
     COLUMN_AMOUNT: str = "amount"
 
 
-@dataclass
+@dataclass(frozen=True)
 class DifferenceHistoryTable:
     TABLE_NAME: str = "DifferenceHistory"
     COLUMN_ID: str = "_id"
@@ -252,3 +252,15 @@ class DifferenceHistoryTable:
     COLUMN_IS_READY: str = "is_ready"
     COLUMN_IS_SERVED: str = "is_served"
     COLUMN_DATE: str = "date"
+
+
+@dataclass(frozen=True)
+class CouponTable:
+    TABLE_NAME: str = "Coupon"
+    COLUMN_ID: str = "_id"
+    COLUMN_DATE_START: str = "date_start"
+    COLUMN_DATE_END: str = "date_end"
+    COLUMN_DATE_CREATED: str = "date_created"
+    COLUMN_AMOUNT: str = "amount"
+    COLUMN_IS_USED: str = "is_used"
+    COLUMN_HASH: str = "hash"
