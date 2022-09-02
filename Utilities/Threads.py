@@ -199,9 +199,8 @@ class ServerThread(QThread):
                 )
 
     def update_dns(self) -> str:
-        token = "1feec1b7-2c7a-4118-9588-61ce45682256"
-        domain = "patus"
-        # domain = "mouradost"
+        token = "Your API key"
+        domain = "Your domain"
         url = f"https://www.duckdns.org/update?domains={domain}&token={token}&verbose=true"
         try:
             return get(url).content.decode("utf8").split("\n")[1]
