@@ -200,6 +200,7 @@ class ServerThread(QThread):
                 )
 
     def update_dns(self) -> str:
+<<<<<<< HEAD
         dns_provider = self.SETTINGS.SHOP_DNS_PROVIDER
         domain = self.SETTINGS.SHOP_DOMAIN
         token = self.SETTINGS.SHOP_TOKEN
@@ -214,6 +215,18 @@ class ServerThread(QThread):
                 )
                 return ""
         else:
+=======
+        token = "Your API key"
+        domain = "Your domain"
+        url = f"https://www.duckdns.org/update?domains={domain}&token={token}&verbose=true"
+        try:
+            return get(url).content.decode("utf8").split("\n")[1]
+        except Exception as e:
+            self.logUpdater.emit(
+                f"[SERVER WAN] Could not update wan ip \n {e}",
+                True,
+            )
+>>>>>>> 6bd893d9787f6db0599bfa19470c6f76ebfc9997
             return ""
 
     @pyqtSlot(str)

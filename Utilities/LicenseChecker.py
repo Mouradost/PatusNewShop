@@ -57,7 +57,7 @@ def save_current_license(license: str) -> None:
 
 
 def license_generator(license: str) -> str:
-    license = f"lbk:{license}:ml"
+    license = f"Choose a way you want to create the licence"
     return hashlib.sha3_512(license.encode()).hexdigest()
 
 
