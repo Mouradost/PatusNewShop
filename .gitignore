@@ -7,9 +7,9 @@
 **/resource/
 **/Setting/*.json
 *.db
-**/tmp/*
+**/tmp/
 **/DB/*.db
-**/tmp/*
+**/tmp/
 
 # fonts
 **/fonts/
