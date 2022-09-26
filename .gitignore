@@ -1,12 +1,15 @@
-# /resource/
+
 *.pyc
 **/__pycach__/
 .idea
+
+# Private folders
+**/resource/
+**/Setting/*.json
 *.db
-
 **/tmp/*
-
 **/DB/*.db
+**/tmp/*
 
 # fonts
 **/fonts/

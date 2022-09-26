@@ -139,6 +139,7 @@ class ServerThread(QThread):
                         removeClient=self.removeClient,
                         tablesUpdated=self.tablesUpdated,
                         printerCall=self.printerCall,
+                        server_setting=self.SETTINGS,
                     )
                     clientHandler.signalFinish.connect(self.removeClientHandler)
                     clientHandler.finished.connect(clientHandler.deleteLater)
@@ -199,17 +200,20 @@ class ServerThread(QThread):
                 )
 
     def update_dns(self) -> str:
-        token = "1feec1b7-2c7a-4118-9588-61ce45682256"
-        domain = "patus"
-        # domain = "mouradost"
-        url = f"https://www.duckdns.org/update?domains={domain}&token={token}&verbose=true"
-        try:
-            return get(url).content.decode("utf8").split("\n")[1]
-        except Exception as e:
-            self.logUpdater.emit(
-                f"[SERVER WAN] Could not update wan ip \n {e}",
-                True,
-            )
+        dns_provider = self.SETTINGS.SHOP_DNS_PROVIDER
+        domain = self.SETTINGS.SHOP_DOMAIN
+        token = self.SETTINGS.SHOP_TOKEN
+        if len(dns_provider) > 0 and len(domain) > 0 and len(token) > 0:
+            url = f"https://{dns_provider}/update?domains={domain}&token={token}&verbose=true"
+            try:
+                return get(url).content.decode("utf8").split("\n")[1]
+            except Exception as e:
+                self.logUpdater.emit(
+                    f"[SERVER WAN] Could not update wan ip \n {e}",
+                    True,
+                )
+                return ""
+        else:
             return ""
 
     @pyqtSlot(str)
@@ -300,10 +304,11 @@ class ClientHandler(QThread):
         tablesUpdated,
         printerCall,
         id=None,
+        server_setting: ServerSetting = ServerSetting(),
     ):
         super(ClientHandler, self).__init__()
         self.id = id
-        self.SETTINGS = ServerSetting()
+        self.SETTINGS = server_setting
         self.client = client
         self.addClient = addClient
         self.logUpdater = logUpdater
@@ -423,7 +428,7 @@ class ClientHandler(QThread):
 
     def authenticate(self, data: List[str]) -> None:
         username, password = data[0].split(";")
-        if username == "Kitchen" and password == "|---Mouradost---|":
+        if username == "Kitchen" and password == self.SETTINGS.KITCHEN_SECRET:
             self.is_kitchen = True
             self.client.socket.send("ok!AUTH\n".encode(self.FORMAT))
             self.client.name = username
@@ -772,7 +777,10 @@ class PrinterThread(QThread):
                     kitchen_places = []
 
                     try:
-                        if self.kitchen_count > 0:
+                        if (
+                            self.kitchen_count > 0
+                            and self.printer_setting.KITCHEN_ACTIVE
+                        ):
                             handlePrint(
                                 ip_address=self.printer_setting.KITCHEN_IP,
                                 text=self.ticket_kitchen,
@@ -785,15 +793,33 @@ class PrinterThread(QThread):
                             f"[PRINTER THREAD] Kitchen ({self.printer_setting.KITCHEN_IP}) is down with error ({e})",
                             True,
                         )
-                        if self.kitchen_count > 0:
+                        if (
+                            self.kitchen_count > 0
+                            and self.printer_setting.KITCHEN_ACTIVE
+                        ):
                             kitchen_tickets.append(self.ticket_kitchen)
                             kitchen_places.append("Kitchen")
-                        # if self.pizza_count > 0:
-                        #     kitchen_tickets.append(self.ticket_pizza)
-                        #     kitchen_places.append("Pizza")
 
                     try:
-                        if self.drink_count > 0:
+                        if self.pizza_count > 0 and self.printer_setting.PIZZA_ACTIVE:
+                            handlePrint(
+                                ip_address=self.printer_setting.PIZZA_IP,
+                                text=self.ticket_kitchen,
+                                show_logo=False,
+                                show_qr_code=False,
+                                height=2,
+                            )
+                    except Exception as e:
+                        self.logUpdater.emit(
+                            f"[PRINTER THREAD] Pizza ({self.printer_setting.KITCHEN_IP}) is down with error ({e})",
+                            True,
+                        )
+                        if self.pizza_count > 0 and self.printer_setting.PIZZA_ACTIVE:
+                            kitchen_tickets.append(self.ticket_pizza)
+                            kitchen_places.append("Pizza")
+
+                    try:
+                        if self.drink_count > 0 and self.printer_setting.BAR_ACTIVE:
                             handlePrint(
                                 ip_address=self.printer_setting.BAR_IP,
                                 text=self.ticket_bar,
@@ -806,9 +832,10 @@ class PrinterThread(QThread):
                             f"[PRINTER THREAD] Bar ({self.printer_setting.BAR_IP}) is down with error ({e})",
                             True,
                         )
-                        if self.drink_count > 0:
+                        if self.drink_count > 0 and self.printer_setting.BAR_ACTIVE:
                             kitchen_tickets.append(self.ticket_bar)
                             kitchen_places.append("Bar")
+
                     if len(kitchen_tickets) > 0:
                         self.signalCallingThread.emit(
                             f"{self.ticket_number}!PRINTER", self.callingThread
@@ -826,19 +853,20 @@ class PrinterThread(QThread):
                     )
 
                     # Print the receipt
-                    try:
-                        handlePrint(
-                            ip_address=self.printer_setting.CASHIER_IP,
-                            text=self.ticket,
-                            show_logo=True,
-                            show_qr_code=False,
-                        )
-                    except Exception as e:
-                        self.logUpdater.emit(
-                            f"[PRINTER THREAD] Cashier ({self.printer_setting.CASHIER_IP}) is down with error ({e})",
-                            True,
-                        )
-                        self.printStatus.emit([self.ticket], ["Receipt"], self)
+                    if self.printer_setting.CASHIER_ACTIVE:
+                        try:
+                            handlePrint(
+                                ip_address=self.printer_setting.CASHIER_IP,
+                                text=self.ticket,
+                                show_logo=True,
+                                show_qr_code=False,
+                            )
+                        except Exception as e:
+                            self.logUpdater.emit(
+                                f"[PRINTER THREAD] Cashier ({self.printer_setting.CASHIER_IP}) is down with error ({e})",
+                                True,
+                            )
+                            self.printStatus.emit([self.ticket], ["Receipt"], self)
 
                 else:
 
@@ -849,6 +877,10 @@ class PrinterThread(QThread):
                         comment=self.comment,
                         ticket_number=self.ticket_number,
                         given=self.given,
+                        shop_name=self.printer_setting.SHOP_NAME,
+                        shop_address=self.printer_setting.SHOP_ADDRESS,
+                        shop_district=self.printer_setting.SHOP_DISTRICT,
+                        shop_phone=self.printer_setting.SHOP_PHONE,
                     )
 
                     # Print the Checker

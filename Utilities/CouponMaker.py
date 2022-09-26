@@ -60,7 +60,7 @@ class CouponMakerUi(QDialog):
         file_name = QFileDialog.getOpenFileName(
             self,
             "Choose a picture",
-            os.path.join(os.getcwd(), "resource", "Patus_coupon_template"),
+            os.path.join(os.getcwd(), "resource", "Coupon_template"),
             "SVG Files (*.svg)",
         )[0]
         if os.path.isfile(file_name):
@@ -74,7 +74,7 @@ class CouponMakerUi(QDialog):
         file_name = QFileDialog.getOpenFileName(
             self,
             "Choose a picture",
-            os.path.join(os.getcwd(), "resource", "Patus_coupon_template"),
+            os.path.join(os.getcwd(), "resource", "Coupon_template"),
             "PNG Files (*.png)",
         )[0]
         if os.path.isfile(file_name):
@@ -271,7 +271,7 @@ Printer output format: {"NativeFormat" if printer.outputFormat() else "PdfFormat
                         else os.path.join(
                             os.getcwd(),
                             "resource",
-                            "Patus_coupon_template",
+                            "Coupon_template",
                             "side_picture.png",
                         ),
                     )

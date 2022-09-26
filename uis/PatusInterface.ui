@@ -2891,8 +2891,8 @@ QRadioButton::indicator::unChecked
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>374</width>
-                             <height>617</height>
+                             <width>261</width>
+                             <height>126</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_13">
@@ -3257,8 +3257,8 @@ QRadioButton::indicator::unChecked
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>374</width>
-                             <height>617</height>
+                             <width>261</width>
+                             <height>126</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_6">
@@ -3569,8 +3569,8 @@ QRadioButton::indicator::unChecked
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>374</width>
-                             <height>617</height>
+                             <width>261</width>
+                             <height>126</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_7">
@@ -3881,8 +3881,8 @@ QRadioButton::indicator::unChecked
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>374</width>
-                             <height>617</height>
+                             <width>261</width>
+                             <height>126</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_11">
@@ -4193,8 +4193,8 @@ QRadioButton::indicator::unChecked
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>374</width>
-                             <height>617</height>
+                             <width>261</width>
+                             <height>126</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_16">
@@ -4505,8 +4505,8 @@ QRadioButton::indicator::unChecked
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>374</width>
-                             <height>617</height>
+                             <width>261</width>
+                             <height>157</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_17">
@@ -11661,7 +11661,7 @@ QComboBox
                                <second>0</second>
                                <year>2022</year>
                                <month>5</month>
-                               <day>13</day>
+                               <day>12</day>
                               </datetime>
                              </property>
                              <property name="currentSection">
@@ -12255,7 +12255,7 @@ QPushButton:pressed
                 <bool>false</bool>
                </property>
                <property name="text">
-                <string>Patus 1.0.1</string>
+                <string>LBK-RESTORATION 1.2</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>

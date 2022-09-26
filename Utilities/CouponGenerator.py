@@ -68,9 +68,9 @@ def create_coupon(
         amount=4000.0,
     ),
     template: str = os.path.join(
-        os.getcwd(), "resource", "Patus_coupon_template", "Patus-coupon-original.svg"
+        os.getcwd(), "resource", "Coupon_template", "Coupon-original.svg"
     ),
-    file_out: str = os.path.join(os.getcwd(), "tmp", "Patus-coupon-new.svg"),
+    file_out: str = os.path.join(os.getcwd(), "tmp", "Coupon-new.svg"),
     side_image: str = "side_image.png",
 ):
     qr_code = to_qr_code(coupon, svg_method="basic")
@@ -118,7 +118,7 @@ def create_coupon_xml(
         amount=4000.0,
     ),
     template: str = os.path.join(
-        os.getcwd(), "resource", "Patus_coupon_template", "Patus-coupon-original.svg"
+        os.getcwd(), "resource", "Coupon_template", "Coupon-original.svg"
     ),
     side_image: str = "side_image.png",
 ):
@@ -150,7 +150,7 @@ def create_coupon_xml(
                     for key in child.keys():
                         child.set(key, child.get(key).strip("mm"))
                     element.append(child)
-    tree.write("Patus-coupon-test.svg")
+    tree.write("Coupon-test.svg")
     return etree.tostring(tree)
 
 
@@ -162,7 +162,7 @@ def main():
         date_creation=datetime.now(),
         amount=1000.0,
     )
-    create_coupon_xml(coupon, template="./Patus-coupon-tiny.svg")
+    create_coupon_xml(coupon, template="./Coupon-tiny.svg")
 
 
 if __name__ == "__main__":

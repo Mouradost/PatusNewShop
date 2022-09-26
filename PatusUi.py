@@ -25,12 +25,20 @@ from Utilities.Threads import *
 from Utilities.LicenseChecker import *
 from Utilities.DashBoardShow import DashBoard
 from resource import resource_rc
+from Setting.Setting import ServerSetting
 
 
 class PatusMainUI(QMainWindow):
     def __init__(self, **kwargs):
         super(PatusMainUI, self).__init__(**kwargs)
         uic.loadUi(os.path.join(os.getcwd(), "uis", "PatusInterface.ui"), self)
+        self.serverSetting = ServerSetting()
+        self.serverSetting.load()
+        self.setWindowTitle(self.serverSetting.SHOP_NAME)
+        self.setWindowIcon(
+            QIcon(os.path.join(os.getcwd(), "resource", "shop_logo.png"))
+        )
+
         self.tables_settings = QSettings("Patus", "Tables")
         self.DB = DBHelper()
         self.sw_content.setCurrentIndex(0)
@@ -71,7 +79,7 @@ class PatusMainUI(QMainWindow):
             self.tableDictId,
         ) = ({}, {}, {}, {}, {}, {}, {}, {}, {})
         self.prepareLogFile()
-        # self.check_me(load_current_license())
+        self.check_me(load_current_license())
 
         self.infoThread = InfoThread(parent=self)
         try:
@@ -637,7 +645,9 @@ class PatusMainUI(QMainWindow):
         self.dte_reservation.setDateTime(QDateTime(datetime.now()))
 
         # Tray setup
-        self.tray = QSystemTrayIcon(QIcon(":/Simple icons/patus_logo.svg"), self)
+        self.tray = QSystemTrayIcon(
+            QIcon(os.path.join(os.getcwd(), "resource", "shop_logo.png")), self
+        )
         self.create_tray()
 
     """Creating the tray"""
@@ -721,7 +731,7 @@ class PatusMainUI(QMainWindow):
         #     format="%(asctime)s %(levelname)s: %(message)s",
         # )
 
-        logFilePath = os.path.join(os.getcwd(), "tmp", "PatusLog.log")
+        logFilePath = os.path.join(os.getcwd(), "tmp", "shop_log.log")
         os.makedirs(os.path.join(os.getcwd(), "tmp"), exist_ok=True)
         logging.basicConfig(
             filename=logFilePath,
@@ -770,7 +780,7 @@ class PatusMainUI(QMainWindow):
     """BottumBarMenu"""
 
     def showLogs(self):
-        logFilePath = os.path.join(os.getcwd(), "tmp", "PatusLog.log")
+        logFilePath = os.path.join(os.getcwd(), "tmp", "shop_log.log")
         log_previewer = LogPreviewer(logFilePath, parent=self)
         log_previewer.show()
         log_previewer.exec_()
@@ -2017,6 +2027,10 @@ class PatusMainUI(QMainWindow):
                 ticket_number=self.current.id,
                 given=self.current.total,
                 time_date=self.current.date,
+                shop_name=self.serverSetting.SHOP_NAME,
+                shop_address=self.serverSetting.SHOP_ADDRESS,
+                shop_district=self.serverSetting.SHOP_DISTRICT,
+                shop_phone=self.serverSetting.SHOP_PHONE,
             )
             printerUi = PrinterProblem(
                 tickets=[ticket], places=["Preview"], parent=self

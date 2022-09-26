@@ -38,7 +38,7 @@ def handlePrint(
     )
     printer.charcode("MULTILINGUAL")
     if show_logo:
-        printer.image(os.path.join(os.getcwd(), "resource", "patus_ticket_logo.jpg"))
+        printer.image(os.path.join(os.getcwd(), "resource", "ticket_logo.png"))
     printer.text(text)
     if show_qr_code:
         printer.qr("https://www.instagram.com/__patus_/")
@@ -451,13 +451,30 @@ class SettingUI(QDialog):
         self.buttonBox.rejected.connect(self.reject)
         self.serverSetting = ServerSetting()
         self.serverSetting.load()
+
+        self.le_shop_name.setText(self.serverSetting.SHOP_NAME)
+        self.le_shop_address.setText(self.serverSetting.SHOP_ADDRESS)
+        self.le_shop_district.setText(self.serverSetting.SHOP_DISTRICT)
+        self.le_shop_phone.setText(self.serverSetting.SHOP_PHONE)
+        self.le_shop_domain.setText(self.serverSetting.SHOP_DOMAIN)
+        self.le_shop_token.setText(self.serverSetting.SHOP_TOKEN)
+        self.le_shop_dns_provider.setText(self.serverSetting.SHOP_DNS_PROVIDER)
+        self.le_kitchen_secret.setText(self.serverSetting.KITCHEN_SECRET)
+
         self.le_ip.setText(self.serverSetting.IP)
         self.sb_port.setValue(self.serverSetting.PORT)
         self.sb_maxClients.setValue(self.serverSetting.MAX_CLIENTS)
+
         self.le_cashier_ip.setText(self.serverSetting.CASHIER_IP)
         self.le_kitchen_ip.setText(self.serverSetting.KITCHEN_IP)
         self.le_pizza_ip.setText(self.serverSetting.PIZZA_IP)
         self.le_bar_ip.setText(self.serverSetting.BAR_IP)
+
+        self.cb_cashier_active.setChecked(self.serverSetting.CASHIER_ACTIVE)
+        self.cb_kitchen_active.setChecked(self.serverSetting.KITCHEN_ACTIVE)
+        self.cb_pizza_active.setChecked(self.serverSetting.PIZZA_ACTIVE)
+        self.cb_bar_active.setChecked(self.serverSetting.BAR_ACTIVE)
+
         self.cb_drawer_pin.setCurrentIndex(
             self.dict_pin_index[self.serverSetting.DRAWER_PIN]
         )
@@ -500,13 +517,30 @@ class SettingUI(QDialog):
 
     def validate_click(self):
         if len(self.le_ip.text()) > 0:
+
+            self.serverSetting.SHOP_NAME = self.le_shop_name.text()
+            self.serverSetting.SHOP_ADDRESS = self.le_shop_address.text()
+            self.serverSetting.SHOP_DISTRICT = self.le_shop_district.text()
+            self.serverSetting.SHOP_PHONE = self.le_shop_phone.text()
+            self.serverSetting.SHOP_DOMAIN = self.le_shop_domain.text()
+            self.serverSetting.SHOP_TOKEN = self.le_shop_token.text()
+            self.serverSetting.SHOP_DNS_PROVIDER = self.le_shop_dns_provider.text()
+            self.serverSetting.KITCHEN_SECRET = self.le_kitchen_secret.text()
+
             self.serverSetting.IP = self.le_ip.text()
             self.serverSetting.PORT = self.sb_port.value()
             self.serverSetting.MAX_CLIENTS = self.sb_maxClients.value()
+
             self.serverSetting.CASHIER_IP = self.le_cashier_ip.text()
             self.serverSetting.KITCHEN_IP = self.le_kitchen_ip.text()
             self.serverSetting.PIZZA_IP = self.le_pizza_ip.text()
             self.serverSetting.BAR_IP = self.le_bar_ip.text()
+
+            self.serverSetting.CASHIER_ACTIVE = self.cb_cashier_active.isChecked()
+            self.serverSetting.KITCHEN_ACTIVE = self.cb_kitchen_active.isChecked()
+            self.serverSetting.PIZZA_ACTIVE = self.cb_pizza_active.isChecked()
+            self.serverSetting.BAR_ACTIVE = self.cb_bar_active.isChecked()
+
             self.serverSetting.DRAWER_PIN = int(self.cb_drawer_pin.currentText())
             self.serverSetting.save()
             self.done(1)
@@ -588,7 +622,7 @@ def createProductContainer(parent, db, product: MenuItem, table_id, fc):
     frame.setMaximumSize(200, 400)
     # Picture or name
     label = QLabel(parent=frame)
-    label.setPixmap(QPixmap(os.path.join(os.getcwd(), "resource", "patus_logo.jpg")))
+    label.setPixmap(QPixmap(os.path.join(os.getcwd(), "resource", "shop_logo.jpg")))
     label.setScaledContents(True)
     label.setAlignment(Qt.AlignHCenter)
     label.setMaximumSize(200, 150)
@@ -819,6 +853,10 @@ def prepareTicketForCashier(
     ticket_number: int,
     given: float,
     time_date: datetime = None,
+    shop_name: str = "",
+    shop_address: str = "",
+    shop_district: str = "",
+    shop_phone: str = "",
 ):
     total = 0
     ticket_txt = ""
@@ -875,18 +913,19 @@ def prepareTicketForCashier(
     ticket_txt += f"{'RECEIVED':<33}{to_money(given):^13}\n"
     ticket_txt += f"{'RETURNED':<33}{to_money(given - (total - tax)):^13}\n"
     ticket_txt += "=" * 46 + " \n"
-    ticket_txt += f"{'PATUS vous remercie pour votre visite':^46}\n"
-    ticket_txt += "=" * 46 + " \n"
-    t = "          Hai Es-Sédikia, Oran, Algérie"
-    ticket_txt += (
-        "Adresse : "
-        + f"{'60 Rue Houari Boualouane,':<36}\n"
-        + f"{t:<46}\n"
-        + "Fix : "
-        + f"{'    041-82-57-38':<40}\n"
-        + "=" * 46
-        + " \n"
-    )
+    if len(shop_name) > 0:
+        ticket_txt += f"{f'{shop_name} vous remercie pour votre visite':^46}\n"
+        ticket_txt += "=" * 46 + " \n"
+    if len(shop_address) > 0:
+        ticket_txt += (
+            "Adresse : "
+            + f"{f'{shop_address},':<36}\n"
+            + f"{shop_district:<46}\n"
+            + "Fix : "
+            + f"{f'    {shop_phone}':<40}\n"
+            + "=" * 46
+            + " \n"
+        )
 
     return ticket_txt
 

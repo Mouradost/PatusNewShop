@@ -361,3 +361,28 @@
 2022-07-03 16:10:01,980 ERROR: [105.235.137.135] [WinError 10054] An existing connection was forcibly closed by the remote host
 2022-07-03 17:59:48,165 ERROR: [PRINTER THREAD] Kitchen (192.168.1.203) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
 2022-07-03 18:19:27,180 ERROR: [192.168.3.4] timed out
+2022-09-26 11:35:49,998 ERROR: No settings found --> 'SHOP_NAME'
+2022-09-26 12:56:27,148 ERROR: [SERVER WAN] Could not update wan ip 
+ list index out of range
+2022-09-26 12:56:49,949 ERROR: [SERVER WAN] Could not update wan ip 
+ list index out of range
+2022-09-26 12:57:33,075 ERROR: [SERVER WAN] Could not update wan ip 
+ list index out of range
+2022-09-26 12:57:57,052 ERROR: [PRINTER THREAD] Cashier (192.168.1.201) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-09-26 12:58:36,823 ERROR: [PRINTER THREAD] Cashier (192.168.1.201) is down with error ([WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond)
+2022-09-26 13:02:59,289 ERROR: [SERVER WAN] Could not update wan ip 
+ HTTPSConnectionPool(host='test', port=443): Max retries exceeded with url: /update?domains=test&token=test&verbose=true (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000002030F6880A0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))
+2022-09-26 13:04:12,203 ERROR: [SERVER WAN] Could not update wan ip 
+ HTTPSConnectionPool(host='test', port=443): Max retries exceeded with url: /update?domains=test&token=test&verbose=true (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000001959E9460A0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))
+2022-09-26 13:04:58,361 ERROR: [SERVER WAN] Could not update wan ip 
+ HTTPSConnectionPool(host='test', port=443): Max retries exceeded with url: /update?domains=test&token=test&verbose=true (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000002194D90B0A0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))
+2022-09-26 13:05:20,317 ERROR: [SERVER WAN] Could not update wan ip 
+ HTTPSConnectionPool(host='test', port=443): Max retries exceeded with url: /update?domains=test&token=test&verbose=true (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000001A833D590A0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))
+2022-09-26 13:06:53,355 ERROR: [SERVER WAN] Could not update wan ip 
+ HTTPSConnectionPool(host='test', port=443): Max retries exceeded with url: /update?domains=test&token=test&verbose=true (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000001CEF056B0A0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))
+2022-09-26 13:07:35,718 ERROR: [SERVER WAN] Could not update wan ip 
+ HTTPSConnectionPool(host='test', port=443): Max retries exceeded with url: /update?domains=test&token=test&verbose=true (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000002AFAD6260A0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))
+2022-09-26 13:09:21,983 ERROR: [SERVER WAN] Could not update wan ip 
+ HTTPSConnectionPool(host='test', port=443): Max retries exceeded with url: /update?domains=test&token=test&verbose=true (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000001F8E178B0D0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))
+2022-09-26 13:09:45,234 ERROR: [SERVER WAN] Could not update wan ip 
+ HTTPSConnectionPool(host='test', port=443): Max retries exceeded with url: /update?domains=test&token=test&verbose=true (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x000001DBEFDC60D0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))

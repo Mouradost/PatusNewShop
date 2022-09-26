@@ -64,3 +64,5 @@ def license_generator(license: str) -> str:
 # print(license_generator(get_mac()))
 
 # print(license_generator(get_serial_number()))
+
+# print(license_generator(""))
